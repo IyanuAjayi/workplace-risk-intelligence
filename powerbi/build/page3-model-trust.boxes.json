@@ -1,0 +1,170 @@
+[
+ {
+  "id": "nav-executive-intelligence",
+  "type": "actionButton",
+  "x": 705,
+  "y": 37,
+  "w": 186,
+  "h": 38
+ },
+ {
+  "id": "nav-risk-landscape",
+  "type": "actionButton",
+  "x": 891,
+  "y": 37,
+  "w": 145,
+  "h": 38
+ },
+ {
+  "id": "nav-model-trust",
+  "type": "actionButton",
+  "x": 1036,
+  "y": 37,
+  "w": 120,
+  "h": 38
+ },
+ {
+  "id": "nav-pricing-lab",
+  "type": "actionButton",
+  "x": 1156,
+  "y": 37,
+  "w": 115,
+  "h": 38
+ },
+ {
+  "id": "kpi-auc-value",
+  "type": "card",
+  "x": 64,
+  "y": 424,
+  "w": 57,
+  "h": 40
+ },
+ {
+  "id": "kpi-auc-base",
+  "type": "card",
+  "x": 64,
+  "y": 484,
+  "w": 272,
+  "h": 20
+ },
+ {
+  "id": "kpi-gini-value",
+  "type": "card",
+  "x": 424,
+  "y": 424,
+  "w": 58,
+  "h": 40
+ },
+ {
+  "id": "kpi-gini-base",
+  "type": "card",
+  "x": 424,
+  "y": 484,
+  "w": 163,
+  "h": 20
+ },
+ {
+  "id": "btn-reset-filters",
+  "type": "actionButton",
+  "x": 540,
+  "y": 612,
+  "w": 100,
+  "h": 20
+ },
+ {
+  "id": "slicer-model",
+  "type": "slicer",
+  "x": 64,
+  "y": 652,
+  "w": 576,
+  "h": 72
+ },
+ {
+  "id": "slicer-test-year",
+  "type": "slicer",
+  "x": 64,
+  "y": 740,
+  "w": 576,
+  "h": 72
+ },
+ {
+  "id": "link-pricing-lab",
+  "type": "actionButton",
+  "x": 64,
+  "y": 996,
+  "w": 576,
+  "h": 20
+ },
+ {
+  "id": "table-model-comparison",
+  "type": "tableEx",
+  "x": 737,
+  "y": 305,
+  "w": 644,
+  "h": 141
+ },
+ {
+  "id": "chart-robustness",
+  "type": "clusteredBarChart",
+  "x": 1685,
+  "y": 222,
+  "w": 136,
+  "h": 353
+ },
+ {
+  "id": "chart-roc",
+  "type": "lineChart",
+  "x": 737,
+  "y": 737,
+  "w": 200,
+  "h": 256
+ },
+ {
+  "id": "label-roc-auc",
+  "type": "card",
+  "x": 823,
+  "y": 863,
+  "w": 112,
+  "h": 28
+ },
+ {
+  "id": "label-roc-selection",
+  "type": "card",
+  "x": 737,
+  "y": 969,
+  "w": 200,
+  "h": 20
+ },
+ {
+  "id": "chart-calibration",
+  "type": "lineClusteredColumnComboChart",
+  "x": 1033,
+  "y": 737,
+  "w": 348,
+  "h": 256
+ },
+ {
+  "id": "label-calibration-selection",
+  "type": "card",
+  "x": 1213,
+  "y": 761,
+  "w": 168,
+  "h": 20
+ },
+ {
+  "id": "card-calibration-note",
+  "type": "card",
+  "x": 0,
+  "y": 0,
+  "w": 0,
+  "h": 0
+ },
+ {
+  "id": "chart-drivers",
+  "type": "clusteredBarChart",
+  "x": 1477,
+  "y": 737,
+  "w": 348,
+  "h": 256
+ }
+]

@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Risk Landscape</title>
+<link rel="stylesheet" href="wri-system.css">
+<!-- Page 2 of 4. Built from wri-system.css; inline styles carry page-specific positions only.
+     data-pbi="visual" with a unique id marks every element Power BI renders natively (data-pbi-type
+     names the visual). Everything else is baked into the background image: open #baked to see it.
+     Population: the priced portfolio, 199,150 private-sector site-years, test years 2023 + 2024 pooled.
+     Bar lengths and tile classes were computed from outputs/landscape/*.csv, so every mark is drawn to scale.
+     The Test year slicer reads TestYears[Tile label] ("2023 + 2024", "2023, outcome 2024", "2024, outcome 2025"), sorted by
+     Sort order; rename the field to "Test year" in the visual so it matches pages 3 and 4. -->
+</head>
+<body>
+
+<!-- HEADER: identical to Executive Intelligence, Risk Landscape active -->
+<img class="wri-logo" src="../brand/parakeet-logo.svg" alt="Parakeet Risk">
+<div class="wri-lockup-rule"></div>
+<div class="wri-product">
+  <div class="wri-product-name">Workplace Risk Intelligence</div>
+  <div class="wri-proposition">Predictive insights for industrial insurance underwriting</div>
+</div>
+<nav class="wri-nav" aria-label="Report pages">
+  <div class="wri-tab" id="nav-executive-intelligence" data-pbi="visual" data-pbi-type="actionButton">Executive Intelligence</div>
+  <div class="wri-tab wri-tab--active" id="nav-risk-landscape" data-pbi="visual" data-pbi-type="actionButton">Risk Landscape</div>
+  <div class="wri-tab" id="nav-model-trust" data-pbi="visual" data-pbi-type="actionButton">Model Trust</div>
+  <div class="wri-tab" id="nav-pricing-lab" data-pbi="visual" data-pbi-type="actionButton">Pricing Lab</div>
+</nav>
+<div class="wri-period">
+  <div>Test years 2023 + 2024</div>
+  <div class="wri-period-sub">199,150 private-sector site-years</div>
+</div>
+
+<!-- RAIL: drill-through back link, the finding, two key figures, what it means, filters, caveat -->
+<a class="wri-drill wri-abs" style="left:64px;top:144px" id="link-back-executive" data-pbi="visual" data-pbi-type="actionButton">← Executive Intelligence</a>
+
+<h1 class="wri-rail-statement" style="top:172px">Every sector's band 5<br>crossed the line at about<br>twice its rate or more.</h1>
+
+<div class="wri-figure wri-abs wri-nowrap" style="left:64px;top:376px" id="kpi-band5-range-value" data-pbi="visual" data-pbi-type="card">43.6% to 49.5%</div>
+<p class="wri-ledger-caption wri-abs" style="left:64px;top:416px;width:336px" id="kpi-band5-range-caption" data-pbi="baked" data-pbi-type="textbox" data-prose>of band 5 sites crossed, by sector</p>
+<p class="wri-count wri-abs" style="left:64px;top:436px" id="kpi-band5-range-count" data-pbi="visual" data-pbi-type="card">39,830 band 5 site-years · 2023 + 2024</p>
+
+<div class="wri-figure wri-abs wri-nowrap" style="left:424px;top:376px" id="kpi-all-sites-value" data-pbi="visual" data-pbi-type="card">18.3%</div>
+<p class="wri-ledger-caption wri-abs" style="left:424px;top:416px;width:216px" id="kpi-all-sites-caption" data-pbi="baked" data-pbi-type="textbox" data-prose>of all sites crossed</p>
+<p class="wri-count wri-abs" style="left:424px;top:436px" id="kpi-all-sites-count" data-pbi="visual" data-pbi-type="card">36,389 of 199,150 · 2023 + 2024</p>
+
+<div class="wri-rail-head" style="top:488px"><span class="wri-dot"></span><h2 class="wri-title" data-prose>What it means</h2></div>
+<p class="wri-body wri-abs" style="left:64px;top:524px;width:576px" data-prose>Within each sector, the band separates sites<br>that a sector rate would price alike.</p>
+
+<div class="wri-filters-head" style="top:608px">
+  <h2 class="wri-title">Filters</h2>
+  <a class="wri-reset" id="btn-reset-filters" data-pbi="visual" data-pbi-type="actionButton"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7a4.5 4.5 0 1 0 1.32-3.18" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2 1.5v3.5h3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Reset filters</a>
+</div>
+<div class="wri-slicer" style="left:64px;top:652px;width:576px" id="slicer-test-year" data-pbi="visual" data-pbi-type="slicer">
+  <span class="wri-slicer-label">Test year</span>
+  <div class="wri-tiles"><div class="wri-tile wri-tile--selected">2023 + 2024</div><div class="wri-tile">2023, outcome 2024</div><div class="wri-tile">2024, outcome 2025</div></div>
+</div>
+<div class="wri-slicer" style="left:64px;top:740px;width:272px" id="slicer-sector" data-pbi="visual" data-pbi-type="slicer">
+  <span class="wri-slicer-label">Sector</span>
+  <div class="wri-dropdown">All</div>
+</div>
+<div class="wri-slicer" style="left:368px;top:740px;width:272px" id="slicer-size-band" data-pbi="visual" data-pbi-type="slicer">
+  <span class="wri-slicer-label">Size band</span>
+  <div class="wri-dropdown">All</div>
+</div>
+<div class="wri-ledger-close" style="top:952px"></div>
+
+<p class="wri-caveat"><span data-prose>Associations, not causes. Reported injuries, not claims.</span> <a class="wri-caveat-link" id="link-method-caveats" data-pbi="visual" data-pbi-type="actionButton"><span data-prose>Method and caveats:</span> Model Trust →</a></p>
+
+<!-- EVIDENCE: tile-grid map. Ghost tiles and codes baked; native scatter (StateGrid x, y; square markers,
+     colour by rules on [Map tile colour]) draws a tile only where the state has 500+ site-years.
+     [Map tile colour] is the state's band 5 share. Rules: under 15% #EADFD2, 15% to under 25% #D9B9A7,
+     25% and over #C98369 (band 3's hex), so the tints follow the risk palette. Onyx state codes read at
+     16.0, 11.5 and 6.9 : 1 on them. Under 500 site-years no marker is drawn: the dashed, unfilled ghost
+     tile stays (too few sites), as in the legend. -->
+<section class="wri-card" style="left:704px;top:144px;width:560px;height:488px">
+  <div class="wri-card-head">
+    <h2 class="wri-title" id="map-title" data-pbi="visual" data-pbi-type="card">Band 5 share by state</h2>
+    <div class="wri-legend"><svg width="12" height="12" aria-hidden="true"><rect class="wri-axis-line" x=".5" y=".5" width="11" height="11" fill="none" stroke-dasharray="3 3"/></svg><span data-prose>Too few sites, under 500 site-years</span></div>
+  </div>
+  <p class="wri-card-sub" data-prose>Gaps may reflect reporting and state rules, not only safety.</p>
+  <svg class="wri-card-plot wri-card-plot--below-sub" width="496" height="352" viewBox="0 0 496 352" role="img" aria-label="Tile map of each state's share of site-years in band 5, 2023 + 2024. 25% and over: Maine, Washington, Oregon, Connecticut, California, Montana, Rhode Island, Nevada, New Hampshire, Idaho, Colorado, Hawaii, Iowa, Minnesota, South Dakota, Massachusetts. 15% to 25%: Pennsylvania, Nebraska, New York, New Jersey, New Mexico, Maryland, Wisconsin, Illinois, Missouri, Michigan, Arizona, Florida, North Dakota, Virginia, Kansas. Under 15%: Oklahoma, Indiana, Georgia, West Virginia, Utah, Kentucky, Tennessee, Texas, South Carolina, Ohio, Alabama, North Carolina, Mississippi, Arkansas, Louisiana. Too few sites: Alaska, Vermont, Delaware, Wyoming, District of Columbia, Puerto Rico.">
+    <!-- baked: a ghost tile and code for every state, shown wherever no live tile is drawn -->
+    <g class="wri-axis-line" fill="none" stroke-dasharray="3 3">
+        <rect x="0.5" y="0.5" width="39" height="39"/>
+        <rect x="440.5" y="0.5" width="39" height="39"/>
+        <rect x="220.5" y="44.5" width="39" height="39"/>
+        <rect x="396.5" y="44.5" width="39" height="39"/>
+        <rect x="440.5" y="44.5" width="39" height="39"/>
+        <rect x="0.5" y="88.5" width="39" height="39"/>
+        <rect x="44.5" y="88.5" width="39" height="39"/>
+        <rect x="88.5" y="88.5" width="39" height="39"/>
+        <rect x="132.5" y="88.5" width="39" height="39"/>
+        <rect x="176.5" y="88.5" width="39" height="39"/>
+        <rect x="220.5" y="88.5" width="39" height="39"/>
+        <rect x="264.5" y="88.5" width="39" height="39"/>
+        <rect x="352.5" y="88.5" width="39" height="39"/>
+        <rect x="396.5" y="88.5" width="39" height="39"/>
+        <rect x="0.5" y="132.5" width="39" height="39"/>
+        <rect x="44.5" y="132.5" width="39" height="39"/>
+        <rect x="88.5" y="132.5" width="39" height="39"/>
+        <rect x="132.5" y="132.5" width="39" height="39"/>
+        <rect x="176.5" y="132.5" width="39" height="39"/>
+        <rect x="220.5" y="132.5" width="39" height="39"/>
+        <rect x="264.5" y="132.5" width="39" height="39"/>
+        <rect x="308.5" y="132.5" width="39" height="39"/>
+        <rect x="352.5" y="132.5" width="39" height="39"/>
+        <rect x="396.5" y="132.5" width="39" height="39"/>
+        <rect x="440.5" y="132.5" width="39" height="39"/>
+        <rect x="0.5" y="176.5" width="39" height="39"/>
+        <rect x="44.5" y="176.5" width="39" height="39"/>
+        <rect x="88.5" y="176.5" width="39" height="39"/>
+        <rect x="132.5" y="176.5" width="39" height="39"/>
+        <rect x="176.5" y="176.5" width="39" height="39"/>
+        <rect x="220.5" y="176.5" width="39" height="39"/>
+        <rect x="264.5" y="176.5" width="39" height="39"/>
+        <rect x="308.5" y="176.5" width="39" height="39"/>
+        <rect x="352.5" y="176.5" width="39" height="39"/>
+        <rect x="396.5" y="176.5" width="39" height="39"/>
+        <rect x="44.5" y="220.5" width="39" height="39"/>
+        <rect x="88.5" y="220.5" width="39" height="39"/>
+        <rect x="132.5" y="220.5" width="39" height="39"/>
+        <rect x="176.5" y="220.5" width="39" height="39"/>
+        <rect x="220.5" y="220.5" width="39" height="39"/>
+        <rect x="264.5" y="220.5" width="39" height="39"/>
+        <rect x="308.5" y="220.5" width="39" height="39"/>
+        <rect x="352.5" y="220.5" width="39" height="39"/>
+        <rect x="132.5" y="264.5" width="39" height="39"/>
+        <rect x="176.5" y="264.5" width="39" height="39"/>
+        <rect x="220.5" y="264.5" width="39" height="39"/>
+        <rect x="264.5" y="264.5" width="39" height="39"/>
+        <rect x="308.5" y="264.5" width="39" height="39"/>
+        <rect x="0.5" y="308.5" width="39" height="39"/>
+        <rect x="132.5" y="308.5" width="39" height="39"/>
+        <rect x="352.5" y="308.5" width="39" height="39"/>
+        <rect x="440.5" y="308.5" width="39" height="39"/>
+    </g>
+    <g class="wri-axis-title" text-anchor="middle">
+        <text x="20" y="25">AK</text>
+        <text x="460" y="25">ME</text>
+        <text x="240" y="69">WI</text>
+        <text x="416" y="69">VT</text>
+        <text x="460" y="69">NH</text>
+        <text x="20" y="113">WA</text>
+        <text x="64" y="113">ID</text>
+        <text x="108" y="113">MT</text>
+        <text x="152" y="113">ND</text>
+        <text x="196" y="113">MN</text>
+        <text x="240" y="113">IL</text>
+        <text x="284" y="113">MI</text>
+        <text x="372" y="113">NY</text>
+        <text x="416" y="113">MA</text>
+        <text x="20" y="157">OR</text>
+        <text x="64" y="157">NV</text>
+        <text x="108" y="157">WY</text>
+        <text x="152" y="157">SD</text>
+        <text x="196" y="157">IA</text>
+        <text x="240" y="157">IN</text>
+        <text x="284" y="157">OH</text>
+        <text x="328" y="157">PA</text>
+        <text x="372" y="157">NJ</text>
+        <text x="416" y="157">CT</text>
+        <text x="460" y="157">RI</text>
+        <text x="20" y="201">CA</text>
+        <text x="64" y="201">UT</text>
+        <text x="108" y="201">CO</text>
+        <text x="152" y="201">NE</text>
+        <text x="196" y="201">MO</text>
+        <text x="240" y="201">KY</text>
+        <text x="284" y="201">WV</text>
+        <text x="328" y="201">VA</text>
+        <text x="372" y="201">MD</text>
+        <text x="416" y="201">DE</text>
+        <text x="64" y="245">AZ</text>
+        <text x="108" y="245">NM</text>
+        <text x="152" y="245">KS</text>
+        <text x="196" y="245">AR</text>
+        <text x="240" y="245">TN</text>
+        <text x="284" y="245">NC</text>
+        <text x="328" y="245">SC</text>
+        <text x="372" y="245">DC</text>
+        <text x="152" y="289">OK</text>
+        <text x="196" y="289">LA</text>
+        <text x="240" y="289">MS</text>
+        <text x="284" y="289">AL</text>
+        <text x="328" y="289">GA</text>
+        <text x="20" y="333">HI</text>
+        <text x="152" y="333">TX</text>
+        <text x="372" y="333">FL</text>
+        <text x="460" y="333">PR</text>
+    </g>
+    <!-- baked: class legend in the empty grid cells north of the Plains -->
+    <g>
+      <text class="wri-axis-title" x="60" y="14" id="map-legend-title" data-pbi="visual" data-pbi-type="card">Share of site-years, 2023 + 2024</text>
+      <rect x="60" y="28" width="12" height="12" fill="#C98369"/><text class="wri-ref-label" x="80" y="39">25% and over</text>
+      <rect x="60" y="50" width="12" height="12" fill="#D9B9A7"/><text class="wri-ref-label" x="80" y="61">15% to 25%</text>
+      <rect x="60" y="72" width="12" height="12" fill="#EADFD2"/><text class="wri-ref-label" x="80" y="83">Under 15%</text>
+    </g>
+    <!-- live: scatter chart, one square marker per state, category label = state code -->
+    <g id="map-tiles" data-pbi="visual" data-pbi-type="scatterChart">
+      <g shape-rendering="crispEdges">
+        <rect x="440" y="0" width="40" height="40" fill="#C98369"/>
+        <rect x="220" y="44" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="440" y="44" width="40" height="40" fill="#C98369"/>
+        <rect x="0" y="88" width="40" height="40" fill="#C98369"/>
+        <rect x="44" y="88" width="40" height="40" fill="#C98369"/>
+        <rect x="88" y="88" width="40" height="40" fill="#C98369"/>
+        <rect x="132" y="88" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="176" y="88" width="40" height="40" fill="#C98369"/>
+        <rect x="220" y="88" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="264" y="88" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="352" y="88" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="396" y="88" width="40" height="40" fill="#C98369"/>
+        <rect x="0" y="132" width="40" height="40" fill="#C98369"/>
+        <rect x="44" y="132" width="40" height="40" fill="#C98369"/>
+        <rect x="132" y="132" width="40" height="40" fill="#C98369"/>
+        <rect x="176" y="132" width="40" height="40" fill="#C98369"/>
+        <rect x="220" y="132" width="40" height="40" fill="#EADFD2"/>
+        <rect x="264" y="132" width="40" height="40" fill="#EADFD2"/>
+        <rect x="308" y="132" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="352" y="132" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="396" y="132" width="40" height="40" fill="#C98369"/>
+        <rect x="440" y="132" width="40" height="40" fill="#C98369"/>
+        <rect x="0" y="176" width="40" height="40" fill="#C98369"/>
+        <rect x="44" y="176" width="40" height="40" fill="#EADFD2"/>
+        <rect x="88" y="176" width="40" height="40" fill="#C98369"/>
+        <rect x="132" y="176" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="176" y="176" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="220" y="176" width="40" height="40" fill="#EADFD2"/>
+        <rect x="264" y="176" width="40" height="40" fill="#EADFD2"/>
+        <rect x="308" y="176" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="352" y="176" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="44" y="220" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="88" y="220" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="132" y="220" width="40" height="40" fill="#D9B9A7"/>
+        <rect x="176" y="220" width="40" height="40" fill="#EADFD2"/>
+        <rect x="220" y="220" width="40" height="40" fill="#EADFD2"/>
+        <rect x="264" y="220" width="40" height="40" fill="#EADFD2"/>
+        <rect x="308" y="220" width="40" height="40" fill="#EADFD2"/>
+        <rect x="132" y="264" width="40" height="40" fill="#EADFD2"/>
+        <rect x="176" y="264" width="40" height="40" fill="#EADFD2"/>
+        <rect x="220" y="264" width="40" height="40" fill="#EADFD2"/>
+        <rect x="264" y="264" width="40" height="40" fill="#EADFD2"/>
+        <rect x="308" y="264" width="40" height="40" fill="#EADFD2"/>
+        <rect x="0" y="308" width="40" height="40" fill="#C98369"/>
+        <rect x="132" y="308" width="40" height="40" fill="#EADFD2"/>
+        <rect x="352" y="308" width="40" height="40" fill="#D9B9A7"/>
+      </g>
+      <g class="wri-data-label" text-anchor="middle">
+        <text x="460" y="27">ME</text>
+        <text x="240" y="71">WI</text>
+        <text x="460" y="71">NH</text>
+        <text x="20" y="115">WA</text>
+        <text x="64" y="115">ID</text>
+        <text x="108" y="115">MT</text>
+        <text x="152" y="115">ND</text>
+        <text x="196" y="115">MN</text>
+        <text x="240" y="115">IL</text>
+        <text x="284" y="115">MI</text>
+        <text x="372" y="115">NY</text>
+        <text x="416" y="115">MA</text>
+        <text x="20" y="159">OR</text>
+        <text x="64" y="159">NV</text>
+        <text x="152" y="159">SD</text>
+        <text x="196" y="159">IA</text>
+        <text x="240" y="159">IN</text>
+        <text x="284" y="159">OH</text>
+        <text x="328" y="159">PA</text>
+        <text x="372" y="159">NJ</text>
+        <text x="416" y="159">CT</text>
+        <text x="460" y="159">RI</text>
+        <text x="20" y="203">CA</text>
+        <text x="64" y="203">UT</text>
+        <text x="108" y="203">CO</text>
+        <text x="152" y="203">NE</text>
+        <text x="196" y="203">MO</text>
+        <text x="240" y="203">KY</text>
+        <text x="284" y="203">WV</text>
+        <text x="328" y="203">VA</text>
+        <text x="372" y="203">MD</text>
+        <text x="64" y="247">AZ</text>
+        <text x="108" y="247">NM</text>
+        <text x="152" y="247">KS</text>
+        <text x="196" y="247">AR</text>
+        <text x="240" y="247">TN</text>
+        <text x="284" y="247">NC</text>
+        <text x="328" y="247">SC</text>
+        <text x="152" y="291">OK</text>
+        <text x="196" y="291">LA</text>
+        <text x="240" y="291">MS</text>
+        <text x="284" y="291">AL</text>
+        <text x="328" y="291">GA</text>
+        <text x="20" y="335">HI</text>
+        <text x="152" y="335">TX</text>
+        <text x="372" y="335">FL</text>
+      </g>
+    </g>
+  </svg>
+  <!-- live: report-page tooltip on hover, shown here for Maine -->
+  <div class="wri-tooltip" style="left:236px;top:136px" id="tooltip-state" data-pbi="visual" data-pbi-type="reportPageTooltip">
+    <div class="wri-tooltip-title">Maine</div>
+    <div class="wri-tooltip-row"><span class="wri-tooltip-key">In band 5</span><span>42.6%</span></div>
+    <div class="wri-tooltip-base">768 site-years · 2023 + 2024</div>
+  </div>
+</section>
+
+<!-- EVIDENCE: portfolio context. Native tables (name, site-years, [Average site DART rate] headed "Avg site DART rate",
+     share in band 5) with native bar charts over their In band 5 column (band 5 share, constant line at 20%), sectors above
+     sizes on one set of columns. The DART header wraps to two lines; the other headers sit on its second line -->
+<section class="wri-card" style="left:1296px;top:144px;width:560px;height:488px">
+  <div class="wri-card-head">
+    <h2 class="wri-title" data-prose>Portfolio by sector and size</h2>
+  </div>
+  <svg class="wri-card-plot" width="496" height="392" viewBox="0 0 496 392" role="img" aria-label="Table and bar chart, 2023 + 2024. Site-years, average site serious-injury (DART) rate per 100 full-time workers, and share of site-years in band 5: manufacturing 78,918, 2.17, 20.3%; construction 43,110, 1.85, 18.4%; transport and warehousing 36,087, 4.29, 21.0%; wholesale 27,123, 2.83, 21.2%; utilities 6,729, 1.38, 15.8%; agriculture 6,335, 3.04, 20.4%; mining, oil and gas 848, 0.77, 19.8%. 20 to 249 employees 172,239, 21.2%; 250+ employees 26,911, 12.0%. Line: all sites 20%.">
+    <text class="wri-axis-title" x="364" y="38">In band 5</text>
+    <line class="wri-hairline" x1="0" y1="50.5" x2="496" y2="50.5"/>
+    <g id="table-sector-context" data-pbi="visual" data-pbi-type="tableEx">
+      <g class="wri-axis-title" text-anchor="end">
+        <text x="340" y="18">Avg site</text>
+        <text x="256" y="38">Site-years</text>
+        <text x="340" y="38">DART rate</text>
+      </g>
+
+      <g class="wri-axis-label">
+          <text x="0" y="74">Manufacturing</text>
+          <text x="0" y="102">Construction</text>
+          <text x="0" y="130">Transport and warehousing</text>
+          <text x="0" y="158">Wholesale</text>
+          <text x="0" y="186">Utilities</text>
+          <text x="0" y="214">Agriculture</text>
+          <text x="0" y="242">Mining, oil and gas</text>
+      </g>
+      <g class="wri-axis-label--secondary" text-anchor="end">
+          <text x="256" y="74">78,918</text>
+          <text x="256" y="102">43,110</text>
+          <text x="256" y="130">36,087</text>
+          <text x="256" y="158">27,123</text>
+          <text x="256" y="186">6,729</text>
+          <text x="256" y="214">6,335</text>
+          <text x="256" y="242">848</text>
+          <text x="340" y="74">2.17</text>
+          <text x="340" y="102">1.85</text>
+          <text x="340" y="130">4.29</text>
+          <text x="340" y="158">2.83</text>
+          <text x="340" y="186">1.38</text>
+          <text x="340" y="214">3.04</text>
+          <text x="340" y="242">0.77</text>
+      </g>
+      <g class="wri-axis-label" text-anchor="end">
+          <text x="496" y="74">20.3%</text>
+          <text x="496" y="102">18.4%</text>
+          <text x="496" y="130">21.0%</text>
+          <text x="496" y="158">21.2%</text>
+          <text x="496" y="186">15.8%</text>
+          <text x="496" y="214">20.4%</text>
+          <text x="496" y="242">19.8%</text>
+      </g>
+    </g>
+    <g id="chart-sector-band5" data-pbi="visual" data-pbi-type="clusteredBarChart">
+      <g class="wri-fill-band-5" shape-rendering="crispEdges">
+          <rect x="364" y="63" width="73.2" height="12"/>
+          <rect x="364" y="91" width="66.3" height="12"/>
+          <rect x="364" y="119" width="75.5" height="12"/>
+          <rect x="364" y="147" width="76.3" height="12"/>
+          <rect x="364" y="175" width="56.9" height="12"/>
+          <rect x="364" y="203" width="73.5" height="12"/>
+          <rect x="364" y="231" width="71.3" height="12"/>
+      </g>
+      <line class="wri-constant-line" x1="436.5" y1="56" x2="436.5" y2="250"/>
+    </g>
+    <line class="wri-hairline" x1="0" y1="266.5" x2="496" y2="266.5"/>
+    <g class="wri-axis-label">
+        <text x="0" y="294">20 to 249 employees</text>
+        <text x="0" y="322">250+ employees</text>
+    </g>
+    <g id="table-size-context" data-pbi="visual" data-pbi-type="cardVisual">
+      <g class="wri-axis-label--secondary" text-anchor="end">
+          <text x="256" y="294">172,239</text>
+          <text x="256" y="322">26,911</text>
+      </g>
+      <g class="wri-axis-label" text-anchor="end">
+          <text x="496" y="294">21.2%</text>
+          <text x="496" y="322">12.0%</text>
+      </g>
+    </g>
+    <g id="chart-size-band5" data-pbi="visual" data-pbi-type="clusteredBarChart">
+      <g class="wri-fill-band-5" shape-rendering="crispEdges">
+          <rect x="364" y="283" width="76.5" height="12"/>
+          <rect x="364" y="311" width="43.2" height="12"/>
+      </g>
+      <line class="wri-constant-line" x1="436.5" y1="272" x2="436.5" y2="328"/>
+    </g>
+    <text class="wri-ref-label" x="436.5" y="348" text-anchor="middle">All sites 20%</text>
+    <text class="wri-axis-title wri-proportional" x="0" y="384" id="text-sector-size-note" data-pbi="visual" data-pbi-type="card"><tspan class="wri-tabular">2023 + 2024</tspan> · DART: serious-injury rate per <tspan class="wri-tabular">100</tspan> full-time workers</text>
+  </svg>
+</section>
+
+<!-- EVIDENCE: crossing rate by risk band and sector. Native table: rows from Bands (band colour by field
+     value), one measure per sector with data bars 0 to 100%, totals row = each sector's rate across all bands -->
+<section class="wri-card" style="left:704px;top:664px;width:1152px;height:352px">
+  <div class="wri-card-head">
+    <h2 class="wri-title" data-prose>Bands split risk inside every sector</h2>
+  </div>
+  <div class="wri-abs" style="left:32px;top:72px;width:1088px" id="table-sector-band" data-pbi="visual" data-pbi-type="tableEx" role="img" aria-label="Table. Share of site-years that crossed the line next year, by risk band and sector, 2023 + 2024. Band 1: manufacturing 2.9%, construction 2.5%, transport and warehousing 3.7%, wholesale 2.4%, utilities 2.5%, agriculture 4.3%, mining too few sites. Band 2: 8.0%, 6.8%, 7.2%, 6.8%, 7.0%, 8.4%, mining too few sites. Band 3: 12.8%, 13.6%, 10.4%, 12.7%, 13.7%, 13.4%, 8.8%. Band 4: 22.0%, 23.3%, 18.1%, 21.7%, 24.5%, 22.5%, 20.4%. Band 5: 46.4%, 49.5%, 46.4%, 47.0%, 43.6%, 45.0%, 46.4%. All bands: 18.3%, 18.1%, 17.7%, 19.2%, 16.8%, 18.8%, 19.9%.">
+    <table class="wri-table">
+      <colgroup><col style="width:136px"><col style="width:136px"><col style="width:136px"><col style="width:136px"><col style="width:136px"><col style="width:136px"><col style="width:136px"><col style="width:136px"></colgroup>
+      <thead><tr><th style="height:48px;padding-left:8px">Risk band</th><th style="height:48px;padding-left:16px">Manufacturing</th><th style="height:48px;padding-left:16px">Construction</th><th style="height:48px;padding-left:16px">Transport and<br>warehousing</th><th style="height:48px;padding-left:16px">Wholesale</th><th style="height:48px;padding-left:16px">Utilities</th><th style="height:48px;padding-left:16px">Agriculture</th><th style="height:48px;padding-left:16px">Mining, oil<br>and gas</th></tr></thead>
+      <tbody>
+          <tr><td class="wri-cell-band-1" style="padding-left:8px">Band 1, lowest</td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:3.4px"></span><span class="wri-databar-value">2.9%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:3.0px"></span><span class="wri-databar-value">2.5%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:4.5px"></span><span class="wri-databar-value">3.7%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:2.9px"></span><span class="wri-databar-value">2.4%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:3.0px"></span><span class="wri-databar-value">2.5%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:5.2px"></span><span class="wri-databar-value">4.3%</span></div></td><td style="padding-left:8px"><span class="wri-tag wri-tag--too-few" style="display:flex;height:28px;justify-content:flex-end">Too few sites</span></td></tr>
+          <tr><td class="wri-cell-band-2" style="padding-left:8px">Band 2</td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:9.6px"></span><span class="wri-databar-value">8.0%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:8.2px"></span><span class="wri-databar-value">6.8%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:8.7px"></span><span class="wri-databar-value">7.2%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:8.2px"></span><span class="wri-databar-value">6.8%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:8.4px"></span><span class="wri-databar-value">7.0%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:10.1px"></span><span class="wri-databar-value">8.4%</span></div></td><td style="padding-left:8px"><span class="wri-tag wri-tag--too-few" style="display:flex;height:28px;justify-content:flex-end">Too few sites</span></td></tr>
+          <tr><td class="wri-cell-band-3" style="padding-left:8px">Band 3</td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:15.3px"></span><span class="wri-databar-value">12.8%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:16.3px"></span><span class="wri-databar-value">13.6%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:12.5px"></span><span class="wri-databar-value">10.4%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:15.3px"></span><span class="wri-databar-value">12.7%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:16.5px"></span><span class="wri-databar-value">13.7%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:16.1px"></span><span class="wri-databar-value">13.4%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:10.5px"></span><span class="wri-databar-value">8.8%</span></div></td></tr>
+          <tr><td class="wri-cell-band-4" style="padding-left:8px">Band 4</td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:26.4px"></span><span class="wri-databar-value">22.0%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:28.0px"></span><span class="wri-databar-value">23.3%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:21.7px"></span><span class="wri-databar-value">18.1%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:26.0px"></span><span class="wri-databar-value">21.7%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:29.4px"></span><span class="wri-databar-value">24.5%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:27.0px"></span><span class="wri-databar-value">22.5%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:24.4px"></span><span class="wri-databar-value">20.4%</span></div></td></tr>
+          <tr><td class="wri-cell-band-5" style="padding-left:8px">Band 5, highest</td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:55.6px"></span><span class="wri-databar-value">46.4%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:59.4px"></span><span class="wri-databar-value">49.5%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:55.7px"></span><span class="wri-databar-value">46.4%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:56.4px"></span><span class="wri-databar-value">47.0%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:52.3px"></span><span class="wri-databar-value">43.6%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:54.0px"></span><span class="wri-databar-value">45.0%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:55.7px"></span><span class="wri-databar-value">46.4%</span></div></td></tr>
+          <tr class="wri-total"><td style="padding-left:8px">All bands</td><td class="wri-num">18.3%</td><td class="wri-num">18.1%</td><td class="wri-num">17.7%</td><td class="wri-num">19.2%</td><td class="wri-num">16.8%</td><td class="wri-num">18.8%</td><td class="wri-num">19.9%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="wri-label wri-text-muted wri-abs wri-nowrap" style="left:32px;top:300px" id="text-band-table-note" data-pbi="visual" data-pbi-type="card" data-prose>Crossed the line next year, 2023 + 2024 · line: each industry's worst-20% DART rate this year · data bars 0 to 100% · too few sites: under 100 site-years</p>
+</section>
+
+<!-- BOTTOM LINE: one-line source, corner label (mockup only) -->
+<p class="wri-source">Source: OSHA ITA Form 300A, 2016 to 2025 (2025 file to 31 Aug 2026) · BLS SOII industry DART rates, 2022 and 2023</p>
+<div class="wri-corner-label">Risk Landscape. Design mockup, not a live Power BI report</div>
+<span id="baked" hidden></span>
+
+</body>
+</html>

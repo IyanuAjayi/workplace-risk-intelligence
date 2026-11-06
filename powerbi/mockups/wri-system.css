@@ -1,0 +1,310 @@
+/* =====================================================================================
+   Workplace Risk Intelligence: design system stylesheet, version 1.0 (1 Nov 2026)
+   Extracted from the approved Executive Intelligence page (final-candidate-rail-inter.html).
+   Rules and reasoning: docs/design-system.md. Power BI theme: powerbi/theme/wri-theme.json.
+
+   Every page links this file:   <link rel="stylesheet" href="wri-system.css">
+   Pages add inline CSS for page-specific positions only (top, left, width, height).
+
+   Two layers.
+   Baked: everything without data-pbi. It is exported into the page background image
+          (Inter for text, IBM Plex Mono for technical labels).
+   Live:  every element with data-pbi="visual" and a unique id is a native Power BI visual
+          (Segoe UI in Power BI; Inter stands in for it here).
+   Open any page as page.html#baked to see the baked layer alone (see section 16).
+
+   Contents
+    1 Tokens: colour     2 Tokens: type     3 Tokens: spacing and grid     4 Base
+    5 Type styles        6 Header           7 Navigation tabs              8 Insight rail
+    9 Rail filters      10 Cards           11 Chart text and marks        12 Tables
+   13 Tooltip          14 Tags            15 Footer and corner label      16 Live layer, export
+   ===================================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=IBM+Plex+Mono:wght@400;500&display=block");
+
+:root {
+  /* ---- 1 Tokens: colour (hex values are fixed; roles below them) ---- */
+  /* Surfaces */
+  --wri-nest: #EFECDF;          /* page canvas, the rail sits directly on it */
+  --wri-card: #F7F5EC;          /* cards, navigation strip, slicer fields, dropdown lists */
+  --wri-card-line: #E3DECF;     /* card hairlines, table header rule, bar track, hover fill */
+  --wri-rule: #DCD8CA;          /* rail rules between ledger rows */
+  --wri-axis: #CFCBBD;          /* axis lines and ticks, lockup divider, input borders */
+  /* Text and dark surfaces */
+  --wri-onyx: #000000;          /* primary text; as a surface only the signature stamp and tooltips */
+  --wri-ink: #303A39;           /* secondary text, tab text, reference labels; selected tile fill */
+  --wri-muted: #66655F;         /* counts, headers, axis titles, source line, proposition */
+  --wri-shell: #FFFFFF;         /* text on Onyx, Ink and band 5 */
+  /* Brand accents (each has one job) */
+  --wri-ember: #E24337;         /* the active page tab and one dot per page, nothing else */
+  --wri-cobalt: #1936E8;        /* links, drill-through cues, reset */
+  --wri-molt: #B5C7E4;          /* the Simulated tag */
+  /* Data series */
+  --wri-screen-ink: #274A48;    /* primary model series (the scorecard), default data bars */
+  --wri-warm-grey: #B3AFA1;     /* comparison series (baselines, scenario A) */
+  --wri-band-1: #C9D6BD;        /* risk band 1, lowest fifth */
+  --wri-band-2: #D1A76A;
+  --wri-band-3: #C98369;
+  --wri-band-4: #A96247;
+  --wri-band-5: #944126;        /* risk band 5, highest fifth */
+
+  /* Roles (use these names in new components) */
+  --wri-bg-page: var(--wri-nest);
+  --wri-bg-card: var(--wri-card);
+  --wri-line-card: var(--wri-card-line);
+  --wri-text-primary: var(--wri-onyx);
+  --wri-text-secondary: var(--wri-ink);
+  --wri-text-tertiary: var(--wri-muted);
+  --wri-text-on-dark: var(--wri-shell);
+  --wri-link: var(--wri-cobalt);
+  --wri-active: var(--wri-ember);
+  --wri-hover-fill: var(--wri-card-line);
+  --wri-selected-fill: var(--wri-ink);
+  --wri-input-border: var(--wri-axis);
+  --wri-series-primary: var(--wri-screen-ink);
+  --wri-series-comparison: var(--wri-warm-grey);
+  --wri-tooltip-key: var(--wri-axis);
+  --wri-dimmed: .4;             /* opacity of unselected marks while one is selected */
+
+  /* ---- 2 Tokens: type ---- */
+  --wri-font-baked: Inter, "Segoe UI", Arial, sans-serif;           /* background image text */
+  --wri-font-live: Inter, "Segoe UI", Arial, sans-serif;            /* Power BI: Segoe UI. Inter stands in */
+  --wri-font-tech: "IBM Plex Mono", Consolas, monospace;            /* baked technical labels */
+  /* weight size/line-height family */
+  --wri-type-statement: 500 52px/58px var(--wri-font-baked);        /* rail finding */
+  --wri-type-hero: 600 96px/96px var(--wri-font-live);              /* signature stamp figure */
+  --wri-type-figure: 600 30px/40px var(--wri-font-live);            /* ledger and key figures */
+  --wri-type-title: 600 20px/28px var(--wri-font-baked);            /* product name, card and rail titles */
+  --wri-type-body: 400 18px/28px var(--wri-font-baked);             /* explanatory copy, subtitles */
+  --wri-type-label: 500 14px/20px var(--wri-font-baked);            /* captions, counts, tabs, axes, tables */
+  --wri-type-tech: 500 13px/20px var(--wri-font-tech);              /* source line, test period, units */
+  --wri-type-data-label: 600 20px/28px var(--wri-font-live);        /* data labels on marks */
+  --wri-track-statement: -.022em;
+  --wri-track-hero: -.02em;
+  --wri-track-figure: -.015em;
+  --wri-track-title: -.005em;
+  --wri-track-data-label: -.005em;
+
+  /* ---- 3 Tokens: spacing (8 px base) and grid ---- */
+  --wri-space-half: 4px;
+  --wri-space-1: 8px;
+  --wri-space-2: 16px;
+  --wri-space-3: 24px;
+  --wri-space-4: 32px;
+  --wri-space-5: 40px;
+  --wri-space-6: 48px;
+  --wri-space-8: 64px;
+  --wri-space-12: 96px;
+
+  --wri-page-w: 1920px;
+  --wri-page-h: 1080px;
+  --wri-margin-x: 64px;          /* left and right page margins */
+  --wri-gutter: 32px;            /* between columns and between cards */
+  --wri-channel: 64px;           /* between the rail and the canvas */
+  --wri-grid-columns: 12;        /* 4 in the rail, 8 in the canvas */
+  /* Rail: x 64 to 640 */
+  --wri-rail-x: 64px;
+  --wri-rail-w: 576px;
+  --wri-rail-col-w: 120px;       /* control grid: columns at x 64, 216, 368, 520 */
+  --wri-rail-text-w: 360px;      /* ledger split: statement column x 64 to 424 */
+  --wri-rail-figure-x: 424px;    /* ledger split: figure column x 424 to 640 */
+  --wri-rail-figure-w: 216px;
+  --wri-stamp-w: 336px;
+  --wri-stamp-h: 152px;
+  /* Canvas: x 704 to 1856 */
+  --wri-canvas-x: 704px;
+  --wri-canvas-w: 1152px;
+  --wri-canvas-col-w: 116px;     /* columns at x 704, 852, 1000, 1148, 1296, 1444, 1592, 1740 */
+  --wri-card-half-w: 560px;      /* halves at x 704 and x 1296 */
+  --wri-card-quarter-w: 264px;   /* quarters at x 704, 1000, 1296, 1592 */
+  /* Rows */
+  --wri-header-y: 32px;          /* header band 32 to 80 */
+  --wri-row-1-y: 144px;          /* first canvas row, 488 tall */
+  --wri-row-1-h: 488px;
+  --wri-row-2-y: 664px;          /* second canvas row, 352 tall */
+  --wri-row-2-h: 352px;
+  --wri-content-bottom: 1016px;
+  --wri-footer-y: 1040px;
+  /* Card interior */
+  --wri-card-pad: 32px;
+  --wri-plot-y: 72px;            /* plot top under a title */
+  --wri-plot-y-sub: 112px;       /* plot top under a title and a subtitle */
+  /* Rail filters */
+  --wri-slicer-h: 72px;          /* 20 header, 12 gap, 40 field */
+  --wri-field-h: 40px;
+  --wri-dropdown-w: 272px;       /* two per row at x 64 and x 368 */
+}
+
+/* ---- 4 Base: every page is a fixed 1920 x 1080 canvas ---- */
+* { box-sizing: border-box; margin: 0; padding: 0 }
+html, body { width: var(--wri-page-w); height: var(--wri-page-h); overflow: hidden; background: var(--wri-nest) }
+body { position: relative; color: var(--wri-onyx); font-family: var(--wri-font-baked); -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; font-optical-sizing: auto }
+.wri-abs { position: absolute }
+.wri-nowrap { white-space: nowrap }
+
+/* ---- 5 Type styles (sentence case, no italic, weights 400 500 600 only) ---- */
+.wri-statement { font: var(--wri-type-statement); letter-spacing: var(--wri-track-statement) }
+.wri-hero { font: var(--wri-type-hero); letter-spacing: var(--wri-track-hero) }
+.wri-figure { font: var(--wri-type-figure); letter-spacing: var(--wri-track-figure) }
+.wri-title { font: var(--wri-type-title); letter-spacing: var(--wri-track-title) }
+.wri-body { font: var(--wri-type-body) }
+.wri-label { font: var(--wri-type-label) }
+.wri-tech { font: var(--wri-type-tech); letter-spacing: 0 }
+.wri-text-onyx { color: var(--wri-onyx); fill: var(--wri-onyx) }
+.wri-text-ink { color: var(--wri-ink); fill: var(--wri-ink) }
+.wri-text-muted { color: var(--wri-muted); fill: var(--wri-muted) }
+.wri-text-shell { color: var(--wri-shell); fill: var(--wri-shell) }
+.wri-text-cobalt { color: var(--wri-cobalt); fill: var(--wri-cobalt) }
+
+/* ---- 6 Header: logo lockup, product name, proposition, test period (all baked) ---- */
+.wri-logo { position: absolute; left: 64px; top: 40px; height: 28px; width: auto }   /* official file, unmodified */
+.wri-lockup-rule { position: absolute; left: 252px; top: 38px; width: 1px; height: 32px; background: var(--wri-axis) }
+.wri-product { position: absolute; left: 276px; top: 32px }
+.wri-product-name { font: var(--wri-type-title); letter-spacing: var(--wri-track-title) }
+.wri-proposition { font: var(--wri-type-label); color: var(--wri-muted) }
+.wri-period { position: absolute; right: 64px; top: 36px; text-align: right; font: var(--wri-type-tech); letter-spacing: 0 }
+.wri-period-sub { color: var(--wri-muted) }
+
+/* ---- 7 Navigation tabs: frame baked, each tab a live page-navigation button ---- */
+.wri-nav { position: absolute; left: 704px; top: 36px; height: 40px; display: flex; border: 1px solid var(--wri-card-line); background: var(--wri-card); font: var(--wri-type-label); font-family: var(--wri-font-live) }
+.wri-tab { height: 38px; padding: 0 20px; display: flex; align-items: center; color: var(--wri-ink); white-space: nowrap }
+.wri-tab:hover, .wri-tab--hover { background: var(--wri-hover-fill); color: var(--wri-onyx) }
+.wri-tab--active, .wri-tab--active:hover { background: var(--wri-ember); color: var(--wri-onyx) }
+.wri-tab:focus-visible { outline: 2px solid var(--wri-cobalt); outline-offset: -2px }
+
+/* ---- 8 Insight rail: statement, signature stamp, ledger rows, caveat (x 64 to 640) ---- */
+.wri-rail-statement { position: absolute; left: 64px; width: 576px; font: var(--wri-type-statement); letter-spacing: var(--wri-track-statement) }
+/* Signature stamp: the one Onyx block on a page, one 72 px corner, hero figure in Shell */
+.wri-stamp { position: absolute; left: 64px; width: 336px; height: 152px; background: var(--wri-onyx); border-radius: 0 72px 0 0; padding: 34px 0 0 34px }
+.wri-stamp-value { font: var(--wri-type-hero); letter-spacing: var(--wri-track-hero); color: var(--wri-shell) }
+/* Figure column of the ledger split: captions, counts and evidence figures line up at x 424 */
+.wri-figure-col { position: absolute; left: 424px; width: 216px }
+.wri-stamp-caption { font: var(--wri-type-body) }
+.wri-stamp-caption span { display: block; white-space: nowrap }
+.wri-count { font: var(--wri-type-label); color: var(--wri-muted); white-space: nowrap }   /* base and count line */
+/* Signature bar: the stamp's share against its comparison, with the comparison as a secondary figure */
+.wri-signature-bar { position: absolute; left: 64px }
+.wri-signature-key { display: flex; align-items: center; gap: 10px; color: var(--wri-ink); font: var(--wri-type-label) }
+/* Section head with the page's one Ember dot */
+.wri-rail-head { position: absolute; left: 64px; display: flex; align-items: center; gap: 10px }
+.wri-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--wri-ember); flex: none }
+/* Ledger row: an action on the left, its evidence figure, caption and base on the right */
+.wri-ledger-row { position: absolute; left: 64px; width: 576px; height: 104px; border-top: 1px solid var(--wri-rule); padding-top: 12px; display: flex; align-items: baseline }
+.wri-ledger-action { width: 360px; font: var(--wri-type-body) }
+.wri-ledger-evidence { width: 216px }
+.wri-ledger-figure { font: var(--wri-type-figure); letter-spacing: var(--wri-track-figure); font-family: var(--wri-font-live) }
+.wri-ledger-caption { font: var(--wri-type-label); color: var(--wri-ink) }
+.wri-ledger-count { font: var(--wri-type-label); color: var(--wri-muted); display: flex; align-items: center; gap: 8px; white-space: nowrap }
+.wri-ledger-close { position: absolute; left: 64px; width: 576px; height: 1px; background: var(--wri-rule) }
+/* One caveat line at the foot of the rail, with its link to the method */
+.wri-caveat { position: absolute; left: 64px; top: 976px; width: 576px; color: var(--wri-ink); font: var(--wri-type-label) }
+.wri-caveat-link { display: block; color: var(--wri-cobalt); text-decoration: none }
+
+/* ---- 9 Rail filters (analysis pages): head with reset, tile slicer, dropdown slicer ---- */
+.wri-filters-head { position: absolute; left: 64px; width: 576px; display: flex; justify-content: space-between; align-items: baseline }
+.wri-reset { display: inline-flex; align-items: center; gap: 6px; color: var(--wri-cobalt); font: var(--wri-type-label); font-family: var(--wri-font-live); white-space: nowrap; text-decoration: none }
+.wri-reset svg { flex: none; align-self: center }
+.wri-slicer { position: absolute; height: 72px }
+.wri-slicer-label { display: block; height: 20px; margin-bottom: 12px; font: var(--wri-type-label); font-family: var(--wri-font-live); color: var(--wri-muted); white-space: nowrap }
+/* Tile slicer: equal tiles in one frame. Default Ink on Card, hover Card line, selected Shell on Ink */
+.wri-tiles { display: flex; height: 40px; border: 1px solid var(--wri-input-border); background: var(--wri-card) }
+.wri-tile { flex: 1 1 0; display: flex; align-items: center; justify-content: center; font: var(--wri-type-label); font-family: var(--wri-font-live); color: var(--wri-ink); white-space: nowrap }
+.wri-tile + .wri-tile { border-left: 1px solid var(--wri-card-line) }
+.wri-tile:hover, .wri-tile--hover { background: var(--wri-hover-fill); color: var(--wri-onyx) }
+.wri-tile--selected, .wri-tile--selected:hover { background: var(--wri-selected-fill); color: var(--wri-shell) }
+/* Dropdown slicer: closed field, open list with check boxes */
+.wri-dropdown { position: relative; height: 40px; display: flex; align-items: center; padding: 0 40px 0 12px; border: 1px solid var(--wri-input-border); background: var(--wri-card); font: var(--wri-type-label); font-family: var(--wri-font-live); color: var(--wri-onyx); white-space: nowrap }
+.wri-dropdown::after { content: ""; position: absolute; right: 16px; top: 13px; width: 7px; height: 7px; border-right: 1.5px solid var(--wri-ink); border-bottom: 1.5px solid var(--wri-ink); transform: rotate(45deg) }
+.wri-dropdown--open { border-color: var(--wri-ink) }
+.wri-dropdown--open::after { top: 17px; transform: rotate(-135deg) }
+.wri-dropdown-list { position: absolute; left: 0; right: 0; top: 76px; z-index: 2; padding: 4px 0; border: 1px solid var(--wri-input-border); background: var(--wri-card) }
+.wri-dropdown-item { height: 32px; display: flex; align-items: center; gap: 10px; padding: 0 12px; font: var(--wri-type-label); font-family: var(--wri-font-live); color: var(--wri-onyx); white-space: nowrap }
+.wri-dropdown-item:hover, .wri-dropdown-item--hover { background: var(--wri-hover-fill) }
+.wri-check { position: relative; width: 14px; height: 14px; flex: none; border: 1px solid var(--wri-ink); background: var(--wri-card) }
+.wri-check--on { background: var(--wri-selected-fill) }
+.wri-check--on::after { content: ""; position: absolute; left: 4px; top: 1px; width: 4px; height: 8px; border-right: 1.5px solid var(--wri-shell); border-bottom: 1.5px solid var(--wri-shell); transform: rotate(45deg) }
+
+/* ---- 10 Cards: light cream, one hairline, no shadow, no radius, 32 px padding ---- */
+.wri-card { position: absolute; background: var(--wri-card); border: 1px solid var(--wri-card-line) }
+.wri-card-head { position: absolute; left: 31px; right: 31px; top: 31px; display: flex; justify-content: space-between; align-items: baseline }
+.wri-card-sub { position: absolute; left: 31px; top: 63px; font: var(--wri-type-body); color: var(--wri-muted) }
+.wri-card-plot { position: absolute; left: 32px; top: 72px }
+.wri-card-plot--below-sub { top: 112px }
+/* Drill link in a card head: Cobalt text and an arrow, a page-navigation or drill-through button */
+.wri-drill { color: var(--wri-cobalt); font: var(--wri-type-label); font-family: var(--wri-font-live); white-space: nowrap; text-decoration: none }
+/* Every Cobalt link underlines on hover; the colour does not change */
+.wri-drill:hover, .wri-caveat-link:hover, .wri-reset:hover { text-decoration: underline }
+
+/* ---- 11 Chart text and marks (charts are native visuals; all their text is live) ---- */
+svg text { font-family: var(--wri-font-live); font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums }
+svg text.wri-data-label { font-size: 20px; font-weight: 600; letter-spacing: var(--wri-track-data-label); fill: var(--wri-onyx) }
+svg text.wri-proportional { font-variant-numeric: normal }
+svg tspan.wri-tabular { font-variant-numeric: tabular-nums }
+.wri-axis-label { fill: var(--wri-onyx) }                    /* category names, values to read first */
+.wri-axis-label--secondary { fill: var(--wri-ink) }          /* comparison categories, second-year values */
+.wri-axis-title { fill: var(--wri-muted) }                   /* axis titles, column headers, ticks, notes */
+.wri-ref-line { stroke: var(--wri-muted); stroke-dasharray: 4 4; fill: none }   /* reference: an average or base rate */
+.wri-constant-line { stroke: var(--wri-ink); fill: none }   /* constant: a fixed comparison such as 20% */
+.wri-ref-label { fill: var(--wri-ink) }
+.wri-baseline { stroke: var(--wri-ink) }
+.wri-axis-line { stroke: var(--wri-axis) }
+.wri-hairline { stroke: var(--wri-card-line) }
+.wri-marker { fill: var(--wri-ink) }                         /* a constant drawn as a 2 px tick on a bar */
+.wri-fill-band-1 { fill: var(--wri-band-1) }
+.wri-fill-band-2 { fill: var(--wri-band-2) }
+.wri-fill-band-3 { fill: var(--wri-band-3) }
+.wri-fill-band-4 { fill: var(--wri-band-4) }
+.wri-fill-band-5 { fill: var(--wri-band-5) }
+.wri-fill-primary { fill: var(--wri-screen-ink) }
+.wri-fill-comparison { fill: var(--wri-warm-grey) }
+.wri-fill-track { fill: var(--wri-card-line) }
+.wri-stroke-primary { stroke: var(--wri-screen-ink); fill: none }
+.wri-stroke-comparison { stroke: var(--wri-warm-grey); fill: none }
+.wri-is-dimmed { opacity: var(--wri-dimmed) }               /* selection dimming */
+.wri-legend { display: flex; align-items: center; gap: 8px; color: var(--wri-ink); font: var(--wri-type-label); font-family: var(--wri-font-live) }
+.wri-legend-swatch { width: 12px; height: 12px; flex: none }
+
+/* ---- 12 Tables: header row, rows, data bars, conditional colour ---- */
+.wri-table { border-collapse: collapse; width: 100%; font: var(--wri-type-label); font-family: var(--wri-font-live); color: var(--wri-onyx); font-variant-numeric: tabular-nums }
+.wri-table th { height: 28px; padding: 0 0 8px; text-align: left; vertical-align: bottom; font-weight: 500; color: var(--wri-muted); border-bottom: 1px solid var(--wri-card-line); white-space: nowrap }
+.wri-table td { height: 28px; padding: 0; vertical-align: middle; white-space: nowrap }
+.wri-table .wri-num { text-align: right }
+.wri-table .wri-secondary { color: var(--wri-ink) }
+.wri-table tr.wri-total td { border-top: 1px solid var(--wri-ink); font-weight: 600 }
+.wri-table tr.wri-row--selected td { background: var(--wri-hover-fill) }
+.wri-databar { display: flex; align-items: center; gap: 8px }
+.wri-databar-bar { height: 12px; flex: none; background: var(--wri-screen-ink) }
+.wri-databar-bar--band-5 { background: var(--wri-band-5) }
+.wri-databar-value { margin-left: auto }
+/* Conditional colour follows the risk band field, never an arbitrary value scale */
+.wri-cell-band-1 { background: var(--wri-band-1); color: var(--wri-onyx) }
+.wri-cell-band-2 { background: var(--wri-band-2); color: var(--wri-onyx) }
+.wri-cell-band-3 { background: var(--wri-band-3); color: var(--wri-onyx) }
+.wri-cell-band-4 { background: var(--wri-band-4); color: var(--wri-onyx) }
+.wri-cell-band-5 { background: var(--wri-band-5); color: var(--wri-shell) }
+.wri-band-chip { display: inline-block; width: 12px; height: 12px; flex: none }
+
+/* ---- 13 Tooltip: Onyx surface, Shell values, keys and base in Axis grey, no caret ---- */
+.wri-tooltip { position: absolute; z-index: 3; padding: 12px 16px; background: var(--wri-onyx); color: var(--wri-shell); font: var(--wri-type-label); font-family: var(--wri-font-live); font-variant-numeric: tabular-nums; white-space: nowrap }
+.wri-tooltip-title { font-weight: 600; margin-bottom: 4px }
+.wri-tooltip-row { display: flex; justify-content: space-between; gap: 24px }
+.wri-tooltip-key { color: var(--wri-tooltip-key) }
+.wri-tooltip-base { margin-top: 4px; color: var(--wri-tooltip-key) }
+
+/* ---- 14 Tags: 20 px tall, label type, Ink text ---- */
+.wri-tag { display: inline-flex; align-items: center; height: 20px; padding: 0 6px; color: var(--wri-ink); font: var(--wri-type-label); white-space: nowrap }
+.wri-tag--simulated { background: var(--wri-molt) }                         /* simulated pricing figures */
+.wri-tag--too-few { background: var(--wri-card-line) }                      /* below the minimum base, not ranked */
+.wri-tag--pending { border: 1px dashed var(--wri-ink); padding: 0 5px }     /* not yet computed, no value shown */
+
+/* ---- 15 Footer source line and corner label (baked, y 1040) ---- */
+.wri-source { position: absolute; left: 64px; top: 1040px; font: var(--wri-type-tech); letter-spacing: 0; color: var(--wri-muted); white-space: nowrap }
+.wri-corner-label { position: absolute; right: 64px; top: 1040px; font: var(--wri-type-label); color: var(--wri-muted); white-space: nowrap }   /* mockups only */
+
+/* ---- 16 Live layer and baked export ---- */
+/* Text that Power BI renders switches to the live face (Segoe UI in Power BI). */
+.wri-live, [data-pbi="visual"] { font-family: var(--wri-font-live) }
+/* page.html#baked hides every live visual and the mockup corner label: what is left is the
+   page background image. Each page carries <span id="baked" hidden></span>. */
+:root:has(#baked:target) [data-pbi="visual"],
+:root:has(#baked:target) .wri-corner-label { visibility: hidden }

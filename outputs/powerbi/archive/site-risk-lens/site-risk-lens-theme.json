@@ -1,0 +1,52 @@
+{
+  "name": "Site Risk Lens",
+  "dataColors": [
+    "#0B5CAD", "#8A939C", "#C2410C", "#2F7D5B",
+    "#6B747E", "#3A424B", "#DCDAD4", "#1C2127"
+  ],
+  "foreground": "#1C2127",
+  "foregroundNeutralSecondary": "#3A424B",
+  "foregroundNeutralTertiary": "#6B747E",
+  "background": "#F7F7F5",
+  "backgroundLight": "#F7F7F5",
+  "backgroundNeutral": "#DCDAD4",
+  "tableAccent": "#0B5CAD",
+  "good": "#2F7D5B",
+  "neutral": "#8A939C",
+  "bad": "#C2410C",
+  "maximum": "#C2410C",
+  "center": "#DCDAD4",
+  "minimum": "#2F7D5B",
+  "textClasses": {
+    "largeTitle": { "fontSize": 20, "fontFace": "Segoe UI Semibold", "color": "#1C2127" },
+    "title":      { "fontSize": 12, "fontFace": "Segoe UI Semibold", "color": "#1C2127" },
+    "header":     { "fontSize": 12, "fontFace": "Segoe UI Semibold", "color": "#1C2127" },
+    "callout":    { "fontSize": 28, "fontFace": "Segoe UI Semibold", "color": "#1C2127" },
+    "label":      { "fontSize": 10, "fontFace": "Segoe UI",          "color": "#3A424B" }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background":   [{ "show": false }],
+        "border":       [{ "show": false }],
+        "visualHeader": [{ "show": false }],
+        "title": [{
+          "show": true, "fontColor": { "solid": { "color": "#1C2127" } },
+          "fontSize": 12, "fontFamily": "Segoe UI Semibold", "alignment": "left"
+        }],
+        "outspacePane": [{ "backgroundColor": { "solid": { "color": "#F7F7F5" } } }]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [{ "color": { "solid": { "color": "#F7F7F5" } }, "transparency": 0 }]
+      }
+    },
+    "categoricalAxis": {
+      "*": { "gridlineColor": [{ "solid": { "color": "#DCDAD4" } }] }
+    },
+    "valueAxis": {
+      "*": { "gridlineColor": [{ "solid": { "color": "#DCDAD4" } }] }
+    }
+  }
+}

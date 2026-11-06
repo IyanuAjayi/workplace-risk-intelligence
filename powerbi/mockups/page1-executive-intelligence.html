@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Executive Intelligence</title>
+<link rel="stylesheet" href="wri-system.css">
+<!-- Page 1 of 4. Built from wri-system.css; inline styles carry page-specific positions only.
+     data-pbi="visual" with a unique id marks every element Power BI renders natively (data-pbi-type
+     names the visual). Everything else is baked into the background image: open #baked to see it. -->
+</head>
+<body>
+
+<!-- HEADER: logo lockup and test period baked, four page-navigation buttons live -->
+<img class="wri-logo" src="../brand/parakeet-logo.svg" alt="Parakeet Risk">
+<div class="wri-lockup-rule"></div>
+<div class="wri-product">
+  <div class="wri-product-name">Workplace Risk Intelligence</div>
+  <div class="wri-proposition">Predictive insights for industrial insurance underwriting</div>
+</div>
+<nav class="wri-nav" aria-label="Report pages">
+  <div class="wri-tab wri-tab--active" id="nav-executive-intelligence" data-pbi="visual" data-pbi-type="actionButton">Executive Intelligence</div>
+  <div class="wri-tab" id="nav-risk-landscape" data-pbi="visual" data-pbi-type="actionButton">Risk Landscape</div>
+  <div class="wri-tab" id="nav-model-trust" data-pbi="visual" data-pbi-type="actionButton">Model Trust</div>
+  <div class="wri-tab" id="nav-pricing-lab" data-pbi="visual" data-pbi-type="actionButton">Pricing Lab</div>
+</nav>
+<div class="wri-period">
+  <div>Test years 2023 + 2024</div>
+  <div class="wri-period-sub">199,150 private-sector site-years</div>
+</div>
+
+<!-- RAIL: the finding, the signature figure, what it means for underwriting, caveat -->
+<h1 class="wri-rail-statement" style="top:172px">Top-band sites<br>crossed the line<br>about 16&nbsp;times as often<br>as bottom-band sites.</h1>
+
+<div class="wri-stamp" style="top:480px"><div class="wri-stamp-value" id="kpi-capture-value" data-pbi="visual" data-pbi-type="card">51.4%</div></div>
+<p class="wri-figure-col wri-stamp-caption" style="top:480px" id="kpi-capture-caption" data-pbi="baked" data-pbi-type="textbox" data-prose><span>of next year's</span><span>line-crossers</span><span>were in band 5</span></p>
+<p class="wri-figure-col wri-count" style="top:582px" id="kpi-capture-count" data-pbi="visual" data-pbi-type="card">18,709 of 36,389 · 2023 + 2024</p>
+
+<!-- 51.4% against a random fifth: native bar with a constant line at 20% -->
+<svg class="wri-signature-bar" style="top:642px" id="chart-capture-vs-random" data-pbi="visual" data-pbi-type="clusteredBarChart" width="336" height="20" viewBox="0 0 336 20" role="img" aria-label="Band 5 holds 51.4% of next year's line-crossers, against 20% for a random fifth of sites.">
+  <rect class="wri-fill-track" x="0" y="6" width="336" height="8"/>
+  <rect class="wri-fill-band-5" x="0" y="6" width="172.7" height="8"/>
+  <rect class="wri-marker" x="66.2" y="0" width="2" height="20"/>
+</svg>
+<div class="wri-figure-col wri-signature-key" style="top:642px"><svg width="2" height="20" aria-hidden="true"><rect class="wri-marker" width="2" height="20"/></svg><span><span data-prose>Random fifth</span> 20%</span></div>
+
+<div class="wri-rail-head" style="top:696px"><span class="wri-dot"></span><h2 class="wri-title" data-prose>Underwriting</h2></div>
+
+<div class="wri-ledger-row" style="top:744px">
+  <p class="wri-ledger-action" data-prose>Survey band 5 before renewal.</p>
+  <div class="wri-ledger-evidence">
+    <div class="wri-ledger-figure" id="kpi-hit-rate-value" data-pbi="visual" data-pbi-type="card">47.0%</div>
+    <p class="wri-ledger-caption" id="kpi-hit-rate-caption" data-pbi="baked" data-pbi-type="textbox" data-prose>of band 5 sites crossed</p>
+    <p class="wri-ledger-count" id="kpi-hit-rate-count" data-pbi="visual" data-pbi-type="card">18,709 of 39,830 · 2023 + 2024</p>
+  </div>
+</div>
+<div class="wri-ledger-row" style="top:848px">
+  <p class="wri-ledger-action" data-prose>Test score-based pricing.</p>
+  <div class="wri-ledger-evidence">
+    <div class="wri-ledger-figure wri-nowrap" id="kpi-wrong-band-value" data-pbi="visual" data-pbi-type="card">27.5%&#8201;→&#8201;10.0%</div>
+    <p class="wri-ledger-caption" id="kpi-wrong-band-caption" data-pbi="baked" data-pbi-type="textbox" data-prose>premium in the wrong band</p>
+    <p class="wri-ledger-count"><span class="wri-tag wri-tag--simulated" data-prose>Simulated</span><span>2023 central</span></p>
+  </div>
+</div>
+<div class="wri-ledger-close" style="top:952px"></div>
+
+<p class="wri-caveat"><span data-prose>Associations, not causes. Reported injuries, not claims.</span> <a class="wri-caveat-link" id="link-method-caveats" data-pbi="visual" data-pbi-type="actionButton"><span data-prose>Method and caveats:</span> Model Trust →</a></p>
+
+<!-- EVIDENCE: risk-band chart. Native column chart (2023), 2024 as a one-row matrix beneath -->
+<section class="wri-card" style="left:704px;top:144px;width:1152px;height:488px">
+  <div class="wri-card-head">
+    <h2 class="wri-title" data-prose>Crossed the line next year</h2>
+    <div class="wri-legend" id="legend-crossing-year" data-pbi="baked" data-pbi-type="textbox">
+      <svg width="19" height="14" aria-hidden="true"><rect class="wri-fill-band-1" x="0" y="10" width="3" height="4"/><rect class="wri-fill-band-2" x="4" y="8" width="3" height="6"/><rect class="wri-fill-band-3" x="8" y="6" width="3" height="8"/><rect class="wri-fill-band-4" x="12" y="3" width="3" height="11"/><rect class="wri-fill-band-5" x="16" y="0" width="3" height="14"/></svg>2023
+    </div>
+  </div>
+  <p class="wri-card-sub" data-prose>Line: each industry's worst-20% serious-injury (DART) rate this year.</p>
+  <svg class="wri-card-plot wri-card-plot--below-sub" width="1088" height="352" viewBox="0 0 1088 352" role="img" aria-label="Column chart. Share of sites that crossed the line next year, by risk band, 2023: band 1 2.9%, band 2 7.1%, band 3 12.3%, band 4 21.0%, band 5 46.5%. 2024 row: 3.0%, 7.6%, 12.8%, 22.0%, 47.5%. Dashed line: all sites 18.3%, 2023 and 2024.">
+    <g id="chart-crossing-by-band" data-pbi="visual" data-pbi-type="clusteredColumnChart">
+      <!-- constant line, position Behind -->
+      <line class="wri-ref-line" x1="0" y1="172.5" x2="1088" y2="172.5"/>
+      <text class="wri-ref-label" x="0" y="164">All sites 18.3%, 2023 + 2024</text>
+      <g shape-rendering="crispEdges">
+        <rect class="wri-fill-band-1" x="106.4" y="249.5" width="120" height="14.5"/>
+        <rect class="wri-fill-band-2" x="311.2" y="228.5" width="120" height="35.5"/>
+        <rect class="wri-fill-band-3" x="516" y="202.5" width="120" height="61.5"/>
+        <rect class="wri-fill-band-4" x="720.8" y="159" width="120" height="105"/>
+        <rect class="wri-fill-band-5" x="925.6" y="31.5" width="120" height="232.5"/>
+      </g>
+      <g text-anchor="middle">
+        <text class="wri-data-label" x="166.4" y="240.5">2.9%</text>
+        <text class="wri-data-label" x="371.2" y="219.5">7.1%</text>
+        <text class="wri-data-label" x="576" y="193.5">12.3%</text>
+        <text class="wri-data-label" x="780.8" y="150">21.0%</text>
+        <text class="wri-data-label" x="985.6" y="22.5">46.5%</text>
+      </g>
+      <line class="wri-baseline" x1="0" y1="264.5" x2="1088" y2="264.5"/>
+      <g class="wri-axis-label" text-anchor="middle">
+        <text x="166.4" y="288">Band 1, lowest fifth</text>
+        <text x="371.2" y="288">Band 2</text>
+        <text x="576" y="288">Band 3</text>
+        <text x="780.8" y="288">Band 4</text>
+        <text x="985.6" y="288">Band 5, highest fifth</text>
+      </g>
+    </g>
+    <line class="wri-hairline" x1="0" y1="304.5" x2="1088" y2="304.5"/>
+    <text class="wri-axis-title" x="0" y="336">2024</text>
+    <g id="matrix-crossing-2024" data-pbi="visual" data-pbi-type="cardVisual">
+      <g class="wri-axis-label--secondary" text-anchor="middle">
+        <text x="166.4" y="336">3.0%</text>
+        <text x="371.2" y="336">7.6%</text>
+        <text x="576" y="336">12.8%</text>
+        <text x="780.8" y="336">22.0%</text>
+        <text x="985.6" y="336">47.5%</text>
+      </g>
+    </g>
+  </svg>
+</section>
+
+<!-- EVIDENCE: industry comparison. Native table (sector, DART rate) beside a native bar chart with a 20% constant line -->
+<section class="wri-card" style="left:704px;top:664px;width:560px;height:352px">
+  <div class="wri-card-head">
+    <h2 class="wri-title" data-prose>Every sector has band 5 sites</h2>
+    <span class="wri-drill" id="link-risk-landscape" data-pbi="visual" data-pbi-type="actionButton">Risk Landscape →</span>
+  </div>
+  <svg class="wri-card-plot" width="496" height="252" viewBox="0 0 496 252" role="img" aria-label="Bar chart. Share of each sector's sites in band 5, 2023 and 2024, with the average serious-injury (DART) rate per 100 full-time workers: transport and warehousing 4.29, 21.0%; agriculture 3.04, 20.4%; wholesale 2.83, 21.2%; manufacturing 2.17, 20.3%; construction 1.85, 18.4%; utilities 1.38, 15.8%; mining, oil and gas 0.77, 19.8%. All sites 20%.">
+    <g id="table-sector-dart" data-pbi="visual" data-pbi-type="tableEx">
+      <text class="wri-axis-title" x="252" y="18" text-anchor="end">Avg DART rate</text>
+      <g class="wri-axis-label">
+        <text x="0" y="54">Transport and warehousing</text>
+        <text x="0" y="82">Agriculture</text>
+        <text x="0" y="110">Wholesale</text>
+        <text x="0" y="138">Manufacturing</text>
+        <text x="0" y="166">Construction</text>
+        <text x="0" y="194">Utilities</text>
+        <text x="0" y="222">Mining, oil and gas</text>
+      </g>
+      <g class="wri-axis-label--secondary" text-anchor="end">
+        <text x="252" y="54">4.29</text>
+        <text x="252" y="82">3.04</text>
+        <text x="252" y="110">2.83</text>
+        <text x="252" y="138">2.17</text>
+        <text x="252" y="166">1.85</text>
+        <text x="252" y="194">1.38</text>
+        <text x="252" y="222">0.77</text>
+      </g>
+    </g>
+    <line class="wri-hairline" x1="0" y1="30.5" x2="496" y2="30.5"/>
+    <text class="wri-axis-title" x="276" y="18">In band 5</text>
+    <text class="wri-ref-label" x="420.5" y="248" text-anchor="middle">All sites 20%</text>
+    <g id="chart-sector-band5" data-pbi="visual" data-pbi-type="clusteredBarChart">
+      <g class="wri-fill-band-5" shape-rendering="crispEdges">
+        <rect x="276" y="43" width="151.2" height="12"/>
+        <rect x="276" y="71" width="146.9" height="12"/>
+        <rect x="276" y="99" width="152.6" height="12"/>
+        <rect x="276" y="127" width="146.2" height="12"/>
+        <rect x="276" y="155" width="132.5" height="12"/>
+        <rect x="276" y="183" width="113.8" height="12"/>
+        <rect x="276" y="211" width="142.6" height="12"/>
+      </g>
+      <line class="wri-constant-line" x1="420.5" y1="36" x2="420.5" y2="230"/>
+      <g class="wri-axis-label" text-anchor="end">
+        <text x="496" y="54">21.0%</text>
+        <text x="496" y="82">20.4%</text>
+        <text x="496" y="110">21.2%</text>
+        <text x="496" y="138">20.3%</text>
+        <text x="496" y="166">18.4%</text>
+        <text x="496" y="194">15.8%</text>
+        <text x="496" y="222">19.8%</text>
+      </g>
+    </g>
+    <text class="wri-axis-title wri-proportional" x="0" y="248"><tspan class="wri-tabular">2023 + 2024</tspan> · rate per <tspan class="wri-tabular">100</tspan> full-time workers</text>
+  </svg>
+</section>
+
+<!-- EVIDENCE: model validation. Native bar chart (2023 test AUC, axis 0.50 to 1.00, label from a text measure) beside a table of both test years -->
+<section class="wri-card" style="left:1296px;top:664px;width:560px;height:352px">
+  <div class="wri-card-head">
+    <h2 class="wri-title" data-prose>Ranking accuracy on unseen years</h2>
+    <span class="wri-drill" id="link-model-trust" data-pbi="visual" data-pbi-type="actionButton">Model Trust →</span>
+  </div>
+  <svg class="wri-card-plot" width="496" height="252" viewBox="0 0 496 252" role="img" aria-label="Bar chart. Ranking accuracy (AUC) on the 2023 test, axis from 0.50 (coin toss) to 1.00: scorecard about 8 in 10, last year's rate 0.73, rating class only about 6 in 10. Values: scorecard 0.78 in 2023 and 0.79 in 2024; last year's rate 0.73 in both years; rating class only 0.59 in both years.">
+    <text class="wri-axis-title" x="144" y="18">AUC, 2023 test, all test pairs</text>
+    <line class="wri-baseline" x1="144.5" y1="44" x2="144.5" y2="222"/>
+    <line class="wri-axis-line" x1="144" y1="222.5" x2="385" y2="222.5"/>
+    <g class="wri-axis-line"><line x1="264.5" y1="222" x2="264.5" y2="228"/><line x1="384.5" y1="222" x2="384.5" y2="228"/></g>
+    <text class="wri-axis-label" x="0" y="83">Scorecard</text>
+    <text class="wri-axis-label--secondary" x="0" y="139">Last year's rate</text>
+    <text class="wri-axis-label--secondary" x="0" y="195">Rating class only</text>
+    <g class="wri-axis-title">
+      <text x="130" y="248">0.50 coin toss</text>
+      <text x="264.5" y="248" text-anchor="middle">0.75</text>
+      <text x="384.5" y="248" text-anchor="middle">1.00</text>
+    </g>
+    <g id="chart-auc-2023" data-pbi="visual" data-pbi-type="clusteredBarChart">
+      <g shape-rendering="crispEdges">
+        <rect class="wri-fill-primary" x="144" y="70" width="135.8" height="16"/>
+        <rect class="wri-fill-comparison" x="144" y="126" width="109.9" height="16"/>
+        <rect class="wri-fill-comparison" x="144" y="182" width="44.2" height="16"/>
+      </g>
+      <text class="wri-axis-title" x="289.8" y="83">about 8 in 10</text>
+      <text class="wri-axis-title" x="198.2" y="195">about 6 in 10</text>
+    </g>
+    <line class="wri-hairline" x1="0" y1="30.5" x2="496" y2="30.5"/>
+    <g class="wri-axis-title" text-anchor="end">
+      <text x="440" y="18">2023</text>
+      <text x="496" y="18">2024</text>
+    </g>
+    <g id="table-auc-by-year" data-pbi="visual" data-pbi-type="cardVisual">
+      <g text-anchor="end">
+        <text class="wri-axis-label" x="440" y="83">0.78</text>
+        <text class="wri-axis-label" x="496" y="83">0.79</text>
+        <text class="wri-axis-label--secondary" x="440" y="139">0.73</text>
+        <text class="wri-axis-label--secondary" x="496" y="139">0.73</text>
+        <text class="wri-axis-label--secondary" x="440" y="195">0.59</text>
+        <text class="wri-axis-label--secondary" x="496" y="195">0.59</text>
+      </g>
+    </g>
+  </svg>
+</section>
+
+<!-- BOTTOM LINE: one-line source, corner label (mockup only) -->
+<p class="wri-source">Source: OSHA ITA Form 300A, 2016 to 2025 (2025 file to 31 Aug 2026) · BLS SOII industry DART rates, 2022 and 2023</p>
+<div class="wri-corner-label">Executive Intelligence. Design mockup, not a live Power BI report</div>
+<span id="baked" hidden></span>
+
+</body>
+</html>

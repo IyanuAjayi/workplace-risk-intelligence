@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920">
+<title>Executive Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,opsz,wght@0,14..32,400..900;1,14..32,400..900&display=block" rel="stylesheet">
+<style>
+:root{
+  --canvas:#F6F4EE; --surface:#FFFFFF; --sunk:#FAF8F3; --nest:#EFECDF;
+  --hair:#E2DED3; --hair-2:#D3CEC1; --grid:#EDEAE2; --axis:#B9B4A8; --ref:#8C887C;
+  --t1:#121614; --t2:#3D4644; --t3:#5E6563;
+  --ember:#E24337; --cobalt:#1936E8; --cobalt-deep:#0F2195; --cobalt-wash:#DCE5FF;
+  --screen-ink:#274A48; --screen-paper:#E6ECE2; --good:#346043; --alarm:#944126;
+  --muted-series:#ADA89C; --neutral-data:#CBC5B8;
+  --b1:#DCE4F1; --b2:#A9B9D6; --b3:#8A92A3; --b4:#A8452D; --b5:#661C14;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{width:1920px;height:1080px;overflow:hidden;position:relative;background:var(--canvas);
+  font-family:'Inter',sans-serif;color:var(--t1);-webkit-font-smoothing:antialiased;font-optical-sizing:auto}
+.mono{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:.08em;text-transform:uppercase}
+.tnum{font-variant-numeric:tabular-nums}
+svg text{font-family:'Inter',sans-serif}
+svg .m{font-family:'IBM Plex Mono',monospace;font-weight:500;letter-spacing:.08em}
+.gridlines{position:absolute;left:0;top:0;width:1920px;height:1080px;pointer-events:none}
+
+/* rail: brand, pages, period and provenance */
+.rail{position:absolute;left:0;top:0;width:240px;height:1080px;background:var(--nest);border-right:1px solid #DDD8CA;padding:28px 24px 0 24px}
+.rail .logo{height:24px;width:auto;display:block}
+.rail .lrule{height:1px;background:#D3CEC1;margin:20px 0 16px 0}
+.rail .pname{font-size:17px;line-height:22px;font-weight:600;letter-spacing:-.01em}
+.rail .prop{margin-top:6px;font-size:13px;line-height:18px;color:var(--t3)}
+.rail .sect{margin-top:36px}
+.rail .sect .k{color:var(--t3);margin-bottom:8px}
+.nav{margin:0 -12px}
+.nav .it{position:relative;height:40px;display:flex;align-items:center;gap:10px;padding:0 12px;border-radius:6px;font-size:15px;font-weight:500;color:var(--t2)}
+.nav .it .n{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--t3);letter-spacing:.04em}
+.nav .it.on{background:var(--surface);color:var(--t1);font-weight:600;box-shadow:0 0 0 1px #E2DED3 inset}
+.nav .it.on::before{content:"";position:absolute;left:-12px;top:10px;width:3px;height:20px;background:var(--ember);border-radius:0 2px 2px 0}
+.meta{margin-top:20px}
+.meta .k{color:var(--t3)}
+.meta .v{margin-top:4px;font-size:14px;line-height:19px;font-weight:600}
+.meta .s{margin-top:2px;font-size:13px;line-height:18px;color:var(--t2)}
+.railfoot{position:absolute;left:24px;right:24px;bottom:24px}
+.railfoot .by{display:flex;align-items:center;gap:8px;font-size:13px;line-height:18px;color:var(--t2)}
+.railfoot .by img{height:18px;width:auto;display:block}
+.concept{margin-top:12px;display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:16px;color:var(--t3);
+  border:1px solid #D3CEC1;border-radius:4px;padding:3px 8px;background:var(--canvas)}
+
+/* page header: question, answer, definition */
+.eyebrow{position:absolute;left:288px;top:28px;display:flex;align-items:center;gap:10px;color:var(--t2)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--ember)}
+.view{position:absolute;left:1360px;top:28px;width:512px;display:flex;gap:10px;color:var(--t2);font-size:13px;line-height:16px}
+.view .k{color:var(--t3)}
+.q{position:absolute;left:288px;top:58px;width:1048px;font-size:18px;line-height:24px;font-weight:500;color:var(--t3)}
+h1{position:absolute;left:288px;top:88px;width:1048px;margin:0;font-size:44px;line-height:52px;font-weight:600;letter-spacing:-.024em;color:var(--t1)}
+.def{position:absolute;left:1360px;top:62px;width:512px;padding-left:20px;border-left:1px solid var(--hair-2)}
+.def .k{color:var(--t3)}
+.def p{margin:6px 0 0;font-size:15px;line-height:22px;color:var(--t2)}
+
+/* KPI row: one primary card, one ribbon of three secondary figures */
+.kp{position:absolute;top:224px;height:120px;background:var(--surface);border:1px solid var(--hair);border-radius:8px 8px 48px 8px}
+.kp .k{position:absolute;left:24px;top:18px;color:var(--t2)}
+.kp .big{position:absolute;left:22px;top:38px;font-size:64px;line-height:64px;font-weight:600;letter-spacing:-.035em;color:var(--ember)}
+.kp .cap{position:absolute;left:292px;top:18px;width:440px;font-size:16px;line-height:22px;font-weight:500}
+.kp svg{position:absolute;left:292px;top:66px}
+.ks{position:absolute;top:224px;height:120px;background:var(--surface);border:1px solid var(--hair);border-radius:8px;display:grid;grid-template-columns:1fr 1fr 1fr}
+.kc{padding:16px 20px 0 20px;border-left:1px solid var(--hair)}
+.kc:first-child{border-left:0}
+.kc .v{font-size:32px;line-height:36px;font-weight:600;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.kc .l{margin-top:6px;font-size:14px;line-height:19px;font-weight:500}
+.kc .s{margin-top:2px;font-size:13px;line-height:18px;color:var(--t3)}
+.fav{color:var(--good);font-weight:600}
+
+/* cards */
+.card{position:absolute;background:var(--surface);border:1px solid var(--hair);border-radius:8px;padding:20px 24px}
+.card .eb{color:var(--t3)}
+.card h2{margin:8px 0 3px;font-size:18px;line-height:24px;font-weight:600;letter-spacing:-.01em}
+.card .sub{font-size:13px;line-height:18px;color:var(--t3)}
+.card .chart{position:absolute;left:24px}
+.card .foot{position:absolute;left:24px;right:24px;font-size:13px;line-height:18px;color:var(--t2)}
+.key{display:inline-flex;align-items:center;gap:6px;margin-right:12px;vertical-align:middle}
+
+.sim{display:inline-block;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:.06em;
+  padding:1px 6px;border-radius:3px;background:var(--screen-paper);color:var(--screen-ink);border:1px solid #C7D3C3;text-transform:uppercase;
+  vertical-align:middle}
+.chip{display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 11px 0 8px;border:1px solid var(--hair-2);border-radius:13px;
+  font-size:13px;font-weight:600;color:var(--t1);background:var(--surface);white-space:nowrap}
+
+/* actions and caveats */
+.ins .cols{position:absolute;left:24px;right:24px;top:52px;display:grid;grid-template-columns:1fr 1fr 1fr}
+.act{padding:0 24px;border-left:1px solid var(--hair)}
+.act:first-child{padding-left:0;border-left:0}
+.act .who{color:var(--t3)}
+.act .lead{margin-top:8px;font-size:17px;line-height:23px;font-weight:600;letter-spacing:-.005em}
+.act p{margin:8px 0 0;font-size:14px;line-height:21px;color:var(--t2)}
+.act .ev{margin-top:12px;color:var(--t3)}
+.cav .rows{position:absolute;left:24px;right:24px;top:50px}
+.cav .r{display:grid;grid-template-columns:232px 1fr;align-items:start;column-gap:16px;padding:10px 0;border-top:1px solid var(--hair)}
+.cav .r:first-child{border-top:0;padding-top:4px}
+.cav .r p{margin:0;font-size:13px;line-height:18px;color:var(--t2)}
+</style>
+</head>
+<body>
+<svg class="gridlines" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true"><line x1="1896.5" y1="0" x2="1896.5" y2="1080" stroke="#E4E0D5" stroke-width="1"/><line x1="240" y1="212.5" x2="1920" y2="212.5" stroke="#E4E0D5" stroke-width="1"/><circle cx="240.5" cy="212.5" r="4.5" fill="#F6F4EE" stroke="#A9A498" stroke-width="1"/><circle cx="1896.5" cy="212.5" r="4.5" fill="#F6F4EE" stroke="#A9A498" stroke-width="1"/><line x1="240" y1="356.5" x2="1920" y2="356.5" stroke="#E4E0D5" stroke-width="1"/><circle cx="240.5" cy="356.5" r="4.5" fill="#F6F4EE" stroke="#A9A498" stroke-width="1"/><circle cx="1896.5" cy="356.5" r="4.5" fill="#F6F4EE" stroke="#A9A498" stroke-width="1"/><line x1="240" y1="776.5" x2="1920" y2="776.5" stroke="#E4E0D5" stroke-width="1"/><circle cx="240.5" cy="776.5" r="4.5" fill="#F6F4EE" stroke="#A9A498" stroke-width="1"/><circle cx="1896.5" cy="776.5" r="4.5" fill="#F6F4EE" stroke="#A9A498" stroke-width="1"/></svg>
+<aside class="rail">
+  <img class="logo" src="../brand/parakeet-logo.svg" alt="Parakeet Risk" height="24">
+  <div class="lrule"></div>
+  <div class="pname">Workplace Risk Intelligence</div>
+  <div class="prop">Predictive insights for industrial insurance underwriting</div>
+  <div class="sect"><div class="mono k">Pages</div>
+    <nav class="nav" aria-label="Report pages">
+      <div class="it on"><span class="n">01</span>Executive Intelligence</div>
+      <div class="it"><span class="n">02</span>Risk Landscape</div>
+      <div class="it"><span class="n">03</span>Model Trust</div>
+      <div class="it"><span class="n">04</span>Pricing Lab</div>
+    </nav></div>
+  <div class="sect">
+    <div class="meta" style="margin-top:0"><div class="mono k">Test period</div><div class="v">Starting years 2023 and 2024</div>
+      <div class="s">Outcomes 2024 and 2025, years the model never saw. Trained on 2016 to 2022.</div></div>
+    <div class="meta"><div class="mono k">Data as of</div><div class="v">OSHA ITA to 31 Aug 2026</div>
+      <div class="s">Form 300A summaries 2016 to 2025. Downloaded 27 and 29 Oct 2026.</div></div>
+    <div class="meta"><div class="mono k">Industry baseline</div><div class="s">BLS SOII industry DART rates, 2022 to 2024.</div></div>
+    <div class="meta"><div class="mono k">Population</div><div class="s">Industrial sectors, 20+ employees, 20,000+ hours.
+      Test pairs: 107,673 (2023), 108,129 (2024). Portfolio views: 199,150 site-years.</div></div>
+    <div class="meta"><div class="mono k">Model</div><div class="s">The scorecard sets the five bands and the pricing test.
+      Gradient boosting is the benchmark.</div></div>
+  </div>
+  <div class="railfoot">
+    <div class="by"><img src="../brand/parakeet-mark.svg" alt="" height="18">A Parakeet Risk product</div>
+    <div class="concept">Design concept B, not a live Power BI report</div>
+  </div>
+</aside>
+
+<div class="eyebrow mono"><span class="dot"></span>01 / Executive intelligence</div>
+<div class="view"><span class="mono k">View</span><span>All sectors, states and sizes · observed outcomes</span></div>
+<div class="q">Which sites should underwriting and risk engineering look at first?</div>
+<h1>The top-scored fifth of sites held half of next year's line-crossers.</h1>
+<div class="def"><div class="mono k">The line</div>
+  <p>A site crosses the line when its next-year serious-injury (DART) rate is above the rate that marked the worst 20% of its
+  industry this year.</p></div>
+
+<div class="kp" style="left:288px;width:780px">
+  <div class="mono k">Band 5 · 2023 and 2024 pooled</div>
+  <div class="big">51.4%</div>
+  <div class="cap">of next year's line-crossers were in band 5, the top-scored fifth of sites. Lift 2.57x, hit rate 47.0%.</div>
+  <svg width="440" height="46" viewBox="0 0 440 46" role="img" aria-label="Band 5 share of sites and of line-crossers"><text x="0" y="14" font-size="13" fill="#3D4644">Sites</text><rect x="96" y="6" width="300" height="10" rx="2" fill="#ECE8DD"/><rect x="96" y="6" width="60.0" height="10" rx="2" fill="#661C14"/><text x="440" y="15" font-size="13" font-weight="600" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">a fifth</text><text x="0" y="36" font-size="13" fill="#3D4644">Line-crossers</text><rect x="96" y="28" width="300" height="10" rx="2" fill="#ECE8DD"/><rect x="96" y="28" width="154.2" height="10" rx="2" fill="#661C14"/><text x="440" y="37" font-size="13" font-weight="600" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">51.4%</text></svg>
+</div>
+<div class="ks" style="left:1092px;width:780px">
+  <div class="kc"><div class="v">16x</div><div class="l">Band 5 vs band 1 crossing rate</div>
+    <div class="s">46.5% vs 2.9% · 2023</div></div>
+  <div class="kc"><div class="v">0.78</div><div class="l">Scorecard AUC on unseen data</div>
+    <div class="s"><span class="fav">+0.19</span> on rating class alone (0.59) · 2023</div></div>
+  <div class="kc"><div class="v">10.0% <span class="sim">Simulated</span></div><div class="l">Premium in the wrong band</div>
+    <div class="s"><span class="fav">Down</span> from 27.5% · 2023 central</div></div>
+</div>
+
+<section class="card" style="left:288px;top:368px;width:512px;height:396px">
+  <div class="eb mono">Risk distribution</div>
+  <h2>Crossing rate by risk band, next year</h2>
+  <div class="sub"><span class="key"><svg width="18" height="10" aria-hidden="true"><rect x="0" y="1" width="18" height="8" rx="2" fill="#8A92A3"/></svg>2023, coloured by band</span><span class="key"><svg width="12" height="12" aria-hidden="true"><circle cx="6" cy="6" r="4.5" fill="none" stroke="#121614" stroke-width="1.5"/></svg>2024</span></div>
+  <div class="chart" style="top:102px"><svg width="464" height="246" viewBox="0 0 464 246" role="img" aria-label="Crossing rate by risk band: 2023 bars, 2024 rings"><text class="m" x="356" y="13" font-size="12" fill="#5E6563" text-anchor="end">2023</text><text class="m" x="410" y="13" font-size="12" fill="#5E6563" text-anchor="end">2024</text><text class="m" x="464" y="13" font-size="12" fill="#5E6563" text-anchor="end">X BAND 1</text><line x1="80.0" y1="24" x2="80.0" y2="222" stroke="#EDEAE2" stroke-width="1"/><text x="80.0" y="239" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">0%</text><line x1="124.0" y1="24" x2="124.0" y2="222" stroke="#EDEAE2" stroke-width="1"/><text x="124.0" y="239" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">10%</text><line x1="168.0" y1="24" x2="168.0" y2="222" stroke="#EDEAE2" stroke-width="1"/><text x="168.0" y="239" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">20%</text><line x1="212.0" y1="24" x2="212.0" y2="222" stroke="#EDEAE2" stroke-width="1"/><text x="212.0" y="239" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">30%</text><line x1="256.0" y1="24" x2="256.0" y2="222" stroke="#EDEAE2" stroke-width="1"/><text x="256.0" y="239" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">40%</text><line x1="300.0" y1="24" x2="300.0" y2="222" stroke="#EDEAE2" stroke-width="1"/><text x="300.0" y="239" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">50%</text><line x1="80" y1="222.5" x2="300.0" y2="222.5" stroke="#B9B4A8" stroke-width="1"/><line x1="160.5" y1="19" x2="160.5" y2="222" stroke="#8C887C" stroke-width="1"/><text x="166.5" y="13" font-size="12" fill="#3D4644">All sites 18.3%</text><path d="M80.00,28.00 h200.60 a4,4 0 0 1 4,4 v12.00 a4,4 0 0 1 -4,4 h-200.60 z" fill="#661C14"/><circle cx="289.00" cy="38" r="5" fill="none" stroke="#FFFFFF" stroke-width="4"/><circle cx="289.00" cy="38" r="5" fill="none" stroke="#121614" stroke-width="1.5"/><text x="0" y="37" font-size="14" font-weight="600" fill="#121614">Band 5</text><text x="0" y="52" font-size="12" fill="#5E6563">Highest</text><text x="356" y="43" font-size="14" font-weight="600" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">46.5%</text><text x="410" y="43" font-size="14" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">47.5%</text><text x="464" y="43" font-size="14" font-weight="600" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">16.0x</text><path d="M80.00,68.00 h88.40 a4,4 0 0 1 4,4 v12.00 a4,4 0 0 1 -4,4 h-88.40 z" fill="#A8452D"/><circle cx="176.80" cy="78" r="5" fill="none" stroke="#FFFFFF" stroke-width="4"/><circle cx="176.80" cy="78" r="5" fill="none" stroke="#121614" stroke-width="1.5"/><text x="0" y="83" font-size="14" font-weight="600" fill="#121614">Band 4</text><text x="356" y="83" font-size="14" font-weight="500" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">21.0%</text><text x="410" y="83" font-size="14" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">22.0%</text><text x="464" y="83" font-size="14" font-weight="500" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">7.2x</text><path d="M80.00,108.00 h50.12 a4,4 0 0 1 4,4 v12.00 a4,4 0 0 1 -4,4 h-50.12 z" fill="#8A92A3"/><circle cx="136.32" cy="118" r="5" fill="none" stroke="#FFFFFF" stroke-width="4"/><circle cx="136.32" cy="118" r="5" fill="none" stroke="#121614" stroke-width="1.5"/><text x="0" y="123" font-size="14" font-weight="600" fill="#121614">Band 3</text><text x="356" y="123" font-size="14" font-weight="500" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">12.3%</text><text x="410" y="123" font-size="14" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">12.8%</text><text x="464" y="123" font-size="14" font-weight="500" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">4.2x</text><path d="M80.00,148.00 h27.24 a4,4 0 0 1 4,4 v12.00 a4,4 0 0 1 -4,4 h-27.24 z" fill="#A9B9D6"/><circle cx="113.44" cy="158" r="5" fill="none" stroke="#FFFFFF" stroke-width="4"/><circle cx="113.44" cy="158" r="5" fill="none" stroke="#121614" stroke-width="1.5"/><text x="0" y="163" font-size="14" font-weight="600" fill="#121614">Band 2</text><text x="356" y="163" font-size="14" font-weight="500" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">7.1%</text><text x="410" y="163" font-size="14" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">7.6%</text><text x="464" y="163" font-size="14" font-weight="500" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">2.4x</text><path d="M80.00,188.00 h8.76 a4,4 0 0 1 4,4 v12.00 a4,4 0 0 1 -4,4 h-8.76 z" fill="#DCE4F1"/><circle cx="93.20" cy="198" r="5" fill="none" stroke="#FFFFFF" stroke-width="4"/><circle cx="93.20" cy="198" r="5" fill="none" stroke="#121614" stroke-width="1.5"/><text x="0" y="197" font-size="14" font-weight="600" fill="#121614">Band 1</text><text x="0" y="212" font-size="12" fill="#5E6563">Lowest</text><text x="356" y="203" font-size="14" font-weight="500" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">2.9%</text><text x="410" y="203" font-size="14" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">3.0%</text><text x="464" y="203" font-size="14" font-weight="500" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">1.0x</text></svg></div>
+  <div class="foot" style="top:352px">Bands 1 to 3 sat below the all-site rate (both years pooled) and bands 4 and 5 above it.
+  Cool colours mark below, warm above.</div>
+</section>
+
+<section class="card" style="left:824px;top:368px;width:646px;height:396px">
+  <div class="eb mono">Industry analysis</div>
+  <h2>Seven sectors: size, injury rate, top-band share and model fit</h2>
+  <div class="sub">DART rates differ about 5.6x between sectors, yet each has 15.8% to 21.2% of its site-years in the top band,
+  because the line is set within each industry. Lines mark all sites.</div>
+  <div class="chart" style="top:122px"><svg width="598" height="262" viewBox="0 0 598 262" role="img" aria-label="Sector small multiples"><text class="m" x="0" y="12" font-size="12" fill="#5E6563" text-anchor="start">SECTOR</text><text x="0" y="29" font-size="12" fill="#5E6563" text-anchor="start">by site-years</text><text class="m" x="230" y="12" font-size="12" fill="#5E6563" text-anchor="end">SITE-YEARS</text><text x="230" y="29" font-size="12" fill="#5E6563" text-anchor="end">2023 + 2024</text><text class="m" x="250" y="12" font-size="12" fill="#5E6563" text-anchor="start">DART RATE</text><text x="250" y="29" font-size="12" fill="#5E6563" text-anchor="start">per 100 workers</text><text class="m" x="360" y="12" font-size="12" fill="#5E6563" text-anchor="start">IN TOP BAND</text><text x="360" y="29" font-size="12" fill="#5E6563" text-anchor="start">2023 + 2024</text><text class="m" x="504" y="12" font-size="12" fill="#5E6563" text-anchor="start">SCORECARD AUC</text><text x="504" y="29" font-size="12" fill="#5E6563" text-anchor="start">2023 only</text><line x1="0" y1="40.5" x2="598" y2="40.5" stroke="#EDEAE2" stroke-width="1"/><line x1="0" y1="69.5" x2="598" y2="69.5" stroke="#EDEAE2" stroke-width="1"/><line x1="0" y1="98.5" x2="598" y2="98.5" stroke="#EDEAE2" stroke-width="1"/><line x1="0" y1="127.5" x2="598" y2="127.5" stroke="#EDEAE2" stroke-width="1"/><line x1="0" y1="156.5" x2="598" y2="156.5" stroke="#EDEAE2" stroke-width="1"/><line x1="0" y1="185.5" x2="598" y2="185.5" stroke="#EDEAE2" stroke-width="1"/><line x1="0" y1="214.5" x2="598" y2="214.5" stroke="#EDEAE2" stroke-width="1"/><line x1="0" y1="243.5" x2="598" y2="243.5" stroke="#EDEAE2" stroke-width="1"/><line x1="360" y1="54.5" x2="440" y2="54.5" stroke="#EDEAE2" stroke-width="2"/><line x1="504" y1="54.5" x2="560" y2="54.5" stroke="#EDEAE2" stroke-width="2"/><line x1="360" y1="83.5" x2="440" y2="83.5" stroke="#EDEAE2" stroke-width="2"/><line x1="504" y1="83.5" x2="560" y2="83.5" stroke="#EDEAE2" stroke-width="2"/><line x1="360" y1="112.5" x2="440" y2="112.5" stroke="#EDEAE2" stroke-width="2"/><line x1="504" y1="112.5" x2="560" y2="112.5" stroke="#EDEAE2" stroke-width="2"/><line x1="360" y1="141.5" x2="440" y2="141.5" stroke="#EDEAE2" stroke-width="2"/><line x1="504" y1="141.5" x2="560" y2="141.5" stroke="#EDEAE2" stroke-width="2"/><line x1="360" y1="170.5" x2="440" y2="170.5" stroke="#EDEAE2" stroke-width="2"/><line x1="504" y1="170.5" x2="560" y2="170.5" stroke="#EDEAE2" stroke-width="2"/><line x1="360" y1="199.5" x2="440" y2="199.5" stroke="#EDEAE2" stroke-width="2"/><line x1="504" y1="199.5" x2="560" y2="199.5" stroke="#EDEAE2" stroke-width="2"/><line x1="360" y1="228.5" x2="440" y2="228.5" stroke="#EDEAE2" stroke-width="2"/><line x1="504" y1="228.5" x2="560" y2="228.5" stroke="#EDEAE2" stroke-width="2"/><line x1="275.7" y1="40" x2="275.7" y2="247" stroke="#8C887C" stroke-width="1"/><text x="275.7" y="261" font-size="12" fill="#3D4644" text-anchor="middle" style="font-variant-numeric:tabular-nums">2.57</text><line x1="408.0" y1="40" x2="408.0" y2="247" stroke="#8C887C" stroke-width="1"/><text x="408.0" y="261" font-size="12" fill="#3D4644" text-anchor="middle" style="font-variant-numeric:tabular-nums">20%</text><line x1="534.1" y1="40" x2="534.1" y2="247" stroke="#8C887C" stroke-width="1"/><text x="534.1" y="261" font-size="12" fill="#3D4644" text-anchor="middle" style="font-variant-numeric:tabular-nums">0.783</text><text x="0" y="59.0" font-size="13" font-weight="500" fill="#121614">Manufacturing</text><text x="230" y="59.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">78,918</text><path d="M250.00,49.50 h18.70 a3,3 0 0 1 3,3 v4.00 a3,3 0 0 1 -3,3 h-18.70 z" fill="#CBC5B8"/><text x="338" y="59.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">2.17</text><circle cx="410.4" cy="54.5" r="5" fill="#661C14" stroke="#FFFFFF" stroke-width="2"/><text x="484" y="59.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">20.3%</text><circle cx="536.9" cy="54.5" r="5" fill="#1936E8" stroke="#FFFFFF" stroke-width="2"/><text x="598" y="59.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.787</text><text x="0" y="88.0" font-size="13" font-weight="500" fill="#121614">Construction</text><text x="230" y="88.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">43,110</text><path d="M250.00,78.50 h15.50 a3,3 0 0 1 3,3 v4.00 a3,3 0 0 1 -3,3 h-15.50 z" fill="#CBC5B8"/><text x="338" y="88.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">1.85</text><circle cx="395.2" cy="83.5" r="5" fill="#661C14" stroke="#FFFFFF" stroke-width="2"/><text x="484" y="88.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">18.4%</text><circle cx="551.6" cy="83.5" r="5" fill="#1936E8" stroke="#FFFFFF" stroke-width="2"/><text x="598" y="88.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.808</text><text x="0" y="117.0" font-size="13" font-weight="500" fill="#121614">Transport and warehousing</text><text x="230" y="117.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">36,087</text><path d="M250.00,107.50 h39.90 a3,3 0 0 1 3,3 v4.00 a3,3 0 0 1 -3,3 h-39.90 z" fill="#CBC5B8"/><text x="338" y="117.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">4.29</text><circle cx="416.0" cy="112.5" r="5" fill="#661C14" stroke="#FFFFFF" stroke-width="2"/><text x="484" y="117.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">21.0%</text><circle cx="521.5" cy="112.5" r="5" fill="#1936E8" stroke="#FFFFFF" stroke-width="2"/><text x="598" y="117.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.765</text><text x="0" y="146.0" font-size="13" font-weight="500" fill="#121614">Wholesale</text><text x="230" y="146.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">27,123</text><path d="M250.00,136.50 h25.30 a3,3 0 0 1 3,3 v4.00 a3,3 0 0 1 -3,3 h-25.30 z" fill="#CBC5B8"/><text x="338" y="146.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">2.83</text><circle cx="417.6" cy="141.5" r="5" fill="#661C14" stroke="#FFFFFF" stroke-width="2"/><text x="484" y="146.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">21.2%</text><circle cx="531.3" cy="141.5" r="5" fill="#1936E8" stroke="#FFFFFF" stroke-width="2"/><text x="598" y="146.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.779</text><text x="0" y="175.0" font-size="13" font-weight="500" fill="#121614">Utilities</text><text x="230" y="175.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">6,729</text><path d="M250.00,165.50 h10.80 a3,3 0 0 1 3,3 v4.00 a3,3 0 0 1 -3,3 h-10.80 z" fill="#CBC5B8"/><text x="338" y="175.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">1.38</text><circle cx="374.4" cy="170.5" r="5" fill="#661C14" stroke="#FFFFFF" stroke-width="2"/><text x="484" y="175.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">15.8%</text><circle cx="531.3" cy="170.5" r="5" fill="#1936E8" stroke="#FFFFFF" stroke-width="2"/><text x="598" y="175.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.779</text><text x="0" y="204.0" font-size="13" font-weight="500" fill="#121614">Agriculture</text><text x="230" y="204.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">6,335</text><path d="M250.00,194.50 h27.40 a3,3 0 0 1 3,3 v4.00 a3,3 0 0 1 -3,3 h-27.40 z" fill="#CBC5B8"/><text x="338" y="204.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">3.04</text><circle cx="411.2" cy="199.5" r="5" fill="#661C14" stroke="#FFFFFF" stroke-width="2"/><text x="484" y="204.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">20.4%</text><circle cx="518.7" cy="199.5" r="5" fill="#1936E8" stroke="#FFFFFF" stroke-width="2"/><text x="598" y="204.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.761</text><text x="0" y="233.0" font-size="13" font-weight="500" fill="#121614">Mining, oil and gas</text><text x="230" y="233.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">848</text><path d="M250.00,223.50 h4.70 a3,3 0 0 1 3,3 v4.00 a3,3 0 0 1 -3,3 h-4.70 z" fill="#CBC5B8"/><text x="338" y="233.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.77</text><circle cx="406.4" cy="228.5" r="5" fill="#661C14" stroke="#FFFFFF" stroke-width="2"/><text x="484" y="233.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">19.8%</text><circle cx="546.0" cy="228.5" r="5" fill="#1936E8" stroke="#FFFFFF" stroke-width="2"/><text x="598" y="233.0" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.800</text></svg></div>
+</section>
+
+<section class="card" style="left:1494px;top:368px;width:378px;height:396px">
+  <div class="eb mono">Model validation</div>
+  <h2>AUC on unseen test years</h2>
+  <div class="sub"><span class="key"><svg width="10" height="10" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="#3D4644"/></svg>2023</span><span class="key"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="none" stroke="#3D4644" stroke-width="1.5"/></svg>2024</span>0.50 is a coin toss</div>
+  <div class="chart" style="top:100px"><svg width="330" height="140" viewBox="0 0 330 140" role="img" aria-label="AUC by model: 2023 dot, 2024 ring"><text class="m" x="290" y="11" font-size="12" fill="#5E6563" text-anchor="end">2023</text><text class="m" x="330" y="11" font-size="12" fill="#5E6563" text-anchor="end">2024</text><line x1="120.0" y1="18" x2="120.0" y2="122" stroke="#EDEAE2" stroke-width="1"/><text x="120.0" y="138" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">0.50</text><line x1="157.1" y1="18" x2="157.1" y2="122" stroke="#EDEAE2" stroke-width="1"/><text x="157.1" y="138" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">0.60</text><line x1="194.3" y1="18" x2="194.3" y2="122" stroke="#EDEAE2" stroke-width="1"/><text x="194.3" y="138" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">0.70</text><line x1="231.4" y1="18" x2="231.4" y2="122" stroke="#EDEAE2" stroke-width="1"/><text x="231.4" y="138" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">0.80</text><line x1="120" y1="18" x2="120" y2="122" stroke="#8C887C" stroke-width="1"/><line x1="120" y1="122.5" x2="256" y2="122.5" stroke="#B9B4A8" stroke-width="1"/><text x="0" y="38.5" font-size="13" font-weight="600" fill="#121614">Gradient boosting</text><line x1="120" y1="34" x2="231.4" y2="34" stroke="#121614" stroke-width="2" stroke-opacity="0.35"/><circle cx="231.80" cy="34" r="7.5" fill="#FFFFFF" stroke="#121614" stroke-width="1.5"/><circle cx="231.43" cy="34" r="4" fill="#121614"/><text x="290" y="38.5" font-size="13" font-weight="600" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">0.800</text><text x="330" y="38.5" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.801</text><text x="0" y="64.5" font-size="13" font-weight="600" fill="#121614">Scorecard</text><line x1="120" y1="60" x2="225.1" y2="60" stroke="#1936E8" stroke-width="2" stroke-opacity="0.35"/><circle cx="225.86" cy="60" r="7.5" fill="#FFFFFF" stroke="#1936E8" stroke-width="1.5"/><circle cx="225.11" cy="60" r="4" fill="#1936E8"/><text x="290" y="64.5" font-size="13" font-weight="600" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">0.783</text><text x="330" y="64.5" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.785</text><text x="0" y="90.5" font-size="13" font-weight="500" fill="#121614">Last year's rate</text><line x1="120" y1="86" x2="205.1" y2="86" stroke="#ADA89C" stroke-width="2" stroke-opacity="0.35"/><circle cx="205.06" cy="86" r="7.5" fill="#FFFFFF" stroke="#ADA89C" stroke-width="1.5"/><circle cx="205.06" cy="86" r="4" fill="#ADA89C"/><text x="290" y="90.5" font-size="13" font-weight="500" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">0.729</text><text x="330" y="90.5" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.729</text><text x="0" y="116.5" font-size="13" font-weight="500" fill="#121614">Rating class only</text><line x1="120" y1="112" x2="154.2" y2="112" stroke="#ADA89C" stroke-width="2" stroke-opacity="0.35"/><circle cx="153.06" cy="112" r="7.5" fill="#FFFFFF" stroke="#ADA89C" stroke-width="1.5"/><circle cx="154.17" cy="112" r="4" fill="#ADA89C"/><text x="290" y="116.5" font-size="13" font-weight="500" fill="#121614" text-anchor="end" style="font-variant-numeric:tabular-nums">0.592</text><text x="330" y="116.5" font-size="13" fill="#3D4644" text-anchor="end" style="font-variant-numeric:tabular-nums">0.589</text></svg></div>
+  <div class="chart" style="top:248px"><svg width="330" height="108" viewBox="0 0 330 108" role="img" aria-label="Zoomed 95 percent intervals, top two models"><text class="m" x="0" y="12" font-size="12" fill="#5E6563">ZOOM: 95% INTERVALS</text><line x1="186.0" y1="24" x2="186.0" y2="90" stroke="#EDEAE2" stroke-width="1"/><text x="186.0" y="106" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">0.78</text><line x1="242.0" y1="24" x2="242.0" y2="90" stroke="#EDEAE2" stroke-width="1"/><text x="242.0" y="106" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">0.79</text><line x1="298.0" y1="24" x2="298.0" y2="90" stroke="#EDEAE2" stroke-width="1"/><text x="298.0" y="106" font-size="12" fill="#5E6563" text-anchor="middle" style="font-variant-numeric:tabular-nums">0.80</text><line x1="158" y1="90.5" x2="326" y2="90.5" stroke="#B9B4A8" stroke-width="1"/><text x="0" y="38.5" font-size="13" font-weight="500" fill="#121614">Scorecard</text><text class="m" x="148" y="38" font-size="12" fill="#5E6563" text-anchor="end">2023</text><rect x="186.00" y="30" width="39.20" height="8" rx="4" fill="#1936E8" fill-opacity="0.24"/><rect x="201.80" y="28" width="2" height="12" fill="#1936E8"/><text class="m" x="148" y="52" font-size="12" fill="#5E6563" text-anchor="end">2024</text><rect x="197.70" y="44.5" width="38.20" height="7" rx="3.5" fill="#FFFFFF" stroke="#1936E8" stroke-width="1"/><rect x="213.00" y="42" width="2" height="12" fill="#1936E8"/><text x="0" y="74.5" font-size="13" font-weight="500" fill="#121614">Gradient boosting</text><text class="m" x="148" y="74" font-size="12" fill="#5E6563" text-anchor="end">2023</text><rect x="281.20" y="66" width="33.60" height="8" rx="4" fill="#121614" fill-opacity="0.24"/><rect x="297.00" y="64" width="2" height="12" fill="#121614"/><text class="m" x="148" y="88" font-size="12" fill="#5E6563" text-anchor="end">2024</text><rect x="287.30" y="80.5" width="32.60" height="7" rx="3.5" fill="#FFFFFF" stroke="#121614" stroke-width="1"/><rect x="302.60" y="78" width="2" height="12" fill="#121614"/></svg></div>
+  <div class="foot" style="top:360px">Scorecard: 78 in 100 pairs ranked right (2023).</div>
+</section>
+
+<section class="card ins" style="left:288px;top:788px;width:1048px;height:268px">
+  <div class="eb mono">What to do with it</div>
+  <div class="cols">
+    <div class="act"><div class="who mono">Risk engineering</div><div class="lead">Survey band 5 first</div>
+      <p>In band 5, 46.5% of sites crossed the line in 2023 and 47.5% in 2024. In band 1 it was 2.9% and 3.0%. Start site visits at the top of the list.</p>
+      <div class="ev mono">Observed · both test years</div></div>
+    <div class="act"><div class="who mono">Pricing</div><div class="lead">Price within the class, not only by it</div>
+      <p>Rating class alone ranks sites little better than a coin toss (AUC 0.59). Spreading premium by score cut premium in the wrong band from 27.5% to 10.0%.</p>
+      <div class="ev"><span class="sim">Simulated</span> <span class="mono" style="color:var(--t3)">· 2023 central</span></div></div>
+    <div class="act"><div class="who mono">Underwriting</div><div class="lead">Trust the ranking most on large sites</div>
+      <p>Scorecard AUC is 0.915 for sites with 250+ employees and 0.762 for sites with 20 to 249. Pair small-site scores with a survey.</p>
+      <div class="ev mono">Observed · 2023 test year</div></div>
+  </div>
+</section>
+
+<section class="card cav" style="left:1360px;top:788px;width:512px;height:268px">
+  <div class="eb mono">Read with care</div>
+  <div class="rows">
+    <div class="r"><span class="chip"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="none" stroke="#3D4644" stroke-width="1.2"/><rect x="6.3" y="6" width="1.4" height="4.2" fill="#3D4644"/><rect x="6.3" y="3.6" width="1.4" height="1.4" fill="#3D4644"/></svg>Associations, not causes</span><p>The score ranks sites. It does not show why injuries happen.</p></div>
+    <div class="r"><span class="chip"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="none" stroke="#3D4644" stroke-width="1.2"/><rect x="6.3" y="6" width="1.4" height="4.2" fill="#3D4644"/><rect x="6.3" y="3.6" width="1.4" height="1.4" fill="#3D4644"/></svg>Reported injuries, not claims</span><p>Employer-reported OSHA counts. A DART rate is not a claim cost.</p></div>
+    <div class="r"><span class="chip"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="none" stroke="#3D4644" stroke-width="1.2"/><rect x="6.3" y="6" width="1.4" height="4.2" fill="#3D4644"/><rect x="6.3" y="3.6" width="1.4" height="1.4" fill="#3D4644"/></svg>Pricing is simulated</span><p>Not real premiums, claims or loss ratios. Claim cost $50,076.</p></div>
+    <div class="r"><span class="chip"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="none" stroke="#3D4644" stroke-width="1.2"/><rect x="6.3" y="6" width="1.4" height="4.2" fill="#3D4644"/><rect x="6.3" y="3.6" width="1.4" height="1.4" fill="#3D4644"/></svg>Two test years</span><p>Starting years 2023 and 2024. A solid check, not a long record.</p></div>
+  </div>
+</section>
+</body>
+</html>

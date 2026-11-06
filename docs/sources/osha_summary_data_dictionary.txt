@@ -1,0 +1,127 @@
+OSHA Injury Tracking Application 300A Data Dictionary –  April 2024 
+ 
+Injury Tracking Application (ITA) 300A 
+Summary Data Dictionary 
+ 
+In May 2016, OSHA amended 29 CFR 1904.41 by publishing the first Improve Tracking of Workplace 
+Injuries and Illnesses final rule. The first year of data collection (CY 2016 data) was conducted in August 
+December 2017. Data are from OSHA Form 300A: Summary of Work-Related Injuries and Illnesses. 
+Establishments with 250+ employees not listed in Exempt Industries list and establishments with 20-249 
+employees listed in the 300A Table must electronically submit their 300A data to OSHA each year, and the 
+data submitted by establishments to the ITA is available at [website].   
+ 
+ 
+Data Element Definition Format 
+ID A unique number for each 300A record. Numeric 
+establishment_name The name of the establishment reporting data. 
+[Must be unique to the establishment]  
+Character 
+establishment_ID A unique number for each establishment. This 
+variable links the 300A summary data and 
+300/301 case detail data. 
+Numeric 
+ein Employer Identification Number (EIN) is also 
+known as Federal Tax Identification Number. 
+Character 
+company_name The name of the company that owns the 
+establishment. 
+Character 
+street_address The street address of the establishment. Character 
+city The city where the establishment is located. Character 
+state The state or territory where the establishment is 
+located. 
+Character 
+zip_code The full zip code for the establishment. Character 
+naics_code The North American Industry Classification 
+System (NAICS) co de  for the establishment. Data 
+through 2022 uses a 2012 NAICS code. Data 
+collected in 2023 and later uses a 2012, 2017, or 
+2022 NAICS code.  
+Numeric 
+naics_year The calendar year reflecting the version of 
+NAICS codes used by the establishment [2012, 
+2017, or 2022] When a NAICS code has not 
+changed, the most recent NAICS year is listed. 
+Data submissions with invalid NAICS codes are 
+shown as missing. 
+Numeric 
+industry_description The industry description for the establishment. Character 
+establishment_type 1 = Not a government entity 
+2 = State Government entity 
+3 = Local Government entity 
+Numeric 
+OSHA Injury Tracking Application 300A Data Dictionary –  April 2024 
+ 
+size The size of the establishment based on the 
+maximum number of employees who worked 
+there at any point in the year. 
+• 1 = < 20 employees 
+• 2 = 20-249 employees  
+• 21 = 20-99 employees 
+• 22 = 100-249 employees 
+• 3 = 250+ employees 
+Note – code 2 was split to 21 and 22 with the 
+collection of 2023 data. 
+Numeric 
+annual_average_employees The annual average number of employees at the 
+establishment. 
+Numeric 
+total_hours_worked The total hours worked by all employees. 
+ 
+Numeric 
+no_injuries_illnesses Whether the establishment had any OSHA 
+recordable work-related injuries or illnesses 
+during the year. 
+• 1 = the establishment had injuries or 
+illnesses 
+• 2 = the establishment did not have injuries 
+or illnesses 
+Numeric 
+total_deaths The total number of deaths (Form 300A Field G). Numeric 
+total_dafw_cases The total number of cases with days away from 
+work (Form 300A Field H). 
+Numeric 
+total_djtr_cases The total number of cases with job transfer or 
+restriction (Form 300A Field I). 
+Numeric 
+total_other_cases The total number of other recordable cases 
+(Form 300A Field J). 
+Numeric 
+total_dafw_days The total number of days away from work (Form 
+300A Field K). 
+Numeric 
+total_djtr_days The total number of days of job 
+transfer or restriction (Form 300A 
+Field L). 
+Numeric 
+total_injuries The total number of injuries (Form 300A Field 
+M(1)). 
+Numeric 
+total_skin_disorders The total number of skin disorders (Form 300A 
+Field M(2)). 
+Numeric 
+total_respiratory_conditions The total number of respiratory conditions (Form 
+300A Field M(3)). 
+Numeric 
+total_poisonings The total number of poisonings (Form 300A Field 
+M(4)). 
+Numeric 
+total_hearing_loss The total number of hearing loss (Form 300A 
+Field M(5)). 
+Numeric 
+OSHA Injury Tracking Application 300A Data Dictionary –  April 2024 
+ 
+total_other_illnesses The total number of all other illnesses (Form 
+300A Field M(6)). 
+Numeric 
+created_timestamp The date and time a record was submitted to the 
+ITA. 
+Numeric 
+Change_reason The reason why an establishment’s injury and 
+illness summary was changed, if applicable. 
+Character 
+year_filing_for The calendar year in which the injuries and 
+illnesses being reported occurred at the 
+establishment.  
+Numeric 
+ 

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<title>Charts for Finding next year's riskiest workplaces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=block">
+<!-- The three charts in docs/templates/riskiest-workplaces.html and the Word copy. Figures from docs/verified-metrics.md.
+     Each chart is drawn at its printed size, one 83.5 mm column (316 px), and saved at 4x by scripts/11_riskiest_workplaces.py:
+     open this file with #bands, #auc or #pricing to see one chart. -->
+<style>
+  :root { --onyx: #000000; --ink: #303A39; --muted: #66655F; --rule: #DCD8CA;
+          --b1: #C9D6BD; --b2: #D1A76A; --b3: #C98369; --b4: #A96247; --b5: #944126;
+          --screen: #274A48; --warm: #B3AFA1; --molt: #B5C7E4; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 316px; background: #FFFFFF; overflow: hidden; }
+  body { font-family: Inter, "Segoe UI", Arial, sans-serif; color: var(--ink); font-size: 9.3px; line-height: 13px; }
+  .chart { display: none; padding-top: 2px; }
+  .chart:target { display: block; }
+
+  .title { font-weight: 600; font-size: 11.3px; line-height: 15px; color: var(--onyx); letter-spacing: -0.005em; }
+  .sub { margin-top: 1px; color: var(--muted); }
+  .tag { display: inline-block; padding: 0 3px; margin-left: 5px; background: var(--molt); color: var(--ink); font-weight: 500; font-size: 9.3px; line-height: 13px; vertical-align: 0; }
+  .legend { display: flex; gap: 14px; margin-top: 6px; font-weight: 500; }
+  .key { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: -0.5px; }
+
+  .grid { display: grid; column-gap: 6px; align-items: center; font-variant-numeric: tabular-nums; }
+  .head { margin-top: 8px; padding-bottom: 3px; border-bottom: 1px solid var(--rule); color: var(--muted); font-weight: 500; }
+  .rows { padding: 2px 0 1px; }
+  .row { height: 18px; }
+  .label { color: var(--onyx); font-weight: 500; white-space: nowrap; }
+  .label small { font-size: 9.3px; font-weight: 400; color: var(--muted); }
+  .num { text-align: right; font-weight: 500; }
+  .num.lead { color: var(--onyx); font-weight: 600; }
+  .plot { position: relative; height: 100%; }
+  .bar { position: absolute; left: 0; top: 4px; height: 10px; border-radius: 0 2px 2px 0; }
+  .tip { position: absolute; top: 2.5px; padding: 0 2px; margin-left: -2px; background: #FFFFFF; font-weight: 600; font-size: 9.8px; color: var(--onyx); }
+  .ref { position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--ink); }
+  .link { position: absolute; top: 8px; border-top: 2px solid var(--rule); }
+  .dot { position: absolute; top: 5px; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; box-shadow: 0 0 0 1.5px #FFFFFF; }
+  .reflabel .plot { height: 15px; }
+  .reflabel .plot span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; font-weight: 500; color: var(--ink); }
+  .foot { margin-top: 3px; padding-top: 4px; border-top: 1px solid var(--rule); color: var(--muted); }
+
+  #bands .grid { grid-template-columns: 78px 1fr 34px 34px; }
+  #auc .grid { grid-template-columns: 92px 1fr 34px; }
+  #pricing .grid { grid-template-columns: 62px 1fr 34px 34px; }
+</style>
+</head>
+<body>
+
+<!-- Crossing rate next year by band, priced portfolio (verified-metrics.md, Portfolio: Risk bands). Scale 0 to 48%. -->
+<section class="chart" id="bands" role="img" aria-label="Share of sites that crossed their industry's line the next year, by risk band. 2023 test year: band 5 46.5%, band 4 21.0%, band 3 12.3%, band 2 7.1%, band 1 2.9%. 2024: 47.5%, 22.0%, 12.8%, 7.6%, 3.0%. All sites 18.3%, 2023 and 2024.">
+  <div class="title">The higher the band, the more sites had a bad year</div>
+  <div class="sub">Share of sites that crossed their industry’s line the next year</div>
+  <div class="grid head"><span>Risk band</span><span>2023 test year</span><span class="num">2023</span><span class="num">2024</span></div>
+  <div class="rows">
+    <div class="grid row"><span class="label">Band 5 <small>highest</small></span><span class="plot"><span class="bar" style="width: calc(100% * 46.5 / 48); background: var(--b5)"></span><span class="ref" style="left: calc(100% * 18.3 / 48)"></span></span><span class="num lead">46.5%</span><span class="num">47.5%</span></div>
+    <div class="grid row"><span class="label">Band 4</span><span class="plot"><span class="bar" style="width: calc(100% * 21.0 / 48); background: var(--b4)"></span><span class="ref" style="left: calc(100% * 18.3 / 48)"></span></span><span class="num lead">21.0%</span><span class="num">22.0%</span></div>
+    <div class="grid row"><span class="label">Band 3</span><span class="plot"><span class="bar" style="width: calc(100% * 12.3 / 48); background: var(--b3)"></span><span class="ref" style="left: calc(100% * 18.3 / 48)"></span></span><span class="num lead">12.3%</span><span class="num">12.8%</span></div>
+    <div class="grid row"><span class="label">Band 2</span><span class="plot"><span class="bar" style="width: calc(100% * 7.1 / 48); background: var(--b2)"></span><span class="ref" style="left: calc(100% * 18.3 / 48)"></span></span><span class="num lead">7.1%</span><span class="num">7.6%</span></div>
+    <div class="grid row"><span class="label">Band 1 <small>lowest</small></span><span class="plot"><span class="bar" style="width: calc(100% * 2.9 / 48); background: var(--b1)"></span><span class="ref" style="left: calc(100% * 18.3 / 48)"></span></span><span class="num lead">2.9%</span><span class="num">3.0%</span></div>
+  </div>
+  <div class="grid reflabel"><span></span><span class="plot"><span style="left: calc(100% * 18.3 / 48)">All sites, both years: 18.3%</span></span><span></span><span></span></div>
+</section>
+
+<!-- AUC by model, all test pairs (verified-metrics.md, Model performance). Bars start at 0.50, scale 0.50 to 1.06. -->
+<section class="chart" id="auc" role="img" aria-label="AUC on the test years, where 0.50 is a coin toss and 1.00 is a perfect ranking. 2023: gradient boosting 0.80, scorecard 0.78, last year's rate 0.73, rating class only 0.59. 2024: 0.80, 0.79, 0.73, 0.59.">
+  <div class="title">A site’s own record does most of the work</div>
+  <div class="sub">AUC: 0.50 is a coin toss, 1.00 is a perfect ranking</div>
+  <div class="grid head"><span>Model</span><span>2023 test year</span><span class="num">2024</span></div>
+  <div class="rows">
+    <div class="grid row"><span class="label">Gradient boosting</span><span class="plot"><span class="bar" style="width: calc(100% * 0.300 / 0.56); background: var(--warm)"></span><span class="tip" style="left: calc(100% * 0.300 / 0.56 + 4px)">0.80</span></span><span class="num">0.80</span></div>
+    <div class="grid row"><span class="label" style="font-weight: 600">Scorecard</span><span class="plot"><span class="bar" style="width: calc(100% * 0.283 / 0.56); background: var(--screen)"></span><span class="tip" style="left: calc(100% * 0.283 / 0.56 + 4px)">0.78</span></span><span class="num lead">0.79</span></div>
+    <div class="grid row"><span class="label">Last year’s rate</span><span class="plot"><span class="bar" style="width: calc(100% * 0.229 / 0.56); background: var(--warm)"></span><span class="tip" style="left: calc(100% * 0.229 / 0.56 + 4px)">0.73</span></span><span class="num">0.73</span></div>
+    <div class="grid row"><span class="label">Rating class only</span><span class="plot"><span class="bar" style="width: calc(100% * 0.092 / 0.56); background: var(--warm)"></span><span class="tip" style="left: calc(100% * 0.092 / 0.56 + 4px)">0.59</span></span><span class="num">0.59</span></div>
+  </div>
+  <div class="foot">Bars start at 0.50. Rating class: sector, size, state and ownership</div>
+</section>
+
+<!-- Simulated loss per premium dollar by band, 2023 central (verified-metrics.md, Pricing simulation). Scale $0 to $2.25. -->
+<section class="chart" id="pricing" role="img" aria-label="Simulated losses per 1 dollar of premium by risk band, 2023 test year, 50,076 dollar claim cost. A, industry only, against B, with the score: band 5 2.10 and 1.05, band 4 1.19 and 1.00, band 3 0.82 and 1.14, band 2 0.58 and 0.87, band 1 0.35 and 0.52. All sites 0.92 either way. Simulated, not actual premiums, claims or loss ratios.">
+  <div class="title">With the score, premium follows risk more closely</div>
+  <div class="sub">Simulated losses per $1 of premium, 2023 test year, $50,076 claim cost</div>
+  <div class="legend"><span><span class="key" style="background: var(--warm)"></span>A: industry only</span><span><span class="key" style="background: var(--screen)"></span>B: with the score</span><span class="tag" style="margin-left: auto">Simulated</span></div>
+  <div class="grid head" style="margin-top: 5px"><span>Risk band</span><span></span><span class="num">A</span><span class="num">B</span></div>
+  <div class="rows">
+    <div class="grid row"><span class="label">Band 5 <small>highest</small></span><span class="plot"><span class="ref" style="left: calc(100% * 0.92 / 2.25)"></span><span class="link" style="left: calc(100% * 1.05 / 2.25); width: calc(100% * 1.05 / 2.25)"></span><span class="dot" style="left: calc(100% * 2.10 / 2.25); background: var(--warm)"></span><span class="dot" style="left: calc(100% * 1.05 / 2.25); background: var(--screen)"></span></span><span class="num">$2.10</span><span class="num lead">$1.05</span></div>
+    <div class="grid row"><span class="label">Band 4</span><span class="plot"><span class="ref" style="left: calc(100% * 0.92 / 2.25)"></span><span class="link" style="left: calc(100% * 1.00 / 2.25); width: calc(100% * 0.19 / 2.25)"></span><span class="dot" style="left: calc(100% * 1.19 / 2.25); background: var(--warm)"></span><span class="dot" style="left: calc(100% * 1.00 / 2.25); background: var(--screen)"></span></span><span class="num">$1.19</span><span class="num lead">$1.00</span></div>
+    <div class="grid row"><span class="label">Band 3</span><span class="plot"><span class="ref" style="left: calc(100% * 0.92 / 2.25)"></span><span class="link" style="left: calc(100% * 0.82 / 2.25); width: calc(100% * 0.32 / 2.25)"></span><span class="dot" style="left: calc(100% * 0.82 / 2.25); background: var(--warm)"></span><span class="dot" style="left: calc(100% * 1.14 / 2.25); background: var(--screen)"></span></span><span class="num">$0.82</span><span class="num lead">$1.14</span></div>
+    <div class="grid row"><span class="label">Band 2</span><span class="plot"><span class="ref" style="left: calc(100% * 0.92 / 2.25)"></span><span class="link" style="left: calc(100% * 0.58 / 2.25); width: calc(100% * 0.29 / 2.25)"></span><span class="dot" style="left: calc(100% * 0.58 / 2.25); background: var(--warm)"></span><span class="dot" style="left: calc(100% * 0.87 / 2.25); background: var(--screen)"></span></span><span class="num">$0.58</span><span class="num lead">$0.87</span></div>
+    <div class="grid row"><span class="label">Band 1 <small>lowest</small></span><span class="plot"><span class="ref" style="left: calc(100% * 0.92 / 2.25)"></span><span class="link" style="left: calc(100% * 0.35 / 2.25); width: calc(100% * 0.17 / 2.25)"></span><span class="dot" style="left: calc(100% * 0.35 / 2.25); background: var(--warm)"></span><span class="dot" style="left: calc(100% * 0.52 / 2.25); background: var(--screen)"></span></span><span class="num">$0.35</span><span class="num lead">$0.52</span></div>
+  </div>
+  <div class="grid reflabel"><span></span><span class="plot"><span style="left: calc(100% * 0.92 / 2.25)">All sites, $0.92</span></span><span></span><span></span></div>
+</section>
+
+</body>
+</html>

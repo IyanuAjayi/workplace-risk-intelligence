@@ -1,0 +1,4928 @@
+{
+ "title": "Workplace Risk Intelligence: Power BI build inventory",
+ "generated": "2026-11-01",
+ "sources": {
+  "mockups": "powerbi/mockups/<page>.html and .png",
+  "boxes": "powerbi/build/<page>.boxes.json (powerbi/tools/visual_boxes.py)",
+  "backgrounds": "powerbi/backgrounds/<page>.png (3840 x 2160)",
+  "theme": "powerbi/theme/wri-theme.json",
+  "measures": "outputs/powerbi/define-measures.dax (query) and outputs/powerbi/measures.dax (documented)",
+  "guide": "docs/powerbi-build-guide.md"
+ },
+ "conventions": {
+  "frame": "x, y, width, height to type in Format > General > Properties (page pixels, 1920 x 1080 page)",
+  "box": "the same element measured on the rendered mockup; differs from frame only where frameNote explains why",
+  "presets": {
+   "NAV": "Button (Blank). Text on, Segoe UI 11 pt, centred, vertical centre. Default: fill off, text Ink #303A39. On hover and On press: fill #E3DECF at 0% transparency, text Onyx #000000. Border, shadow and glow off.",
+   "NAV-ACTIVE": "As NAV, but fill Ember #E24337 at 0% transparency and text Onyx in Default, On hover and On press. Action off (this is the current page).",
+   "LINK": "Button (Blank). Text on, Segoe UI 11 pt, Cobalt #1936E8 in every state, fill off, border off. Underline on hover if your editor offers it.",
+   "RESET": "Button (Reset icon, from Insert > Buttons > Reset). Text on: 'Reset filters', Segoe UI 11 pt, Cobalt #1936E8, right aligned; icon Cobalt, placed left of the text, about 14 px; fill and border off.",
+   "HERO": "Card (new). Callout value Segoe UI Semibold 72 pt, Shell #FFFFFF, left, vertical top. Display units None (so 172,239 does not become 172K), decimals from the measure. Label off. Card background, border, shadow and accent bar off; padding 0.",
+   "FIGURE": "Card (new). Callout value Segoe UI Semibold 23 pt, Onyx #000000, left, vertical middle, no word wrap. Display units None (so 172,239 does not become 172K), decimals from the measure. Label off. Card background, border, shadow and accent bar off; padding 0.",
+   "BASE": "Card (new). Callout value Segoe UI 11 pt, Muted #66655F, left, vertical middle, no word wrap. Display units None (so 172,239 does not become 172K), decimals from the measure. Label off. Card background, border, shadow and accent bar off; padding 0.",
+   "TITLE": "Card (new). Callout value Segoe UI Semibold 15 pt, Onyx #000000, vertical middle, no word wrap. Display units None (so 172,239 does not become 172K), decimals from the measure. Label off. Card background, border, shadow and accent bar off; padding 0.",
+   "LABEL-INK": "Card (new). Callout value Segoe UI 11 pt, Ink #303A39, vertical middle, no word wrap. Display units None (so 172,239 does not become 172K), decimals from the measure. Label off. Card background, border, shadow and accent bar off; padding 0.",
+   "TILES": "Button slicer. Slicer header on (field renamed as given), Segoe UI 11 pt Muted #66655F. Buttons: one row, spacing 0, text Segoe UI 11 pt centred. Default: fill #F7F5EC, text Ink #303A39. On hover and On press: fill #E3DECF, text Onyx. Selected: fill Ink #303A39, text Shell #FFFFFF. Border 1 px Axis #CFCBBD. Selection: Single select on, Force selection on.",
+   "DROPDOWN": "Slicer (the classic slicer), style Dropdown. Header on (field renamed as given), Segoe UI 11 pt Muted. Values Segoe UI 11 pt Onyx on Card #F7F5EC, 1 px Axis #CFCBBD border (the theme sets these). Selection: Single select off, Multi-select with Ctrl off (clicks tick the check boxes), Show Select all on. Shows All when nothing is picked.",
+   "TABLE": "Table. Style preset None. Grid: horizontal and vertical gridlines off, row padding 4 (28 px rows). Column headers Segoe UI 11 pt Muted on Card, word wrap on. Values Segoe UI 11 pt Onyx on Card for both row colours (no banding). Totals off unless stated. Auto-size column width off, then drag the column widths given.",
+   "CHART": "Title, background, border and shadow off (theme). Legend off, gridlines off, axis titles off unless stated."
+  }
+ },
+ "pages": [
+  {
+   "name": "Executive Intelligence",
+   "order": 1,
+   "background": "powerbi/backgrounds/page1-executive-intelligence.png",
+   "mockup": "powerbi/mockups/page1-executive-intelligence.png",
+   "boxes": "powerbi/build/page1-executive-intelligence.boxes.json",
+   "visuals": [
+    {
+     "n": 1,
+     "id": "nav-executive-intelligence",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 705,
+      "y": 37,
+      "w": 186,
+      "h": 38
+     },
+     "box": {
+      "x": 705,
+      "y": 37,
+      "w": 186,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Executive Intelligence"
+      }
+     ],
+     "preset": "NAV-ACTIVE",
+     "wellsText": "Text: Executive Intelligence",
+     "action": "None (current page)"
+    },
+    {
+     "n": 2,
+     "id": "nav-risk-landscape",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 891,
+      "y": 37,
+      "w": 145,
+      "h": 38
+     },
+     "box": {
+      "x": 891,
+      "y": 37,
+      "w": 145,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Risk Landscape"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Risk Landscape",
+     "action": "Page navigation to Risk Landscape"
+    },
+    {
+     "n": 3,
+     "id": "nav-model-trust",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1036,
+      "y": 37,
+      "w": 120,
+      "h": 38
+     },
+     "box": {
+      "x": 1036,
+      "y": 37,
+      "w": 120,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Model Trust"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Model Trust",
+     "action": "Page navigation to Model Trust"
+    },
+    {
+     "n": 4,
+     "id": "nav-pricing-lab",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1156,
+      "y": 37,
+      "w": 115,
+      "h": 38
+     },
+     "box": {
+      "x": 1156,
+      "y": 37,
+      "w": 115,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Pricing Lab"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Pricing Lab",
+     "action": "Page navigation to Pricing Lab"
+    },
+    {
+     "n": 5,
+     "id": "kpi-capture-value",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 98,
+      "y": 493,
+      "w": 302,
+      "h": 128
+     },
+     "box": {
+      "x": 98,
+      "y": 514,
+      "w": 302,
+      "h": 96
+     },
+     "frameNote": "72 pt Segoe UI needs a 128 px line, so the card starts 21 px higher and the digits keep the mockup's baseline (y 597) inside the stamp.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Top band capture]"
+        }
+       ]
+      }
+     ],
+     "preset": "HERO",
+     "wellsText": "Data: Sites[Top band capture]",
+     "format": "Shows 51.4%. Sits on the baked Onyx stamp (x 64 to 400, y 480 to 632)."
+    },
+    {
+     "n": 6,
+     "id": "kpi-capture-count",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 424,
+      "y": 582,
+      "w": 216,
+      "h": 20
+     },
+     "box": {
+      "x": 424,
+      "y": 582,
+      "w": 216,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Capture base line]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: Sites[Capture base line]",
+     "format": "18,709 of 36,389 · 2023 + 2024"
+    },
+    {
+     "n": 7,
+     "id": "chart-capture-vs-random",
+     "boxType": "clusteredBarChart",
+     "visual": "Stacked bar chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 642,
+      "w": 336,
+      "h": 20
+     },
+     "box": {
+      "x": 64,
+      "y": 642,
+      "w": 336,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "TestYears[Tile label]",
+         "note": "(visual filter: Tile label is 2023 + 2024)"
+        }
+       ]
+      },
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "Sites[Top band capture]"
+        },
+        {
+         "field": "Sites[Capture remainder]"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "Y-axis: TestYears[Tile label] (visual filter: Tile label is 2023 + 2024); X-axis: Sites[Top band capture], Sites[Capture remainder]",
+     "format": "Bar colours: Top band capture #944126, Capture remainder #E3DECF. X-axis off, range 0 to 1. Y-axis off. Bars > Layout > inner padding 60% (an 8 px bar, y 648 to 656). Data labels off. Tooltips off. Analytics: X-axis constant line, value fx Sites[Random fifth] (0.2), Ink #303A39, 2 px, solid, position In front, data label off."
+    },
+    {
+     "n": 8,
+     "id": "kpi-hit-rate-value",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 424,
+      "y": 757,
+      "w": 216,
+      "h": 40
+     },
+     "box": {
+      "x": 424,
+      "y": 757,
+      "w": 216,
+      "h": 40
+     },
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Top band hit rate]"
+        }
+       ]
+      }
+     ],
+     "preset": "FIGURE",
+     "wellsText": "Data: Sites[Top band hit rate]",
+     "format": "47.0%"
+    },
+    {
+     "n": 9,
+     "id": "kpi-hit-rate-count",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 424,
+      "y": 817,
+      "w": 216,
+      "h": 20
+     },
+     "box": {
+      "x": 424,
+      "y": 817,
+      "w": 216,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Hit rate base line]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: Sites[Hit rate base line]",
+     "format": "18,709 of 39,830 · 2023 + 2024"
+    },
+    {
+     "n": 10,
+     "id": "kpi-wrong-band-value",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 424,
+      "y": 861,
+      "w": 216,
+      "h": 40
+     },
+     "box": {
+      "x": 424,
+      "y": 861,
+      "w": 216,
+      "h": 40
+     },
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "PricingSummary[Wrong band A to B 2023 central]"
+        }
+       ]
+      }
+     ],
+     "preset": "FIGURE",
+     "wellsText": "Data: PricingSummary[Wrong band A to B 2023 central]",
+     "format": "27.5% → 10.0%. Pinned to 2023 central, as the baked Simulated tag below it says."
+    },
+    {
+     "n": 11,
+     "id": "link-method-caveats",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 996,
+      "w": 576,
+      "h": 20
+     },
+     "box": {
+      "x": 64,
+      "y": 996,
+      "w": 576,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Method and caveats: Model Trust →"
+      }
+     ],
+     "preset": "LINK",
+     "wellsText": "Text: Method and caveats: Model Trust →",
+     "format": "Left aligned. The first caveat line is baked.",
+     "action": "Page navigation to Model Trust"
+    },
+    {
+     "n": 12,
+     "id": "chart-crossing-by-band",
+     "boxType": "clusteredColumnChart",
+     "visual": "Clustered column chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 801,
+      "y": 257,
+      "w": 1024,
+      "h": 292
+     },
+     "box": {
+      "x": 737,
+      "y": 261,
+      "w": 1088,
+      "h": 288
+     },
+     "frameNote": "The plot must start at x 801 so the five columns sit on the mockup's centres (903, 1108, 1313, 1518, 1723) and line up with the 2024 row. Power BI draws the reference line across the plot only, so it starts at x 801, not 737.",
+     "wells": [
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "Bands[Band label long]"
+        }
+       ]
+      },
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "Sites[Crossing rate 2023]"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "Sites[Crossing base 2023]",
+         "rename": "Base"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "X-axis: Bands[Band label long]; Y-axis: Sites[Crossing rate 2023]; Tooltips: Sites[Crossing base 2023] renamed Base",
+     "format": "Sort: Band label long ascending (follows Band order). Columns: colour fx Field value Bands[Band fill]; inner padding 41% (120 px columns on a 204.8 px pitch). Y-axis off, range 0 to 0.53. X-axis on: Segoe UI 11 pt Onyx, no title. Data labels on: Outside end, Segoe UI Semibold 15 pt Onyx, 0.0%. Analytics, Y-axis constant line 1: name 'All sites 18.3%, 2023 + 2024', value fx Sites[All sites rate], Muted #66655F, 1 px, dashed, position Behind, data label on, text Name only, Segoe UI 11 pt Ink, horizontal Left, vertical Above. Constant line 2: value 0, Ink #303A39, 1 px, solid, Behind, label off (the baseline).",
+     "altText": "Column chart. Share of sites that crossed the line next year, by risk band, 2023: band 1 2.9%, band 2 7.1%, band 3 12.3%, band 4 21.0%, band 5 46.5%. Dashed line: all sites 18.3%, 2023 and 2024."
+    },
+    {
+     "n": 13,
+     "id": "matrix-crossing-2024",
+     "boxType": "cardVisual",
+     "visual": "Card (new), five values",
+     "placedOnPage": true,
+     "frame": {
+      "x": 801,
+      "y": 574,
+      "w": 1024,
+      "h": 28
+     },
+     "box": {
+      "x": 885,
+      "y": 579,
+      "w": 860,
+      "h": 17
+     },
+     "frameNote": "The box is the text extent. Five equal 204.8 px cells from x 801 centre each value under its column; the baked '2024' label sits at x 737.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Crossing rate 2024 band 1]"
+        },
+        {
+         "field": "Sites[Crossing rate 2024 band 2]"
+        },
+        {
+         "field": "Sites[Crossing rate 2024 band 3]"
+        },
+        {
+         "field": "Sites[Crossing rate 2024 band 4]"
+        },
+        {
+         "field": "Sites[Crossing rate 2024 band 5]"
+        }
+       ]
+      }
+     ],
+     "preset": "LABEL-INK",
+     "wellsText": "Data, in this order: Sites[Crossing rate 2024 band 1], Sites[Crossing rate 2024 band 2], Sites[Crossing rate 2024 band 3], Sites[Crossing rate 2024 band 4], Sites[Crossing rate 2024 band 5]",
+     "format": "Layout: 5 cards in one row, card spacing 0, padding 0. Callout value centred, Ink. Shows 3.0%, 7.6%, 12.8%, 22.0%, 47.5%."
+    },
+    {
+     "n": 14,
+     "id": "link-risk-landscape",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1109,
+      "y": 702,
+      "w": 123,
+      "h": 20
+     },
+     "box": {
+      "x": 1109,
+      "y": 702,
+      "w": 123,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Risk Landscape →"
+      }
+     ],
+     "preset": "LINK",
+     "wellsText": "Text: Risk Landscape →",
+     "format": "Right aligned.",
+     "action": "Page navigation to Risk Landscape"
+    },
+    {
+     "n": 15,
+     "id": "table-sector-dart",
+     "boxType": "tableEx",
+     "visual": "Table",
+     "placedOnPage": true,
+     "frame": {
+      "x": 737,
+      "y": 740,
+      "w": 496,
+      "h": 228
+     },
+     "box": {
+      "x": 737,
+      "y": 741,
+      "w": 252,
+      "h": 221
+     },
+     "frameNote": "The table also carries the band 5 shares as a third, right-aligned column, because Power BI bar labels cannot line up at x 1233. It spans the card's 496 px and the bar chart sits over the empty left part of that column.",
+     "wells": [
+      {
+       "well": "Columns",
+       "fields": [
+        {
+         "field": "Sites[Sector]",
+         "note": "(one space)",
+         "rename": "' '"
+        },
+        {
+         "field": "Sites[Average site DART rate]",
+         "rename": "Avg DART rate"
+        },
+        {
+         "field": "Sites[Share of sites in top band]",
+         "note": "(two spaces: its header 'In band 5' is baked)",
+         "rename": "'  '"
+        }
+       ]
+      }
+     ],
+     "preset": "TABLE",
+     "wellsText": "Columns: Sites[Sector] renamed ' ' (one space); Sites[Average site DART rate] renamed Avg DART rate; Sites[Share of sites in top band] renamed '  ' (two spaces: its header 'In band 5' is baked)",
+     "format": "Sort: Average site DART rate descending. Widths 160, 92, 244. Column header outline None (the rule under the header is baked at y 768). Avg DART rate header and values right aligned, values Ink #303A39 (Specific column font colour). Sector left, Onyx. Third column values right aligned, Onyx. Totals off. Rows from y 768 to 964.",
+     "altText": "Table and bar chart. Share of each sector's sites in band 5, 2023 and 2024, with the average serious-injury (DART) rate per 100 full-time workers. All sites 20%."
+    },
+    {
+     "n": 16,
+     "id": "chart-sector-band5",
+     "boxType": "clusteredBarChart",
+     "visual": "Clustered bar chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1013,
+      "y": 768,
+      "w": 180,
+      "h": 196
+     },
+     "box": {
+      "x": 1013,
+      "y": 773,
+      "w": 220,
+      "h": 194
+     },
+     "frameNote": "The plot is the bars only: 0 to 25% over 180 px (7.2 px per point) and seven 28 px rows level with the table rows. The values come from the table.",
+     "wells": [
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "Sites[Sector]"
+        }
+       ]
+      },
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "Sites[Share of sites in top band]"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "Sites[Average site DART rate]"
+        },
+        {
+         "field": "Sites[Band 5 share base]",
+         "rename": "Base"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "Y-axis: Sites[Sector]; X-axis: Sites[Share of sites in top band]; Tooltips: Sites[Average site DART rate], Sites[Band 5 share base] renamed Base",
+     "format": "Sort: Average site DART rate descending (same order as the table). Bars #944126; inner padding 57% (12 px bars). X-axis off, range 0 to 0.25. Y-axis off. Data labels off. Analytics: X-axis constant line, value fx Sites[Random fifth] (0.2), Ink #303A39, 1 px, solid, Behind, label off ('All sites 20%' is baked)."
+    },
+    {
+     "n": 17,
+     "id": "link-model-trust",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1726,
+      "y": 702,
+      "w": 98,
+      "h": 20
+     },
+     "box": {
+      "x": 1726,
+      "y": 702,
+      "w": 98,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Model Trust →"
+      }
+     ],
+     "preset": "LINK",
+     "wellsText": "Text: Model Trust →",
+     "format": "Right aligned.",
+     "action": "Page navigation to Model Trust"
+    },
+    {
+     "n": 18,
+     "id": "chart-auc-2023",
+     "boxType": "clusteredBarChart",
+     "visual": "Clustered bar chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1473,
+      "y": 787,
+      "w": 240,
+      "h": 168
+     },
+     "box": {
+      "x": 1473,
+      "y": 806,
+      "w": 234,
+      "h": 129
+     },
+     "frameNote": "The box is the drawn bars and labels. The plot must run from the baked 0.50 floor (x 1473) to the baked 1.00 tick (x 1713) and cover three 56 px rows.",
+     "wells": [
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "Models[Model]",
+         "note": "(visual filter: Model is Scorecard, Last year's rate, Rating class only)"
+        }
+       ]
+      },
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "Models[AUC 2023]"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "Models[Tooltip AUC 2023]",
+         "rename": "AUC, 2023 test"
+        },
+        {
+         "field": "Models[Tooltip AUC 2024]",
+         "rename": "AUC, 2024 test"
+        },
+        {
+         "field": "Models[Tooltip base]",
+         "rename": "Base"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "Y-axis: Models[Model] (visual filter: Model is Scorecard, Last year's rate, Rating class only); X-axis: Models[AUC 2023]; Tooltips: Models[Tooltip AUC 2023] renamed AUC, 2023 test; Models[Tooltip AUC 2024] renamed AUC, 2024 test; Models[Tooltip base] renamed Base",
+     "format": "Sort: Model descending (Model order gives Scorecard, Last year's rate, Rating class only). Bar colours (Colors, show all): Scorecard #274A48, the other two #B3AFA1. Inner padding 71% (16 px bars). X-axis off, range 0.5 to 1. Y-axis off (model names are baked). Data labels on: Outside end; Value field Models[AUC 2023 words] (about 8 in 10, blank, about 6 in 10); Segoe UI 11 pt Muted.",
+     "altText": "Bar chart. Ranking accuracy (AUC) on the 2023 test, axis from 0.50 (coin toss) to 1.00: scorecard about 8 in 10, last year's rate 0.73, rating class only about 6 in 10."
+    },
+    {
+     "n": 19,
+     "id": "table-auc-by-year",
+     "boxType": "cardVisual",
+     "visual": "Card (new), six values",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1713,
+      "y": 787,
+      "w": 112,
+      "h": 168
+     },
+     "box": {
+      "x": 1738,
+      "y": 806,
+      "w": 87,
+      "h": 129
+     },
+     "frameNote": "Two 56 px columns end on the mockup's right edges (x 1769 and 1825) and three 56 px rows sit level with the bars.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Models[AUC 2023 scorecard]"
+        },
+        {
+         "field": "Models[AUC 2024 scorecard]"
+        },
+        {
+         "field": "Models[AUC 2023 last year]"
+        },
+        {
+         "field": "Models[AUC 2024 last year]"
+        },
+        {
+         "field": "Models[AUC 2023 rating class]"
+        },
+        {
+         "field": "Models[AUC 2024 rating class]"
+        }
+       ]
+      }
+     ],
+     "preset": "LABEL-INK",
+     "wellsText": "Data, in this order: Models[AUC 2023 scorecard], [AUC 2024 scorecard], [AUC 2023 last year], [AUC 2024 last year], [AUC 2023 rating class], [AUC 2024 rating class]",
+     "format": "Layout: 2 cards per row, 3 rows, card spacing 0, padding 0. Callout value right aligned; first two values Onyx #000000, the other four Ink #303A39. Shows 0.78 0.79 / 0.73 0.73 / 0.59 0.59. The 2023 and 2024 headers are baked."
+    }
+   ],
+   "interactions": {
+    "rule": "Every data visual and card is set to None on every other visual, except table-sector-dart to chart-sector-band5, which is Highlight. The page is a fixed summary.",
+    "bySource": [
+     {
+      "source": "chart-capture-vs-random",
+      "filter": "",
+      "highlight": "",
+      "none": "every visual"
+     },
+     {
+      "source": "chart-crossing-by-band",
+      "filter": "",
+      "highlight": "",
+      "none": "every visual"
+     },
+     {
+      "source": "table-sector-dart",
+      "filter": "",
+      "highlight": "chart-sector-band5",
+      "none": "every other visual"
+     },
+     {
+      "source": "chart-sector-band5",
+      "filter": "",
+      "highlight": "",
+      "none": "every visual, including table-sector-dart"
+     },
+     {
+      "source": "chart-auc-2023",
+      "filter": "",
+      "highlight": "",
+      "none": "every visual"
+     }
+    ]
+   },
+   "bookmarks": [],
+   "bakedNotBuilt": [
+    "kpi-capture-caption",
+    "kpi-hit-rate-caption",
+    "kpi-wrong-band-caption",
+    "legend-crossing-year",
+    "'In band 5' and 'All sites 20%' in the sector card",
+    "the AUC card's header, model names, 0.50 coin toss / 0.75 / 1.00 scale, 2023 and 2024 headers and the '2024' row label"
+   ],
+   "validation": [
+    {
+     "visual": "kpi-capture-value",
+     "shows": "51.4%",
+     "source": "Top band capture 0.5141 in expected_values.csv"
+    },
+    {
+     "visual": "kpi-capture-count",
+     "shows": "18,709 of 36,389 · 2023 + 2024",
+     "source": "verified: 18,709 of all 36,389 line-crossers"
+    },
+    {
+     "visual": "chart-capture-vs-random",
+     "shows": "Band 5 bar ends at 51.4% of the track (x about 237); Ink marker at 20% (x about 131)",
+     "source": "Random fifth 20%"
+    },
+    {
+     "visual": "kpi-hit-rate-value",
+     "shows": "47.0%",
+     "source": "Top band hit rate 0.4697"
+    },
+    {
+     "visual": "kpi-hit-rate-count",
+     "shows": "18,709 of 39,830 · 2023 + 2024",
+     "source": "verified"
+    },
+    {
+     "visual": "kpi-wrong-band-value",
+     "shows": "27.5% → 10.0%",
+     "source": "Misallocated share A 0.2754, B 0.0995 (central 2023)"
+    },
+    {
+     "visual": "chart-crossing-by-band",
+     "shows": "2.9%, 7.1%, 12.3%, 21.0%, 46.5%; dashed line at 18.3% labelled All sites 18.3%, 2023 + 2024",
+     "source": "verified risk bands, 2023; Base rate 0.1827"
+    },
+    {
+     "visual": "matrix-crossing-2024",
+     "shows": "3.0%, 7.6%, 12.8%, 22.0%, 47.5%",
+     "source": "verified risk bands, 2024"
+    },
+    {
+     "visual": "table-sector-dart",
+     "shows": "Transport and warehousing 4.29 / 21.0%; Agriculture 3.04 / 20.4%; Wholesale 2.83 / 21.2%; Manufacturing 2.17 / 20.3%; Construction 1.85 / 18.4%; Utilities 1.38 / 15.8%; Mining, oil and gas 0.77 / 19.8%, in that order",
+     "source": "verified by sector"
+    },
+    {
+     "visual": "chart-sector-band5",
+     "shows": "Seven bars level with the table rows, all ending just short of or past the 20% line (Utilities the shortest)",
+     "source": ""
+    },
+    {
+     "visual": "chart-auc-2023",
+     "shows": "Scorecard bar longest, then Last year's rate, then Rating class only; labels about 8 in 10 and about 6 in 10",
+     "source": "verified AUC 0.783, 0.729, 0.592"
+    },
+    {
+     "visual": "table-auc-by-year",
+     "shows": "0.78 0.79 / 0.73 0.73 / 0.59 0.59",
+     "source": "verified, two decimals"
+    }
+   ]
+  },
+  {
+   "name": "Risk Landscape",
+   "order": 2,
+   "background": "powerbi/backgrounds/page2-risk-landscape.png",
+   "mockup": "powerbi/mockups/page2-risk-landscape.png",
+   "boxes": "powerbi/build/page2-risk-landscape.boxes.json",
+   "visuals": [
+    {
+     "n": 1,
+     "id": "nav-executive-intelligence",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 705,
+      "y": 37,
+      "w": 186,
+      "h": 38
+     },
+     "box": {
+      "x": 705,
+      "y": 37,
+      "w": 186,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Executive Intelligence"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Executive Intelligence",
+     "action": "Page navigation to Executive Intelligence"
+    },
+    {
+     "n": 2,
+     "id": "nav-risk-landscape",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 891,
+      "y": 37,
+      "w": 145,
+      "h": 38
+     },
+     "box": {
+      "x": 891,
+      "y": 37,
+      "w": 145,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Risk Landscape"
+      }
+     ],
+     "preset": "NAV-ACTIVE",
+     "wellsText": "Text: Risk Landscape",
+     "action": "None (current page)"
+    },
+    {
+     "n": 3,
+     "id": "nav-model-trust",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1036,
+      "y": 37,
+      "w": 120,
+      "h": 38
+     },
+     "box": {
+      "x": 1036,
+      "y": 37,
+      "w": 120,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Model Trust"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Model Trust",
+     "action": "Page navigation to Model Trust"
+    },
+    {
+     "n": 4,
+     "id": "nav-pricing-lab",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1156,
+      "y": 37,
+      "w": 115,
+      "h": 38
+     },
+     "box": {
+      "x": 1156,
+      "y": 37,
+      "w": 115,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Pricing Lab"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Pricing Lab",
+     "action": "Page navigation to Pricing Lab"
+    },
+    {
+     "n": 5,
+     "id": "link-back-executive",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 144,
+      "w": 164,
+      "h": 20
+     },
+     "box": {
+      "x": 64,
+      "y": 144,
+      "w": 164,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "← Executive Intelligence"
+      }
+     ],
+     "preset": "LINK",
+     "wellsText": "Text: ← Executive Intelligence",
+     "format": "Left aligned.",
+     "action": "Page navigation to Executive Intelligence (not the Back action, which would return to whichever page the reader came from)"
+    },
+    {
+     "n": 6,
+     "id": "kpi-band5-range-value",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 376,
+      "w": 336,
+      "h": 40
+     },
+     "box": {
+      "x": 64,
+      "y": 376,
+      "w": 214,
+      "h": 40
+     },
+     "frameNote": "The box is only as wide as the default text; the frame takes the figure column's width so longer values in other slicer states fit.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Band 5 crossing range]"
+        }
+       ]
+      }
+     ],
+     "preset": "FIGURE",
+     "wellsText": "Data: Sites[Band 5 crossing range]",
+     "format": "43.6% to 49.5%"
+    },
+    {
+     "n": 7,
+     "id": "kpi-band5-range-count",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 436,
+      "w": 336,
+      "h": 20
+     },
+     "box": {
+      "x": 64,
+      "y": 436,
+      "w": 268,
+      "h": 20
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Band 5 base line]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: Sites[Band 5 base line]",
+     "format": "39,830 band 5 site-years · 2023 + 2024"
+    },
+    {
+     "n": 8,
+     "id": "kpi-all-sites-value",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 424,
+      "y": 376,
+      "w": 216,
+      "h": 40
+     },
+     "box": {
+      "x": 424,
+      "y": 376,
+      "w": 80,
+      "h": 40
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Portfolio crossing rate]"
+        }
+       ]
+      }
+     ],
+     "preset": "FIGURE",
+     "wellsText": "Data: Sites[Portfolio crossing rate]",
+     "format": "18.3%"
+    },
+    {
+     "n": 9,
+     "id": "kpi-all-sites-count",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 424,
+      "y": 436,
+      "w": 216,
+      "h": 20
+     },
+     "box": {
+      "x": 424,
+      "y": 436,
+      "w": 217,
+      "h": 20
+     },
+     "frameNote": "The text is 1 px wider than the figure column in the mockup font; the frame stays inside the 216 px column.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Portfolio base line]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: Sites[Portfolio base line]",
+     "format": "36,389 of 199,150 · 2023 + 2024"
+    },
+    {
+     "n": 10,
+     "id": "btn-reset-filters",
+     "boxType": "actionButton",
+     "visual": "Button (Reset)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 540,
+      "y": 612,
+      "w": 100,
+      "h": 20
+     },
+     "box": {
+      "x": 540,
+      "y": 612,
+      "w": 100,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Reset filters"
+      }
+     ],
+     "preset": "RESET",
+     "wellsText": "Text: Reset filters",
+     "action": "Bookmark: Risk Landscape defaults"
+    },
+    {
+     "n": 11,
+     "id": "slicer-test-year",
+     "boxType": "slicer",
+     "visual": "Button slicer",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 652,
+      "w": 576,
+      "h": 72
+     },
+     "box": {
+      "x": 64,
+      "y": 652,
+      "w": 576,
+      "h": 72
+     },
+     "wells": [
+      {
+       "well": "Field",
+       "fields": [
+        {
+         "field": "TestYears[Tile label]",
+         "rename": "Test year"
+        }
+       ]
+      }
+     ],
+     "preset": "TILES",
+     "wellsText": "Field: TestYears[Tile label], renamed Test year",
+     "format": "3 buttons: 2023 + 2024, 2023, outcome 2024, 2024, outcome 2025 (sorted by Sort order). Default selection 2023 + 2024.",
+     "slicer": "Single select, Force selection, default 2023 + 2024"
+    },
+    {
+     "n": 12,
+     "id": "slicer-sector",
+     "boxType": "slicer",
+     "visual": "Slicer (dropdown)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 740,
+      "w": 272,
+      "h": 72
+     },
+     "box": {
+      "x": 64,
+      "y": 740,
+      "w": 272,
+      "h": 72
+     },
+     "wells": [
+      {
+       "well": "Field",
+       "fields": [
+        {
+         "field": "Sites[Sector]",
+         "rename": "Sector"
+        }
+       ]
+      }
+     ],
+     "preset": "DROPDOWN",
+     "wellsText": "Field: Sites[Sector], renamed Sector",
+     "format": "Sorted by Sector (follows Sector order).",
+     "slicer": "Multi-select, Select all, default All"
+    },
+    {
+     "n": 13,
+     "id": "slicer-size-band",
+     "boxType": "slicer",
+     "visual": "Slicer (dropdown)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 368,
+      "y": 740,
+      "w": 272,
+      "h": 72
+     },
+     "box": {
+      "x": 368,
+      "y": 740,
+      "w": 272,
+      "h": 72
+     },
+     "wells": [
+      {
+       "well": "Field",
+       "fields": [
+        {
+         "field": "Sites[Size band label]",
+         "rename": "Size band"
+        }
+       ]
+      }
+     ],
+     "preset": "DROPDOWN",
+     "wellsText": "Field: Sites[Size band label], renamed Size band",
+     "format": "Sorted by Size band label (follows Size order).",
+     "slicer": "Multi-select, Select all, default All"
+    },
+    {
+     "n": 14,
+     "id": "link-method-caveats",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 996,
+      "w": 576,
+      "h": 20
+     },
+     "box": {
+      "x": 64,
+      "y": 996,
+      "w": 576,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Method and caveats: Model Trust →"
+      }
+     ],
+     "preset": "LINK",
+     "wellsText": "Text: Method and caveats: Model Trust →",
+     "format": "Left aligned.",
+     "action": "Page navigation to Model Trust"
+    },
+    {
+     "n": 15,
+     "id": "map-title",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 736,
+      "y": 176,
+      "w": 250,
+      "h": 28
+     },
+     "box": {
+      "x": 736,
+      "y": 176,
+      "w": 202,
+      "h": 28
+     },
+     "frameNote": "The box is only as wide as the text; 250 px fits Band 2 share by state and stays clear of the baked legend on the right of the card head.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Map title]"
+        }
+       ]
+      }
+     ],
+     "preset": "TITLE",
+     "wellsText": "Data: Sites[Map title]",
+     "format": "Left aligned. Band 5 share by state; Band 2 share by state after a band 2 row click."
+    },
+    {
+     "n": 16,
+     "id": "map-legend-title",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 797,
+      "y": 256,
+      "w": 240,
+      "h": 20
+     },
+     "box": {
+      "x": 797,
+      "y": 257,
+      "w": 227,
+      "h": 17
+     },
+     "frameNote": "The box is the glyph box of an SVG text line; the frame is its 20 px line box.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Map legend title]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: Sites[Map legend title]",
+     "format": "Share of site-years, 2023 + 2024. The three class swatches under it are baked."
+    },
+    {
+     "n": 17,
+     "id": "map-tiles",
+     "boxType": "scatterChart",
+     "visual": "Scatter chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 735,
+      "y": 255,
+      "w": 484,
+      "h": 352
+     },
+     "box": {
+      "x": 737,
+      "y": 257,
+      "w": 480,
+      "h": 348
+     },
+     "frameNote": "The box is the drawn tiles. The plot must be 11 x 8 cells of 44 px so the axis ranges put each tile centre on its baked ghost tile.",
+     "wells": [
+      {
+       "well": "Values (details)",
+       "fields": [
+        {
+         "field": "StateGrid[State]"
+        }
+       ]
+      },
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "Sites[Map x]"
+        }
+       ]
+      },
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "Sites[Map y]"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "Values (details): StateGrid[State]; X-axis: Sites[Map x]; Y-axis: Sites[Map y]",
+     "format": "Markers: shape square, size tuned until a tile measures 40 px, colour fx Field value Sites[Map tile colour]. Category labels on: Segoe UI 11 pt Onyx. X-axis off, range -0.5 to 10.5. Y-axis off, range -0.5 to 7.5, Invert range on. Legend off. Tooltips: Type Report page, Page Tooltip state. States under 500 site-years return no X and Y, so no marker is drawn and the baked dashed tile shows.",
+     "altTextMeasure": "Sites[Alt text map]"
+    },
+    {
+     "n": 18,
+     "id": "tooltip-state",
+     "boxType": "reportPageTooltip",
+     "visual": "Report page tooltip (hover preview only)",
+     "placedOnPage": false,
+     "frame": {
+      "x": 941,
+      "y": 281,
+      "w": 234,
+      "h": 92
+     },
+     "box": {
+      "x": 941,
+      "y": 281,
+      "w": 234,
+      "h": 92
+     },
+     "wells": [
+      {
+       "well": null,
+       "note": "Not placed on this page. Built as the hidden page Tooltip state (table below) and set as map-tiles' tooltip."
+      }
+     ],
+     "wellsText": "Not placed on this page. Built as the hidden page Tooltip state (table below) and set as map-tiles' tooltip.",
+     "format": "The box shows where the mockup draws the hover state for Maine."
+    },
+    {
+     "n": 19,
+     "id": "table-sector-context",
+     "boxType": "tableEx",
+     "visual": "Table",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1329,
+      "y": 220,
+      "w": 496,
+      "h": 248
+     },
+     "box": {
+      "x": 1329,
+      "y": 221,
+      "w": 496,
+      "h": 241
+     },
+     "frameNote": "The two-line header (48 px) must end on the baked rule at y 268, with the seven 28 px rows running to y 464.",
+     "wells": [
+      {
+       "well": "Columns",
+       "fields": [
+        {
+         "field": "Sites[Sector]",
+         "rename": "' '"
+        },
+        {
+         "field": "Sites[Portfolio site-years]",
+         "rename": "Site-years"
+        },
+        {
+         "field": "Sites[Portfolio DART rate]",
+         "rename": "Avg site DART rate"
+        },
+        {
+         "field": "Sites[Band 5 share]",
+         "note": "(two spaces: 'In band 5' is baked)",
+         "rename": "'  '"
+        }
+       ]
+      }
+     ],
+     "preset": "TABLE",
+     "wellsText": "Columns: Sites[Sector] renamed ' '; Sites[Portfolio site-years] renamed Site-years; Sites[Portfolio DART rate] renamed Avg site DART rate; Sites[Band 5 share] renamed '  ' (two spaces: 'In band 5' is baked)",
+     "format": "Sort: Sector ascending (follows Sector order). Widths 184, 72, 84, 156 (the DART header wraps to 'Avg site' over 'DART rate'). Column header outline None (rule baked). Site-years and DART headers and values right aligned, values Ink #303A39. Sector Onyx, left. Band 5 share values Onyx, right aligned at x 1825. Totals off.",
+     "altText": "Table and bar chart, 2023 + 2024. Site-years, average site serious-injury (DART) rate per 100 full-time workers, and share of site-years in band 5 by sector."
+    },
+    {
+     "n": 20,
+     "id": "chart-sector-band5",
+     "boxType": "clusteredBarChart",
+     "visual": "Clustered bar chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1693,
+      "y": 268,
+      "w": 90,
+      "h": 196
+     },
+     "box": {
+      "x": 1693,
+      "y": 273,
+      "w": 76,
+      "h": 194
+     },
+     "frameNote": "0 to 25% at 3.6 px per point is 90 px, and the seven 28 px rows sit level with the table rows.",
+     "wells": [
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "Sites[Sector]"
+        }
+       ]
+      },
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "Sites[Band 5 share]"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "Sites[Band 5 share base]",
+         "rename": "Base"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "Y-axis: Sites[Sector]; X-axis: Sites[Band 5 share]; Tooltips: Sites[Band 5 share base] renamed Base",
+     "format": "Sort: Sector ascending. Bars #944126, inner padding 57% (12 px). X-axis off, range 0 to 0.25. Y-axis off. Data labels off (the values are the table's last column). Analytics: X-axis constant line, value fx Sites[Random fifth], Ink 1 px solid, Behind, label off."
+    },
+    {
+     "n": 21,
+     "id": "table-size-context",
+     "boxType": "cardVisual",
+     "visual": "Card (new), four values",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1345,
+      "y": 492,
+      "w": 480,
+      "h": 56
+     },
+     "box": {
+      "x": 1527,
+      "y": 497,
+      "w": 298,
+      "h": 45
+     },
+     "frameNote": "The box is the text extent. Two equal 240 px columns end on the mockup's right edges (x 1585 for site-years, x 1825 for shares) and two 28 px rows sit under the baked rule; the size names are baked.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Size site-years 20 to 249]"
+        },
+        {
+         "field": "Sites[Size band 5 share 20 to 249]"
+        },
+        {
+         "field": "Sites[Size site-years 250+]"
+        },
+        {
+         "field": "Sites[Size band 5 share 250+]"
+        }
+       ]
+      }
+     ],
+     "preset": "LABEL-INK",
+     "wellsText": "Data, in this order: Sites[Size site-years 20 to 249], Sites[Size band 5 share 20 to 249], Sites[Size site-years 250+], Sites[Size band 5 share 250+]",
+     "format": "Layout: 2 cards per row, 2 rows, card spacing 0, padding 0. Callout values right aligned; site-years Ink #303A39, shares Onyx #000000. Shows 172,239 21.2% / 26,911 12.0%."
+    },
+    {
+     "n": 22,
+     "id": "chart-size-band5",
+     "boxType": "clusteredBarChart",
+     "visual": "Clustered bar chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1693,
+      "y": 492,
+      "w": 90,
+      "h": 56
+     },
+     "box": {
+      "x": 1693,
+      "y": 489,
+      "w": 77,
+      "h": 56
+     },
+     "frameNote": "Same scale as chart-sector-band5, with two 28 px rows level with the size values.",
+     "wells": [
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "Sites[Size band label]"
+        }
+       ]
+      },
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "Sites[Band 5 share]"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "Sites[Band 5 share base]",
+         "rename": "Base"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "Y-axis: Sites[Size band label]; X-axis: Sites[Band 5 share]; Tooltips: Sites[Band 5 share base] renamed Base",
+     "format": "As chart-sector-band5: bars #944126, inner padding 57%, X 0 to 0.25 off, Y off, labels off, constant line fx Sites[Random fifth] Ink 1 px, label off ('All sites 20%' is baked)."
+    },
+    {
+     "n": 23,
+     "id": "text-sector-size-note",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1329,
+      "y": 586,
+      "w": 496,
+      "h": 20
+     },
+     "box": {
+      "x": 1329,
+      "y": 587,
+      "w": 444,
+      "h": 17
+     },
+     "frameNote": "The box is the glyph box of an SVG text line; the frame is its 20 px line box.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Sector size note]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: Sites[Sector size note]",
+     "format": "2023 + 2024 · DART: serious-injury rate per 100 full-time workers"
+    },
+    {
+     "n": 24,
+     "id": "table-sector-band",
+     "boxType": "tableEx",
+     "visual": "Table",
+     "placedOnPage": true,
+     "frame": {
+      "x": 737,
+      "y": 737,
+      "w": 1088,
+      "h": 217
+     },
+     "box": {
+      "x": 737,
+      "y": 737,
+      "w": 1088,
+      "h": 217
+     },
+     "wells": [
+      {
+       "well": "Columns",
+       "fields": [
+        {
+         "field": "Bands[Band label]",
+         "rename": "Risk band"
+        },
+        {
+         "field": "Sites[Crossed Manufacturing]",
+         "rename": "Manufacturing"
+        },
+        {
+         "field": "Sites[Crossed Construction]",
+         "rename": "Construction"
+        },
+        {
+         "field": "Sites[Crossed Transport and warehousing]",
+         "rename": "Transport and warehousing"
+        },
+        {
+         "field": "Sites[Crossed Wholesale]",
+         "rename": "Wholesale"
+        },
+        {
+         "field": "Sites[Crossed Utilities]",
+         "rename": "Utilities"
+        },
+        {
+         "field": "Sites[Crossed Agriculture]",
+         "rename": "Agriculture"
+        },
+        {
+         "field": "Sites[Crossed Mining, oil and gas]",
+         "rename": "Mining, oil and gas"
+        }
+       ],
+       "note": "each renamed to its sector name"
+      }
+     ],
+     "preset": "TABLE",
+     "wellsText": "Columns: Bands[Band label] renamed Risk band; then Sites[Crossed Manufacturing], [Crossed Construction], [Crossed Transport and warehousing], [Crossed Wholesale], [Crossed Utilities], [Crossed Agriculture], [Crossed Mining, oil and gas], each renamed to its sector name",
+     "format": "Sort: Band label ascending (follows Band order). Eight columns of 136 px; headers wrap to two lines (48 px header row). Header outline Bottom only, Card line #E3DECF. Risk band column: Background colour fx Field value Bands[Band fill]; Font colour fx Field value Bands[Band text fill]. Sector columns: right aligned; Data bars on (Apply to values only): Minimum Number 0, Maximum Number 1, positive bar #274A48, negative bar #E3DECF, not bar only; Background colour fx Rules: if value < 0 then #E3DECF; Font colour fx Rules: if value < 0 then Ink #303A39 (apply both rules to values and totals). Totals on, label All bands, Segoe UI Semibold 11 pt, top border 1 px Ink #303A39 (Grid > Borders > Totals section). Values under 100 site-years show Too few sites through the format string.",
+     "altText": "Table. Share of site-years that crossed the line next year, by risk band and sector, 2023 + 2024. Band 5 crossed at 43.6% to 49.5%; all bands 16.8% to 19.9%; mining bands 1 and 2 have too few sites."
+    },
+    {
+     "n": 25,
+     "id": "text-band-table-note",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 737,
+      "y": 965,
+      "w": 1088,
+      "h": 20
+     },
+     "box": {
+      "x": 737,
+      "y": 965,
+      "w": 1015,
+      "h": 20
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Band table note]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: Sites[Band table note]",
+     "format": "Crossed the line next year, 2023 + 2024 · line: each industry's worst-20% DART rate this year · data bars 0 to 100% · too few sites: under 100 site-years"
+    }
+   ],
+   "interactions": {
+    "rule": "Set these by hand. They keep the overlaid bars aligned with their tables and stop small state bases reaching the context visuals. Every other pair keeps the default.",
+    "bySource": [
+     {
+      "source": "slicer-test-year",
+      "filter": "every visual",
+      "highlight": "",
+      "none": ""
+     },
+     {
+      "source": "slicer-sector",
+      "filter": "every other visual",
+      "highlight": "",
+      "none": "table-sector-context, chart-sector-band5"
+     },
+     {
+      "source": "slicer-size-band",
+      "filter": "every other visual",
+      "highlight": "",
+      "none": "table-size-context, chart-size-band5"
+     },
+     {
+      "source": "map-tiles",
+      "filter": "table-sector-band, map-title",
+      "highlight": "",
+      "none": "table-sector-context, chart-sector-band5, table-size-context, chart-size-band5, map-legend-title, the rail cards, both notes"
+     },
+     {
+      "source": "table-sector-context",
+      "filter": "map-tiles, map-title, table-size-context, chart-size-band5",
+      "highlight": "chart-sector-band5",
+      "none": "table-sector-band, map-legend-title, the rail cards, both notes"
+     },
+     {
+      "source": "chart-sector-band5",
+      "filter": "map-tiles, map-title, table-size-context, chart-size-band5",
+      "highlight": "",
+      "none": "table-sector-context, table-sector-band, map-legend-title, the rail cards, both notes"
+     },
+     {
+      "source": "chart-size-band5",
+      "filter": "map-tiles, map-title, table-sector-context, chart-sector-band5, table-sector-band",
+      "highlight": "",
+      "none": "table-size-context, map-legend-title, the rail cards, both notes"
+     },
+     {
+      "source": "table-sector-band",
+      "filter": "map-tiles, map-title",
+      "highlight": "",
+      "none": "table-sector-context, chart-sector-band5, table-size-context, chart-size-band5, map-legend-title, the rail cards, both notes"
+     }
+    ]
+   },
+   "bookmarks": [
+    {
+     "name": "Risk Landscape defaults",
+     "state": "Test year 2023 + 2024; Sector and Size band cleared (All); no visual selections; Data on, Display off, Current page on, All visuals",
+     "button": "btn-reset-filters"
+    }
+   ],
+   "bakedNotBuilt": [
+    "kpi-band5-range-caption",
+    "kpi-all-sites-caption",
+    "'In band 5' header and its rule",
+    "the size band names",
+    "'All sites 20%' under the size bars",
+    "the map's ghost tiles, codes and class legend"
+   ],
+   "validation": [
+    {
+     "visual": "kpi-band5-range-value",
+     "shows": "43.6% to 49.5%",
+     "source": "utilities and construction band 5"
+    },
+    {
+     "visual": "kpi-band5-range-count",
+     "shows": "39,830 band 5 site-years · 2023 + 2024",
+     "source": "verified"
+    },
+    {
+     "visual": "kpi-all-sites-value",
+     "shows": "18.3%",
+     "source": "Base rate"
+    },
+    {
+     "visual": "kpi-all-sites-count",
+     "shows": "36,389 of 199,150 · 2023 + 2024",
+     "source": "verified"
+    },
+    {
+     "visual": "map-title / map-legend-title",
+     "shows": "Band 5 share by state / Share of site-years, 2023 + 2024",
+     "source": ""
+    },
+    {
+     "visual": "map-tiles",
+     "shows": "46 tiles: 16 in #C98369 (25% and over, Maine darkest group), 15 in #D9B9A7, 15 in #EADFD2; no tile for AK, VT, WY, DE, DC, PR",
+     "source": "verified state list (KS at 15.0% falls in 15% to 25%)"
+    },
+    {
+     "visual": "Tooltip state (hover Maine)",
+     "shows": "Maine / In band 5 42.6% / 768 site-years · 2023 + 2024",
+     "source": "verified"
+    },
+    {
+     "visual": "table-sector-context",
+     "shows": "Manufacturing 78,918 / 2.17 / 20.3%; Construction 43,110 / 1.85 / 18.4%; Transport and warehousing 36,087 / 4.29 / 21.0%; Wholesale 27,123 / 2.83 / 21.2%; Utilities 6,729 / 1.38 / 15.8%; Agriculture 6,335 / 3.04 / 20.4%; Mining, oil and gas 848 / 0.77 / 19.8%",
+     "source": "verified by sector"
+    },
+    {
+     "visual": "table-size-context",
+     "shows": "20 to 249 employees 172,239 / 21.2%; 250+ employees 26,911 / 12.0%",
+     "source": "verified by size"
+    },
+    {
+     "visual": "table-sector-band",
+     "shows": "Band 5 row 46.4%, 49.5%, 46.4%, 47.0%, 43.6%, 45.0%, 46.4%; Mining bands 1 and 2 Too few sites; Agriculture band 3 13.4%; All bands 18.3%, 18.1%, 17.7%, 19.2%, 16.8%, 18.8%, 19.9%",
+     "source": "verified sector by band (13.4% and 18.3% as corrected on 1 Nov)"
+    },
+    {
+     "visual": "text-sector-size-note / text-band-table-note",
+     "shows": "Both start with 2023 + 2024 (the note reads Crossed the line next year, 2023 + 2024 · ...)",
+     "source": ""
+    }
+   ],
+   "spotChecks": [
+    "Test year 2023, outcome 2024: 44.2% to 49.4%; 20,191 band 5 site-years · 2023; 18.2%; 18,005 of 99,185 · 2023; notes start with 2023.",
+    "Test year 2024, outcome 2025: 42.9% to 49.5%; 19,639 band 5 site-years · 2024; 18.4%; 18,384 of 99,965 · 2024.",
+    "Click the Band 2 row: the map title reads Band 2 share by state and the tiles recolour; the sector and size tables do not change.",
+    "Pick Mining, oil and gas in Sector: the sector table and bars keep all seven rows; the band table blanks the other six columns."
+   ]
+  },
+  {
+   "name": "Model Trust",
+   "order": 3,
+   "background": "powerbi/backgrounds/page3-model-trust.png",
+   "mockup": "powerbi/mockups/page3-model-trust.png",
+   "boxes": "powerbi/build/page3-model-trust.boxes.json",
+   "visuals": [
+    {
+     "n": 1,
+     "id": "nav-executive-intelligence",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 705,
+      "y": 37,
+      "w": 186,
+      "h": 38
+     },
+     "box": {
+      "x": 705,
+      "y": 37,
+      "w": 186,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Executive Intelligence"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Executive Intelligence",
+     "action": "Page navigation to Executive Intelligence"
+    },
+    {
+     "n": 2,
+     "id": "nav-risk-landscape",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 891,
+      "y": 37,
+      "w": 145,
+      "h": 38
+     },
+     "box": {
+      "x": 891,
+      "y": 37,
+      "w": 145,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Risk Landscape"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Risk Landscape",
+     "action": "Page navigation to Risk Landscape"
+    },
+    {
+     "n": 3,
+     "id": "nav-model-trust",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1036,
+      "y": 37,
+      "w": 120,
+      "h": 38
+     },
+     "box": {
+      "x": 1036,
+      "y": 37,
+      "w": 120,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Model Trust"
+      }
+     ],
+     "preset": "NAV-ACTIVE",
+     "wellsText": "Text: Model Trust",
+     "action": "None (current page)"
+    },
+    {
+     "n": 4,
+     "id": "nav-pricing-lab",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1156,
+      "y": 37,
+      "w": 115,
+      "h": 38
+     },
+     "box": {
+      "x": 1156,
+      "y": 37,
+      "w": 115,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Pricing Lab"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Pricing Lab",
+     "action": "Page navigation to Pricing Lab"
+    },
+    {
+     "n": 5,
+     "id": "kpi-auc-value",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 424,
+      "w": 336,
+      "h": 40
+     },
+     "box": {
+      "x": 64,
+      "y": 424,
+      "w": 57,
+      "h": 40
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Models[Picked AUC]"
+        }
+       ]
+      }
+     ],
+     "preset": "FIGURE",
+     "wellsText": "Data: Models[Picked AUC]",
+     "format": "0.78 (format 0.00)"
+    },
+    {
+     "n": 6,
+     "id": "kpi-auc-base",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 484,
+      "w": 336,
+      "h": 20
+     },
+     "box": {
+      "x": 64,
+      "y": 484,
+      "w": 272,
+      "h": 20
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Models[Picked AUC base]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: Models[Picked AUC base]",
+     "format": "Scorecard, 2023 · 95% CI 0.780 to 0.787"
+    },
+    {
+     "n": 7,
+     "id": "kpi-gini-value",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 424,
+      "y": 424,
+      "w": 216,
+      "h": 40
+     },
+     "box": {
+      "x": 424,
+      "y": 424,
+      "w": 58,
+      "h": 40
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Models[Picked Gini]"
+        }
+       ]
+      }
+     ],
+     "preset": "FIGURE",
+     "wellsText": "Data: Models[Picked Gini]",
+     "format": "0.57"
+    },
+    {
+     "n": 8,
+     "id": "kpi-gini-base",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 424,
+      "y": 484,
+      "w": 216,
+      "h": 20
+     },
+     "box": {
+      "x": 424,
+      "y": 484,
+      "w": 163,
+      "h": 20
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Models[Picked test pairs]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: Models[Picked test pairs]",
+     "format": "107,673 test pairs · 2023"
+    },
+    {
+     "n": 9,
+     "id": "btn-reset-filters",
+     "boxType": "actionButton",
+     "visual": "Button (Reset)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 540,
+      "y": 612,
+      "w": 100,
+      "h": 20
+     },
+     "box": {
+      "x": 540,
+      "y": 612,
+      "w": 100,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Reset filters"
+      }
+     ],
+     "preset": "RESET",
+     "wellsText": "Text: Reset filters",
+     "action": "Bookmark: Model Trust defaults"
+    },
+    {
+     "n": 10,
+     "id": "slicer-model",
+     "boxType": "slicer",
+     "visual": "Button slicer",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 652,
+      "w": 576,
+      "h": 72
+     },
+     "box": {
+      "x": 64,
+      "y": 652,
+      "w": 576,
+      "h": 72
+     },
+     "wells": [
+      {
+       "well": "Field",
+       "fields": [
+        {
+         "field": "ModelPicker[Model]",
+         "rename": "Model"
+        }
+       ]
+      }
+     ],
+     "preset": "TILES",
+     "wellsText": "Field: ModelPicker[Model], renamed Model",
+     "format": "4 buttons in Model order: Rating class only, Last year's rate, Scorecard, Gradient boosting. Default Scorecard.",
+     "slicer": "Single select, Force selection, default Scorecard"
+    },
+    {
+     "n": 11,
+     "id": "slicer-test-year",
+     "boxType": "slicer",
+     "visual": "Button slicer",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 740,
+      "w": 576,
+      "h": 72
+     },
+     "box": {
+      "x": 64,
+      "y": 740,
+      "w": 576,
+      "h": 72
+     },
+     "wells": [
+      {
+       "well": "Field",
+       "fields": [
+        {
+         "field": "TestYearPicker[Tile label]",
+         "rename": "Test year"
+        }
+       ]
+      }
+     ],
+     "preset": "TILES",
+     "wellsText": "Field: TestYearPicker[Tile label], renamed Test year",
+     "format": "2 buttons: 2023, outcome 2024 and 2024, outcome 2025. Default 2023, outcome 2024.",
+     "slicer": "Single select, Force selection, default 2023, outcome 2024"
+    },
+    {
+     "n": 12,
+     "id": "link-pricing-lab",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 996,
+      "w": 576,
+      "h": 20
+     },
+     "box": {
+      "x": 64,
+      "y": 996,
+      "w": 576,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Scores in pricing: Pricing Lab →"
+      }
+     ],
+     "preset": "LINK",
+     "wellsText": "Text: Scores in pricing: Pricing Lab →",
+     "format": "Left aligned.",
+     "action": "Page navigation to Pricing Lab"
+    },
+    {
+     "n": 13,
+     "id": "table-model-comparison",
+     "boxType": "tableEx",
+     "visual": "Table",
+     "placedOnPage": true,
+     "frame": {
+      "x": 737,
+      "y": 305,
+      "w": 644,
+      "h": 141
+     },
+     "box": {
+      "x": 737,
+      "y": 305,
+      "w": 644,
+      "h": 141
+     },
+     "wells": [
+      {
+       "well": "Columns",
+       "fields": [
+        {
+         "field": "Models[Model]",
+         "rename": "' '"
+        },
+        {
+         "field": "Models[AUC 2023]",
+         "rename": "2023"
+        },
+        {
+         "field": "Models[AUC 2024]",
+         "rename": "2024"
+        },
+        {
+         "field": "Models[Gini 2023]",
+         "rename": "'2023 '"
+        },
+        {
+         "field": "Models[Gini 2024]",
+         "rename": "'2024 '"
+        },
+        {
+         "field": "Models[Capture top 20% 2023]",
+         "rename": "'2023  '"
+        },
+        {
+         "field": "Models[Capture top 20% 2024]",
+         "rename": "'2024  '"
+        },
+        {
+         "field": "Models[Precision top 20% 2023]",
+         "rename": "'2023   '"
+        },
+        {
+         "field": "Models[Precision top 20% 2024]",
+         "note": "(trailing spaces keep the repeated names distinct)",
+         "rename": "'2024   '"
+        }
+       ]
+      }
+     ],
+     "preset": "TABLE",
+     "wellsText": "Columns: Models[Model] renamed ' '; Models[AUC 2023] renamed 2023; [AUC 2024] renamed 2024; [Gini 2023] renamed '2023 '; [Gini 2024] renamed '2024 '; [Capture top 20% 2023] renamed '2023  '; [Capture top 20% 2024] renamed '2024  '; [Precision top 20% 2023] renamed '2023   '; [Precision top 20% 2024] renamed '2024   ' (trailing spaces keep the repeated names distinct)",
+     "format": "Sort: Model ascending (follows Model order). Widths 140, 56, 56, 56, 56, 70, 70, 70, 70. Header outline Bottom only, Card line. Number headers and values right aligned; 2023 columns Onyx, 2024 columns Ink #303A39 (Specific column). Background colour fx Field value Models[Model row fill] on every column (the picked model's row turns #E3DECF). Totals off. AUC and Gini 0.000, shares 0.0% (from the measures). The group labels and their rules above the header are baked.",
+     "altText": "Four models on the 2023 and 2024 test years, all test pairs: AUC, Gini, share of line-crossers caught in the top 20% and share of the top 20% that crossed."
+    },
+    {
+     "n": 14,
+     "id": "chart-robustness",
+     "boxType": "clusteredBarChart",
+     "visual": "Clustered bar chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1685,
+      "y": 217,
+      "w": 140,
+      "h": 364
+     },
+     "box": {
+      "x": 1685,
+      "y": 222,
+      "w": 136,
+      "h": 353
+     },
+     "frameNote": "The box is the bars and labels. The plot starts on the baked 0.50 tick (x 1685) and covers thirteen 28 px rows.",
+     "wells": [
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "Robustness[Label]"
+        }
+       ]
+      },
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "Robustness[Robustness AUC 2023]"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "Robustness[Robustness note]",
+         "rename": "Note"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "Y-axis: Robustness[Label]; X-axis: Robustness[Robustness AUC 2023]; Tooltips: Robustness[Robustness note] renamed Note",
+     "format": "Sort: Label ascending (follows Row order). Bars #274A48, inner padding 57%. X-axis off, range 0.5 to 1.148 (0.50 on the baked tick at x 1685, 1.00 on the tick at x 1793). Y-axis off (labels and the '428 pairs' note are baked). Data labels on: Outside end, Segoe UI 11 pt Onyx, 0.000.",
+     "altText": "Bar chart. Scorecard AUC on the 2023 test year under robustness checks and by subgroup, axis from 0.50 (coin toss) to 1.00. All test pairs 0.783; without 2020 0.783; stable-ID links only 0.782; next year's own top 20% as the target 0.781. Construction 0.808; mining, oil and gas 0.800, on only 428 test pairs, so read it with care; manufacturing 0.787; utilities 0.779; wholesale 0.779; transport and warehousing 0.765; agriculture 0.761. 20 to 249 employees 0.762; 250+ employees 0.915."
+    },
+    {
+     "n": 15,
+     "id": "chart-roc",
+     "boxType": "lineChart",
+     "visual": "Line chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 781,
+      "y": 765,
+      "w": 156,
+      "h": 156
+     },
+     "box": {
+      "x": 737,
+      "y": 737,
+      "w": 200,
+      "h": 256
+     },
+     "frameNote": "The box is the whole SVG, baked axes included; the plot is the 156 px square inside it.",
+     "wells": [
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "ROC[False positive rate]",
+         "note": "(Don't summarize)"
+        }
+       ]
+      },
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "ROC[ROC true positive rate]",
+         "rename": "Crossers caught"
+        },
+        {
+         "field": "ROC[Coin toss]",
+         "rename": "Coin toss"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "Models[Picked model and year]",
+         "rename": "Model and year"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "X-axis: ROC[False positive rate] (Don't summarize); Y-axis: ROC[ROC true positive rate] renamed Crossers caught, ROC[Coin toss] renamed Coin toss; Tooltips: Models[Picked model and year] renamed Model and year",
+     "format": "X-axis type Continuous, range 0 to 1, off. Y-axis range 0 to 1, off. Series Crossers caught: Screen ink #274A48, 2 px, Shade area on, area transparency 88%. Series Coin toss: Muted #66655F, 1 px, dashed, no shade. Markers off.",
+     "altTextMeasure": "ROC[Alt text ROC]"
+    },
+    {
+     "n": 16,
+     "id": "label-roc-auc",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 823,
+      "y": 863,
+      "w": 112,
+      "h": 28
+     },
+     "box": {
+      "x": 823,
+      "y": 863,
+      "w": 112,
+      "h": 28
+     },
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Models[ROC AUC label]"
+        }
+       ]
+      }
+     ],
+     "preset": "TITLE",
+     "wellsText": "Data: Models[ROC AUC label]",
+     "format": "Right aligned. AUC 0.78. Sits inside the shaded area, under the diagonal."
+    },
+    {
+     "n": 17,
+     "id": "label-roc-selection",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 737,
+      "y": 969,
+      "w": 200,
+      "h": 20
+     },
+     "box": {
+      "x": 737,
+      "y": 969,
+      "w": 200,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Models[Picked model and year]"
+        }
+       ]
+      }
+     ],
+     "preset": "LABEL-INK",
+     "wellsText": "Data: Models[Picked model and year]",
+     "format": "Right aligned. Scorecard, 2023."
+    },
+    {
+     "n": 18,
+     "id": "chart-calibration",
+     "boxType": "lineClusteredColumnComboChart",
+     "visual": "Line and clustered column chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1073,
+      "y": 789,
+      "w": 308,
+      "h": 172
+     },
+     "box": {
+      "x": 1033,
+      "y": 737,
+      "w": 348,
+      "h": 256
+     },
+     "frameNote": "The box is the whole SVG. The plot must run from the baked 60% tick (y 789) to the baked 0% baseline (y 937) between x 1073 and 1381, with the decile labels below.",
+     "wells": [
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "Calibration[Score decile]"
+        }
+       ]
+      },
+      {
+       "well": "Column y-axis",
+       "fields": [
+        {
+         "field": "Calibration[Calibration share crossed]",
+         "rename": "Share that crossed"
+        }
+       ]
+      },
+      {
+       "well": "Line y-axis",
+       "fields": [
+        {
+         "field": "Calibration[Calibration predicted]",
+         "rename": "Predicted"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "Models[Picked model and year]",
+         "rename": "Model and year"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "X-axis: Calibration[Score decile]; Column y-axis: Calibration[Calibration share crossed] renamed Share that crossed; Line y-axis: Calibration[Calibration predicted] renamed Predicted; Tooltips: Models[Picked model and year] renamed Model and year",
+     "format": "X-axis type Categorical, on, Segoe UI 11 pt Muted, no title. Columns #B3AFA1, inner padding 42% (18 px). Line #274A48, 2 px, markers on, circle, 8 px, #274A48. Y-axis range 0 to 0.6, values off; Secondary y-axis on with the same range 0 to 0.6, values off (so the line and columns share one scale). Data labels off.",
+     "altTextMeasure": "Calibration[Alt text calibration]"
+    },
+    {
+     "n": 19,
+     "id": "label-calibration-selection",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1213,
+      "y": 761,
+      "w": 168,
+      "h": 20
+     },
+     "box": {
+      "x": 1213,
+      "y": 761,
+      "w": 168,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Models[Picked model and year]"
+        }
+       ]
+      }
+     ],
+     "preset": "LABEL-INK",
+     "wellsText": "Data: Models[Picked model and year]",
+     "format": "Right aligned. Scorecard, 2023."
+    },
+    {
+     "n": 20,
+     "id": "card-calibration-note",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1073,
+      "y": 815,
+      "w": 308,
+      "h": 40
+     },
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 0,
+      "h": 0
+     },
+     "frameNote": "The note is hidden in the mockup's default state, so its box is empty; the frame comes from the HTML (inside the plot, two lines).",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Calibration[Calibration note]"
+        }
+       ]
+      }
+     ],
+     "preset": "LABEL-INK",
+     "wellsText": "Data: Calibration[Calibration note]",
+     "format": "Left aligned, word wrap on. Empty by default; shows only when Last year's rate is picked."
+    },
+    {
+     "n": 21,
+     "id": "chart-drivers",
+     "boxType": "clusteredBarChart",
+     "visual": "Clustered bar chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1477,
+      "y": 772,
+      "w": 348,
+      "h": 196
+     },
+     "box": {
+      "x": 1477,
+      "y": 737,
+      "w": 348,
+      "h": 256
+     },
+     "frameNote": "The box is the whole SVG; the plot is seven 28 px rows from y 772.",
+     "wells": [
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "Drivers[Driver]"
+        }
+       ]
+      },
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "Drivers[Driver AUC drop]"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "Drivers[Driver note]",
+         "rename": "Note"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "Y-axis: Drivers[Driver]; X-axis: Drivers[Driver AUC drop]; Tooltips: Drivers[Driver note] renamed Note",
+     "format": "Filter: Driver, Top N, top 7 by Driver AUC drop. Sort: Driver AUC drop descending. Bars #274A48, inner padding 57%. Y-axis on: Segoe UI 11 pt Onyx, no title (check the bars start under the baked header at x 1645; move the visual sideways if not). X-axis off, range 0 to 0.174. Data labels on: Outside end, Segoe UI 11 pt Onyx, 0.000.",
+     "altText": "Bar chart. Gradient boosting permutation importance on a 2023 sample: AUC lost when each input is shuffled. DART rank in industry this year 0.125; hours worked 0.037; total case rate 0.018; change on last year 0.011; above the line this year 0.011; two-year DART rate 0.010; DART rate 0.007. Associations, not causes."
+    }
+   ],
+   "interactions": {
+    "rule": "The two slicers keep the default (Filter). Every other visual is set to None on every visual: the table, robustness and drivers have no relationship to the slicers, and a click on the ROC or calibration chart must not cut anything.",
+    "bySource": [
+     {
+      "source": "slicer-model",
+      "filter": "every visual",
+      "highlight": "",
+      "none": ""
+     },
+     {
+      "source": "slicer-test-year",
+      "filter": "every visual",
+      "highlight": "",
+      "none": ""
+     },
+     {
+      "source": "table-model-comparison",
+      "filter": "",
+      "highlight": "",
+      "none": "every visual"
+     },
+     {
+      "source": "chart-robustness",
+      "filter": "",
+      "highlight": "",
+      "none": "every visual"
+     },
+     {
+      "source": "chart-roc",
+      "filter": "",
+      "highlight": "",
+      "none": "every visual"
+     },
+     {
+      "source": "chart-calibration",
+      "filter": "",
+      "highlight": "",
+      "none": "every visual"
+     },
+     {
+      "source": "chart-drivers",
+      "filter": "",
+      "highlight": "",
+      "none": "every visual"
+     }
+    ]
+   },
+   "bookmarks": [
+    {
+     "name": "Model Trust defaults",
+     "state": "Model Scorecard; Test year 2023, outcome 2024; no visual selections; Data on, Display off, Current page on, All visuals",
+     "button": "btn-reset-filters"
+    }
+   ],
+   "bakedNotBuilt": [
+    "kpi-auc-caption",
+    "kpi-gini-caption",
+    "the robustness labels, group rules, '428 pairs' note and 0.50 to 1.00 scale",
+    "the ROC and calibration axes, ticks and keys",
+    "the table's group labels and spanner rules"
+   ],
+   "validation": [
+    {
+     "visual": "kpi-auc-value / kpi-auc-base",
+     "shows": "0.78 / Scorecard, 2023 · 95% CI 0.780 to 0.787",
+     "source": "verified"
+    },
+    {
+     "visual": "kpi-gini-value / kpi-gini-base",
+     "shows": "0.57 / 107,673 test pairs · 2023",
+     "source": "verified"
+    },
+    {
+     "visual": "table-model-comparison",
+     "shows": "AUC 0.592 0.589 / 0.729 0.729 / 0.783 0.785 / 0.800 0.801; Gini 0.183 0.177 / 0.459 0.458 / 0.567 0.571 / 0.600 0.601; caught 28.0% 27.2% / 49.8% 49.8% / 50.8% 51.1% / 51.7% 51.8%; share crossed 25.6% 24.8% / 45.9% 45.8% / 46.7% 46.9% / 47.6% 47.6%; Scorecard row filled #E3DECF",
+     "source": "verified model table; Gradient boosting AUC 0.7999 and 0.8007 in expected_values.csv"
+    },
+    {
+     "visual": "chart-robustness",
+     "shows": "0.783, 0.783, 0.782, 0.781, 0.808, 0.800, 0.787, 0.779, 0.779, 0.765, 0.761, 0.762, 0.915",
+     "source": "verified robustness and subgroups"
+    },
+    {
+     "visual": "chart-roc / label-roc-auc / label-roc-selection",
+     "shows": "Curve bowing above the dashed diagonal, shaded underneath / AUC 0.78 / Scorecard, 2023",
+     "source": ""
+    },
+    {
+     "visual": "chart-calibration / label-calibration-selection",
+     "shows": "Decile 1: columns 2.1%, line 4.0%; decile 10: columns 55.5%, line 57.8% / Scorecard, 2023",
+     "source": "verified calibration, scorecard 2023"
+    },
+    {
+     "visual": "card-calibration-note",
+     "shows": "Empty",
+     "source": ""
+    },
+    {
+     "visual": "chart-drivers",
+     "shows": "0.125, 0.037, 0.018, 0.011, 0.011, 0.010, 0.007 (DART rank in industry first)",
+     "source": "verified drivers, top seven"
+    }
+   ],
+   "spotChecks": [
+    "Gradient boosting, 2024: 0.80; Gradient boosting, 2024 · 95% CI 0.798 to 0.804; 0.60; 108,129 test pairs · 2024; AUC 0.80; Gradient boosting row filled.",
+    "Last year's rate: the calibration chart is empty and the note reads Last year's rate is a rank, not a probability, so it has no calibration."
+   ]
+  },
+  {
+   "name": "Pricing Lab",
+   "order": 4,
+   "background": "powerbi/backgrounds/page4-pricing-lab.png",
+   "mockup": "powerbi/mockups/page4-pricing-lab.png",
+   "boxes": "powerbi/build/page4-pricing-lab.boxes.json",
+   "visuals": [
+    {
+     "n": 1,
+     "id": "nav-executive-intelligence",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 705,
+      "y": 37,
+      "w": 186,
+      "h": 38
+     },
+     "box": {
+      "x": 705,
+      "y": 37,
+      "w": 186,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Executive Intelligence"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Executive Intelligence",
+     "action": "Page navigation to Executive Intelligence"
+    },
+    {
+     "n": 2,
+     "id": "nav-risk-landscape",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 891,
+      "y": 37,
+      "w": 145,
+      "h": 38
+     },
+     "box": {
+      "x": 891,
+      "y": 37,
+      "w": 145,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Risk Landscape"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Risk Landscape",
+     "action": "Page navigation to Risk Landscape"
+    },
+    {
+     "n": 3,
+     "id": "nav-model-trust",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1036,
+      "y": 37,
+      "w": 120,
+      "h": 38
+     },
+     "box": {
+      "x": 1036,
+      "y": 37,
+      "w": 120,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Model Trust"
+      }
+     ],
+     "preset": "NAV",
+     "wellsText": "Text: Model Trust",
+     "action": "Page navigation to Model Trust"
+    },
+    {
+     "n": 4,
+     "id": "nav-pricing-lab",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1156,
+      "y": 37,
+      "w": 115,
+      "h": 38
+     },
+     "box": {
+      "x": 1156,
+      "y": 37,
+      "w": 115,
+      "h": 38
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Pricing Lab"
+      }
+     ],
+     "preset": "NAV-ACTIVE",
+     "wellsText": "Text: Pricing Lab",
+     "action": "None (current page)"
+    },
+    {
+     "n": 5,
+     "id": "kpi-wrong-band-value",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 376,
+      "w": 336,
+      "h": 40
+     },
+     "box": {
+      "x": 64,
+      "y": 376,
+      "w": 199,
+      "h": 40
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "PricingSummary[Wrong band A to B]"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "PricingSummary[Wrong band definition]"
+        }
+       ]
+      }
+     ],
+     "preset": "FIGURE",
+     "wellsText": "Data: PricingSummary[Wrong band A to B]; Tooltips: PricingSummary[Wrong band definition]",
+     "format": "27.5% → 10.0%"
+    },
+    {
+     "n": 6,
+     "id": "kpi-wrong-band-base",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 150,
+      "y": 436,
+      "w": 250,
+      "h": 20
+     },
+     "box": {
+      "x": 150,
+      "y": 436,
+      "w": 85,
+      "h": 20
+     },
+     "frameNote": "The box is only as wide as the default text; the frame starts 8 px after the baked Simulated tag and runs to the column edge.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "PricingBands[Pricing scenario label]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: PricingBands[Pricing scenario label]",
+     "format": "2023 central"
+    },
+    {
+     "n": 7,
+     "id": "kpi-overall-ratio-value",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 424,
+      "y": 376,
+      "w": 216,
+      "h": 40
+     },
+     "box": {
+      "x": 424,
+      "y": 376,
+      "w": 156,
+      "h": 40
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "PricingSummary[Overall ratio A to B]"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "PricingSummary[Overall ratio note]"
+        }
+       ]
+      }
+     ],
+     "preset": "FIGURE",
+     "wellsText": "Data: PricingSummary[Overall ratio A to B]; Tooltips: PricingSummary[Overall ratio note]",
+     "format": "0.92 → 0.92"
+    },
+    {
+     "n": 8,
+     "id": "kpi-overall-ratio-base",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 510,
+      "y": 436,
+      "w": 130,
+      "h": 20
+     },
+     "box": {
+      "x": 510,
+      "y": 436,
+      "w": 85,
+      "h": 20
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "PricingBands[Pricing scenario label]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: PricingBands[Pricing scenario label]",
+     "format": "2023 central"
+    },
+    {
+     "n": 9,
+     "id": "btn-reset-filters",
+     "boxType": "actionButton",
+     "visual": "Button (Reset)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 540,
+      "y": 612,
+      "w": 100,
+      "h": 20
+     },
+     "box": {
+      "x": 540,
+      "y": 612,
+      "w": 100,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Reset filters"
+      }
+     ],
+     "preset": "RESET",
+     "wellsText": "Text: Reset filters",
+     "action": "Bookmark: Pricing Lab defaults"
+    },
+    {
+     "n": 10,
+     "id": "slicer-claim-cost",
+     "boxType": "slicer",
+     "visual": "Button slicer",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 652,
+      "w": 576,
+      "h": 72
+     },
+     "box": {
+      "x": 64,
+      "y": 652,
+      "w": 576,
+      "h": 72
+     },
+     "wells": [
+      {
+       "well": "Field",
+       "fields": [
+        {
+         "field": "ClaimCostScenarios[Scenario]",
+         "rename": "Claim-cost scenario"
+        }
+       ]
+      }
+     ],
+     "preset": "TILES",
+     "wellsText": "Field: ClaimCostScenarios[Scenario], renamed Claim-cost scenario",
+     "format": "3 buttons: Low, Central, High (Scenario order). Default Central. The table is disconnected, so the slicer filters nothing by itself; the measures read it.",
+     "slicer": "Single select, Force selection, default Central"
+    },
+    {
+     "n": 11,
+     "id": "slicer-score-year",
+     "boxType": "slicer",
+     "visual": "Button slicer",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 740,
+      "w": 576,
+      "h": 72
+     },
+     "box": {
+      "x": 64,
+      "y": 740,
+      "w": 576,
+      "h": 72
+     },
+     "wells": [
+      {
+       "well": "Field",
+       "fields": [
+        {
+         "field": "ScoreYears[Tile label]",
+         "rename": "Test year"
+        }
+       ]
+      }
+     ],
+     "preset": "TILES",
+     "wellsText": "Field: ScoreYears[Tile label], renamed Test year",
+     "format": "2 buttons: 2023, outcome 2024 and 2024, outcome 2025. Default 2023, outcome 2024.",
+     "slicer": "Single select, Force selection, default 2023, outcome 2024"
+    },
+    {
+     "n": 12,
+     "id": "link-method-caveats",
+     "boxType": "actionButton",
+     "visual": "Button (Blank)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 64,
+      "y": 996,
+      "w": 576,
+      "h": 20
+     },
+     "box": {
+      "x": 64,
+      "y": 996,
+      "w": 576,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Text",
+       "fields": [],
+       "value": "Method and caveats: Model Trust →"
+      }
+     ],
+     "preset": "LINK",
+     "wellsText": "Text: Method and caveats: Model Trust →",
+     "format": "Left aligned.",
+     "action": "Page navigation to Model Trust"
+    },
+    {
+     "n": 13,
+     "id": "chart-loss-premium-by-band",
+     "boxType": "lineChart",
+     "visual": "Line chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 737,
+      "y": 217,
+      "w": 644,
+      "h": 352
+     },
+     "box": {
+      "x": 737,
+      "y": 268,
+      "w": 644,
+      "h": 296
+     },
+     "frameNote": "The box is the drawn marks. The plot is the card's full plot area (y 217 to 541 for -0.1 to 2.6) with the band labels below.",
+     "wells": [
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "PricingBands[Band label]"
+        }
+       ]
+      },
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "PricingBands[Band loss ratio A]",
+         "rename": "A, industry only"
+        },
+        {
+         "field": "PricingBands[Band loss ratio B]",
+         "rename": "B, with the score"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [
+        {
+         "field": "PricingBands[Band premium A]",
+         "rename": "Premium A, industry only"
+        },
+        {
+         "field": "PricingBands[Band premium B]",
+         "rename": "Premium B, with the score"
+        },
+        {
+         "field": "PricingBands[Band simulated loss]",
+         "rename": "Simulated loss"
+        },
+        {
+         "field": "PricingBands[Band tooltip base]",
+         "rename": "Base"
+        }
+       ]
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "X-axis: PricingBands[Band label]; Y-axis: PricingBands[Band loss ratio A] renamed A, industry only, PricingBands[Band loss ratio B] renamed B, with the score; Tooltips: PricingBands[Band premium A] renamed Premium A, industry only; [Band premium B] renamed Premium B, with the score; [Band simulated loss] renamed Simulated loss; [Band tooltip base] renamed Base",
+     "format": "Sort: Band label ascending (follows Band order). Lines: transparency 100% on both series (markers only). Markers on, circle, 8 px: A #B3AFA1, B #274A48. Y-axis off, range -0.1 to 2.6. X-axis on, Segoe UI 11 pt Onyx, no title. Data labels on: series A position Left, Segoe UI 11 pt Ink, 0.00; series B position Right, Segoe UI Semibold 15 pt Onyx, 0.00, label background on, Card #F7F5EC, 0% transparency. Analytics: Error bars on series B, upper bound PricingBands[Band loss ratio high], lower bound PricingBands[Band loss ratio low], bar on, #B3AFA1, 2 px, no caps or markers (draws the A to B connector). Y-axis constant line 1: name '1.0: simulated loss equals premium', value 1, Ink 1 px solid, Behind, data label on, Name only, Segoe UI 11 pt Ink, Left, Above. Constant line 2: value 0, Axis #CFCBBD, 1 px solid, label off.",
+     "altTextMeasure": "PricingBands[Alt text loss premium]"
+    },
+    {
+     "n": 14,
+     "id": "text-loss-premium-base",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 823,
+      "y": 589,
+      "w": 300,
+      "h": 20
+     },
+     "box": {
+      "x": 823,
+      "y": 589,
+      "w": 175,
+      "h": 20
+     },
+     "frameNote": "The box is only as wide as the default text; the frame starts after the baked Simulated tag and gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "PricingBands[Pricing base line]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: PricingBands[Pricing base line]",
+     "format": "2023 central · 99,185 sites"
+    },
+    {
+     "n": 15,
+     "id": "chart-premium-change",
+     "boxType": "clusteredColumnChart",
+     "visual": "Clustered column chart",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1477,
+      "y": 217,
+      "w": 348,
+      "h": 352
+     },
+     "box": {
+      "x": 1477,
+      "y": 228,
+      "w": 348,
+      "h": 336
+     },
+     "frameNote": "The box is the drawn marks. The plot is the full plot area (y 217 to 541 for -50% to +115%) with the band labels below.",
+     "wells": [
+      {
+       "well": "X-axis",
+       "fields": [
+        {
+         "field": "PricingBands[Band short]"
+        }
+       ]
+      },
+      {
+       "well": "Y-axis",
+       "fields": [
+        {
+         "field": "PricingBands[Band premium change]"
+        }
+       ]
+      },
+      {
+       "well": "Tooltips",
+       "fields": [],
+       "value": "the same four as chart-loss-premium-by-band"
+      }
+     ],
+     "preset": "CHART",
+     "wellsText": "X-axis: PricingBands[Band short]; Y-axis: PricingBands[Band premium change]; Tooltips: the same four as chart-loss-premium-by-band",
+     "format": "Sort: Band short ascending (follows Band order). Columns: colour fx Field value PricingBands[Band colour]; inner padding 43% (40 px columns on a 69.6 px pitch). Y-axis off, range -0.5 to 1.15. X-axis on, Segoe UI 11 pt Onyx. Data labels on: Outside end, Segoe UI 11 pt Onyx (format from the measure, +0.0%). Analytics: Y-axis constant line, value 0, Ink 1 px solid, label off.",
+     "altTextMeasure": "PricingBands[Alt text premium change]"
+    },
+    {
+     "n": 16,
+     "id": "text-premium-change-base",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 1563,
+      "y": 589,
+      "w": 262,
+      "h": 20
+     },
+     "box": {
+      "x": 1563,
+      "y": 589,
+      "w": 175,
+      "h": 20
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "PricingBands[Pricing base line]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: PricingBands[Pricing base line]",
+     "format": "2023 central · 99,185 sites"
+    },
+    {
+     "n": 17,
+     "id": "table-claim-cost-sensitivity",
+     "boxType": "tableEx",
+     "visual": "Table",
+     "placedOnPage": true,
+     "frame": {
+      "x": 737,
+      "y": 737,
+      "w": 1088,
+      "h": 113
+     },
+     "box": {
+      "x": 737,
+      "y": 737,
+      "w": 1088,
+      "h": 113
+     },
+     "wells": [
+      {
+       "well": "Columns",
+       "fields": [
+        {
+         "field": "PricingSummary[Scenario]",
+         "rename": "Scenario"
+        },
+        {
+         "field": "PricingSummary[Rule]",
+         "rename": "Cases priced × claim cost"
+        },
+        {
+         "field": "PricingSummary[Scenario premium]",
+         "rename": "Simulated premium"
+        },
+        {
+         "field": "PricingSummary[Scenario simulated loss]",
+         "rename": "Simulated loss"
+        },
+        {
+         "field": "PricingSummary[Scenario loss ratio]",
+         "rename": "Loss / premium, A and B"
+        },
+        {
+         "field": "PricingSummary[Scenario wrong band A to B]",
+         "rename": "Wrong band, A → B"
+        },
+        {
+         "field": "PricingSummary[Scenario band spread A to B]",
+         "rename": "Band spread, A → B"
+        }
+       ]
+      }
+     ],
+     "preset": "TABLE",
+     "wellsText": "Columns: PricingSummary[Scenario] renamed Scenario; PricingSummary[Rule] renamed Cases priced × claim cost; [Scenario premium] renamed Simulated premium; [Scenario simulated loss] renamed Simulated loss; [Scenario loss ratio] renamed Loss / premium, A and B; [Scenario wrong band A to B] renamed Wrong band, A → B; [Scenario band spread A to B] renamed Band spread, A → B",
+     "format": "Sort: Scenario ascending (follows Scenario order). Widths 96, 200, 152, 152, 168, 168, 152. Header outline Bottom only, Card line. Rule column Ink #303A39. Last three columns right aligned (headers and values). Data bars on Simulated premium and Simulated loss (values only): Minimum Number 0, Maximum Number 48000000000, positive bar #274A48, value shown. Background colour fx Field value PricingSummary[Scenario row fill] on every column. Totals off.",
+     "altText": "Table. All three claim-cost scenarios for the selected test year: simulated premium, simulated loss, loss / premium under A and B, premium in the wrong band A to B, and band spread A to B."
+    },
+    {
+     "n": 18,
+     "id": "text-sensitivity-base",
+     "boxType": "card",
+     "visual": "Card (new)",
+     "placedOnPage": true,
+     "frame": {
+      "x": 823,
+      "y": 973,
+      "w": 200,
+      "h": 20
+     },
+     "box": {
+      "x": 823,
+      "y": 973,
+      "w": 125,
+      "h": 20
+     },
+     "frameNote": "The box is only as wide as the default text; the frame gives longer values room.",
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "PricingBands[Pricing year base line]"
+        }
+       ]
+      }
+     ],
+     "preset": "BASE",
+     "wellsText": "Data: PricingBands[Pricing year base line]",
+     "format": "2023 · 99,185 sites"
+    }
+   ],
+   "interactions": {
+    "rule": "Line charts cannot be highlighted, so the column chart is None on the line chart. Nothing filters the base-line cards, so they keep the whole portfolio's site count.",
+    "bySource": [
+     {
+      "source": "slicer-claim-cost",
+      "filter": "every visual",
+      "highlight": "",
+      "none": ""
+     },
+     {
+      "source": "slicer-score-year",
+      "filter": "every visual",
+      "highlight": "",
+      "none": ""
+     },
+     {
+      "source": "chart-loss-premium-by-band",
+      "filter": "",
+      "highlight": "chart-premium-change",
+      "none": "every card, table-claim-cost-sensitivity"
+     },
+     {
+      "source": "chart-premium-change",
+      "filter": "",
+      "highlight": "",
+      "none": "chart-loss-premium-by-band, every card, table-claim-cost-sensitivity"
+     },
+     {
+      "source": "table-claim-cost-sensitivity",
+      "filter": "",
+      "highlight": "",
+      "none": "every visual"
+     }
+    ]
+   },
+   "bookmarks": [
+    {
+     "name": "Pricing Lab defaults",
+     "state": "Claim-cost scenario Central; Test year 2023, outcome 2024; no visual selections; Data on, Display off, Current page on, All visuals",
+     "button": "btn-reset-filters"
+    }
+   ],
+   "bakedNotBuilt": [
+    "kpi-wrong-band-caption",
+    "kpi-overall-ratio-caption",
+    "the Simulated tags",
+    "the A and B legend",
+    "the Assumptions block and the high-scenario note"
+   ],
+   "validation": [
+    {
+     "visual": "kpi-wrong-band-value / kpi-wrong-band-base",
+     "shows": "27.5% → 10.0% / 2023 central",
+     "source": "verified"
+    },
+    {
+     "visual": "kpi-overall-ratio-value / kpi-overall-ratio-base",
+     "shows": "0.92 → 0.92 / 2023 central",
+     "source": "verified"
+    },
+    {
+     "visual": "chart-loss-premium-by-band",
+     "shows": "A 0.35, 0.58, 0.82, 1.19, 2.10; B 0.52, 0.87, 1.14, 1.00, 1.05; line at 1.0 labelled 1.0: simulated loss equals premium",
+     "source": "verified 2023 central band table"
+    },
+    {
+     "visual": "chart-premium-change",
+     "shows": "−33.6%, −33.6%, −28.3%, +19.5%, +99.4%",
+     "source": "verified"
+    },
+    {
+     "visual": "text-loss-premium-base / text-premium-change-base",
+     "shows": "2023 central · 99,185 sites",
+     "source": "verified 2023 portfolio"
+    },
+    {
+     "visual": "table-claim-cost-sensitivity",
+     "shows": "Low $10.02bn, $8.11bn, 0.81, 26.4% → 9.5%, 5.9x → 2.2x; Central $17.84bn, $16.43bn, 0.92, 27.5% → 10.0%, 6.1x → 2.2x (row filled #E3DECF); High $20.42bn, $18.80bn, 0.92, 27.5% → 10.0%, 6.1x → 2.2x",
+     "source": "verified pricing scenarios"
+    },
+    {
+     "visual": "text-sensitivity-base",
+     "shows": "2023 · 99,185 sites",
+     "source": "verified"
+    }
+   ],
+   "spotChecks": [
+    "Central, 2024: 26.7% → 9.3%; 0.96 → 0.96; 2024 central · 99,965 sites; A 0.38, 0.62, 0.87, 1.26, 2.21; B 0.57, 0.92, 1.20, 1.03, 1.09; change −33.3%, −32.8%, −27.4%, +22.4%, +102.5%; table $9.03bn / $16.48bn / $18.86bn premium.",
+    "Low, 2023: 26.4% → 9.5%; 0.81 → 0.81; 2023 low; the Low row is filled.",
+    "Click band 5 in the line chart: band 5 stays bright in the column chart, the others dim; the base lines still read 99,185 sites."
+   ]
+  }
+ ],
+ "tooltipPages": [
+  {
+   "name": "Tooltip state",
+   "size": {
+    "w": 240,
+    "h": 96
+   },
+   "background": "#000000",
+   "hidden": true,
+   "allowUseAsTooltip": true,
+   "usedBy": "Risk Landscape map-tiles",
+   "visuals": [
+    {
+     "id": "tt-state-name",
+     "visual": "Card (new)",
+     "frame": {
+      "x": 16,
+      "y": 12,
+      "w": 208,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "StateGrid[State name]",
+         "note": "(First)"
+        }
+       ]
+      }
+     ],
+     "wellsText": "Data: StateGrid[State name] (First)",
+     "format": "Callout Segoe UI Semibold 11 pt, Shell #FFFFFF, left. Label off, no background."
+    },
+    {
+     "id": "tt-share-key",
+     "visual": "Card (new)",
+     "frame": {
+      "x": 16,
+      "y": 36,
+      "w": 120,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Map share label]"
+        }
+       ]
+      }
+     ],
+     "wellsText": "Data: Sites[Map share label]",
+     "format": "Segoe UI 11 pt, Axis grey #CFCBBD, left. Reads In band 5."
+    },
+    {
+     "id": "tt-share-value",
+     "visual": "Card (new)",
+     "frame": {
+      "x": 136,
+      "y": 36,
+      "w": 88,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[Map share]"
+        }
+       ]
+      }
+     ],
+     "wellsText": "Data: Sites[Map share]",
+     "format": "Segoe UI 11 pt, Shell, right aligned. 0.0%."
+    },
+    {
+     "id": "tt-base",
+     "visual": "Card (new)",
+     "frame": {
+      "x": 16,
+      "y": 60,
+      "w": 208,
+      "h": 20
+     },
+     "wells": [
+      {
+       "well": "Data",
+       "fields": [
+        {
+         "field": "Sites[State base line]"
+        }
+       ]
+      }
+     ],
+     "wellsText": "Data: Sites[State base line]",
+     "format": "Segoe UI 11 pt, Axis grey #CFCBBD, left. Maine: 768 site-years · 2023 + 2024."
+    }
+   ]
+  }
+ ],
+ "relationships": [
+  {
+   "n": 1,
+   "filtering": "TestYears[Score year]",
+   "filtered": "Sites[Score year]",
+   "cardinality": "Many to many",
+   "direction": "Single (TestYears filters Sites)"
+  },
+  {
+   "n": 2,
+   "filtering": "StateGrid[State]",
+   "filtered": "Sites[State]",
+   "cardinality": "One to many",
+   "direction": "Single"
+  },
+  {
+   "n": 3,
+   "filtering": "Bands[Risk band]",
+   "filtered": "Sites[Risk band]",
+   "cardinality": "One to many",
+   "direction": "Single"
+  },
+  {
+   "n": 4,
+   "filtering": "ModelPicker[Model]",
+   "filtered": "ROC[Model]",
+   "cardinality": "One to many",
+   "direction": "Single"
+  },
+  {
+   "n": 5,
+   "filtering": "ModelPicker[Model]",
+   "filtered": "Calibration[Model]",
+   "cardinality": "One to many",
+   "direction": "Single"
+  },
+  {
+   "n": 6,
+   "filtering": "TestYearPicker[Test year]",
+   "filtered": "ROC[Test year]",
+   "cardinality": "One to many",
+   "direction": "Single"
+  },
+  {
+   "n": 7,
+   "filtering": "TestYearPicker[Test year]",
+   "filtered": "Calibration[Test year]",
+   "cardinality": "One to many",
+   "direction": "Single"
+  },
+  {
+   "n": 8,
+   "filtering": "ScoreYears[Score year]",
+   "filtered": "PricingBands[Score year]",
+   "cardinality": "One to many",
+   "direction": "Single"
+  },
+  {
+   "n": 9,
+   "filtering": "ScoreYears[Score year]",
+   "filtered": "PricingSummary[Score year]",
+   "cardinality": "One to many",
+   "direction": "Single"
+  }
+ ],
+ "disconnected": [
+  "Models",
+  "Drivers",
+  "Robustness",
+  "PrecisionRecall",
+  "ClaimCostScenarios",
+  "About"
+ ],
+ "mustNotExist": [
+  "ModelPicker or TestYearPicker to Models",
+  "ScoreYears to Sites",
+  "TestYears to PricingBands or PricingSummary",
+  "Bands to PricingBands",
+  "any relationship on ClaimCostScenarios"
+ ],
+ "sortByColumn": [
+  [
+   "Sites[Sector]",
+   "Sites[Sector order]"
+  ],
+  [
+   "Sites[Size band label]",
+   "Sites[Size order]"
+  ],
+  [
+   "Sites[Risk band]",
+   "Sites[Band order]"
+  ],
+  [
+   "Bands[Risk band]",
+   "Bands[Band order]"
+  ],
+  [
+   "Bands[Band label]",
+   "Bands[Band order]"
+  ],
+  [
+   "Bands[Band label long]",
+   "Bands[Band order]"
+  ],
+  [
+   "TestYears[Test year]",
+   "TestYears[Sort order]"
+  ],
+  [
+   "TestYears[Tile label]",
+   "TestYears[Sort order]"
+  ],
+  [
+   "ModelPicker[Model]",
+   "ModelPicker[Model order]"
+  ],
+  [
+   "Models[Model]",
+   "Models[Model order]"
+  ],
+  [
+   "TestYearPicker[Tile label]",
+   "TestYearPicker[Test year]"
+  ],
+  [
+   "ScoreYears[Tile label]",
+   "ScoreYears[Score year]"
+  ],
+  [
+   "ClaimCostScenarios[Scenario]",
+   "ClaimCostScenarios[Scenario order]"
+  ],
+  [
+   "PricingSummary[Scenario]",
+   "PricingSummary[Scenario order]"
+  ],
+  [
+   "PricingBands[Risk band]",
+   "PricingBands[Band order]"
+  ],
+  [
+   "PricingBands[Band label]",
+   "PricingBands[Band order]"
+  ],
+  [
+   "PricingBands[Band short]",
+   "PricingBands[Band order]"
+  ],
+  [
+   "Robustness[Label]",
+   "Robustness[Row order]"
+  ]
+ ],
+ "measures": [
+  {
+   "home": "Sites",
+   "name": "Sites",
+   "format": "#,0",
+   "usedOn": "base of most Sites measures",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Sites crossing next year",
+   "format": "#,0",
+   "usedOn": "base of most Sites measures",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Base rate",
+   "format": "0.0%",
+   "usedOn": "base of the crossing rates",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Top band hit rate",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: kpi-hit-rate-value",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Top band capture",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: kpi-capture-value, chart-capture-vs-random",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Top band lift",
+   "format": "0.0\"x\"",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Share of sites in top band",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: table-sector-dart, chart-sector-band5",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Average site DART rate",
+   "format": "0.00",
+   "usedOn": "Executive Intelligence: table-sector-dart, chart-sector-band5 (sort and tooltip)",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Site premium A",
+   "format": "\\$#,0.0,,\"m\"",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Site premium B",
+   "format": "\\$#,0.0,,\"m\"",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Site simulated loss",
+   "format": "\\$#,0.0,,\"m\"",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Site premium change",
+   "format": "+0%;−0%;0%",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Sites",
+   "name": "Top band crossing sites",
+   "format": "#,0",
+   "usedOn": "Executive Intelligence: base lines",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Top band site-years",
+   "format": "#,0",
+   "usedOn": "Executive Intelligence: base lines",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Capture remainder",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: chart-capture-vs-random (the track)",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Random fifth",
+   "format": "0%",
+   "usedOn": "Executive Intelligence: chart-capture-vs-random, chart-sector-band5; Risk Landscape: chart-sector-band5, chart-size-band5 (constant lines)",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Capture base line",
+   "format": "Text",
+   "usedOn": "Executive Intelligence: kpi-capture-count",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Hit rate base line",
+   "format": "Text",
+   "usedOn": "Executive Intelligence: kpi-hit-rate-count",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossing rate 2023",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: chart-crossing-by-band",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossing rate 2024",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: matrix-crossing-2024 (through the five band measures)",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossing rate 2024 band 1",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: matrix-crossing-2024 (cell 1)",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossing rate 2024 band 2",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: matrix-crossing-2024 (cell 2)",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossing rate 2024 band 3",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: matrix-crossing-2024 (cell 3)",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossing rate 2024 band 4",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: matrix-crossing-2024 (cell 4)",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossing rate 2024 band 5",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: matrix-crossing-2024 (cell 5)",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossing base 2023",
+   "format": "Text",
+   "usedOn": "Executive Intelligence: chart-crossing-by-band tooltip",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "All sites rate",
+   "format": "0.0%",
+   "usedOn": "Executive Intelligence: chart-crossing-by-band reference line",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Portfolio site-years",
+   "format": "#,0",
+   "usedOn": "Risk Landscape: table-sector-context, table-size-context, map, tooltip",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Portfolio crossing sites",
+   "format": "#,0",
+   "usedOn": "Risk Landscape: base line",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Portfolio crossing rate",
+   "format": "0.0%",
+   "usedOn": "Risk Landscape: kpi-all-sites-value",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Portfolio base line",
+   "format": "Text",
+   "usedOn": "Risk Landscape: kpi-all-sites-count",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Portfolio DART rate",
+   "format": "0.00",
+   "usedOn": "Risk Landscape: table-sector-context",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Band 5 site-years",
+   "format": "#,0",
+   "usedOn": "Risk Landscape: base line, tooltips",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Band 5 share",
+   "format": "0.0%",
+   "usedOn": "Risk Landscape: table-sector-context, table-size-context, chart-sector-band5, chart-size-band5",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Band 5 base line",
+   "format": "Text",
+   "usedOn": "Risk Landscape: kpi-band5-range-count",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Size site-years 20 to 249",
+   "format": "#,0",
+   "usedOn": "Risk Landscape: table-size-context",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Size band 5 share 20 to 249",
+   "format": "0.0%",
+   "usedOn": "Risk Landscape: table-size-context",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Size site-years 250+",
+   "format": "#,0",
+   "usedOn": "Risk Landscape: table-size-context",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Size band 5 share 250+",
+   "format": "0.0%",
+   "usedOn": "Risk Landscape: table-size-context",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Band 5 share base",
+   "format": "Text",
+   "usedOn": "Executive Intelligence: chart-sector-band5 tooltip; Risk Landscape: chart-sector-band5 and chart-size-band5 tooltips",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Band 5 crossing range",
+   "format": "Text",
+   "usedOn": "Risk Landscape: kpi-band5-range-value",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Cell site-years",
+   "format": "#,0",
+   "usedOn": "Risk Landscape: table-sector-band (through the sector measures)",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Cell crossing rate",
+   "format": "0.0%;\"Too few sites\";0.0%",
+   "usedOn": "Risk Landscape: table-sector-band (through the sector measures)",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossed Manufacturing",
+   "format": "0.0%;\"Too few sites\";0.0%",
+   "usedOn": "Risk Landscape: table-sector-band, column Manufacturing",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossed Construction",
+   "format": "0.0%;\"Too few sites\";0.0%",
+   "usedOn": "Risk Landscape: table-sector-band, column Construction",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossed Transport and warehousing",
+   "format": "0.0%;\"Too few sites\";0.0%",
+   "usedOn": "Risk Landscape: table-sector-band, column Transport and warehousing",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossed Wholesale",
+   "format": "0.0%;\"Too few sites\";0.0%",
+   "usedOn": "Risk Landscape: table-sector-band, column Wholesale",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossed Utilities",
+   "format": "0.0%;\"Too few sites\";0.0%",
+   "usedOn": "Risk Landscape: table-sector-band, column Utilities",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossed Agriculture",
+   "format": "0.0%;\"Too few sites\";0.0%",
+   "usedOn": "Risk Landscape: table-sector-band, column Agriculture",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Crossed Mining, oil and gas",
+   "format": "0.0%;\"Too few sites\";0.0%",
+   "usedOn": "Risk Landscape: table-sector-band, column Mining, oil and gas",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Map band order",
+   "format": "0",
+   "usedOn": "Risk Landscape: map measures",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Map share",
+   "format": "0.0%",
+   "usedOn": "Risk Landscape: map colour, Tooltip state page",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Map x",
+   "format": "0",
+   "usedOn": "Risk Landscape: map-tiles X axis",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Map y",
+   "format": "0",
+   "usedOn": "Risk Landscape: map-tiles Y axis",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Map tile colour",
+   "format": "Text",
+   "usedOn": "Risk Landscape: map-tiles marker colour (field value)",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Map title",
+   "format": "Text",
+   "usedOn": "Risk Landscape: map-title",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Map legend title",
+   "format": "Text",
+   "usedOn": "Risk Landscape: map-legend-title",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Map share label",
+   "format": "Text",
+   "usedOn": "Tooltip state page: key",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "State base line",
+   "format": "Text",
+   "usedOn": "Tooltip state page: base line",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Sector size note",
+   "format": "Text",
+   "usedOn": "Risk Landscape: text-sector-size-note",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Band table note",
+   "format": "Text",
+   "usedOn": "Risk Landscape: text-band-table-note",
+   "status": "new"
+  },
+  {
+   "home": "Sites",
+   "name": "Alt text map",
+   "format": "Text",
+   "usedOn": "Risk Landscape: map-tiles alt text",
+   "status": "new"
+  },
+  {
+   "home": "TestYears",
+   "name": "Test year label",
+   "format": "Text",
+   "usedOn": "Executive Intelligence and Risk Landscape: every base line",
+   "status": "new"
+  },
+  {
+   "home": "Bands",
+   "name": "Band fill",
+   "format": "Text",
+   "usedOn": "Executive Intelligence: chart-crossing-by-band column colour; Risk Landscape: table-sector-band band column background",
+   "status": "new"
+  },
+  {
+   "home": "Bands",
+   "name": "Band text fill",
+   "format": "Text",
+   "usedOn": "Risk Landscape: table-sector-band band column font colour",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Model AUC",
+   "format": "0.00",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Models",
+   "name": "Model AUC low",
+   "format": "0.00",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Models",
+   "name": "Model AUC high",
+   "format": "0.00",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Models",
+   "name": "Model Gini",
+   "format": "0.00",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Models",
+   "name": "Model capture top 20%",
+   "format": "0%",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Models",
+   "name": "Model precision top 20%",
+   "format": "0%",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Models",
+   "name": "Best model AUC",
+   "format": "0.00",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Models",
+   "name": "Rating class AUC",
+   "format": "0.00",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "Models",
+   "name": "Capture gain vs rating class",
+   "format": "0.0\"x\"",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "ModelPicker",
+   "name": "Flagged and crossed",
+   "format": "#,0",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "ModelPicker",
+   "name": "Flagged, did not cross",
+   "format": "#,0",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "ModelPicker",
+   "name": "Missed",
+   "format": "#,0",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "ModelPicker",
+   "name": "Not flagged, did not cross",
+   "format": "#,0",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "ModelPicker",
+   "name": "Picked model",
+   "format": "Text",
+   "usedOn": "Model Trust: key figures, labels, row fill",
+   "status": "new"
+  },
+  {
+   "home": "TestYearPicker",
+   "name": "Picked test year",
+   "format": "0",
+   "usedOn": "Model Trust: key figures, labels",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Picked AUC",
+   "format": "0.00",
+   "usedOn": "Model Trust: kpi-auc-value",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Picked AUC base",
+   "format": "Text",
+   "usedOn": "Model Trust: kpi-auc-base",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Picked Gini",
+   "format": "0.00",
+   "usedOn": "Model Trust: kpi-gini-value",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Picked test pairs",
+   "format": "Text",
+   "usedOn": "Model Trust: kpi-gini-base",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Picked model and year",
+   "format": "Text",
+   "usedOn": "Model Trust: label-roc-selection, label-calibration-selection",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "ROC AUC label",
+   "format": "Text",
+   "usedOn": "Model Trust: label-roc-auc",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "AUC 2023",
+   "format": "0.000",
+   "usedOn": "Model Trust: table-model-comparison; Executive Intelligence: chart-auc-2023",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "AUC 2024",
+   "format": "0.000",
+   "usedOn": "Model Trust: table-model-comparison",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Gini 2023",
+   "format": "0.000",
+   "usedOn": "Model Trust: table-model-comparison",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Gini 2024",
+   "format": "0.000",
+   "usedOn": "Model Trust: table-model-comparison",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Capture top 20% 2023",
+   "format": "0.0%",
+   "usedOn": "Model Trust: table-model-comparison",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Capture top 20% 2024",
+   "format": "0.0%",
+   "usedOn": "Model Trust: table-model-comparison",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Precision top 20% 2023",
+   "format": "0.0%",
+   "usedOn": "Model Trust: table-model-comparison",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Precision top 20% 2024",
+   "format": "0.0%",
+   "usedOn": "Model Trust: table-model-comparison",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Model row fill",
+   "format": "Text",
+   "usedOn": "Model Trust: table-model-comparison background (field value)",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Model inputs",
+   "format": "Text",
+   "usedOn": "optional tooltip text (not placed)",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Tooltip AUC 2023",
+   "format": "Text",
+   "usedOn": "Executive Intelligence: chart-auc-2023 tooltip",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Tooltip AUC 2024",
+   "format": "Text",
+   "usedOn": "Executive Intelligence: chart-auc-2023 tooltip",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Tooltip Gini",
+   "format": "Text",
+   "usedOn": "optional tooltip text (not placed)",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "Tooltip base",
+   "format": "Text",
+   "usedOn": "Executive Intelligence: chart-auc-2023 tooltip",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "AUC 2023 words",
+   "format": "Text",
+   "usedOn": "Executive Intelligence: chart-auc-2023 data labels",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "AUC 2023 scorecard",
+   "format": "0.00",
+   "usedOn": "Executive Intelligence: table-auc-by-year",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "AUC 2024 scorecard",
+   "format": "0.00",
+   "usedOn": "Executive Intelligence: table-auc-by-year",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "AUC 2023 last year",
+   "format": "0.00",
+   "usedOn": "Executive Intelligence: table-auc-by-year",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "AUC 2024 last year",
+   "format": "0.00",
+   "usedOn": "Executive Intelligence: table-auc-by-year",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "AUC 2023 rating class",
+   "format": "0.00",
+   "usedOn": "Executive Intelligence: table-auc-by-year",
+   "status": "new"
+  },
+  {
+   "home": "Models",
+   "name": "AUC 2024 rating class",
+   "format": "0.00",
+   "usedOn": "Executive Intelligence: table-auc-by-year",
+   "status": "new"
+  },
+  {
+   "home": "ROC",
+   "name": "ROC true positive rate",
+   "format": "0%",
+   "usedOn": "Model Trust: chart-roc",
+   "status": "new"
+  },
+  {
+   "home": "ROC",
+   "name": "Coin toss",
+   "format": "0%",
+   "usedOn": "Model Trust: chart-roc",
+   "status": "new"
+  },
+  {
+   "home": "ROC",
+   "name": "Alt text ROC",
+   "format": "Text",
+   "usedOn": "Model Trust: chart-roc alt text",
+   "status": "new"
+  },
+  {
+   "home": "Calibration",
+   "name": "Calibration share crossed",
+   "format": "0.0%",
+   "usedOn": "Model Trust: chart-calibration columns",
+   "status": "new"
+  },
+  {
+   "home": "Calibration",
+   "name": "Calibration predicted",
+   "format": "0.0%",
+   "usedOn": "Model Trust: chart-calibration line",
+   "status": "new"
+  },
+  {
+   "home": "Calibration",
+   "name": "Calibration note",
+   "format": "Text",
+   "usedOn": "Model Trust: card-calibration-note",
+   "status": "new"
+  },
+  {
+   "home": "Calibration",
+   "name": "Alt text calibration",
+   "format": "Text",
+   "usedOn": "Model Trust: chart-calibration alt text",
+   "status": "new"
+  },
+  {
+   "home": "Robustness",
+   "name": "Robustness AUC 2023",
+   "format": "0.000",
+   "usedOn": "Model Trust: chart-robustness",
+   "status": "new"
+  },
+  {
+   "home": "Robustness",
+   "name": "Robustness AUC 2024",
+   "format": "0.000",
+   "usedOn": "inside Robustness note",
+   "status": "new"
+  },
+  {
+   "home": "Robustness",
+   "name": "Robustness note",
+   "format": "Text",
+   "usedOn": "Model Trust: chart-robustness tooltip",
+   "status": "new"
+  },
+  {
+   "home": "Drivers",
+   "name": "Driver AUC drop",
+   "format": "0.000",
+   "usedOn": "Model Trust: chart-drivers",
+   "status": "new"
+  },
+  {
+   "home": "Drivers",
+   "name": "Driver note",
+   "format": "Text",
+   "usedOn": "Model Trust: chart-drivers tooltip",
+   "status": "new"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Selected scenario",
+   "format": "Text",
+   "usedOn": "Pricing Lab: every pricing measure; Executive Intelligence: through Wrong band A to B 2023 central",
+   "status": "existing (redefined)"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Band premium A",
+   "format": "\\$#,0.00,,,\"bn\"",
+   "usedOn": "Pricing Lab: chart tooltips",
+   "status": "existing"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Band premium B",
+   "format": "\\$#,0.00,,,\"bn\"",
+   "usedOn": "Pricing Lab: chart tooltips",
+   "status": "existing"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Band simulated loss",
+   "format": "\\$#,0.00,,,\"bn\"",
+   "usedOn": "Pricing Lab: chart tooltips",
+   "status": "existing"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Band loss ratio A",
+   "format": "0.00",
+   "usedOn": "Pricing Lab: chart-loss-premium-by-band (A)",
+   "status": "existing"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Band loss ratio B",
+   "format": "0.00",
+   "usedOn": "Pricing Lab: chart-loss-premium-by-band (B)",
+   "status": "existing"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Band premium change",
+   "format": "+0.0%;−0.0%;0.0%",
+   "usedOn": "Pricing Lab: chart-premium-change",
+   "status": "existing"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Priced sites",
+   "format": "#,0",
+   "usedOn": "Pricing Lab: base lines",
+   "status": "new"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Pricing scenario label",
+   "format": "Text",
+   "usedOn": "Pricing Lab: kpi-wrong-band-base, kpi-overall-ratio-base",
+   "status": "new"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Pricing base line",
+   "format": "Text",
+   "usedOn": "Pricing Lab: text-loss-premium-base, text-premium-change-base",
+   "status": "new"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Pricing year base line",
+   "format": "Text",
+   "usedOn": "Pricing Lab: text-sensitivity-base",
+   "status": "new"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Band loss ratio low",
+   "format": "0.00",
+   "usedOn": "Pricing Lab: chart-loss-premium-by-band error bar (lower)",
+   "status": "new"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Band loss ratio high",
+   "format": "0.00",
+   "usedOn": "Pricing Lab: chart-loss-premium-by-band error bar (upper)",
+   "status": "new"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Band colour",
+   "format": "Text",
+   "usedOn": "Pricing Lab: chart-premium-change column colour (field value)",
+   "status": "new"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Band tooltip base",
+   "format": "Text",
+   "usedOn": "Pricing Lab: chart tooltips",
+   "status": "new"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Alt text loss premium",
+   "format": "Text",
+   "usedOn": "Pricing Lab: chart-loss-premium-by-band alt text",
+   "status": "new"
+  },
+  {
+   "home": "PricingBands",
+   "name": "Alt text premium change",
+   "format": "Text",
+   "usedOn": "Pricing Lab: chart-premium-change alt text",
+   "status": "new"
+  },
+  {
+   "home": "ClaimCostScenarios",
+   "name": "Misallocated share A",
+   "format": "0.0%",
+   "usedOn": "Pricing Lab: through Wrong band A to B",
+   "status": "existing"
+  },
+  {
+   "home": "ClaimCostScenarios",
+   "name": "Misallocated share B",
+   "format": "0.0%",
+   "usedOn": "Pricing Lab: through Wrong band A to B",
+   "status": "existing"
+  },
+  {
+   "home": "ClaimCostScenarios",
+   "name": "Band spread A",
+   "format": "0.0\"x\"",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "ClaimCostScenarios",
+   "name": "Band spread B",
+   "format": "0.0\"x\"",
+   "usedOn": "not placed (kept from Site Risk Lens)",
+   "status": "existing"
+  },
+  {
+   "home": "ScoreYears",
+   "name": "Selected year label",
+   "format": "Text",
+   "usedOn": "Pricing Lab: base lines",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Wrong band A to B",
+   "format": "Text",
+   "usedOn": "Pricing Lab: kpi-wrong-band-value",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Wrong band A to B 2023 central",
+   "format": "Text",
+   "usedOn": "Executive Intelligence: kpi-wrong-band-value",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Wrong band definition",
+   "format": "Text",
+   "usedOn": "Pricing Lab: kpi-wrong-band-value tooltip",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Overall loss ratio A",
+   "format": "0.00",
+   "usedOn": "Pricing Lab: through Overall ratio A to B",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Overall loss ratio B",
+   "format": "0.00",
+   "usedOn": "Pricing Lab: through Overall ratio A to B",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Overall ratio A to B",
+   "format": "Text",
+   "usedOn": "Pricing Lab: kpi-overall-ratio-value",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Overall ratio note",
+   "format": "Text",
+   "usedOn": "Pricing Lab: kpi-overall-ratio-value tooltip",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Scenario premium",
+   "format": "\\$#,0.00,,,\"bn\"",
+   "usedOn": "Pricing Lab: table-claim-cost-sensitivity",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Scenario simulated loss",
+   "format": "\\$#,0.00,,,\"bn\"",
+   "usedOn": "Pricing Lab: table-claim-cost-sensitivity",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Scenario loss ratio",
+   "format": "0.00",
+   "usedOn": "Pricing Lab: table-claim-cost-sensitivity",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Scenario wrong band A to B",
+   "format": "Text",
+   "usedOn": "Pricing Lab: table-claim-cost-sensitivity",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Scenario band spread A to B",
+   "format": "Text",
+   "usedOn": "Pricing Lab: table-claim-cost-sensitivity",
+   "status": "new"
+  },
+  {
+   "home": "PricingSummary",
+   "name": "Scenario row fill",
+   "format": "Text",
+   "usedOn": "Pricing Lab: table-claim-cost-sensitivity background (field value)",
+   "status": "new"
+  },
+  {
+   "home": "About",
+   "name": "Footer",
+   "format": "Text",
+   "usedOn": "not placed (the footer is baked)",
+   "status": "existing"
+  }
+ ],
+ "counts": {
+  "measures": 155,
+  "relationships": 9,
+  "visualsPerPage": {
+   "Executive Intelligence": 19,
+   "Risk Landscape": 24,
+   "Model Trust": 21,
+   "Pricing Lab": 18
+  },
+  "tooltipPageVisuals": 4
+ }
+}

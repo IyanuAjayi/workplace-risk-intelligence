@@ -1,0 +1,146 @@
+[
+ {
+  "id": "nav-executive-intelligence",
+  "type": "actionButton",
+  "x": 705,
+  "y": 37,
+  "w": 186,
+  "h": 38
+ },
+ {
+  "id": "nav-risk-landscape",
+  "type": "actionButton",
+  "x": 891,
+  "y": 37,
+  "w": 145,
+  "h": 38
+ },
+ {
+  "id": "nav-model-trust",
+  "type": "actionButton",
+  "x": 1036,
+  "y": 37,
+  "w": 120,
+  "h": 38
+ },
+ {
+  "id": "nav-pricing-lab",
+  "type": "actionButton",
+  "x": 1156,
+  "y": 37,
+  "w": 115,
+  "h": 38
+ },
+ {
+  "id": "kpi-wrong-band-value",
+  "type": "card",
+  "x": 64,
+  "y": 376,
+  "w": 199,
+  "h": 40
+ },
+ {
+  "id": "kpi-wrong-band-base",
+  "type": "card",
+  "x": 150,
+  "y": 436,
+  "w": 85,
+  "h": 20
+ },
+ {
+  "id": "kpi-overall-ratio-value",
+  "type": "card",
+  "x": 424,
+  "y": 376,
+  "w": 156,
+  "h": 40
+ },
+ {
+  "id": "kpi-overall-ratio-base",
+  "type": "card",
+  "x": 510,
+  "y": 436,
+  "w": 85,
+  "h": 20
+ },
+ {
+  "id": "btn-reset-filters",
+  "type": "actionButton",
+  "x": 540,
+  "y": 612,
+  "w": 100,
+  "h": 20
+ },
+ {
+  "id": "slicer-claim-cost",
+  "type": "slicer",
+  "x": 64,
+  "y": 652,
+  "w": 576,
+  "h": 72
+ },
+ {
+  "id": "slicer-score-year",
+  "type": "slicer",
+  "x": 64,
+  "y": 740,
+  "w": 576,
+  "h": 72
+ },
+ {
+  "id": "link-method-caveats",
+  "type": "actionButton",
+  "x": 64,
+  "y": 996,
+  "w": 576,
+  "h": 20
+ },
+ {
+  "id": "chart-loss-premium-by-band",
+  "type": "lineChart",
+  "x": 737,
+  "y": 268,
+  "w": 644,
+  "h": 296
+ },
+ {
+  "id": "text-loss-premium-base",
+  "type": "card",
+  "x": 823,
+  "y": 589,
+  "w": 175,
+  "h": 20
+ },
+ {
+  "id": "chart-premium-change",
+  "type": "clusteredColumnChart",
+  "x": 1477,
+  "y": 228,
+  "w": 348,
+  "h": 336
+ },
+ {
+  "id": "text-premium-change-base",
+  "type": "card",
+  "x": 1563,
+  "y": 589,
+  "w": 175,
+  "h": 20
+ },
+ {
+  "id": "table-claim-cost-sensitivity",
+  "type": "tableEx",
+  "x": 737,
+  "y": 737,
+  "w": 1088,
+  "h": 113
+ },
+ {
+  "id": "text-sensitivity-base",
+  "type": "card",
+  "x": 823,
+  "y": 973,
+  "w": 125,
+  "h": 20
+ }
+]

@@ -1,0 +1,19 @@
+Measure,Expected value
+Sites,199150.0
+Sites crossing next year,36389.0
+Base rate,0.18272156665829778
+Top band hit rate,0.46972131559126284
+Top band capture,0.5141388881255324
+Top band lift,2.570694440627662
+Share of sites in top band,0.2
+Average site DART rate,2.5704554155159425
+"Premium A (Sites, central)",34324348851.0
+"Premium B (Sites, central)",34324348934.0
+"Simulated loss (Sites, central)",32232619224.0
+"Premium A (PricingBands, central)",34324348951.563133
+"Simulated loss (PricingBands, central)",32232619224.0
+"Top band premium change (central, both years)",1.0082519689781329
+Gradient boosting AUC 2023,0.7999536352780482
+Gradient boosting AUC 2024,0.8006826293489864
+Misallocated share A (central 2023),0.2753663210357169
+Misallocated share B (central 2023),0.0995474233801055

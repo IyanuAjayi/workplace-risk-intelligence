@@ -1,0 +1,154 @@
+[
+ {
+  "id": "nav-executive-intelligence",
+  "type": "actionButton",
+  "x": 705,
+  "y": 37,
+  "w": 186,
+  "h": 38
+ },
+ {
+  "id": "nav-risk-landscape",
+  "type": "actionButton",
+  "x": 891,
+  "y": 37,
+  "w": 145,
+  "h": 38
+ },
+ {
+  "id": "nav-model-trust",
+  "type": "actionButton",
+  "x": 1036,
+  "y": 37,
+  "w": 120,
+  "h": 38
+ },
+ {
+  "id": "nav-pricing-lab",
+  "type": "actionButton",
+  "x": 1156,
+  "y": 37,
+  "w": 115,
+  "h": 38
+ },
+ {
+  "id": "kpi-capture-value",
+  "type": "card",
+  "x": 98,
+  "y": 514,
+  "w": 302,
+  "h": 96
+ },
+ {
+  "id": "kpi-capture-count",
+  "type": "card",
+  "x": 424,
+  "y": 582,
+  "w": 216,
+  "h": 20
+ },
+ {
+  "id": "chart-capture-vs-random",
+  "type": "clusteredBarChart",
+  "x": 64,
+  "y": 642,
+  "w": 336,
+  "h": 20
+ },
+ {
+  "id": "kpi-hit-rate-value",
+  "type": "card",
+  "x": 424,
+  "y": 757,
+  "w": 216,
+  "h": 40
+ },
+ {
+  "id": "kpi-hit-rate-count",
+  "type": "card",
+  "x": 424,
+  "y": 817,
+  "w": 216,
+  "h": 20
+ },
+ {
+  "id": "kpi-wrong-band-value",
+  "type": "card",
+  "x": 424,
+  "y": 861,
+  "w": 216,
+  "h": 40
+ },
+ {
+  "id": "link-method-caveats",
+  "type": "actionButton",
+  "x": 64,
+  "y": 996,
+  "w": 576,
+  "h": 20
+ },
+ {
+  "id": "chart-crossing-by-band",
+  "type": "clusteredColumnChart",
+  "x": 737,
+  "y": 261,
+  "w": 1088,
+  "h": 288
+ },
+ {
+  "id": "matrix-crossing-2024",
+  "type": "cardVisual",
+  "x": 885,
+  "y": 579,
+  "w": 860,
+  "h": 17
+ },
+ {
+  "id": "link-risk-landscape",
+  "type": "actionButton",
+  "x": 1109,
+  "y": 702,
+  "w": 123,
+  "h": 20
+ },
+ {
+  "id": "table-sector-dart",
+  "type": "tableEx",
+  "x": 737,
+  "y": 741,
+  "w": 252,
+  "h": 221
+ },
+ {
+  "id": "chart-sector-band5",
+  "type": "clusteredBarChart",
+  "x": 1013,
+  "y": 773,
+  "w": 220,
+  "h": 194
+ },
+ {
+  "id": "link-model-trust",
+  "type": "actionButton",
+  "x": 1726,
+  "y": 702,
+  "w": 98,
+  "h": 20
+ },
+ {
+  "id": "chart-auc-2023",
+  "type": "clusteredBarChart",
+  "x": 1473,
+  "y": 806,
+  "w": 234,
+  "h": 129
+ },
+ {
+  "id": "table-auc-by-year",
+  "type": "cardVisual",
+  "x": 1738,
+  "y": 806,
+  "w": 87,
+  "h": 129
+ }
+]

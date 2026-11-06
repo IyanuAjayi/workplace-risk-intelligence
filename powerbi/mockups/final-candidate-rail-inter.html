@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Executive Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Manrope:wght@400..700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=block" rel="stylesheet">
+<style>
+/* Round 2, version Narrative rail.
+   Canvas 1920 x 1080, 8 px base, 64 px margins.
+   Rail x 64 to 640 (576), 64 px channel, evidence canvas x 704 to 1856 (1152).
+   Rows: header 32 to 80, chart card 144 to 632, lower cards 664 to 1016 (two of 560, 32 px gutter), bottom line 1040.
+   Inside the rail a second column at x 424 carries every caption, count and evidence figure,
+   so the two counts behind 51.4% and 47.0% sit one above the other.
+   Baked text (page background image): Inter. Technical labels (source, period): IBM Plex Mono. Live text (native Power BI): Segoe UI, Inter stands in.
+   One curve on the page: the 72 px corner of the 51.4% stamp. Everything else is square. */
+:root{
+  --nest:#EFECDF; --card:#F7F5EC; --card-line:#E3DECF; --rule:#DCD8CA; --axis:#CFCBBD;
+  --ember:#E24337; --cobalt:#1936E8; --onyx:#000000; --shell:#FFFFFF; --ink:#303A39;
+  --molt:#B5C7E4; --screen-ink:#274A48; --muted:#66655F; --grey-bar:#B3AFA1;
+  --b1:#C9D6BD; --b2:#D1A76A; --b3:#C98369; --b4:#A96247; --b5:#944126;
+  --baked:Inter,"Segoe UI",Arial,sans-serif;
+  --live:Inter,"Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--nest)}
+body{position:relative;color:var(--onyx);font-family:var(--baked);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;font-optical-sizing:auto}
+.a{position:absolute}
+.live{font-family:var(--live)}
+.nw{white-space:nowrap}
+
+/* the six text styles: statement, hero, figure, title, body, label */
+.t-statement{font:500 52px/58px var(--baked);letter-spacing:-.022em}
+.t-hero{font:600 96px/96px var(--live);letter-spacing:-.02em}
+.t-figure{font:600 30px/40px var(--live);letter-spacing:-.015em}
+.t-title{font:600 20px/28px var(--baked);letter-spacing:-.005em}
+.t-body{font:400 18px/28px var(--baked)}
+.t-label{font:500 14px/20px var(--baked)}
+.t-label.live{font-family:var(--live)}
+svg text{font-family:var(--live);font-size:14px;font-weight:500;font-variant-numeric:tabular-nums}
+svg text.dl{font-size:20px;font-weight:600;letter-spacing:-.005em}
+svg text.w{font-variant-numeric:normal}
+svg tspan.n{font-variant-numeric:tabular-nums}
+
+/* header */
+.logo{left:64px;top:40px;height:28px;width:auto}
+.lockup-rule{left:252px;top:38px;width:1px;height:32px;background:var(--axis)}
+.product{left:276px;top:32px}
+.product .prop{color:var(--muted)}
+.nav{left:704px;top:36px;height:40px;display:flex;border:1px solid var(--card-line);background:var(--card)}
+.tab{height:38px;padding:0 20px;display:flex;align-items:center;color:var(--ink);white-space:nowrap}
+.tab.on{background:var(--ember);color:var(--onyx)}
+.period{right:64px;top:36px;text-align:right}
+.period .s{color:var(--muted)}
+
+/* rail */
+.statement{left:64px;top:172px;width:576px}
+.stamp{left:64px;top:480px;width:336px;height:152px;background:var(--onyx);border-radius:0 72px 0 0;padding:34px 0 0 34px}
+.stamp .t-hero{color:var(--shell)}
+.kpi-cap{left:424px;top:480px;width:216px}
+.kpi-cap span{display:block;white-space:nowrap}
+.kpi-n{left:424px;top:582px;color:var(--muted)}
+.sig{left:64px;top:642px}
+.sig-key{left:424px;top:642px;display:flex;align-items:center;gap:10px;color:var(--ink)}
+.uw-head{left:64px;top:696px;display:flex;align-items:center;gap:10px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ember);flex:none}
+.row{left:64px;width:576px;height:104px;border-top:1px solid var(--rule);padding-top:12px;display:flex;align-items:baseline}
+.row .act{width:360px}
+.row .ev{width:216px}
+.row .ev .l2{color:var(--ink)}
+.row .ev .l3{color:var(--muted);display:flex;align-items:center;gap:8px}
+.tag{display:inline-flex;align-items:center;height:20px;padding:0 6px;background:var(--molt);color:var(--ink)}
+.close{left:64px;width:576px;height:1px;background:var(--rule)}
+.caveat{left:64px;top:976px;width:576px;color:var(--ink)}
+.caveat a{display:block;color:var(--cobalt);text-decoration:none}
+.foot{top:1040px;color:var(--muted)}
+.tech{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:0}
+
+/* evidence canvas */
+.card{position:absolute;background:var(--card);border:1px solid var(--card-line)}
+.card .head{position:absolute;left:31px;right:31px;top:31px;display:flex;justify-content:space-between;align-items:baseline}
+.card .sub{position:absolute;left:31px;top:63px;color:var(--muted)}
+.link{color:var(--cobalt);white-space:nowrap}
+.legend{display:flex;align-items:center;gap:8px;color:var(--ink)}
+.tip{position:absolute;background:var(--shell);border:1px solid var(--axis);padding:12px 16px;white-space:nowrap;color:var(--ink)}
+.tip .h{color:var(--onyx)}
+.tip .caret{position:absolute;right:-8px;top:34px;width:14px;height:14px;background:var(--shell);border-right:1px solid var(--axis);border-top:1px solid var(--axis);transform:rotate(45deg)}
+</style>
+</head>
+<body>
+
+<!-- HEADER: logo lockup (baked), page navigator (live buttons), test period and population -->
+<img class="a logo" src="../brand/parakeet-logo.svg" alt="Parakeet Risk">
+<div class="a lockup-rule"></div>
+<div class="a product">
+  <div class="t-title">Workplace Risk Intelligence</div>
+  <div class="t-label prop">Predictive insights for industrial insurance underwriting</div>
+</div>
+<nav class="a nav t-label live" aria-label="Report pages">
+  <div class="tab on">Executive Intelligence</div>
+  <div class="tab">Risk Landscape</div>
+  <div class="tab">Model Trust</div>
+  <div class="tab">Pricing Lab</div>
+</nav>
+<div class="a period t-label tech">
+  <div>Test years 2023 + 2024</div>
+  <div class="s">199,150 private-sector site-years</div>
+</div>
+
+<!-- RAIL: the finding, the signature figure, what it means for underwriting, caveat -->
+<h1 class="a statement t-statement">Top-band sites<br>crossed the line<br>about 16&nbsp;times as often<br>as bottom-band sites.</h1>
+
+<div class="a stamp"><div class="t-hero live">51.4%</div></div>
+<p class="a kpi-cap t-body live" data-prose><span>of next year's</span><span>line-crossers</span><span>were in band 5</span></p>
+<p class="a kpi-n t-label live nw">18,709 of 36,389 · 2023 + 2024</p>
+
+<!-- 51.4% against a random fifth: native bar with a constant line at 20% -->
+<svg class="a sig" width="336" height="20" viewBox="0 0 336 20" role="img" aria-label="Band 5 holds 51.4% of next year's line-crossers, against 20% for a random fifth of sites.">
+  <rect x="0" y="6" width="336" height="8" fill="#E3DECF"/>
+  <rect x="0" y="6" width="172.7" height="8" fill="#944126"/>
+  <rect x="66.2" y="0" width="2" height="20" fill="#303A39"/>
+</svg>
+<div class="a sig-key t-label"><svg width="2" height="20" aria-hidden="true"><rect width="2" height="20" fill="#303A39"/></svg><span><span data-prose>Random fifth</span> 20%</span></div>
+
+<div class="a uw-head"><span class="dot"></span><h2 class="t-title" data-prose>Underwriting</h2></div>
+
+<div class="a row" style="top:744px">
+  <p class="act t-body" data-prose>Survey band 5 before renewal.</p>
+  <div class="ev">
+    <div class="t-figure live">47.0%</div>
+    <p class="l2 t-label live" data-prose>of band 5 sites crossed</p>
+    <p class="l3 t-label live nw">18,709 of 39,830 · 2023 + 2024</p>
+  </div>
+</div>
+<div class="a row" style="top:848px">
+  <p class="act t-body" data-prose>Test score-based pricing.</p>
+  <div class="ev">
+    <div class="t-figure live nw">27.5%&#8201;→&#8201;10.0%</div>
+    <p class="l2 t-label live" data-prose>premium in the wrong band</p>
+    <p class="l3 t-label nw"><span class="tag" data-prose>Simulated</span><span>2023 central</span></p>
+  </div>
+</div>
+<div class="a close" style="top:952px"></div>
+
+<p class="a caveat t-label"><span data-prose>Associations, not causes. Reported injuries, not claims.</span> <a class="live"><span data-prose>Method and caveats:</span> Model Trust →</a></p>
+
+<!-- EVIDENCE: risk-band chart. Native column chart (2023), 2024 as a one-row matrix beneath, band 5 selected and hovered -->
+<section class="card" style="left:704px;top:144px;width:1152px;height:488px">
+  <div class="head">
+    <h2 class="t-title" data-prose>Crossed the line next year</h2>
+    <div class="legend t-label live">
+      <svg width="19" height="14" aria-hidden="true"><rect x="0" y="10" width="3" height="4" fill="#C9D6BD"/><rect x="4" y="8" width="3" height="6" fill="#D1A76A"/><rect x="8" y="6" width="3" height="8" fill="#C98369"/><rect x="12" y="3" width="3" height="11" fill="#A96247"/><rect x="16" y="0" width="3" height="14" fill="#944126"/></svg>2023
+    </div>
+  </div>
+  <p class="sub t-body" data-prose>Line: each industry's worst-20% serious-injury (DART) rate this year.</p>
+  <svg class="a" style="left:32px;top:112px" width="1088" height="352" viewBox="0 0 1088 352" role="img" aria-label="Column chart. Share of sites that crossed the line next year, by risk band, 2023: band 1 2.9%, band 2 7.1%, band 3 12.3%, band 4 21.0%, band 5 46.5%. 2024 row: 3.0%, 7.6%, 12.8%, 22.0%, 47.5%. Dashed line: all sites 18.3%, 2023 and 2024.">
+    <!-- constant line, position Behind -->
+    <line x1="0" y1="172.5" x2="1088" y2="172.5" stroke="#66655F" stroke-dasharray="4 4"/>
+    <text x="0" y="164" fill="#303A39">All sites 18.3%, 2023 + 2024</text>
+    <!-- 2023 columns, default state (nothing selected) -->
+    <g shape-rendering="crispEdges">
+      <rect x="106.4" y="249.5" width="120" height="14.5" fill="#C9D6BD"/>
+      <rect x="311.2" y="228.5" width="120" height="35.5" fill="#D1A76A"/>
+      <rect x="516" y="202.5" width="120" height="61.5" fill="#C98369"/>
+      <rect x="720.8" y="159" width="120" height="105" fill="#A96247"/>
+      <rect x="925.6" y="31.5" width="120" height="232.5" fill="#944126"/>
+    </g>
+    <g text-anchor="middle" fill="#000">
+      <text class="dl" x="166.4" y="240.5">2.9%</text>
+      <text class="dl" x="371.2" y="219.5">7.1%</text>
+      <text class="dl" x="576" y="193.5">12.3%</text>
+      <text class="dl" x="780.8" y="150">21.0%</text>
+      <text class="dl" x="985.6" y="22.5">46.5%</text>
+    </g>
+    <line x1="0" y1="264.5" x2="1088" y2="264.5" stroke="#303A39"/>
+    <g text-anchor="middle" fill="#000">
+      <text x="166.4" y="288">Band 1, lowest fifth</text>
+      <text x="371.2" y="288">Band 2</text>
+      <text x="576" y="288">Band 3</text>
+      <text x="780.8" y="288">Band 4</text>
+      <text x="985.6" y="288">Band 5, highest fifth</text>
+    </g>
+    <!-- 2024, compact value row -->
+    <line x1="0" y1="304.5" x2="1088" y2="304.5" stroke="#E3DECF"/>
+    <text x="0" y="336" fill="#66655F">2024</text>
+    <g text-anchor="middle" fill="#303A39">
+      <text x="166.4" y="336">3.0%</text>
+      <text x="371.2" y="336">7.6%</text>
+      <text x="576" y="336">12.8%</text>
+      <text x="780.8" y="336">22.0%</text>
+      <text x="985.6" y="336">47.5%</text>
+    </g>
+  </svg>
+</section>
+
+<!-- EVIDENCE: industry comparison. Native table (sector, DART rate) beside a native bar chart with a 20% constant line -->
+<section class="card" style="left:704px;top:664px;width:560px;height:352px">
+  <div class="head">
+    <h2 class="t-title" data-prose>Every sector has band 5 sites</h2>
+    <span class="link t-label live">Risk Landscape →</span>
+  </div>
+  <svg class="a" style="left:32px;top:72px" width="496" height="252" viewBox="0 0 496 252" role="img" aria-label="Bar chart. Share of each sector's sites in band 5, 2023 and 2024, with the average serious-injury (DART) rate per 100 full-time workers: transport and warehousing 4.29, 21.0%; agriculture 3.04, 20.4%; wholesale 2.83, 21.2%; manufacturing 2.17, 20.3%; construction 1.85, 18.4%; utilities 1.38, 15.8%; mining, oil and gas 0.77, 19.8%. All sites 20%.">
+    <g fill="#66655F">
+      <text x="252" y="18" text-anchor="end">Avg DART rate</text>
+      <text x="276" y="18">In band 5</text>
+    </g>
+    <line x1="0" y1="30.5" x2="496" y2="30.5" stroke="#E3DECF"/>
+    <g fill="#944126" shape-rendering="crispEdges">
+      <rect x="276" y="43" width="151.2" height="12"/>
+      <rect x="276" y="71" width="146.9" height="12"/>
+      <rect x="276" y="99" width="152.6" height="12"/>
+      <rect x="276" y="127" width="146.2" height="12"/>
+      <rect x="276" y="155" width="132.5" height="12"/>
+      <rect x="276" y="183" width="113.8" height="12"/>
+      <rect x="276" y="211" width="142.6" height="12"/>
+    </g>
+    <line x1="420.5" y1="36" x2="420.5" y2="230" stroke="#303A39"/>
+    <g fill="#000">
+      <text x="0" y="54">Transport and warehousing</text>
+      <text x="0" y="82">Agriculture</text>
+      <text x="0" y="110">Wholesale</text>
+      <text x="0" y="138">Manufacturing</text>
+      <text x="0" y="166">Construction</text>
+      <text x="0" y="194">Utilities</text>
+      <text x="0" y="222">Mining, oil and gas</text>
+    </g>
+    <g fill="#303A39" text-anchor="end">
+      <text x="252" y="54">4.29</text>
+      <text x="252" y="82">3.04</text>
+      <text x="252" y="110">2.83</text>
+      <text x="252" y="138">2.17</text>
+      <text x="252" y="166">1.85</text>
+      <text x="252" y="194">1.38</text>
+      <text x="252" y="222">0.77</text>
+    </g>
+    <g fill="#000" text-anchor="end">
+      <text x="496" y="54">21.0%</text>
+      <text x="496" y="82">20.4%</text>
+      <text x="496" y="110">21.2%</text>
+      <text x="496" y="138">20.3%</text>
+      <text x="496" y="166">18.4%</text>
+      <text x="496" y="194">15.8%</text>
+      <text x="496" y="222">19.8%</text>
+    </g>
+    <text class="w" x="0" y="248" fill="#66655F"><tspan class="n">2023 + 2024</tspan> · rate per <tspan class="n">100</tspan> full-time workers</text>
+    <text x="420.5" y="248" text-anchor="middle" fill="#303A39">All sites 20%</text>
+  </svg>
+</section>
+
+<!-- EVIDENCE: model validation. Native bar chart (2023 test AUC, axis 0.50 to 1.00, label from a text measure) with both test years as value columns -->
+<section class="card" style="left:1296px;top:664px;width:560px;height:352px">
+  <div class="head">
+    <h2 class="t-title" data-prose>Ranking accuracy on unseen years</h2>
+    <span class="link t-label live">Model Trust →</span>
+  </div>
+  <svg class="a" style="left:32px;top:72px" width="496" height="252" viewBox="0 0 496 252" role="img" aria-label="Bar chart. Ranking accuracy (AUC) on the 2023 test, axis from 0.50 (coin toss) to 1.00: scorecard about 8 in 10, last year's rate 0.73, rating class alone about 6 in 10. Values: scorecard 0.78 in 2023 and 0.79 in 2024; last year's rate 0.73 in both years; rating class alone 0.59 in both years.">
+    <g fill="#66655F">
+      <text x="144" y="18">AUC, 2023 test</text>
+      <text x="440" y="18" text-anchor="end">2023</text>
+      <text x="496" y="18" text-anchor="end">2024</text>
+    </g>
+    <line x1="0" y1="30.5" x2="496" y2="30.5" stroke="#E3DECF"/>
+    <g shape-rendering="crispEdges">
+      <rect x="144" y="70" width="135.8" height="16" fill="#274A48"/>
+      <rect x="144" y="126" width="109.9" height="16" fill="#B3AFA1"/>
+      <rect x="144" y="182" width="44.2" height="16" fill="#B3AFA1"/>
+    </g>
+    <line x1="144.5" y1="44" x2="144.5" y2="222" stroke="#303A39"/>
+    <line x1="144" y1="222.5" x2="385" y2="222.5" stroke="#CFCBBD"/>
+    <g stroke="#CFCBBD"><line x1="264.5" y1="222" x2="264.5" y2="228"/><line x1="384.5" y1="222" x2="384.5" y2="228"/></g>
+    <text x="0" y="83" fill="#000">Scorecard</text>
+    <text x="0" y="139" fill="#303A39">Last year's rate</text>
+    <text x="0" y="195" fill="#303A39">Rating class alone</text>
+    <text x="289.8" y="83" fill="#66655F">about 8 in 10</text>
+    <text x="198.2" y="195" fill="#66655F">about 6 in 10</text>
+    <g text-anchor="end">
+      <text x="440" y="83" fill="#000">0.78</text>
+      <text x="496" y="83" fill="#000">0.79</text>
+      <text x="440" y="139" fill="#303A39">0.73</text>
+      <text x="496" y="139" fill="#303A39">0.73</text>
+      <text x="440" y="195" fill="#303A39">0.59</text>
+      <text x="496" y="195" fill="#303A39">0.59</text>
+    </g>
+    <g fill="#66655F">
+      <text x="130" y="248">0.50 coin toss</text>
+      <text x="264.5" y="248" text-anchor="middle">0.75</text>
+      <text x="384.5" y="248" text-anchor="middle">1.00</text>
+    </g>
+  </svg>
+</section>
+
+<!-- BOTTOM LINE: one-line source from the foot of the rail, corner label -->
+<p class="a foot t-label nw tech" style="left:64px">Source: OSHA ITA Form 300A, 2016 to 2025 (2025 file to 31 Aug 2026) · BLS SOII industry DART rates, 2022 to 2024</p>
+<div class="a foot t-label" style="right:64px">Executive Intelligence, Narrative rail in Inter. Design mockup, not a live Power BI report</div>
+
+</body>
+</html>

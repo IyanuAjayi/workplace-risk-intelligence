@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pricing Lab</title>
+<link rel="stylesheet" href="wri-system.css">
+<!-- Page 4 of 4. Built from wri-system.css; inline styles carry page-specific positions only.
+     data-pbi="visual" with a unique id marks every element Power BI renders natively (data-pbi-type
+     names the visual). Everything else is baked into the background image: open #baked to see it.
+     Every figure is the default slicer state: claim-cost scenario Central, test year 2023.
+     The year slicer reads ScoreYears[Tile label] ("2023, outcome 2024", "2024, outcome 2025"); rename the field to "Test year" in the visual so it matches pages 2 and 3. -->
+<style>
+/* Page-specific: assumption lines (key column 48 px, text from x 112) */
+.pl-assume { position: absolute; left: 64px; width: 576px; display: flex; font: var(--wri-type-label); color: var(--wri-ink); white-space: nowrap }
+.pl-assume b { width: 48px; flex: none; font-weight: 500; color: var(--wri-onyx) }
+/* Base line under a figure or a chart: baked Simulated tag, then live text */
+.pl-base { position: absolute; display: flex; align-items: center; gap: 8px }
+/* Labels that sit on the 1.0 line are knocked out of it (Power BI: data label background Card) */
+svg text.pl-knockout { paint-order: stroke; stroke: var(--wri-card); stroke-width: 6px; stroke-linejoin: round }
+</style>
+</head>
+<body>
+
+<!-- HEADER: identical on every page; Pricing Lab is the active tab -->
+<img class="wri-logo" src="../brand/parakeet-logo.svg" alt="Parakeet Risk">
+<div class="wri-lockup-rule"></div>
+<div class="wri-product">
+  <div class="wri-product-name">Workplace Risk Intelligence</div>
+  <div class="wri-proposition">Predictive insights for industrial insurance underwriting</div>
+</div>
+<nav class="wri-nav" aria-label="Report pages">
+  <div class="wri-tab" id="nav-executive-intelligence" data-pbi="visual" data-pbi-type="actionButton">Executive Intelligence</div>
+  <div class="wri-tab" id="nav-risk-landscape" data-pbi="visual" data-pbi-type="actionButton">Risk Landscape</div>
+  <div class="wri-tab" id="nav-model-trust" data-pbi="visual" data-pbi-type="actionButton">Model Trust</div>
+  <div class="wri-tab wri-tab--active" id="nav-pricing-lab" data-pbi="visual" data-pbi-type="actionButton">Pricing Lab</div>
+</nav>
+<div class="wri-period">
+  <div>Test years 2023 + 2024</div>
+  <div class="wri-period-sub">199,150 private-sector site-years</div>
+</div>
+
+<!-- RAIL: simulation banner, the finding, two key figures, what it means, filters, assumptions, caveat -->
+<div class="wri-tag wri-tag--simulated wri-abs" style="left:64px;top:144px">Simulated: not actual premiums, claims or loss ratios</div>
+
+<h1 class="wri-rail-statement" style="top:172px">Pricing by score<br>sharply cut premium<br>in the wrong band.</h1>
+
+<!-- Key figure A: premium in the wrong band, A to B (live card, text measure) -->
+<div class="wri-figure wri-abs wri-nowrap" style="left:64px;top:376px" id="kpi-wrong-band-value" data-pbi="visual" data-pbi-type="card">27.5%&#8201;→&#8201;10.0%</div>
+<p class="wri-ledger-caption wri-abs" style="left:64px;top:416px" id="kpi-wrong-band-caption" data-pbi="baked" data-pbi-type="textbox">premium in the wrong band</p>
+<div class="pl-base" style="left:64px;top:436px"><span class="wri-tag wri-tag--simulated">Simulated</span><span class="wri-count" id="kpi-wrong-band-base" data-pbi="visual" data-pbi-type="card">2023 central</span></div>
+
+<!-- Key figure B: overall simulated loss / premium, unchanged from A to B by construction -->
+<div class="wri-figure wri-abs wri-nowrap" style="left:424px;top:376px" id="kpi-overall-ratio-value" data-pbi="visual" data-pbi-type="card">0.92&#8201;→&#8201;0.92</div>
+<p class="wri-ledger-caption wri-abs" style="left:424px;top:416px;width:216px" id="kpi-overall-ratio-caption" data-pbi="baked" data-pbi-type="textbox">overall simulated loss / premium</p>
+<div class="pl-base" style="left:424px;top:436px"><span class="wri-tag wri-tag--simulated">Simulated</span><span class="wri-count" id="kpi-overall-ratio-base" data-pbi="visual" data-pbi-type="card">2023 central</span></div>
+
+<div class="wri-rail-head" style="top:488px"><span class="wri-dot"></span><h2 class="wri-title">What it means</h2></div>
+<p class="wri-body wri-abs" style="left:64px;top:524px;width:576px">In the simulation, industry rates alone overcharge<br>bands 1 to 3 and undercharge bands 4 and 5.</p>
+
+<div class="wri-filters-head" style="top:608px">
+  <h2 class="wri-title">Filters</h2>
+  <a class="wri-reset" id="btn-reset-filters" data-pbi="visual" data-pbi-type="actionButton"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7a4.5 4.5 0 1 0 1.32-3.18" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2 1.5v3.5h3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Reset filters</a>
+</div>
+<div class="wri-slicer" style="left:64px;top:652px;width:576px" id="slicer-claim-cost" data-pbi="visual" data-pbi-type="slicer">
+  <span class="wri-slicer-label">Claim-cost scenario</span>
+  <div class="wri-tiles"><div class="wri-tile">Low</div><div class="wri-tile wri-tile--selected">Central</div><div class="wri-tile">High</div></div>
+</div>
+<div class="wri-slicer" style="left:64px;top:740px;width:576px" id="slicer-score-year" data-pbi="visual" data-pbi-type="slicer">
+  <span class="wri-slicer-label">Test year</span>
+  <div class="wri-tiles"><div class="wri-tile wri-tile--selected">2023, outcome 2024</div><div class="wri-tile">2024, outcome 2025</div></div>
+</div>
+
+<div class="wri-ledger-close" style="top:836px"></div>
+<div class="wri-filters-head" style="top:848px"><h2 class="wri-title">Assumptions</h2><span class="wri-label wri-text-muted">Low scenario: days-away rate and cases only</span></div>
+<p class="pl-assume" style="top:884px"><b>A</b><span>BLS industry serious-injury (DART) rate, prior year × hours × claim cost</span></p>
+<p class="pl-assume" style="top:904px"><b>B</b><span>Same total per industry, re-spread by score, relativity capped 0.6 to 2.0</span></p>
+<p class="pl-assume" style="top:924px"><b>Loss</b><span>Next year's reported DART cases × claim cost</span></p>
+<div class="wri-ledger-close" style="top:952px"></div>
+
+<p class="wri-caveat">Associations, not causes. Reported injuries, not claims. <a class="wri-caveat-link" id="link-method-caveats" data-pbi="visual" data-pbi-type="actionButton">Method and caveats: Model Trust →</a></p>
+
+<!-- EVIDENCE 1: simulated loss / premium by band under A and B. Native line chart, lines off, 8 px markers,
+     A to B connector as an error bar on series B, constant lines at 1.0 (Ink) and 0 (Axis grey). Y axis fixed -0.1 to 2.6:
+     on the same 324 px plot as the column chart's -50% to +115%, that puts 0 at y 312 and 1.0 at y 192 as drawn (120 px per 1.0) -->
+<section class="wri-card" style="left:704px;top:144px;width:708px;height:488px">
+  <div class="wri-card-head">
+    <h2 class="wri-title">Simulated loss / premium by band</h2>
+    <div class="wri-legend">
+      <svg width="8" height="8" aria-hidden="true"><circle class="wri-fill-comparison" cx="4" cy="4" r="4"/></svg>A, industry only
+      <svg width="8" height="8" aria-hidden="true" style="margin-left:12px"><circle class="wri-fill-primary" cx="4" cy="4" r="4"/></svg>B, with the score
+    </div>
+  </div>
+  <svg class="wri-card-plot" width="644" height="352" viewBox="0 0 644 352" role="img" aria-label="Dot chart. Simulated loss divided by simulated premium for each risk band, test year 2023, central claim cost. A, industry only: band 1 0.35, band 2 0.58, band 3 0.82, band 4 1.19, band 5 2.10. B, with the score: band 1 0.52, band 2 0.87, band 3 1.14, band 4 1.00, band 5 1.05. Solid line at 1.0, where simulated loss equals premium.">
+    <g id="chart-loss-premium-by-band" data-pbi="visual" data-pbi-type="lineChart">
+      <line class="wri-axis-line" x1="0" y1="312.5" x2="644" y2="312.5"/>
+      <line class="wri-constant-line" x1="0" y1="192.5" x2="644" y2="192.5"/>
+      <text class="wri-ref-label" x="0" y="184">1.0: simulated loss equals premium</text>
+      <g class="wri-stroke-comparison" stroke-width="2"><line x1="64.4" y1="249.6" x2="64.4" y2="270.6"/><line x1="193.2" y1="207.7" x2="193.2" y2="242.7"/><line x1="322" y1="175.0" x2="322" y2="213.8"/><line x1="450.8" y1="168.6" x2="450.8" y2="192.0"/><line x1="579.6" y1="59.9" x2="579.6" y2="185.6"/></g>
+      <g class="wri-fill-comparison"><circle cx="64.4" cy="270.6" r="4"/><circle cx="193.2" cy="242.7" r="4"/><circle cx="322" cy="213.8" r="4"/><circle cx="450.8" cy="168.6" r="4"/><circle cx="579.6" cy="59.9" r="4"/></g>
+      <g class="wri-fill-primary"><circle cx="64.4" cy="249.6" r="4"/><circle cx="193.2" cy="207.7" r="4"/><circle cx="322" cy="175.0" r="4"/><circle cx="450.8" cy="192.0" r="4"/><circle cx="579.6" cy="185.6" r="4"/></g>
+      <g class="wri-axis-label--secondary" text-anchor="end"><text x="52.4" y="275.6">0.35</text><text x="181.2" y="247.7">0.58</text><text x="310" y="218.8">0.82</text><text x="438.8" y="173.6">1.19</text><text x="567.6" y="64.9">2.10</text></g>
+      <g>
+        <text class="wri-data-label" x="76.4" y="256.6">0.52</text>
+        <text class="wri-data-label" x="205.2" y="214.7">0.87</text>
+        <text class="wri-data-label" x="334" y="182.0">1.14</text>
+        <text class="wri-data-label pl-knockout" x="462.8" y="199.0">1.00</text>
+        <text class="wri-data-label pl-knockout" x="591.6" y="192.6">1.05</text>
+      </g>
+      <g class="wri-axis-label" text-anchor="middle">
+        <text x="64.4" y="344">Band 1, lowest</text><text x="193.2" y="344">Band 2</text><text x="322" y="344">Band 3</text><text x="450.8" y="344">Band 4</text><text x="579.6" y="344">Band 5, highest</text>
+      </g>
+    </g>
+  </svg>
+  <div class="pl-base" style="left:32px;top:444px"><span class="wri-tag wri-tag--simulated">Simulated</span><span class="wri-count" id="text-loss-premium-base" data-pbi="visual" data-pbi-type="card">2023 central · 99,185 sites</span></div>
+</section>
+
+<!-- EVIDENCE 2: premium change A to B by band. Native clustered column chart, band fills, Y axis fixed -50% to +115%,
+     data labels Outside end, constant line at 0 (Ink) -->
+<section class="wri-card" style="left:1444px;top:144px;width:412px;height:488px">
+  <div class="wri-card-head">
+    <h2 class="wri-title">Simulated premium change, A to B</h2>
+  </div>
+  <svg class="wri-card-plot" width="348" height="352" viewBox="0 0 348 352" role="img" aria-label="Column chart. Change in simulated premium from A to B by risk band, test year 2023, central claim cost: band 1 −33.6%, band 2 −33.6%, band 3 −28.3%, band 4 +19.5%, band 5 +99.4%. Total premium is the same under A and B.">
+    <g id="chart-premium-change" data-pbi="visual" data-pbi-type="clusteredColumnChart">
+      <g shape-rendering="crispEdges">
+        <rect class="wri-fill-band-1" x="14.8" y="226" width="40" height="65.91"/>
+        <rect class="wri-fill-band-2" x="84.4" y="226" width="40" height="65.92"/>
+        <rect class="wri-fill-band-3" x="154" y="226" width="40" height="55.6"/>
+        <rect class="wri-fill-band-4" x="223.6" y="187.61" width="40" height="38.39"/>
+        <rect class="wri-fill-band-5" x="293.2" y="30.79" width="40" height="195.21"/>
+      </g>
+      <line class="wri-baseline" x1="0" y1="226.5" x2="348" y2="226.5"/>
+      <g class="wri-axis-label" text-anchor="middle">
+        <text x="34.8" y="308.9">−33.6%</text><text x="104.4" y="308.9">−33.6%</text><text x="174" y="298.6">−28.3%</text><text x="243.6" y="181.6">+19.5%</text><text x="313.2" y="24.8">+99.4%</text>
+      </g>
+      <g class="wri-axis-label" text-anchor="middle">
+        <text x="34.8" y="344">Band 1</text><text x="104.4" y="344">Band 2</text><text x="174" y="344">Band 3</text><text x="243.6" y="344">Band 4</text><text x="313.2" y="344">Band 5</text>
+      </g>
+    </g>
+  </svg>
+  <div class="pl-base" style="left:32px;top:444px"><span class="wri-tag wri-tag--simulated">Simulated</span><span class="wri-count" id="text-premium-change-base" data-pbi="visual" data-pbi-type="card">2023 central · 99,185 sites</span></div>
+</section>
+
+<!-- EVIDENCE 3: claim-cost sensitivity. Native table, one row per scenario for the selected score year (the scenario
+     slicer does not filter it: it highlights the selected row). Data bars Screen ink, fixed maximum $48bn -->
+<section class="wri-card" style="left:704px;top:664px;width:1152px;height:352px">
+  <div class="wri-card-head">
+    <h2 class="wri-title">Every claim cost tells the same story</h2>
+  </div>
+  <div class="wri-abs" style="left:32px;top:72px;width:1088px" id="table-claim-cost-sensitivity" data-pbi="visual" data-pbi-type="tableEx" role="table" aria-label="Table. Test year 2023, all three claim-cost scenarios. Low, days-away cases at $50,076: simulated premium $10.02bn, simulated loss $8.11bn, loss / premium 0.81 under A and B, premium in the wrong band 26.4% to 9.5%, band spread 5.9x to 2.2x. Central, DART cases at $50,076: $17.84bn, $16.43bn, 0.92, 27.5% to 10.0%, 6.1x to 2.2x. High, DART cases at $57,314: $20.42bn, $18.80bn, 0.92, 27.5% to 10.0%, 6.1x to 2.2x.">
+    <table class="wri-table">
+      <colgroup><col style="width:96px"><col style="width:200px"><col style="width:152px"><col style="width:152px"><col style="width:168px"><col style="width:168px"><col style="width:152px"></colgroup>
+      <thead><tr><th style="padding-left:8px">Scenario</th><th>Cases priced × claim cost</th><th style="padding-left:24px">Simulated premium</th><th style="padding-left:24px">Simulated loss</th><th class="wri-num">Loss / premium, A and B</th><th class="wri-num">Wrong band, A → B</th><th class="wri-num">Band spread, A → B</th></tr></thead>
+      <tbody>
+        <tr><td style="padding-left:8px">Low</td><td class="wri-secondary">Days-away cases × $50,076</td><td style="padding-left:24px"><div class="wri-databar"><span class="wri-databar-bar" style="width:31.7px"></span><span class="wri-databar-value">$10.02bn</span></div></td><td style="padding-left:24px"><div class="wri-databar"><span class="wri-databar-bar" style="width:25.7px"></span><span class="wri-databar-value">$8.11bn</span></div></td><td class="wri-num">0.81</td><td class="wri-num">26.4% → 9.5%</td><td class="wri-num">5.9x → 2.2x</td></tr>
+        <tr class="wri-row--selected"><td style="padding-left:8px">Central</td><td class="wri-secondary">DART cases × $50,076</td><td style="padding-left:24px"><div class="wri-databar"><span class="wri-databar-bar" style="width:56.5px"></span><span class="wri-databar-value">$17.84bn</span></div></td><td style="padding-left:24px"><div class="wri-databar"><span class="wri-databar-bar" style="width:52px"></span><span class="wri-databar-value">$16.43bn</span></div></td><td class="wri-num">0.92</td><td class="wri-num">27.5% → 10.0%</td><td class="wri-num">6.1x → 2.2x</td></tr>
+        <tr><td style="padding-left:8px">High</td><td class="wri-secondary">DART cases × $57,314</td><td style="padding-left:24px"><div class="wri-databar"><span class="wri-databar-bar" style="width:64.7px"></span><span class="wri-databar-value">$20.42bn</span></div></td><td style="padding-left:24px"><div class="wri-databar"><span class="wri-databar-bar" style="width:59.5px"></span><span class="wri-databar-value">$18.80bn</span></div></td><td class="wri-num">0.92</td><td class="wri-num">27.5% → 10.0%</td><td class="wri-num">6.1x → 2.2x</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="wri-label wri-text-ink wri-abs" style="left:32px;top:208px">High multiplies every premium and loss by $57,314 / $50,076, so its ratios equal central.</p>
+  <p class="wri-tech wri-text-muted wri-abs wri-nowrap" style="left:32px;top:236px">Claim costs: NCCI average lost-time claim, accidents 2023 to 2024 (high: falls or slips), via NSC Injury Facts, valued 15 Oct 2026</p>
+  <div class="pl-base" style="left:32px;top:308px"><span class="wri-tag wri-tag--simulated">Simulated</span><span class="wri-count" id="text-sensitivity-base" data-pbi="visual" data-pbi-type="card">2023 · 99,185 sites</span></div>
+</section>
+
+<!-- BOTTOM LINE: one-line source, corner label (mockup only) -->
+<p class="wri-source">Source: OSHA ITA Form 300A, 2016 to 2025 (2025 file to 31 Aug 2026) · BLS SOII DART and days-away rates, 2022 and 2023 · NCCI claim costs via NSC Injury Facts</p>
+<div class="wri-corner-label">Pricing Lab. Design mockup, not a live Power BI report</div>
+<span id="baked" hidden></span>
+
+</body>
+</html>

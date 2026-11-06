@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Board</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,opsz,wght@0,14..32,400..900;1,14..32,400..900&display=block" rel="stylesheet">
+<style>
+:root{
+  --ember:#E24337; --cobalt:#1936E8; --cobalt-deep:#0F2195; --cobalt-tint:#DCE5FF; --nest:#EFECDF; --onyx:#000000; --shell:#FFFFFF; --ink:#303A39;
+  --molt:#B5C7E4; --metal:#D8D9D3; --screen-ink:#274A48; --screen-paper:#E6ECE2; --millet:#F2D858;
+  --text-2:#3D3C37; --muted:#66655F; --grid:#CFCBBD; --hair:#DCD8CA; --junction:#6E6D67; --rule:#9C9A90;
+  --b1:#C9D6BD; --b2:#D1A76A; --b3:#C98369; --b4:#A96247; --b5:#944126;
+  --model-muted:#A7B6A5; --dart-bar:#6F6C62;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--nest)}
+body{position:relative;font-family:Inter,Arial,sans-serif;color:var(--onyx);-webkit-font-smoothing:antialiased;font-optical-sizing:auto}
+.abs{position:absolute}
+.mono{font-family:"IBM Plex Mono",Consolas,monospace}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:13px;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:10px;white-space:nowrap;height:18px}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ember);flex:none}
+.eyebrow .num{color:var(--muted)}
+.sub{font-size:14px;line-height:20px;color:var(--text-2);margin-top:6px;white-space:nowrap}
+.lab{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sec{position:absolute}
+#grain{position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.55}
+#grid{position:absolute;inset:0;pointer-events:none}
+
+/* header */
+.logo{position:absolute;left:48px;top:24px;height:24px;width:auto}
+.divider{position:absolute;left:208px;top:18px;width:1px;height:36px;background:var(--rule)}
+.product{position:absolute;left:228px;top:16px}
+.product .name{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:14px;letter-spacing:.08em;line-height:18px}
+.product .prop{font-size:14px;line-height:20px;color:var(--text-2);margin-top:2px}
+.boardtitle{position:absolute;right:48px;top:13px;text-align:right}
+.boardtitle .t{font-weight:900;font-style:italic;font-size:28px;line-height:30px;letter-spacing:-.015em}
+.boardtitle .lab{margin-top:5px;color:var(--text-2)}
+
+/* 01 */
+.swgrid{display:grid;grid-template-columns:284px 284px;row-gap:6px;margin-top:12px}
+.sw{display:flex;gap:12px;align-items:center;height:40px}
+.swc{width:38px;height:38px;border-top-right-radius:14px;flex:none}
+.swc.light{box-shadow:inset 0 0 0 1px #B9B5A6}
+.sw .nm{font-weight:600;font-size:14px;line-height:18px;display:flex;gap:8px;align-items:baseline}
+.sw .hx{font-family:"IBM Plex Mono",monospace;font-weight:400;font-size:12px;letter-spacing:.04em;color:var(--muted)}
+.sw .rl{font-size:14px;line-height:18px;color:var(--text-2);white-space:nowrap}
+
+/* 02 */
+.tok{display:grid;grid-template-columns:26px 136px 82px 1fr;align-items:center;height:22px;font-size:14px}
+.tok .c{width:16px;height:16px;border-top-right-radius:6px}
+.tok .c.light{box-shadow:inset 0 0 0 1px #B9B5A6}
+.tok .h{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em}
+.tok .n{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+
+/* 03 */
+.ty{display:grid;grid-template-columns:108px 268px 196px 204px;align-items:center;border-bottom:1px solid var(--hair)}
+.ty.h{border-bottom:1px solid var(--onyx);height:22px;align-items:end;padding-bottom:4px}
+.ty .r{font-size:14px}
+.ty .spec{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.03em;text-transform:uppercase;color:var(--text-2);line-height:15px}
+.ty .live{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.03em;text-transform:uppercase;line-height:15px;white-space:nowrap}
+.ty .live.b{color:var(--muted)}
+
+/* 04 */
+.bands{display:grid;grid-template-columns:repeat(5,104px);column-gap:12px;margin-top:12px}
+.bandsw{height:56px;border-top-right-radius:18px;position:relative}
+.bandsw span{position:absolute;left:8px;bottom:6px;font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.06em;white-space:nowrap}
+.bandcap{margin-top:6px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.02em;line-height:16px;color:var(--text-2);white-space:nowrap}
+.bandcap b{font-weight:500;color:var(--onyx)}
+.flag{display:inline-block;margin-top:4px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em;border:1px solid var(--onyx);padding:0 4px;line-height:16px;white-space:nowrap}
+.term{background:var(--metal);border:1px solid #C3C4BD;border-radius:12px;padding:6px}
+.term .bar{height:24px;background:var(--screen-ink);border-radius:6px 6px 0 0;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;color:var(--screen-paper)}
+.term .bar i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ember);margin-right:8px;vertical-align:1px}
+.term .scr{background:var(--screen-paper);border-radius:0 0 6px 6px;padding:7px 10px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.02em;line-height:17px;color:var(--ink);white-space:nowrap}
+.pass{display:inline-block;background:var(--screen-ink);color:var(--screen-paper);padding:0 6px;font-weight:500;letter-spacing:.1em}
+
+/* 05 */
+.rule{display:grid;grid-template-columns:96px 1fr;column-gap:8px;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--hair)}
+.rule:first-child{border-top:1px solid var(--onyx)}
+.rule p{font-size:14px;line-height:19px}
+
+/* 06 */
+.layer{font-size:14px;line-height:19px;color:var(--text-2)}
+.layer b{display:block;font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--onyx);margin-bottom:3px}
+.sp{display:grid;grid-template-columns:28px 60px 1fr;align-items:center;height:20px;font-size:14px;white-space:nowrap}
+.sp .k{font-family:"IBM Plex Mono",monospace;font-size:12px;text-align:right;padding-right:8px}
+.sp .bar{display:block;height:8px;background:var(--onyx)}
+
+/* 07 */
+.navst{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.navst .cap{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;white-space:nowrap}
+.tab{height:34px;padding:0 14px;display:inline-flex;align-items:center;gap:10px;font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--onyx);white-space:nowrap}
+.tab .i{color:var(--muted)}
+.tab.hover{color:var(--cobalt-deep);background:var(--cobalt-tint);box-shadow:inset 0 -2px 0 var(--cobalt)}
+.tab.hover .i{color:var(--cobalt-deep)}
+.tab.active{background:var(--ember)}
+.tab.active .i{color:var(--onyx)}
+.tab.focus{outline:2px solid var(--cobalt);outline-offset:2px}
+.tip{position:absolute;width:268px;background:var(--metal);border:1px solid #C3C4BD;border-radius:12px;padding:6px}
+.tip .bar{height:26px;background:var(--screen-ink);border-radius:6px 6px 0 0;display:flex;align-items:center;padding:0 10px;font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--screen-paper)}
+.tip .bar i{display:inline-block;width:10px;height:10px;background:var(--b5);margin-right:8px;border-top-right-radius:4px;box-shadow:0 0 0 1px var(--screen-paper)}
+.tip .body{background:var(--screen-paper);border-radius:0 0 6px 6px;padding:4px 10px 8px}
+.tip .tr{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;line-height:23px;border-bottom:1px solid #CBD3C9;color:var(--ink)}
+.tip .tr b{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:14px}
+.tip .tf{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.03em;text-transform:uppercase;color:#56615F;margin-top:6px;line-height:16px}
+
+/* 08 */
+.dl{display:grid;grid-template-columns:92px 176px 164px;align-items:center;height:28px;border-bottom:1px solid var(--hair);font-size:14px}
+.dl.h{height:22px;border-bottom:1px solid var(--onyx);align-items:end;padding-bottom:4px}
+.dl .ex{font-weight:600;font-size:15px;display:flex;gap:8px;align-items:center;white-space:nowrap}
+.dl .ru{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--text-2);white-space:nowrap}
+.simtag{display:inline-flex;align-items:center;height:20px;padding:0 7px;background:var(--onyx);color:var(--millet);font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+
+/* 09 */
+.ctn{display:grid;grid-template-columns:repeat(4,176px);column-gap:24px;margin-top:12px}
+.ctn .box{height:94px;position:relative;overflow:hidden}
+.ctn .cap{margin-top:6px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;line-height:16px;white-space:nowrap}
+.ctn .cap span{color:var(--muted)}
+.cmp{display:grid;grid-template-columns:200px 244px 284px;column-gap:24px;margin-top:14px;align-items:start}
+.kt{border-top:1px solid var(--onyx);padding-top:6px}
+.kt .v{font-weight:700;font-size:30px;line-height:36px;letter-spacing:-.015em}
+.kt .c{font-size:14px;line-height:18px;color:var(--text-2);white-space:nowrap}
+.chip{display:inline-flex;align-items:center;height:20px;padding:0 7px;border:1px solid var(--onyx);font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;height:28px;padding:0 12px;background:var(--ember);font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.pending{height:84px;border:1px solid var(--rule);background:repeating-linear-gradient(135deg,transparent 0 7px,#D9D5C7 7px 8px);padding:9px 12px}
+.pending .pt{display:inline-block;background:var(--nest);font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:1px 6px;border:1px solid var(--onyx)}
+.pending p{display:inline;background:var(--nest);font-size:14px;line-height:22px;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 4px}
+.srcfoot{margin-top:12px;border-top:1px solid var(--onyx);padding-top:6px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--text-2);white-space:nowrap}
+.srcfoot b{font-weight:500;color:var(--onyx);margin-right:8px}
+
+.footer{position:absolute;left:48px;right:48px;top:1032px;height:48px;display:flex;align-items:center;justify-content:space-between}
+.foot-l{display:flex;align-items:center;gap:12px;font-size:14px}
+.foot-l .mark{height:18px;width:auto}
+.foot-l .meta{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.corner{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--rule);padding:3px 8px}
+</style>
+</head>
+<body>
+
+<svg id="grain" width="1920" height="1080" aria-hidden="true">
+  <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 .42  0 0 0 0 .41  0 0 0 0 .38  0 0 0 .16 0"/></filter>
+  <rect width="1920" height="1080" filter="url(#noise)"/>
+</svg>
+<svg id="grid" width="1920" height="1080" aria-hidden="true">
+  <g stroke="#CFCBBD" stroke-width="1" shape-rendering="crispEdges">
+    <line x1="0" y1="72.5" x2="1920" y2="72.5"/>
+    <line x1="0" y1="400.5" x2="1920" y2="400.5"/>
+    <line x1="0" y1="716.5" x2="1920" y2="716.5"/>
+    <line x1="0" y1="1032.5" x2="1920" y2="1032.5"/>
+    <line x1="628.5" y1="72" x2="628.5" y2="1032"/>
+    <line x1="1084.5" y1="72" x2="1084.5" y2="400"/>
+    <line x1="1268.5" y1="400" x2="1268.5" y2="716"/>
+    <line x1="1084.5" y1="716" x2="1084.5" y2="1032"/>
+  </g>
+  <g fill="#EFECDF" stroke="#6E6D67" stroke-width="1">
+    <circle cx="628.5" cy="400.5" r="8.5"/>
+    <circle cx="1084.5" cy="400.5" r="8.5"/>
+    <circle cx="1268.5" cy="716.5" r="8.5"/>
+    <circle cx="628.5" cy="1032.5" r="8.5"/>
+    <circle cx="1084.5" cy="72.5" r="8.5"/>
+  </g>
+</svg>
+
+<!-- header -->
+<img class="logo" src="../brand/parakeet-logo.svg" alt="Parakeet Risk">
+<div class="divider"></div>
+<div class="product">
+  <div class="name">WORKPLACE RISK INTELLIGENCE</div>
+  <div class="prop">Predictive insights for industrial insurance underwriting</div>
+</div>
+<div class="boardtitle">
+  <div class="t">The brand frames the data. It never competes with it.</div>
+  <div class="lab">Design system · Concept A, Authentic Parakeet · 1920 x 1080 page</div>
+</div>
+
+<!-- 01 -->
+<section class="sec" style="left:48px;top:96px;width:568px">
+  <div class="eyebrow"><span class="num">01 /</span>Brand colour integration</div>
+  <p class="sub">Kept as parakeetrisk.com uses them. Ember marks brand and action, never risk.</p>
+  <div class="swgrid">
+    <div class="sw"><span class="swc" style="background:#E24337"></span><div><div class="nm">Ember <span class="hx">#E24337</span></div><div class="rl">Logo, active page, action, dot</div></div></div>
+    <div class="sw"><span class="swc" style="background:#B5C7E4"></span><div><div class="nm">Molt <span class="hx">#B5C7E4</span></div><div class="rl">Action panel, 05 / what to do</div></div></div>
+    <div class="sw"><span class="swc" style="background:#1936E8"></span><div><div class="nm">Cobalt <span class="hx">#1936E8</span></div><div class="rl">Selection, focus ring, hover</div></div></div>
+    <div class="sw"><span class="swc" style="background:#274A48"></span><div><div class="nm">Screen ink <span class="hx">#274A48</span></div><div class="rl">Terminal bar, highlighted series</div></div></div>
+    <div class="sw"><span class="swc light" style="background:#EFECDF"></span><div><div class="nm">Nest <span class="hx">#EFECDF</span></div><div class="rl">Page canvas, grain and grid</div></div></div>
+    <div class="sw"><span class="swc light" style="background:#E6ECE2"></span><div><div class="nm">Screen paper <span class="hx">#E6ECE2</span></div><div class="rl">Terminal screen, tooltip body</div></div></div>
+    <div class="sw"><span class="swc" style="background:#000000"></span><div><div class="nm">Onyx <span class="hx">#000000</span></div><div class="rl">Text, the one primary KPI block</div></div></div>
+    <div class="sw"><span class="swc light" style="background:#D8D9D3"></span><div><div class="nm">Metal <span class="hx">#D8D9D3</span></div><div class="rl">Terminal bezel</div></div></div>
+    <div class="sw"><span class="swc light" style="background:#FFFFFF"></span><div><div class="nm">Shell <span class="hx">#FFFFFF</span></div><div class="rl">Values on Onyx</div></div></div>
+    <div class="sw"><span class="swc" style="background:#F2D858"></span><div><div class="nm">Millet <span class="hx">#F2D858</span></div><div class="rl">Simulated tag text, on Onyx</div></div></div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="sec" style="left:640px;top:96px;width:432px">
+  <div class="eyebrow"><span class="num">02 /</span>Extended interface palette</div>
+  <p class="sub" style="margin-bottom:10px">New tokens for text, structure and data on Nest.</p>
+  <div class="tok"><span class="c" style="background:#3D3C37"></span><span>Text secondary</span><span class="h">#3D3C37</span><span class="n">9.33:1 · body</span></div>
+  <div class="tok"><span class="c" style="background:#66655F"></span><span>Text muted</span><span class="h">#66655F</span><span class="n">4.94:1 · labels</span></div>
+  <div class="tok"><span class="c" style="background:#303A39"></span><span>Ink</span><span class="h">#303A39</span><span class="n">Brand · terminal text</span></div>
+  <div class="tok"><span class="c light" style="background:#CFCBBD"></span><span>Grid line</span><span class="h">#CFCBBD</span><span class="n">Engineering grid</span></div>
+  <div class="tok"><span class="c light" style="background:#DCD8CA"></span><span>Hairline</span><span class="h">#DCD8CA</span><span class="n">Rows, gridlines</span></div>
+  <div class="tok"><span class="c" style="background:#9C9A90"></span><span>Rule</span><span class="h">#9C9A90</span><span class="n">Lockup divider</span></div>
+  <div class="tok"><span class="c" style="background:#6F6C62"></span><span>Neutral data</span><span class="h">#6F6C62</span><span class="n">Context bars</span></div>
+  <div class="tok"><span class="c" style="background:#A7B6A5"></span><span>Muted series</span><span class="h">#A7B6A5</span><span class="n">Site support green</span></div>
+  <div class="tok"><span class="c" style="background:#0F2195"></span><span>Cobalt deep</span><span class="h">#0F2195</span><span class="n">Hover text · site token</span></div>
+  <div class="tok"><span class="c light" style="background:#DCE5FF"></span><span>Cobalt tint</span><span class="h">#DCE5FF</span><span class="n">Hover fill · site token</span></div>
+</section>
+
+<!-- 03 -->
+<section class="sec" style="left:1096px;top:96px;width:776px">
+  <div class="eyebrow"><span class="num">03 /</span>Typography</div>
+  <p class="sub" style="margin-bottom:8px">Inter and IBM Plex Mono only. Live text switches to a Power BI font. No Mabry or Yumex.</p>
+  <div class="ty h"><span class="lab">Role</span><span class="lab">Specimen</span><span class="lab">Mockup and baked</span><span class="lab">Live in Power BI</span></div>
+  <div class="ty" style="height:42px"><span class="r">Headline</span><span style="font-weight:900;font-style:italic;font-size:30px;letter-spacing:-.02em;line-height:34px">16 times as often.</span><span class="spec">Inter 900 italic 55/58<br>stands in for Yumex</span><span class="live b">Baked only</span></div>
+  <div class="ty" style="height:38px"><span class="r">KPI value</span><span style="font-weight:800;font-size:28px;letter-spacing:-.02em;line-height:32px">51.4% <span style="font-weight:700;font-size:22px">0.78</span></span><span class="spec">Inter 800 92 · 700 32</span><span class="live">Segoe UI Bold</span></div>
+  <div class="ty" style="height:28px"><span class="r">Panel title</span><span style="font-weight:600;font-size:17px">Share of sites by risk band</span><span class="spec">Inter 600 20/26</span><span class="live">Baked, or Segoe Semibold 15pt</span></div>
+  <div class="ty" style="height:28px"><span class="r">Body</span><span style="font-size:15px">Refer band 5 sites for a survey.</span><span class="spec">Inter 400 14 to 18</span><span class="live">Segoe UI 10.5 to 13.5pt</span></div>
+  <div class="ty" style="height:28px"><span class="r">Data label</span><span style="font-weight:600;font-size:14px">46.5%&nbsp;&nbsp;21.0%&nbsp;&nbsp;2.57x</span><span class="spec">Inter 600 14</span><span class="live">Segoe UI Semibold 10.5pt</span></div>
+  <div class="ty" style="height:28px"><span class="r">Eyebrow, tags</span><span class="eyebrow" style="font-size:12px"><span class="num">02 /</span>Risk distribution</span><span class="spec">Plex Mono 500, caps</span><span class="live b">Baked, or Consolas 10pt</span></div>
+  <div class="ty" style="height:28px"><span class="r">Axis, table</span><span class="mono" style="font-size:14px;font-variant-numeric:tabular-nums">0.783&nbsp;&nbsp;0.785&nbsp;&nbsp;107,673</span><span class="spec">Plex Mono 400 12 to 14</span><span class="live">Consolas 9 to 10.5pt</span></div>
+</section>
+
+<!-- 04 -->
+<section class="sec" style="left:48px;top:412px;width:568px">
+  <div class="eyebrow"><span class="num">04 /</span>Risk-state colours</div>
+  <p class="sub">From the site's risk matrix: terracotta and alarm kept, three steps added.</p>
+  <div class="bands">
+    <div><div class="bandsw" style="background:var(--b1)"><span>1 LOWEST</span></div><div class="bandcap"><b>#C9D6BD</b> new<br>L* 84.1 · 1.28:1</div><span class="flag">LABEL ALWAYS</span></div>
+    <div><div class="bandsw" style="background:var(--b2)"><span>2</span></div><div class="bandcap"><b>#D1A76A</b> new<br>L* 71.0 · 1.88:1</div><span class="flag">LABEL ALWAYS</span></div>
+    <div><div class="bandsw" style="background:var(--b3)"><span>3</span></div><div class="bandcap"><b>#C98369</b> kept<br>L* 61.4 · 2.56:1</div><span class="flag">LABEL ALWAYS</span></div>
+    <div><div class="bandsw" style="background:var(--b4)"><span style="color:#fff">4</span></div><div class="bandcap"><b>#A96247</b> new<br>L* 49.0 · 3.92:1</div></div>
+    <div><div class="bandsw" style="background:var(--b5)"><span style="color:#fff">5 HIGHEST</span></div><div class="bandcap"><b>#944126</b> kept<br>L* 38.2 · 5.83:1</div></div>
+  </div>
+  <div class="term" style="margin-top:10px">
+    <div class="bar"><span><i></i>check_palette.py --bg "#EFECDF"</span><span>Contrast vs Nest</span></div>
+    <div class="scr">Lightness ordered: True<br>Smallest neighbour ΔE: normal 10.5 · protanopia 10.5<br>deuteranopia 8.2 · tritanopia 9.5&nbsp;&nbsp;&nbsp;<span class="pass">PASS</span></div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="sec" style="left:640px;top:412px;width:616px">
+  <div class="eyebrow"><span class="num">05 /</span>Chart conventions</div>
+  <div style="font-weight:600;font-size:16px;line-height:20px;margin-top:10px;width:270px">ROC curve, 2023 test: scorecard and rating class only</div>
+</section>
+<svg class="abs" style="left:640px;top:480px" width="270" height="226" viewBox="0 0 270 226" role="img" aria-label="ROC curve for the 2023 test year. Scorecard AUC 0.783 and rating class only 0.592, with the coin-toss diagonal.">
+  <g transform="translate(56,6)">
+    <line x1="0" y1="90" x2="180" y2="90" stroke="#DCD8CA"/>
+    <line x1="90" y1="0" x2="90" y2="180" stroke="#DCD8CA"/>
+    <line x1="0" y1="180" x2="180" y2="0" stroke="#9C9A90" stroke-width="1"/>
+    <g transform="scale(0.9)">
+      <path d="M0.0,200.0 L0.4,198.7 L1.2,197.6 L2.7,195.3 L2.8,195.2 L3.6,193.6 L4.2,192.6 L5.1,191.5 L6.0,190.2 L6.9,188.6 L7.7,187.7 L8.6,186.2 L9.1,185.6 L9.9,184.4 L10.5,183.2 L11.5,181.6 L12.0,180.7 L14.7,177.1 L15.5,176.0 L16.6,173.7 L17.3,172.8 L17.8,172.3 L18.5,171.0 L22.8,164.5 L23.2,163.8 L25.6,160.2 L25.6,160.2 L26.4,158.9 L27.4,157.4 L28.1,156.7 L29.1,155.6 L32.9,149.4 L33.1,149.1 L34.3,147.5 L34.8,146.8 L35.7,145.8 L36.6,144.0 L37.4,143.2 L38.5,141.4 L38.9,141.1 L39.6,139.9 L41.5,137.8 L43.2,135.5 L44.6,133.9 L46.3,131.3 L47.3,130.4 L47.9,129.6 L48.6,128.5 L52.3,124.1 L53.4,122.9 L54.6,121.7 L55.8,120.2 L56.6,119.5 L57.6,119.4 L59.8,116.8 L60.4,116.2 L62.6,113.9 L63.9,112.6 L67.0,109.1 L67.5,108.4 L68.3,107.6 L69.2,106.5 L70.8,105.1 L72.1,103.4 L73.2,102.1 L74.7,100.6 L76.5,98.5 L77.0,97.9 L80.2,94.5 L82.1,92.8 L83.4,91.3 L84.2,90.5 L86.1,88.7 L86.8,87.9 L88.4,86.3 L89.7,85.2 L90.3,84.5 L93.6,80.8 L94.4,79.9 L95.8,78.3 L96.9,77.3 L97.1,76.9 L98.5,75.5 L99.3,75.0 L101.6,72.7 L102.9,71.2 L103.4,70.8 L106.0,68.1 L106.9,67.4 L107.8,66.5 L108.5,65.4 L110.8,63.2 L111.5,62.5 L113.3,61.1 L113.7,60.8 L115.6,59.1 L115.8,58.9 L117.7,57.1 L117.9,56.9 L119.1,56.1 L120.2,55.1 L121.5,53.6 L123.7,52.0 L124.7,51.1 L125.7,50.3 L127.2,49.0 L127.8,48.4 L128.6,47.4 L130.2,46.1 L131.1,45.3 L132.4,44.4 L133.5,43.5 L134.9,42.6 L137.4,40.9 L138.3,40.2 L139.2,39.4 L140.8,38.2 L142.1,37.2 L143.1,36.3 L144.3,35.5 L145.1,35.0 L146.5,34.1 L151.3,30.0 L151.5,29.6 L153.6,27.7 L153.9,27.4 L156.3,25.8 L157.4,25.2 L162.3,21.1 L163.0,20.6 L165.0,19.2 L165.7,18.8 L166.6,18.1 L170.9,15.5 L171.6,15.2 L172.7,14.1 L173.5,13.4 L174.7,12.5 L177.5,10.4 L178.4,9.8 L179.4,9.0 L180.6,8.3 L181.9,7.6 L183.2,6.7 L184.4,5.8 L185.4,5.4 L186.7,4.8 L187.9,4.0 L189.6,3.4 L190.7,2.8 L191.8,2.4 L193.3,1.8 L195.3,1.2 L196.0,1.0 L197.6,0.6 L198.6,0.3 L200.0,0.0" fill="none" stroke="#A7B6A5" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+      <path d="M0.0,200.0 L0.1,198.2 L0.3,196.4 L0.6,194.7 L0.8,192.9 L1.1,191.2 L1.3,189.5 L1.6,187.8 L1.9,186.1 L2.2,184.3 L2.5,182.6 L2.8,180.9 L3.0,179.2 L3.3,177.5 L3.6,175.8 L3.8,174.1 L4.1,172.4 L4.5,170.8 L4.7,169.0 L5.0,167.3 L5.2,165.6 L5.6,163.9 L5.8,162.3 L6.2,160.7 L6.5,159.0 L6.8,157.4 L7.1,155.7 L7.4,154.1 L7.8,152.5 L8.2,150.9 L8.6,149.3 L8.9,147.7 L9.3,146.1 L9.7,144.5 L10.1,142.9 L10.5,141.4 L10.9,139.9 L11.3,138.3 L11.7,136.8 L12.2,135.3 L12.7,133.8 L13.2,132.4 L13.6,130.8 L14.1,129.4 L14.5,127.8 L15.0,126.4 L15.5,124.9 L16.0,123.4 L16.5,121.9 L16.9,120.5 L17.4,119.0 L18.0,117.6 L18.6,116.2 L19.1,114.8 L19.7,113.5 L20.3,112.1 L20.8,110.6 L21.4,109.3 L22.0,107.9 L22.6,106.5 L23.1,105.1 L23.7,103.7 L24.3,102.3 L24.9,101.0 L25.5,99.7 L26.2,98.4 L26.8,97.1 L27.6,95.8 L28.2,94.6 L28.9,93.3 L29.6,92.0 L30.4,90.8 L31.1,89.6 L31.9,88.4 L32.6,87.2 L33.4,86.0 L34.2,84.8 L35.0,83.7 L35.8,82.5 L36.5,81.3 L37.4,80.2 L38.1,79.0 L39.0,77.9 L39.9,76.8 L40.7,75.7 L41.5,74.6 L42.4,73.4 L43.3,72.4 L44.3,71.4 L45.2,70.3 L46.1,69.2 L47.0,68.2 L48.0,67.2 L49.0,66.2 L50.0,65.3 L51.1,64.4 L52.0,63.4 L53.0,62.3 L54.0,61.4 L55.0,60.4 L55.9,59.4 L57.0,58.4 L58.0,57.5 L59.1,56.6 L60.1,55.6 L61.0,54.6 L62.1,53.6 L63.1,52.6 L64.2,51.8 L65.2,50.7 L66.2,49.9 L67.3,49.0 L68.5,48.1 L69.6,47.3 L70.7,46.4 L71.9,45.6 L72.9,44.6 L74.2,43.8 L75.4,43.1 L76.6,42.3 L77.8,41.4 L78.9,40.6 L80.1,39.8 L81.4,39.1 L82.7,38.2 L83.8,37.4 L85.0,36.6 L86.3,35.8 L87.5,34.8 L88.9,34.1 L90.2,33.4 L91.4,32.4 L92.6,31.5 L94.0,30.8 L95.3,30.0 L96.6,29.2 L97.9,28.5 L99.3,27.7 L100.7,27.0 L102.0,26.2 L103.3,25.4 L104.7,24.6 L106.0,23.8 L107.5,23.2 L108.9,22.4 L110.4,21.8 L111.8,21.2 L113.3,20.5 L114.8,19.8 L116.3,19.1 L117.7,18.4 L119.3,17.9 L120.8,17.3 L122.3,16.7 L123.8,16.0 L125.3,15.4 L126.8,14.7 L128.3,14.1 L129.8,13.5 L131.3,12.9 L132.9,12.4 L134.6,11.9 L136.1,11.4 L137.7,10.8 L139.4,10.3 L140.9,9.8 L142.6,9.3 L144.2,8.8 L146.0,8.5 L147.6,8.0 L149.2,7.6 L150.8,7.1 L152.5,6.7 L154.1,6.3 L155.9,6.0 L157.6,5.6 L159.4,5.3 L161.0,4.9 L162.7,4.5 L164.4,4.2 L166.2,3.9 L167.9,3.6 L169.6,3.2 L171.3,3.0 L173.1,2.7 L174.9,2.4 L176.6,2.2 L178.4,2.0 L180.1,1.7 L181.8,1.4 L183.5,1.2 L185.3,1.0 L187.1,0.7 L188.9,0.6 L190.7,0.5 L192.6,0.4 L194.4,0.2 L196.2,0.1 L198.1,0.0 L200.0,0.0" fill="none" stroke="#274A48" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+    </g>
+    <line x1="0" y1="180.5" x2="180" y2="180.5" stroke="#000"/>
+    <line x1="-0.5" y1="0" x2="-0.5" y2="180" stroke="#000"/>
+    <text x="64" y="40" style="font-family:Inter;font-weight:600;font-size:14px;fill:#000">Scorecard 0.783</text>
+    <text x="102" y="112" style="font-family:Inter;font-weight:600;font-size:14px;fill:#3D3C37">Rating class</text>
+    <text x="102" y="128" style="font-family:Inter;font-weight:600;font-size:14px;fill:#3D3C37">only 0.592</text>
+    <text x="112" y="166" style="font-family:'IBM Plex Mono';font-size:12px;fill:#66655F;letter-spacing:.06em">COIN TOSS</text>
+    <g style="font-family:'IBM Plex Mono';font-size:12px;fill:#66655F">
+      <text x="-6" y="184" text-anchor="end">0</text><text x="-6" y="94" text-anchor="end">0.5</text><text x="-6" y="10" text-anchor="end">1</text>
+      <text x="90" y="196" text-anchor="middle">0.5</text><text x="180" y="196" text-anchor="end">1</text>
+    </g>
+    <text x="0" y="216" style="font-family:'IBM Plex Mono';font-size:12px;fill:#3D3C37;letter-spacing:.06em">FALSE POSITIVE RATE →</text>
+  </g>
+  <text x="12" y="186" transform="rotate(-90 12 186)" style="font-family:'IBM Plex Mono';font-size:12px;fill:#3D3C37;letter-spacing:.06em">TRUE POSITIVE RATE →</text>
+</svg>
+<section class="sec" style="left:930px;top:440px;width:326px">
+  <div class="rule"><span class="lab" style="color:var(--onyx)">Axes</span><p>1px Onyx baseline. No value axis when every mark is labelled.</p></div>
+  <div class="rule"><span class="lab" style="color:var(--onyx)">Gridlines</span><p>1px hairline, solid, only where values are read off.</p></div>
+  <div class="rule"><span class="lab" style="color:var(--onyx)">Labels</span><p>Value at the bar end. Lines: end labels only.</p></div>
+  <div class="rule"><span class="lab" style="color:var(--onyx)">Annotation</span><p>One per chart: italic figure, mono working.</p></div>
+  <div class="rule"><span class="lab" style="color:var(--onyx)">Highlight</span><p>Screen ink for the key series, #A7B6A5 for the rest.</p></div>
+  <div class="rule"><span class="lab" style="color:var(--onyx)">Reference</span><p>1px Onyx line with a mono label.</p></div>
+</section>
+
+<!-- 06 -->
+<section class="sec" style="left:1280px;top:412px;width:592px">
+  <div class="eyebrow"><span class="num">06 /</span>Page background, grid and spacing</div>
+</section>
+<svg class="abs" style="left:1280px;top:442px" width="292" height="196" viewBox="0 0 292 196" role="img" aria-label="Schematic of the 1920 by 1080 page on a 12-column grid: 48 px margins, 130 px columns, 24 px gutters.">
+  <rect x="0.5" y="0.5" width="288" height="162" fill="#EFECDF" stroke="#9C9A90"/>
+  <g fill="#1936E8" opacity=".07">
+    <rect x="7.2" y="1" width="19.5" height="161"/><rect x="30.3" y="1" width="19.5" height="161"/><rect x="53.4" y="1" width="19.5" height="161"/><rect x="76.5" y="1" width="19.5" height="161"/><rect x="99.6" y="1" width="19.5" height="161"/><rect x="122.7" y="1" width="19.5" height="161"/><rect x="145.8" y="1" width="19.5" height="161"/><rect x="168.9" y="1" width="19.5" height="161"/><rect x="192" y="1" width="19.5" height="161"/><rect x="215.1" y="1" width="19.5" height="161"/><rect x="238.2" y="1" width="19.5" height="161"/><rect x="261.3" y="1" width="19.5" height="161"/>
+  </g>
+  <g stroke="#CFCBBD" shape-rendering="crispEdges">
+    <line x1="0" y1="11" x2="288" y2="11"/><line x1="0" y1="17" x2="288" y2="17"/><line x1="0" y1="65" x2="288" y2="65"/><line x1="0" y1="129" x2="288" y2="129"/><line x1="0" y1="155" x2="288" y2="155"/>
+    <line x1="98" y1="65" x2="98" y2="129"/><line x1="190" y1="65" x2="190" y2="155"/>
+  </g>
+  <rect x="7.5" y="3.5" width="21" height="4" fill="none" stroke="#000" stroke-width=".8"/>
+  <rect x="106" y="3" width="37" height="6" fill="#E24337"/>
+  <g fill="#3D3C37"><rect x="7" y="25" width="150" height="7"/><rect x="7" y="35" width="128" height="7"/></g>
+  <path d="M169 20 H221 A14 14 0 0 1 235 34 V62 H169 Z" fill="#000"/>
+  <g><rect x="17" y="116" width="9" height="2" fill="#C9D6BD"/><rect x="33" y="113" width="9" height="5" fill="#D1A76A"/><rect x="49" y="110" width="9" height="8" fill="#C98369"/><rect x="65" y="105" width="9" height="13" fill="#A96247"/><rect x="81" y="93" width="9" height="25" fill="#944126"/></g>
+  <g fill="#6F6C62"><rect x="104" y="88" width="30" height="3"/><rect x="104" y="95" width="22" height="3"/><rect x="104" y="102" width="18" height="3"/><rect x="104" y="109" width="12" height="3"/></g>
+  <rect x="192" y="67" width="89" height="60" rx="3" fill="#D8D9D3"/>
+  <rect x="194" y="69" width="85" height="6" fill="#274A48"/>
+  <rect x="194" y="75" width="85" height="50" fill="#E6ECE2"/>
+  <path d="M7 131 H188 V142 A11 11 0 0 1 177 153 H7 Z" fill="#B5C7E4"/>
+  <g style="font-family:'IBM Plex Mono';font-size:12px;fill:#3D3C37;letter-spacing:.04em">
+    <line x1="0.5" y1="168" x2="7.5" y2="168" stroke="#000"/><text x="0" y="186">48 MARGIN</text>
+    <line x1="99.6" y1="168" x2="119.1" y2="168" stroke="#000"/><text x="96" y="186">130 COLUMN</text>
+    <line x1="211.5" y1="168" x2="215.1" y2="168" stroke="#000"/><text x="200" y="186">24 GUTTER</text>
+  </g>
+</svg>
+<section class="sec" style="left:1596px;top:446px;width:276px">
+  <div class="layer"><b>Baked into the PNG</b>Nest, grain, grid and junctions, logo lockup, headline, eyebrows, fixed titles, block and terminal shapes.</div>
+  <div class="layer" style="margin-top:12px"><b>Live Power BI visuals</b>Cards, charts, table, page navigator, buttons, text boxes fed by measures.</div>
+</section>
+<section class="sec" style="left:1280px;top:648px;width:592px">
+  <div class="lab" style="color:var(--onyx);margin-bottom:4px">Site spacing scale: 4 8 12 16 24 32 48 56 72 96 120</div>
+  <div style="display:grid;grid-template-columns:288px 280px;column-gap:24px">
+    <div class="sp"><span class="k">48</span><span><span class="bar" style="width:48px"></span></span><span>Page margin</span></div>
+    <div class="sp"><span class="k">16</span><span><span class="bar" style="width:16px"></span></span><span>Tile padding</span></div>
+    <div class="sp"><span class="k">24</span><span><span class="bar" style="width:24px"></span></span><span>Gutter, panel inset</span></div>
+    <div class="sp"><span class="k">8</span><span><span class="bar" style="width:8px"></span></span><span>Eyebrow to title</span></div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="sec" style="left:48px;top:728px;width:300px">
+  <div class="eyebrow"><span class="num">07 /</span>Navigation and tooltip</div>
+  <div class="navst">
+    <div><div class="cap">Active · Ember, Onyx text 5.09:1</div><span class="tab active"><span class="i">01</span>Executive Intelligence</span></div>
+    <div><div class="cap">Default</div><span class="tab"><span class="i">02</span>Risk Landscape</span></div>
+    <div><div class="cap">Hover · Cobalt deep on tint</div><span class="tab hover"><span class="i">03</span>Model Trust</span></div>
+    <div><div class="cap">Keyboard focus · Cobalt ring</div><span class="tab focus"><span class="i">04</span>Pricing Lab</span></div>
+  </div>
+</section>
+<div class="abs lab" style="left:340px;top:764px">Report-page tooltip, band 5 hover</div>
+<div class="tip" style="left:340px;top:786px">
+  <div class="bar"><i></i>Risk band 5 · highest</div>
+  <div class="body">
+    <div class="tr"><span>Crossed the line, 2023</span><b>46.5%</b></div>
+    <div class="tr"><span>Crossed the line, 2024</span><b>47.5%</b></div>
+    <div class="tr"><span>Share of all crossers</span><b>51.4%</b></div>
+    <div class="tr"><span>Hit rate · lift</span><b>47.0% · 2.57x</b></div>
+    <div class="tf">Last two rows pool both<br>test years · scorecard fifths</div>
+  </div>
+</div>
+
+<!-- 08 -->
+<section class="sec" style="left:640px;top:728px;width:432px">
+  <div class="eyebrow"><span class="num">08 /</span>Data labels</div>
+  <div style="margin-top:12px">
+    <div class="dl h"><span class="lab">Measure</span><span class="lab">Example</span><span class="lab">Rule</span></div>
+    <div class="dl"><span>Share, rate</span><span class="ex">46.5%</span><span class="ru">1 decimal, % sign</span></div>
+    <div class="dl"><span>AUC</span><span class="ex">0.80 · 0.800</span><span class="ru">2 dp cards, 3 tables</span></div>
+    <div class="dl"><span>Multiple</span><span class="ex">2.57x · about 16x</span><span class="ru">x; "about" if derived</span></div>
+    <div class="dl"><span>Count</span><span class="ex">199,150</span><span class="ru">Thousands comma</span></div>
+    <div class="dl"><span>DART rate</span><span class="ex">4.29</span><span class="ru">2 dp, per 100 workers</span></div>
+    <div class="dl"><span>Money</span><span class="ex">$17.84bn <span class="simtag">Simulated</span></span><span class="ru">2 dp + bn, tagged</span></div>
+  </div>
+  <p class="sub" style="margin-top:8px;white-space:normal">Label every bar when there are seven or fewer. Label line ends only. Move a label outside the mark, or into the tooltip, when it would collide.</p>
+</section>
+
+<!-- 09 -->
+<section class="sec" style="left:1096px;top:728px;width:776px">
+  <div class="eyebrow"><span class="num">09 /</span>Containers and components</div>
+  <div class="ctn">
+    <div>
+      <div class="box" style="background:var(--nest)">
+        <svg width="176" height="94" aria-hidden="true"><g stroke="#CFCBBD"><line x1="0" y1="10.5" x2="176" y2="10.5"/><line x1="20.5" y1="0" x2="20.5" y2="94"/></g><circle cx="20.5" cy="10.5" r="8.5" fill="#EFECDF" stroke="#6E6D67"/><g fill="#6F6C62"><rect x="40" y="32" width="96" height="9"/><rect x="40" y="49" width="70" height="9"/><rect x="40" y="66" width="44" height="9"/></g></svg>
+      </div>
+      <div class="cap">Open cell <span>· charts</span></div>
+    </div>
+    <div>
+      <div class="box" style="background:var(--onyx);border-top-right-radius:40px;padding:12px 14px;color:#fff">
+        <div style="font-family:'IBM Plex Mono';font-weight:500;font-size:12px;letter-spacing:.1em;color:#E24337">● CONCENTRATION</div>
+        <div style="font-weight:800;font-size:36px;letter-spacing:-.03em;line-height:46px">51.4%</div>
+      </div>
+      <div class="cap">Onyx block <span>· one KPI</span></div>
+    </div>
+    <div>
+      <div class="box" style="background:var(--metal);border-radius:10px;border:1px solid #C3C4BD;padding:5px">
+        <div style="height:22px;background:#274A48;border-radius:5px 5px 0 0;font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.06em;color:#E6ECE2;padding:3px 8px">● 04 / MODEL</div>
+        <div style="height:60px;background:#E6ECE2;border-radius:0 0 5px 5px;padding:7px 8px;font-family:'IBM Plex Mono';font-size:14px;line-height:20px;color:#303A39">0.783&nbsp;&nbsp;0.785<br><span style="font-size:12px;color:#56615F">AUC 2023 · 2024</span></div>
+      </div>
+      <div class="cap">Terminal <span>· model</span></div>
+    </div>
+    <div>
+      <div class="box" style="background:var(--molt);border-bottom-right-radius:36px;padding:11px 14px">
+        <div style="font-family:'IBM Plex Mono';font-weight:500;font-size:12px;letter-spacing:.1em">UNDERWRITING</div>
+        <div style="font-size:14px;line-height:19px;margin-top:4px">Refer band 5 sites for a survey before renewal.</div>
+      </div>
+      <div class="cap">Molt block <span>· actions</span></div>
+    </div>
+  </div>
+  <div class="cmp">
+    <div class="kt">
+      <div class="lab" style="color:var(--onyx)">Scorecard AUC, 2023</div>
+      <div class="v">0.78</div>
+      <div class="c">2024: 0.79 · rating class 0.59</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+      <span class="chip">Association, not cause</span>
+      <span class="simtag">Simulated</span>
+      <span class="btn">Open band 5 sites →</span>
+    </div>
+    <div class="pending"><span class="pt">Pending validation</span><br><p>DART rate trend by year: not computed, so no line is drawn.</p></div>
+  </div>
+  <div class="srcfoot"><b>Source</b>OSHA ITA Form 300A 2016 to 2025 · 2025 file to 31 Aug 2026 · BLS SOII 2022 to 2024</div>
+</section>
+
+<footer class="footer">
+  <div class="foot-l"><img class="mark" src="../brand/parakeet-mark.svg" alt=""><span>A Parakeet Risk product</span><span class="meta">· Workplace Risk Intelligence · design system board</span></div>
+  <div class="corner">Design concept A: design system</div>
+</footer>
+
+</body>
+</html>

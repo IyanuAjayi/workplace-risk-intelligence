@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Executive Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Manrope:wght@400..700&family=IBM+Plex+Sans:wght@400;500;600;700&display=block" rel="stylesheet">
+<style>
+:root{
+  --nest:#EFECDF; --card:#F7F5EC; --hair:#E3DECF; --sep:#D6D1C1;
+  --onyx:#000000; --ink:#303A39; --text-2:#3D3C37; --muted:#66655F;
+  --ember:#E24337; --cobalt:#1936E8; --molt:#B5C7E4; --screen-ink:#274A48; --bar-grey:#ADA99B;
+  --on-black:#E9E6DA; --on-black-2:#A9A69B;
+  --b1:#C9D6BD; --b2:#D1A76A; --b3:#C98369; --b4:#A96247; --b5:#944126;
+  --display:"Manrope",Arial,sans-serif; --ui:"Inter","Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--nest)}
+body{position:relative;color:var(--onyx);font-family:var(--ui);font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
+.a{position:absolute;white-space:nowrap}
+.r{position:absolute;white-space:nowrap;text-align:right}
+.num{font-variant-numeric:tabular-nums}
+.c2{color:var(--text-2)} .cm{color:var(--muted)} .ci{color:var(--ink)}
+
+/* six text styles. Manrope: the 48 px headline and the 20 px titles only. Inter (Segoe UI in Power BI): everything else */
+.s-display{font-family:var(--display);font-size:48px;line-height:56px;font-weight:600;letter-spacing:-.022em}
+.s-figure{font-size:64px;line-height:56px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.s-kpi{font-size:36px;line-height:44px;font-weight:600;letter-spacing:-.015em;font-variant-numeric:tabular-nums}
+.s-title{font-family:var(--display);font-size:20px;line-height:28px;font-weight:600;letter-spacing:-.006em}
+.s-body{font-size:16px;line-height:24px;font-weight:400}
+.s-label{font-size:14px;line-height:20px;font-weight:500}
+.v-data{font-family:var(--ui);font-size:20px;font-weight:600;font-variant-numeric:tabular-nums;fill:#000}
+.v-body{font-family:var(--ui);font-size:16px;font-weight:400;fill:#000}
+.v-label{font-family:var(--ui);font-size:14px;font-weight:500;font-variant-numeric:tabular-nums}
+
+/* header */
+.logo{position:absolute;left:64px;top:42px;height:28px;width:auto}
+.vrule{position:absolute;left:252px;top:36px;width:1px;height:40px;background:var(--sep)}
+.nav{position:absolute;right:520px;top:36px;display:flex;gap:4px}
+.tab{height:40px;padding:0 16px;display:flex;align-items:center;color:var(--text-2)}
+.tab.on{background:var(--ember);color:var(--onyx)}
+.period{position:absolute;left:1432px;top:46px;display:flex;align-items:center;gap:10px}
+.period::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ember)}
+
+/* hero card and its signature corner */
+.hero{position:absolute;left:64px;top:108px;width:1336px;height:528px;background:var(--card);border:1px solid var(--hair);border-top-right-radius:48px}
+.sig{position:absolute;left:1016px;top:108px;width:384px;height:176px;background:var(--onyx);border-top-right-radius:48px}
+
+/* rules */
+.rule{position:absolute;height:1px;background:var(--onyx)}
+.rule.lt{background:var(--sep)}
+.rule.hl{background:var(--hair)}
+.vline{position:absolute;width:1px;background:var(--onyx)}
+.bar{position:absolute;height:10px}
+.link{color:var(--cobalt)}
+.tag{position:absolute;display:flex;align-items:center;height:24px;padding:0 8px;background:var(--molt);color:var(--ink)}
+.legend-ico{display:inline-block;vertical-align:-2px;margin:0 6px 0 2px}
+
+/* caveat, source and corner label */
+.foot1{position:absolute;left:64px;right:64px;top:1000px;display:flex;align-items:center;gap:20px}
+.foot1 .corner{margin-left:auto}
+</style>
+</head>
+<body>
+
+<!-- header -->
+<img class="logo" src="../brand/parakeet-logo.svg" alt="Parakeet Risk">
+<div class="vrule"></div>
+<div class="a s-title" style="left:276px;top:32px">Workplace Risk Intelligence</div>
+<div class="a s-label cm" style="left:276px;top:60px">Predictive insights for industrial insurance underwriting</div>
+<nav class="nav s-label" aria-label="Report pages">
+  <div class="tab on">Executive Intelligence</div>
+  <div class="tab">Risk Landscape</div>
+  <div class="tab">Model Trust</div>
+  <div class="tab">Pricing Lab</div>
+</nav>
+<div class="period s-label">Test years 2023 and 2024</div>
+
+<!-- hero: the finding written onto the risk-band chart -->
+<div class="hero"></div>
+<div class="sig"></div>
+<svg class="a" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Column chart. Share of each band's sites that crossed the line next year. 2023: band 1 2.9%, band 2 7.1%, band 3 12.3%, band 4 21.0%, band 5 46.5%. 2024: 3.0%, 7.6%, 12.8%, 22.0%, 47.5%. All sites 18.3%, both years. Y axis fixed at 0 to 60%.">
+  <!-- all-site reference line, behind the columns -->
+  <line x1="104" y1="480.86" x2="1360" y2="480.86" stroke="#66655F" stroke-width="1" stroke-dasharray="3 4"/>
+  <text x="104" y="473" class="v-label" fill="#3D3C37">All sites 18.3%, both years</text>
+  <!-- 2023 columns, y axis fixed at 0 to 60% (252.9 px) -->
+  <g shape-rendering="crispEdges">
+    <rect x="160" y="545.78" width="128" height="12.22" fill="#C9D6BD"/>
+    <rect x="414" y="528.07" width="128" height="29.93" fill="#D1A76A"/>
+    <rect x="668" y="506.15" width="128" height="51.85" fill="#C98369"/>
+    <rect x="922" y="469.48" width="128" height="88.52" fill="#A96247"/>
+    <rect x="1176" y="362.00" width="128" height="196.00" fill="#944126"/>
+  </g>
+  <!-- 2023 data labels on cream knockouts -->
+  <rect x="196" y="517.78" width="56" height="24" fill="#F7F5EC"/><text x="224" y="536.78" text-anchor="middle" class="v-data">2.9%</text>
+  <rect x="450" y="500.07" width="56" height="24" fill="#F7F5EC"/><text x="478" y="519.07" text-anchor="middle" class="v-data">7.1%</text>
+  <rect x="699" y="478.15" width="66" height="24" fill="#F7F5EC"/><text x="732" y="497.15" text-anchor="middle" class="v-data">12.3%</text>
+  <rect x="953" y="441.48" width="66" height="24" fill="#F7F5EC"/><text x="986" y="460.48" text-anchor="middle" class="v-data">21.0%</text>
+  <rect x="1207" y="334.00" width="66" height="24" fill="#F7F5EC"/><text x="1240" y="353.00" text-anchor="middle" class="v-data">46.5%</text>
+  <!-- x axis, bands, 2024 row -->
+  <line x1="104" y1="558.5" x2="1360" y2="558.5" stroke="#000" stroke-width="1"/>
+  <text x="224" y="584" text-anchor="middle" class="v-body">Band 1, lowest fifth</text>
+  <text x="478" y="584" text-anchor="middle" class="v-body">Band 2</text>
+  <text x="732" y="584" text-anchor="middle" class="v-body">Band 3</text>
+  <text x="986" y="584" text-anchor="middle" class="v-body">Band 4</text>
+  <text x="1240" y="584" text-anchor="middle" class="v-body">Band 5, highest fifth</text>
+  <text x="104" y="608" class="v-label" fill="#66655F">2024</text>
+  <g class="v-label" fill="#3D3C37" text-anchor="middle">
+    <text x="224" y="608">3.0%</text><text x="478" y="608">7.6%</text><text x="732" y="608">12.8%</text><text x="986" y="608">22.0%</text><text x="1240" y="608">47.5%</text>
+  </g>
+  <!-- signature: 51.4% against a one-fifth tick -->
+  <rect x="1044" y="241" width="328" height="4" fill="#3A3935"/>
+  <rect x="1044" y="241" width="168.59" height="4" fill="#FFFFFF"/>
+  <rect x="1108.6" y="235" width="2" height="33" fill="#8F8C82"/>
+</svg>
+
+<h1 class="a s-display" style="left:104px;top:133px">Band 5 sites crossed the line<br>about 16 times as often as band 1.</h1>
+<div class="a s-body c2 wc" style="left:104px;top:254px">The line: each industry's worst-20% serious-injury (DART) rate this year.</div>
+<div class="a s-label c2" style="left:104px;top:338px">Share of each band's sites that crossed next year<svg class="legend-ico" width="30" height="14" aria-hidden="true"><rect x="8" y="11" width="3" height="3" fill="#C9D6BD"/><rect x="12.5" y="9" width="3" height="5" fill="#D1A76A"/><rect x="17" y="7" width="3" height="7" fill="#C98369"/><rect x="21.5" y="4" width="3" height="10" fill="#A96247"/><rect x="26" y="0" width="3" height="14" fill="#944126"/></svg><span style="color:var(--onyx)">2023</span></div>
+
+<div class="a s-figure" style="left:1044px;top:128px;color:#FFFFFF">51.4%</div>
+<div class="a s-body wc" style="left:1044px;top:187px;color:var(--on-black)">of next year's line-crossers were in band 5</div>
+<div class="a s-label num" style="left:1044px;top:211px;color:var(--on-black-2)">18,709 of 36,389 · both years</div>
+<div class="a s-label wc" style="left:1117px;top:250px;color:var(--on-black-2)">20%, one fifth of sites</div>
+
+<!-- strip: three cells, one structure, figures on the signature's baselines -->
+<div class="rule" style="left:1432px;top:108px;width:424px"></div>
+<div class="a s-kpi" style="left:1432px;top:144px">47.0%</div>
+<div class="a s-body c2 wc" style="left:1432px;top:187px">of band 5 sites crossed</div>
+<div class="a s-label cm num" style="left:1432px;top:211px">18,709 of 39,830 · both years</div>
+
+<div class="rule lt" style="left:1432px;top:284px;width:424px"></div>
+<div class="a s-kpi ci" style="left:1432px;top:320px">2.57x</div>
+<div class="a s-body c2 wc" style="left:1432px;top:363px">band 5 vs all sites</div>
+<div class="a s-label cm num" style="left:1432px;top:387px">47.0% vs 18.3% · both years</div>
+
+<div class="rule lt" style="left:1432px;top:460px;width:424px"></div>
+<div class="a s-kpi ci" style="left:1432px;top:496px">199,150</div>
+<div class="a s-body c2 wc" style="left:1432px;top:539px">portfolio site-years</div>
+<div class="a s-label cm num" style="left:1432px;top:563px">39,830 in band 5 · both years</div>
+
+<!-- lower row: three open modules on one 32 px row grid (rows from y 748) -->
+
+<!-- industry -->
+<div class="rule" style="left:64px;top:668px;width:728px"></div>
+<div class="a s-title wc" style="left:64px;top:684px">Band 5 in every sector</div>
+<div class="a s-label cm" style="left:289px;top:690px">Both years · DART per 100 full-time workers</div>
+<div class="r s-label link" style="right:1128px;top:690px">Risk Landscape →</div>
+<div class="a s-label cm" style="left:64px;top:722px">Sector</div>
+<div class="r s-label cm" style="right:1520px;top:722px">Avg DART rate</div>
+<div class="a s-label cm" style="left:436px;top:722px">Sites in band 5</div>
+<div class="a s-label" style="left:712.5px;top:722px;transform:translateX(-50%)">All sites 20%</div>
+<div class="rule lt" style="left:64px;top:748px;width:728px"></div>
+<div class="vline" style="left:712px;top:742px;height:230px"></div>
+<div class="s-body">
+  <div class="a" style="left:64px;top:752px">Transport and warehousing</div><div class="r c2 num" style="right:1520px;top:752px">4.29</div><div class="r num" style="right:1440px;top:752px">21.0%</div><div class="bar" style="left:492px;top:759px;width:231.0px;background:var(--b5)"></div>
+  <div class="a" style="left:64px;top:784px">Agriculture</div><div class="r c2 num" style="right:1520px;top:784px">3.04</div><div class="r num" style="right:1440px;top:784px">20.4%</div><div class="bar" style="left:492px;top:791px;width:224.4px;background:var(--b5)"></div>
+  <div class="a" style="left:64px;top:816px">Wholesale</div><div class="r c2 num" style="right:1520px;top:816px">2.83</div><div class="r num" style="right:1440px;top:816px">21.2%</div><div class="bar" style="left:492px;top:823px;width:233.2px;background:var(--b5)"></div>
+  <div class="a" style="left:64px;top:848px">Manufacturing</div><div class="r c2 num" style="right:1520px;top:848px">2.17</div><div class="r num" style="right:1440px;top:848px">20.3%</div><div class="bar" style="left:492px;top:855px;width:223.3px;background:var(--b5)"></div>
+  <div class="a" style="left:64px;top:880px">Construction</div><div class="r c2 num" style="right:1520px;top:880px">1.85</div><div class="r num" style="right:1440px;top:880px">18.4%</div><div class="bar" style="left:492px;top:887px;width:202.4px;background:var(--b5)"></div>
+  <div class="a" style="left:64px;top:912px">Utilities</div><div class="r c2 num" style="right:1520px;top:912px">1.38</div><div class="r num" style="right:1440px;top:912px">15.8%</div><div class="bar" style="left:492px;top:919px;width:173.8px;background:var(--b5)"></div>
+  <div class="a" style="left:64px;top:944px">Mining, oil and gas</div><div class="r c2 num" style="right:1520px;top:944px">0.77</div><div class="r num" style="right:1440px;top:944px">19.8%</div><div class="bar" style="left:492px;top:951px;width:217.8px;background:var(--b5)"></div>
+</div>
+
+<!-- model validation -->
+<div class="rule" style="left:824px;top:668px;width:576px"></div>
+<div class="a s-title wc" style="left:824px;top:684px">Ranking accuracy on unseen years</div>
+<div class="r s-label link" style="right:520px;top:690px">Model Trust →</div>
+<div class="a s-label cm" style="left:1000px;top:722px">AUC, 2023 test</div>
+<div class="r s-label cm" style="right:584px;top:722px">2023</div>
+<div class="r s-label cm" style="right:520px;top:722px">2024</div>
+<div class="rule lt" style="left:824px;top:748px;width:576px"></div>
+<div class="vline" style="left:1000px;top:748px;height:105px"></div>
+<div class="rule" style="left:1000px;top:852px;width:241px"></div>
+<div class="vline" style="left:1120px;top:852px;height:6px"></div>
+<div class="vline" style="left:1240px;top:852px;height:6px"></div>
+<div class="vline" style="left:1000px;top:852px;height:6px"></div>
+<div class="s-body">
+  <div class="a c2" style="left:824px;top:752px">Rating class alone</div><div class="bar" style="left:1001px;top:758px;height:12px;width:44.2px;background:var(--bar-grey)"></div><div class="r c2 num" style="right:584px;top:752px">0.59</div><div class="r c2 num" style="right:520px;top:752px">0.59</div>
+  <div class="a c2" style="left:824px;top:784px">Last year's rate</div><div class="bar" style="left:1001px;top:790px;height:12px;width:109.9px;background:var(--bar-grey)"></div><div class="r c2 num" style="right:584px;top:784px">0.73</div><div class="r c2 num" style="right:520px;top:784px">0.73</div>
+  <div class="a" style="left:824px;top:816px">Scorecard</div><div class="bar" style="left:1001px;top:822px;height:12px;width:135.8px;background:var(--screen-ink)"></div><div class="r num" style="right:584px;top:816px">0.78</div><div class="r num" style="right:520px;top:816px">0.79</div>
+</div>
+<div class="a s-label cm" style="left:1055px;top:754px">about 6 in 10</div>
+<div class="a s-label cm" style="left:1147px;top:818px">about 8 in 10</div>
+<div class="a s-label cm num" style="left:1000.5px;top:862px;transform:translateX(-50%)">0.50</div>
+<div class="a s-label cm num" style="left:1120.5px;top:862px;transform:translateX(-50%)">0.75</div>
+<div class="a s-label cm num" style="left:1240.5px;top:862px;transform:translateX(-50%)">1.00</div>
+<div class="a s-label cm" style="left:1000.5px;top:880px;transform:translateX(-50%)">coin toss</div>
+
+<!-- what it means for underwriting: a two-action ledger -->
+<div class="rule" style="left:1432px;top:668px;width:424px"></div>
+<div class="a s-title wc" style="left:1432px;top:684px">Underwriting</div>
+<div class="r s-label link" style="right:64px;top:690px">Pricing Lab →</div>
+<div class="rule lt" style="left:1432px;top:748px;width:424px"></div>
+<div class="a s-body wc" style="left:1432px;top:752px">Survey band 5 before renewal.</div>
+<div class="rule hl" style="left:1432px;top:780px;width:424px"></div>
+<div class="a s-body wc" style="left:1432px;top:784px">Test score-based pricing.</div>
+<div class="tag s-label" style="right:64px;top:785px">Simulated</div>
+<div class="a s-kpi" style="left:1432px;top:831px">27.5% → 10.0%</div>
+<div class="a s-label cm wc" style="left:1432px;top:883px">wrong-band premium, 2023 central</div>
+<div class="a s-label c2" style="left:1432px;top:915px">A, industry rate</div><div class="bar" style="left:1556px;top:920px;width:220px;background:var(--bar-grey)"></div>
+<div class="a s-label c2" style="left:1432px;top:947px">B, by score</div><div class="bar" style="left:1556px;top:952px;width:80px;background:var(--screen-ink)"></div>
+
+<!-- caveat, source, corner label -->
+<div class="foot1 s-label">
+  <span class="c2 wc">Associations, not causes. Reported injuries, not claims.</span>
+  <span class="link">Method and caveats: Model Trust →</span>
+  <span class="corner cm">Executive Intelligence, version Chart first. Design mockup, not a live Power BI report</span>
+</div>
+<div class="a s-label cm" style="left:64px;top:1024px">Source: OSHA ITA Form 300A summaries, 2016 to 2025 (2025 file to 31 Aug 2026) · BLS SOII industry DART rates, 2022 to 2024 · Portfolio: private-sector industrial sites with a BLS rate, 20+ staff</div>
+
+</body>
+</html>

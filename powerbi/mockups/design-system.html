@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Board</title>
+<link rel="stylesheet" href="wri-system.css">
+<style>
+/* Board layout only. Every product element on this board uses a wri-system.css component.
+   Columns: rail x 64 to 640 (KPI treatments, rail filters); x 704 to 1264 (colour, grid, table card);
+   x 1296 to 1856 (type, chart card). Notes in IBM Plex Mono are board annotations, not product text. */
+.b-head { position: absolute; width: 560px; display: flex; justify-content: space-between; align-items: baseline }
+.b-head .wri-label { color: var(--wri-ink) }
+.b-note { position: absolute; font: var(--wri-type-tech); letter-spacing: 0; color: var(--wri-muted); white-space: nowrap }
+
+/* Colour: two ledger columns of swatches */
+.b-swatches { position: absolute; width: 272px }
+.b-sw { height: 24px; display: flex; align-items: center; gap: 8px; font: var(--wri-type-label); white-space: nowrap }
+.b-sw i { width: 16px; height: 16px; flex: none }
+.b-sw i.lt { border: 1px solid var(--wri-axis) }
+.b-sw .hex { font: var(--wri-type-tech); letter-spacing: 0; color: var(--wri-muted) }
+.b-sw .role { margin-left: auto; color: var(--wri-ink) }
+
+/* Type scale: specimen at real size, specification in the technical style */
+.b-type { position: absolute; left: 1296px; width: 560px; display: flex; align-items: center }
+.b-type .spec { position: absolute; left: 296px; font: var(--wri-type-tech); letter-spacing: 0; color: var(--wri-muted); white-space: nowrap }
+
+/* Grid: spacing scale beside the page diagram */
+.b-space { position: absolute; left: 1048px; width: 216px; height: 24px; display: flex; align-items: center; font: var(--wri-type-label); color: var(--wri-ink); white-space: nowrap }
+.b-space b { width: 24px; text-align: right; font-weight: 500; color: var(--wri-onyx) }
+.b-space .bar { width: 64px; margin: 0 8px; display: flex; align-items: center }
+.b-space .bar i { height: 8px; background: var(--wri-ink) }
+.b-diagram text { font-family: var(--wri-font-tech); font-size: 13px; font-weight: 500 }
+</style>
+</head>
+<body>
+
+<!-- HEADER: the real header. Navigation shown in its three states -->
+<img class="wri-logo" src="../brand/parakeet-logo.svg" alt="Parakeet Risk">
+<div class="wri-lockup-rule"></div>
+<div class="wri-product">
+  <div class="wri-product-name">Workplace Risk Intelligence</div>
+  <div class="wri-proposition">Predictive insights for industrial insurance underwriting</div>
+</div>
+<nav class="wri-nav" aria-label="Report pages">
+  <div class="wri-tab wri-tab--active">Executive Intelligence</div>
+  <div class="wri-tab wri-tab--hover">Risk Landscape</div>
+  <div class="wri-tab">Model Trust</div>
+  <div class="wri-tab">Pricing Lab</div>
+</nav>
+<div class="b-note" style="left:725px;top:84px">Active</div>
+<div class="b-note" style="left:911px;top:84px">Hover</div>
+<div class="b-note" style="left:1056px;top:84px">Default</div>
+<div class="b-note" style="left:1176px;top:84px">Default</div>
+<div class="wri-period">
+  <div>Design system v1.0, 1 Nov 2026</div>
+  <div class="wri-period-sub">1920 x 1080 page · 8 px base</div>
+</div>
+
+<!-- RAIL COLUMN: KPI treatments as built on Executive Intelligence -->
+<h2 class="wri-title wri-abs" style="left:64px;top:120px">KPI treatments</h2>
+<div class="wri-stamp" style="top:160px"><div class="wri-stamp-value">51.4%</div></div>
+<p class="wri-figure-col wri-stamp-caption" style="top:160px"><span>of next year's</span><span>line-crossers</span><span>were in band 5</span></p>
+<p class="wri-figure-col wri-count wri-live" style="top:262px">18,709 of 36,389 · 2023 + 2024</p>
+<svg class="wri-signature-bar" style="top:322px" width="336" height="20" viewBox="0 0 336 20" role="img" aria-label="Signature bar: band 5 holds 51.4% of next year's line-crossers, against 20% for a random fifth.">
+  <rect class="wri-fill-track" x="0" y="6" width="336" height="8"/>
+  <rect class="wri-fill-band-5" x="0" y="6" width="172.7" height="8"/>
+  <rect class="wri-marker" x="66.2" y="0" width="2" height="20"/>
+</svg>
+<div class="wri-figure-col wri-signature-key" style="top:322px"><svg width="2" height="20" aria-hidden="true"><rect class="wri-marker" width="2" height="20"/></svg><span>Random fifth 20%</span></div>
+<div class="wri-rail-head" style="top:374px"><span class="wri-dot"></span><h2 class="wri-title">Underwriting</h2></div>
+<div class="wri-ledger-row" style="top:422px">
+  <p class="wri-ledger-action">Test score-based pricing.</p>
+  <div class="wri-ledger-evidence">
+    <div class="wri-ledger-figure wri-nowrap">27.5%&#8201;→&#8201;10.0%</div>
+    <p class="wri-ledger-caption wri-live">premium in the wrong band</p>
+    <p class="wri-ledger-count"><span class="wri-tag wri-tag--simulated">Simulated</span><span>2023 central</span></p>
+  </div>
+</div>
+<div class="wri-ledger-close" style="top:526px"></div>
+
+<!-- RAIL COLUMN: filters as placed on analysis pages -->
+<div class="wri-filters-head" style="top:558px">
+  <h2 class="wri-title">Filters</h2>
+  <a class="wri-reset"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7a4.5 4.5 0 1 0 1.32-3.18" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2 1.5v3.5h3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Reset filters</a>
+</div>
+<div class="wri-slicer" style="left:64px;top:602px;width:576px">
+  <span class="wri-slicer-label">Claim-cost scenario</span>
+  <div class="wri-tiles"><div class="wri-tile">Low</div><div class="wri-tile wri-tile--selected">Central</div><div class="wri-tile wri-tile--hover">High</div></div>
+</div>
+<div class="wri-slicer" style="left:64px;top:690px;width:272px">
+  <span class="wri-slicer-label">Sector</span>
+  <div class="wri-dropdown">All sectors</div>
+</div>
+<div class="wri-slicer" style="left:368px;top:690px;width:272px">
+  <span class="wri-slicer-label">Size band</span>
+  <div class="wri-dropdown wri-dropdown--open">20 to 249 employees</div>
+  <div class="wri-dropdown-list">
+    <div class="wri-dropdown-item"><span class="wri-check"></span>Select all</div>
+    <div class="wri-dropdown-item"><span class="wri-check wri-check--on"></span>20 to 249 employees</div>
+    <div class="wri-dropdown-item wri-dropdown-item--hover"><span class="wri-check"></span>250+ employees</div>
+  </div>
+</div>
+<div class="b-note" style="left:64px;top:888px">Tiles: default, selected, hover. Dropdown: closed, open.</div>
+<div class="wri-ledger-close" style="top:952px"></div>
+<p class="wri-caveat">Associations, not causes. Reported injuries, not claims. <a class="wri-caveat-link wri-live">Method and caveats: Model Trust →</a></p>
+
+<!-- COLOUR -->
+<div class="b-head" style="left:704px;top:120px"><h2 class="wri-title">Colour</h2><span class="wri-label">Each accent has one job</span></div>
+<div class="b-swatches" style="left:704px;top:160px">
+  <div class="b-sw"><i class="lt" style="background:var(--wri-nest)"></i>Nest <span class="hex">#EFECDF</span><span class="role">Page canvas</span></div>
+  <div class="b-sw"><i class="lt" style="background:var(--wri-card)"></i>Card <span class="hex">#F7F5EC</span><span class="role">Cards, fields</span></div>
+  <div class="b-sw"><i class="lt" style="background:var(--wri-card-line)"></i>Card line <span class="hex">#E3DECF</span><span class="role">Hairlines, hover</span></div>
+  <div class="b-sw"><i class="lt" style="background:var(--wri-rule)"></i>Rule <span class="hex">#DCD8CA</span><span class="role">Rail rules</span></div>
+  <div class="b-sw"><i style="background:var(--wri-axis)"></i>Axis <span class="hex">#CFCBBD</span><span class="role">Axes, input borders</span></div>
+  <div class="b-sw"><i style="background:var(--wri-onyx)"></i>Onyx <span class="hex">#000000</span><span class="role">Text, stamp, tooltip</span></div>
+  <div class="b-sw"><i style="background:var(--wri-ink)"></i>Ink <span class="hex">#303A39</span><span class="role">Second text, selected</span></div>
+  <div class="b-sw"><i style="background:var(--wri-muted)"></i>Muted <span class="hex">#66655F</span><span class="role">Counts, headers</span></div>
+  <div class="b-sw"><i class="lt" style="background:var(--wri-shell)"></i>Shell <span class="hex">#FFFFFF</span><span class="role">Text on dark</span></div>
+  <div class="b-sw"><i style="background:var(--wri-ember)"></i>Ember <span class="hex">#E24337</span><span class="role">Active page, dot</span></div>
+</div>
+<div class="b-swatches" style="left:992px;top:160px">
+  <div class="b-sw"><i style="background:var(--wri-cobalt)"></i>Cobalt <span class="hex">#1936E8</span><span class="role">Links, reset</span></div>
+  <div class="b-sw"><i style="background:var(--wri-molt)"></i>Molt <span class="hex">#B5C7E4</span><span class="role">Simulated tag</span></div>
+  <div class="b-sw"><i style="background:var(--wri-screen-ink)"></i>Screen ink <span class="hex">#274A48</span><span class="role">Model series</span></div>
+  <div class="b-sw"><i style="background:var(--wri-warm-grey)"></i>Warm grey <span class="hex">#B3AFA1</span><span class="role">Comparison</span></div>
+  <div class="b-sw"><i style="background:var(--wri-band-1)"></i>Band 1 <span class="hex">#C9D6BD</span><span class="role">Lowest fifth</span></div>
+  <div class="b-sw"><i style="background:var(--wri-band-2)"></i>Band 2 <span class="hex">#D1A76A</span><span class="role">Second fifth</span></div>
+  <div class="b-sw"><i style="background:var(--wri-band-3)"></i>Band 3 <span class="hex">#C98369</span><span class="role">Middle fifth</span></div>
+  <div class="b-sw"><i style="background:var(--wri-band-4)"></i>Band 4 <span class="hex">#A96247</span><span class="role">Fourth fifth</span></div>
+  <div class="b-sw"><i style="background:var(--wri-band-5)"></i>Band 5 <span class="hex">#944126</span><span class="role">Highest fifth</span></div>
+  <div class="b-sw"><span class="role" style="margin-left:0">Text on bands: Onyx on 1 to 4, Shell on 5</span></div>
+</div>
+
+<!-- GRID AND SPACING -->
+<div class="b-head" style="left:704px;top:432px"><h2 class="wri-title">Grid and spacing</h2><span class="wri-label">12 columns, 64 px margins</span></div>
+<svg class="b-diagram wri-abs" style="left:704px;top:472px" width="320" height="180" viewBox="0 0 320 180" role="img" aria-label="Page diagram at one sixth scale: header 32 to 80, rail x 64 to 640, canvas x 704 to 1856 with a 1152 by 488 card above two 560 by 352 cards, footer at 1040.">
+  <rect x="0.5" y="0.5" width="319" height="179" fill="none" class="wri-axis-line"/>
+  <!-- 12 columns: 4 rail columns of 120, 8 canvas columns of 116, 32 px gutters -->
+  <g class="wri-fill-track">
+    <rect x="10.67" y="24" width="20" height="145.33"/><rect x="36" y="24" width="20" height="145.33"/><rect x="61.33" y="24" width="20" height="145.33"/><rect x="86.67" y="24" width="20" height="145.33"/>
+    <rect x="117.33" y="24" width="19.33" height="145.33"/><rect x="142" y="24" width="19.33" height="145.33"/><rect x="166.67" y="24" width="19.33" height="145.33"/><rect x="191.33" y="24" width="19.33" height="145.33"/>
+    <rect x="216" y="24" width="19.33" height="145.33"/><rect x="240.67" y="24" width="19.33" height="145.33"/><rect x="265.33" y="24" width="19.33" height="145.33"/><rect x="290" y="24" width="19.33" height="145.33"/>
+  </g>
+  <!-- header band and footer line -->
+  <rect x="10.67" y="6.67" width="27.3" height="4.67" class="wri-fill-comparison"/>
+  <rect x="117.33" y="6" width="94.67" height="6.67" class="wri-fill-comparison"/>
+  <rect x="10.67" y="173.33" width="145.6" height="2.4" class="wri-fill-comparison"/>
+  <!-- rail and card slots -->
+  <rect x="10.67" y="24" width="96" height="145.33" fill="none" class="wri-baseline" stroke-dasharray="3 3"/>
+  <rect x="117.33" y="24" width="192" height="81.33" fill="var(--wri-card)" fill-opacity=".8" class="wri-baseline"/>
+  <rect x="117.33" y="110.67" width="93.33" height="58.67" fill="var(--wri-card)" fill-opacity=".8" class="wri-baseline"/>
+  <rect x="216" y="110.67" width="93.33" height="58.67" fill="var(--wri-card)" fill-opacity=".8" class="wri-baseline"/>
+  <g class="wri-axis-label--secondary">
+    <text x="16" y="42">Rail 576</text>
+    <text x="123" y="42">Card 1152 x 488</text>
+    <text x="123" y="128">560 x 352</text>
+    <text x="222" y="128">560 x 352</text>
+  </g>
+</svg>
+<div class="b-space" style="top:472px"><b>8</b><span class="bar"><i style="width:8px"></i></span>legend gaps</div>
+<div class="b-space" style="top:496px"><b>16</b><span class="bar"><i style="width:16px"></i></span>tooltip padding</div>
+<div class="b-space" style="top:520px"><b>24</b><span class="bar"><i style="width:24px"></i></span>stamp to figures</div>
+<div class="b-space" style="top:544px"><b>32</b><span class="bar"><i style="width:32px"></i></span>gutter, padding</div>
+<div class="b-space" style="top:568px"><b>48</b><span class="bar"><i style="width:48px"></i></span>header band</div>
+<div class="b-space" style="top:592px"><b>64</b><span class="bar"><i style="width:64px"></i></span>margin, channel</div>
+<div class="b-note" style="left:1048px;top:628px">Rail cols 120, canvas 116</div>
+
+<!-- TABLE CARD: header row, rows, data bars, conditional colour, tags -->
+<section class="wri-card" style="left:704px;top:684px;width:560px;height:332px">
+  <div class="wri-card-head">
+    <h2 class="wri-title">Crossing rate by band and sector</h2>
+    <a class="wri-drill">Risk Landscape →</a>
+  </div>
+  <div class="wri-abs" style="left:32px;top:72px;width:496px">
+    <table class="wri-table">
+      <colgroup><col style="width:136px"><col style="width:180px"><col style="width:180px"></colgroup>
+      <thead><tr><th>Risk band</th><th style="padding-left:16px">Mining, oil and gas</th><th style="padding-left:16px">Utilities</th></tr></thead>
+      <tbody>
+        <tr><td class="wri-cell-band-1" style="padding-left:8px">Band 1</td><td style="padding-left:16px"><span class="wri-tag wri-tag--too-few">Too few sites</span></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:5px"></span><span class="wri-databar-value">2.5%</span></div></td></tr>
+        <tr><td class="wri-cell-band-2" style="padding-left:8px">Band 2</td><td style="padding-left:16px"><span class="wri-tag wri-tag--too-few">Too few sites</span></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:14px"></span><span class="wri-databar-value">7.0%</span></div></td></tr>
+        <tr><td class="wri-cell-band-3" style="padding-left:8px">Band 3</td><td style="padding:0 16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:17.6px"></span><span class="wri-databar-value">8.8%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:27.4px"></span><span class="wri-databar-value">13.7%</span></div></td></tr>
+        <tr><td class="wri-cell-band-4" style="padding-left:8px">Band 4</td><td style="padding:0 16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:40.8px"></span><span class="wri-databar-value">20.4%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:49px"></span><span class="wri-databar-value">24.5%</span></div></td></tr>
+        <tr><td class="wri-cell-band-5" style="padding-left:8px">Band 5</td><td style="padding:0 16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:92.8px"></span><span class="wri-databar-value">46.4%</span></div></td><td style="padding-left:16px"><div class="wri-databar"><span class="wri-databar-bar" style="width:87.2px"></span><span class="wri-databar-value">43.6%</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="wri-abs" style="left:32px;top:252px;display:flex;gap:8px;align-items:center"><span class="wri-label wri-text-muted" style="margin-right:4px">Tags</span><span class="wri-tag wri-tag--simulated">Simulated</span><span class="wri-tag wri-tag--too-few">Too few sites</span><span class="wri-tag wri-tag--pending">Pending validation</span></div>
+  <div class="b-note" style="left:32px;top:284px">Crossing rate next year, 2023 + 2024. Data bars 0 to 50%.</div>
+</section>
+
+<!-- TYPE -->
+<div class="b-head" style="left:1296px;top:120px"><h2 class="wri-title">Type</h2><span class="wri-label">Inter baked, Segoe UI live, Plex Mono technical</span></div>
+<div class="b-type" style="top:160px;height:58px"><span class="wri-statement">The finding</span><span class="spec">Statement · Inter 500 52/58<br>Baked · rail, two to four lines</span></div>
+<div class="b-type" style="top:224px;height:96px"><span class="wri-hero">51.4%</span><span class="spec">Hero · Segoe UI 600 96/96<br>Live · signature stamp only</span></div>
+<div class="b-type" style="top:326px;height:40px"><span class="wri-figure">47.0%</span><span class="spec">Figure · Segoe UI 600 30/40<br>Live · ledger and key figures</span></div>
+<div class="b-type" style="top:372px;height:28px"><span class="wri-title">Card title</span><span class="spec">Title · Inter 600 20/28 · baked</span></div>
+<div class="b-type" style="top:406px;height:28px"><span class="wri-body">What it means</span><span class="spec">Body · Inter 400 18/28 · baked</span></div>
+<div class="b-type" style="top:440px;height:20px"><span class="wri-label">Caption, count, axis</span><span class="spec">Label · 500 14/20 · both layers</span></div>
+<div class="b-type" style="top:466px;height:20px"><span class="wri-tech">Source: OSHA ITA Form 300A</span><span class="spec">Technical · Plex Mono 500 13/20</span></div>
+
+<!-- CHART CARD: columns, data labels, reference line, legend, 2024 row, selection and tooltip -->
+<section class="wri-card" style="left:1296px;top:518px;width:560px;height:498px">
+  <div class="wri-card-head">
+    <h2 class="wri-title">Crossed the line next year</h2>
+    <div class="wri-legend">
+      <svg width="19" height="14" aria-hidden="true"><rect class="wri-fill-band-1" x="0" y="10" width="3" height="4"/><rect class="wri-fill-band-2" x="4" y="8" width="3" height="6"/><rect class="wri-fill-band-3" x="8" y="6" width="3" height="8"/><rect class="wri-fill-band-4" x="12" y="3" width="3" height="11"/><rect class="wri-fill-band-5" x="16" y="0" width="3" height="14"/></svg>2023
+    </div>
+  </div>
+  <p class="wri-card-sub">Share of sites, by risk band.</p>
+  <svg class="wri-card-plot wri-card-plot--below-sub" width="496" height="352" viewBox="0 0 496 352" role="img" aria-label="Column chart with band 5 selected. Share of sites that crossed the line next year, 2023: band 1 2.9%, band 2 7.1%, band 3 12.3%, band 4 21.0%, band 5 46.5%. 2024: 3.0%, 7.6%, 12.8%, 22.0%, 47.5%. Dashed line: all sites 18.3%.">
+    <line class="wri-ref-line" x1="0" y1="165.5" x2="496" y2="165.5"/>
+    <text class="wri-ref-label" x="0" y="157">All sites 18.3%, 2023 + 2024</text>
+    <g shape-rendering="crispEdges">
+      <rect class="wri-fill-band-1 wri-is-dimmed" x="64.8" y="236.7" width="56" height="13.3"/>
+      <rect class="wri-fill-band-2 wri-is-dimmed" x="154.4" y="217.3" width="56" height="32.7"/>
+      <rect class="wri-fill-band-3 wri-is-dimmed" x="244" y="193.4" width="56" height="56.6"/>
+      <rect class="wri-fill-band-4 wri-is-dimmed" x="333.6" y="153.4" width="56" height="96.6"/>
+      <rect class="wri-fill-band-5" x="423.2" y="36.1" width="56" height="213.9"/>
+    </g>
+    <g text-anchor="middle">
+      <text class="wri-data-label" x="92.8" y="227.7">2.9%</text>
+      <text class="wri-data-label" x="182.4" y="208.3">7.1%</text>
+      <text class="wri-data-label" x="272" y="184.4">12.3%</text>
+      <text class="wri-data-label" x="361.6" y="144.4">21.0%</text>
+      <text class="wri-data-label" x="451.2" y="27.1">46.5%</text>
+    </g>
+    <line class="wri-baseline" x1="0" y1="250.5" x2="496" y2="250.5"/>
+    <g class="wri-axis-label" text-anchor="middle">
+      <text x="92.8" y="274">Band 1</text><text x="182.4" y="274">Band 2</text><text x="272" y="274">Band 3</text><text x="361.6" y="274">Band 4</text><text x="451.2" y="274">Band 5</text>
+    </g>
+    <line class="wri-hairline" x1="0" y1="290.5" x2="496" y2="290.5"/>
+    <text class="wri-axis-title" x="0" y="322">2024</text>
+    <g class="wri-axis-label--secondary" text-anchor="middle">
+      <text x="92.8" y="322">3.0%</text><text x="182.4" y="322">7.6%</text><text x="272" y="322">12.8%</text><text x="361.6" y="322">22.0%</text><text x="451.2" y="322">47.5%</text>
+    </g>
+  </svg>
+  <div class="wri-tooltip" style="left:152px;top:112px">
+    <div class="wri-tooltip-title">Band 5, highest fifth</div>
+    <div class="wri-tooltip-row"><span class="wri-tooltip-key">Crossed the line, 2023</span><span>46.5%</span></div>
+    <div class="wri-tooltip-row"><span class="wri-tooltip-key">Both test years</span><span>47.0%</span></div>
+    <div class="wri-tooltip-base">18,709 of 39,830 site-years</div>
+  </div>
+  <div class="b-note" style="left:32px;top:450px">Band 5 selected: other columns dim to 40%.</div>
+</section>
+
+<!-- FOOTER: the real source line and corner label -->
+<p class="wri-source">Design system v1.0 · Tokens and components: wri-system.css · Theme: wri-theme.json · Rules: docs/design-system.md</p>
+<div class="wri-corner-label">Design system board. Design mockup, not a live Power BI report</div>
+
+</body>
+</html>

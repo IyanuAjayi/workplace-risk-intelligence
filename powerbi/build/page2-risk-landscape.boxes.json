@@ -1,0 +1,202 @@
+[
+ {
+  "id": "nav-executive-intelligence",
+  "type": "actionButton",
+  "x": 705,
+  "y": 37,
+  "w": 186,
+  "h": 38
+ },
+ {
+  "id": "nav-risk-landscape",
+  "type": "actionButton",
+  "x": 891,
+  "y": 37,
+  "w": 145,
+  "h": 38
+ },
+ {
+  "id": "nav-model-trust",
+  "type": "actionButton",
+  "x": 1036,
+  "y": 37,
+  "w": 120,
+  "h": 38
+ },
+ {
+  "id": "nav-pricing-lab",
+  "type": "actionButton",
+  "x": 1156,
+  "y": 37,
+  "w": 115,
+  "h": 38
+ },
+ {
+  "id": "link-back-executive",
+  "type": "actionButton",
+  "x": 64,
+  "y": 144,
+  "w": 164,
+  "h": 20
+ },
+ {
+  "id": "kpi-band5-range-value",
+  "type": "card",
+  "x": 64,
+  "y": 376,
+  "w": 214,
+  "h": 40
+ },
+ {
+  "id": "kpi-band5-range-count",
+  "type": "card",
+  "x": 64,
+  "y": 436,
+  "w": 268,
+  "h": 20
+ },
+ {
+  "id": "kpi-all-sites-value",
+  "type": "card",
+  "x": 424,
+  "y": 376,
+  "w": 80,
+  "h": 40
+ },
+ {
+  "id": "kpi-all-sites-count",
+  "type": "card",
+  "x": 424,
+  "y": 436,
+  "w": 217,
+  "h": 20
+ },
+ {
+  "id": "btn-reset-filters",
+  "type": "actionButton",
+  "x": 540,
+  "y": 612,
+  "w": 100,
+  "h": 20
+ },
+ {
+  "id": "slicer-test-year",
+  "type": "slicer",
+  "x": 64,
+  "y": 652,
+  "w": 576,
+  "h": 72
+ },
+ {
+  "id": "slicer-sector",
+  "type": "slicer",
+  "x": 64,
+  "y": 740,
+  "w": 272,
+  "h": 72
+ },
+ {
+  "id": "slicer-size-band",
+  "type": "slicer",
+  "x": 368,
+  "y": 740,
+  "w": 272,
+  "h": 72
+ },
+ {
+  "id": "link-method-caveats",
+  "type": "actionButton",
+  "x": 64,
+  "y": 996,
+  "w": 576,
+  "h": 20
+ },
+ {
+  "id": "map-title",
+  "type": "card",
+  "x": 736,
+  "y": 176,
+  "w": 202,
+  "h": 28
+ },
+ {
+  "id": "map-legend-title",
+  "type": "card",
+  "x": 797,
+  "y": 257,
+  "w": 227,
+  "h": 17
+ },
+ {
+  "id": "map-tiles",
+  "type": "scatterChart",
+  "x": 737,
+  "y": 257,
+  "w": 480,
+  "h": 348
+ },
+ {
+  "id": "tooltip-state",
+  "type": "reportPageTooltip",
+  "x": 941,
+  "y": 281,
+  "w": 234,
+  "h": 92
+ },
+ {
+  "id": "table-sector-context",
+  "type": "tableEx",
+  "x": 1329,
+  "y": 221,
+  "w": 496,
+  "h": 241
+ },
+ {
+  "id": "chart-sector-band5",
+  "type": "clusteredBarChart",
+  "x": 1693,
+  "y": 273,
+  "w": 76,
+  "h": 194
+ },
+ {
+  "id": "table-size-context",
+  "type": "cardVisual",
+  "x": 1527,
+  "y": 497,
+  "w": 298,
+  "h": 45
+ },
+ {
+  "id": "chart-size-band5",
+  "type": "clusteredBarChart",
+  "x": 1693,
+  "y": 489,
+  "w": 77,
+  "h": 56
+ },
+ {
+  "id": "text-sector-size-note",
+  "type": "card",
+  "x": 1329,
+  "y": 587,
+  "w": 444,
+  "h": 17
+ },
+ {
+  "id": "table-sector-band",
+  "type": "tableEx",
+  "x": 737,
+  "y": 737,
+  "w": 1088,
+  "h": 217
+ },
+ {
+  "id": "text-band-table-note",
+  "type": "card",
+  "x": 737,
+  "y": 965,
+  "w": 1015,
+  "h": 20
+ }
+]

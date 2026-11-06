@@ -1,0 +1,495 @@
+createOrReplace
+
+	ref table Sites
+
+		measure 'Sites scored' = SUM ( Sites[Site count] )
+			formatString: #,0
+			displayFolder: Base
+
+		measure 'Sites crossing next year' = SUM ( Sites[Crossing sites] )
+			formatString: #,0
+			displayFolder: Base
+
+		measure 'Base rate' = DIVIDE ( [Sites crossing next year], [Sites scored] )
+			formatString: 0.0%
+			displayFolder: Base
+
+		measure 'Average site DART rate' = DIVIDE ( SUM ( Sites[DART rate sum] ), [Sites scored] )
+			formatString: 0.00
+			displayFolder: Base
+
+		measure 'Test year label' = SELECTEDVALUE ( TestYears[Test year], "2023 + 2024" )
+			displayFolder: Base
+
+		measure 'Band 5 sites' = CALCULATE ( [Sites scored], Sites[Risk band] = "5 highest" )
+			formatString: #,0
+			displayFolder: Executive Intelligence
+
+		measure 'Band 5 crossing sites' = CALCULATE ( [Sites crossing next year], Sites[Risk band] = "5 highest" )
+			formatString: #,0
+			displayFolder: Executive Intelligence
+
+		measure 'All crossing sites' = CALCULATE ( [Sites crossing next year], REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ), REMOVEFILTERS ( Bands ) )
+			formatString: #,0
+			displayFolder: Executive Intelligence
+
+		measure 'All sites scored' = CALCULATE ( [Sites scored], REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ), REMOVEFILTERS ( Bands ) )
+			formatString: #,0
+			displayFolder: Executive Intelligence
+
+		measure 'Top band capture' = DIVIDE ( [Band 5 crossing sites], [All crossing sites] )
+			formatString: 0.0%
+			displayFolder: Executive Intelligence
+
+		measure 'Capture remainder' = 1 - [Top band capture]
+			formatString: 0.0%
+			displayFolder: Executive Intelligence
+
+		measure 'Top band hit rate' = DIVIDE ( [Band 5 crossing sites], [Band 5 sites] )
+			formatString: 0.0%
+			displayFolder: Executive Intelligence
+
+		measure 'Share of sites in top band' = DIVIDE ( [Band 5 sites], [All sites scored] )
+			formatString: 0.0%
+			displayFolder: Executive Intelligence
+
+		measure 'All sites rate' = DIVIDE ( [All crossing sites], [All sites scored] )
+			formatString: 0.0%
+			displayFolder: Executive Intelligence
+
+		measure 'Random fifth' = 0.2
+			formatString: 0%
+			displayFolder: Executive Intelligence
+
+		measure 'Capture base line' = FORMAT ( [Band 5 crossing sites], "#,0" ) & " of " & FORMAT ( [All crossing sites], "#,0" ) & " · 2023 + 2024"
+			displayFolder: Executive Intelligence
+
+		measure 'Hit rate base line' = FORMAT ( [Band 5 crossing sites], "#,0" ) & " of " & FORMAT ( [Band 5 sites], "#,0" ) & " · 2023 + 2024"
+			displayFolder: Executive Intelligence
+
+		measure 'Crossing rate 2023' = CALCULATE ( [Base rate], Sites[Score year] = 2023 )
+			formatString: 0.0%
+			displayFolder: Executive Intelligence
+
+		measure 'Crossing rate 2024' = CALCULATE ( [Base rate], Sites[Score year] = 2024 )
+			formatString: 0.0%
+			displayFolder: Executive Intelligence
+
+		measure 'Portfolio site-years' = CALCULATE ( [Sites scored], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ) )
+			formatString: #,0
+			displayFolder: Risk Landscape
+
+		measure 'Portfolio crossing sites' = CALCULATE ( [Sites crossing next year], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ) )
+			formatString: #,0
+			displayFolder: Risk Landscape
+
+		measure 'Portfolio crossing rate' = DIVIDE ( [Portfolio crossing sites], [Portfolio site-years] )
+			formatString: 0.0%
+			displayFolder: Risk Landscape
+
+		measure 'Portfolio base line' = FORMAT ( [Portfolio crossing sites], "#,0" ) & " of " & FORMAT ( [Portfolio site-years], "#,0" ) & " · " & [Test year label]
+			displayFolder: Risk Landscape
+
+		measure 'Portfolio DART rate' = CALCULATE ( [Average site DART rate], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ) )
+			formatString: 0.00
+			displayFolder: Risk Landscape
+
+		measure 'Band 5 site-years' = CALCULATE ( [Sites scored], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Band order] ), Sites[Risk band] = "5 highest" )
+			formatString: #,0
+			displayFolder: Risk Landscape
+
+		measure 'Band 5 share' = DIVIDE ( [Band 5 site-years], [Portfolio site-years] )
+			formatString: 0.0%
+			displayFolder: Risk Landscape
+
+		measure 'Band 5 base line' = FORMAT ( [Band 5 site-years], "#,0" ) & " band 5 site-years · " & [Test year label]
+			displayFolder: Risk Landscape
+
+		measure 'Band 5 crossing range' = ```
+				VAR t =
+				    FILTER (
+				        ADDCOLUMNS (
+				            VALUES ( Sites[Sector] ),
+				            "@n", CALCULATE ( [Sites scored], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Band order] ), Sites[Risk band] = "5 highest" ),
+				            "@r", CALCULATE ( [Base rate], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Band order] ), Sites[Risk band] = "5 highest" )
+				        ),
+				        [@n] >= 100
+				    )
+				VAR lo = MINX ( t, [@r] )
+				VAR hi = MAXX ( t, [@r] )
+				RETURN
+				    IF (
+				        NOT ISEMPTY ( t ),
+				        IF ( ROUND ( lo, 3 ) = ROUND ( hi, 3 ), FORMAT ( lo, "0.0%" ), FORMAT ( lo, "0.0%" ) & " to " & FORMAT ( hi, "0.0%" ) )
+				    )
+				```
+			displayFolder: Risk Landscape
+
+		measure 'Map band order' = COALESCE ( SELECTEDVALUE ( Bands[Band order] ), 5 )
+			formatString: 0
+			displayFolder: Risk Landscape
+
+		measure 'Map share' = ```
+				VAR b = [Map band order]
+				RETURN DIVIDE ( CALCULATE ( [Sites scored], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Risk band] ), Sites[Band order] = b ), [Portfolio site-years] )
+				```
+			formatString: 0.0%
+			displayFolder: Risk Landscape
+
+		measure 'Map tile label' = IF ( [Portfolio site-years] >= 500, SELECTEDVALUE ( StateGrid[State] ), " " )
+			displayFolder: Risk Landscape
+
+		measure 'Map tile colour' = ```
+				VAR s = [Map share]
+				RETURN IF ( [Portfolio site-years] >= 500, SWITCH ( TRUE (), s >= 0.25, "#C98369", s >= 0.15, "#D9B9A7", "#EADFD2" ) )
+				```
+			displayFolder: Risk Landscape
+
+		measure 'State name label' = SELECTEDVALUE ( StateGrid[State name] )
+			displayFolder: Risk Landscape
+
+		measure 'Map hover x' = SELECTEDVALUE ( StateGrid[Grid column] )
+			formatString: ;;;
+			displayFolder: Risk Landscape
+
+		measure 'Map hover y' = 7 - SELECTEDVALUE ( StateGrid[Grid row] )
+			formatString: ;;;
+			displayFolder: Risk Landscape
+
+		measure 'Map title' = "Band " & [Map band order] & " share by state"
+			displayFolder: Risk Landscape
+
+		measure 'Map legend title' = "Share of site-years, " & [Test year label]
+			displayFolder: Risk Landscape
+
+		measure 'Map share label' = IF ( [Portfolio site-years] < 500, "Too few sites", FORMAT ( [Map share], "0.0%" ) & " in band " & [Map band order] )
+			displayFolder: Risk Landscape
+
+		measure 'State site-years' = IF ( [Portfolio site-years] < 500, "Under 500", FORMAT ( [Portfolio site-years], "#,0" ) ) & " site-years · " & [Test year label]
+			displayFolder: Risk Landscape
+
+		measure 'Site-years label' = FORMAT ( [Portfolio site-years], "#,0" )
+			displayFolder: Risk Landscape
+
+		measure 'Portfolio note' = [Test year label] & " · DART: serious-injury rate per 100 full-time workers"
+			displayFolder: Risk Landscape
+
+		measure 'Cell site-years' = CALCULATE ( [Sites scored], REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ) )
+			formatString: #,0
+			displayFolder: Risk Landscape
+
+		measure 'Cell crossing rate' = ```
+				VAR n = [Cell site-years]
+				RETURN IF ( n > 0, IF ( n < 100, -1, CALCULATE ( [Base rate], REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ) ) ) )
+				```
+			formatString: 0.0%;"Too few sites"
+			displayFolder: Risk Landscape
+
+		measure 'Band table note' = "Crossed the line next year, " & [Test year label] & " · line: each industry's worst-20% DART rate this year · data bars 0 to 100% · too few sites: under 100 site-years"
+			displayFolder: Risk Landscape
+
+		measure 'Crossed Manufacturing' = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Manufacturing" ) )
+			formatString: 0.0%;"Too few sites"
+			displayFolder: Risk Landscape
+
+		measure 'Crossed Construction' = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Construction" ) )
+			formatString: 0.0%;"Too few sites"
+			displayFolder: Risk Landscape
+
+		measure 'Crossed Transport and warehousing' = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Transport and warehousing" ) )
+			formatString: 0.0%;"Too few sites"
+			displayFolder: Risk Landscape
+
+		measure 'Crossed Wholesale' = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Wholesale" ) )
+			formatString: 0.0%;"Too few sites"
+			displayFolder: Risk Landscape
+
+		measure 'Crossed Utilities' = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Utilities" ) )
+			formatString: 0.0%;"Too few sites"
+			displayFolder: Risk Landscape
+
+		measure 'Crossed Agriculture' = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Agriculture" ) )
+			formatString: 0.0%;"Too few sites"
+			displayFolder: Risk Landscape
+
+		measure 'Crossed Mining, oil and gas' = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Mining, oil and gas" ) )
+			formatString: 0.0%;"Too few sites"
+			displayFolder: Risk Landscape
+
+	ref table Models
+
+		measure 'AUC 2023' = CALCULATE ( AVERAGE ( 'Models'[AUC] ), 'Models'[Test year] = 2023 )
+			formatString: 0.000
+			displayFolder: Executive Intelligence
+
+		measure 'AUC 2024' = CALCULATE ( AVERAGE ( 'Models'[AUC] ), 'Models'[Test year] = 2024 )
+			formatString: 0.000
+			displayFolder: Executive Intelligence
+
+		measure 'AUC 2023 words' = ```
+				VAR m = SELECTEDVALUE ( 'Models'[Model] )
+				RETURN IF ( m <> "Last year's rate", "about " & FORMAT ( ROUND ( [AUC 2023] * 10, 0 ), "0" ) & " in 10" )
+				```
+			displayFolder: Executive Intelligence
+
+		measure 'Picked model' = SELECTEDVALUE ( ModelPicker[Model], "Scorecard" )
+			displayFolder: Model Trust
+
+		measure 'Picked test year' = SELECTEDVALUE ( TestYearPicker[Test year], 2023 )
+			formatString: 0
+			displayFolder: Model Trust
+
+		measure 'Picked AUC' = ```
+				VAR m = [Picked model]
+				VAR y = [Picked test year]
+				RETURN CALCULATE ( AVERAGE ( 'Models'[AUC] ), REMOVEFILTERS ( 'Models' ), 'Models'[Model] = m, 'Models'[Test year] = y )
+				```
+			formatString: 0.00
+			displayFolder: Model Trust
+
+		measure 'Picked AUC base' = ```
+				VAR m = [Picked model]
+				VAR y = [Picked test year]
+				VAR lo = CALCULATE ( AVERAGE ( 'Models'[AUC low] ), REMOVEFILTERS ( 'Models' ), 'Models'[Model] = m, 'Models'[Test year] = y )
+				VAR hi = CALCULATE ( AVERAGE ( 'Models'[AUC high] ), REMOVEFILTERS ( 'Models' ), 'Models'[Model] = m, 'Models'[Test year] = y )
+				RETURN m & ", " & y & " · 95% CI " & FORMAT ( lo, "0.000" ) & " to " & FORMAT ( hi, "0.000" )
+				```
+			displayFolder: Model Trust
+
+		measure 'Picked Gini' = ```
+				VAR m = [Picked model]
+				VAR y = [Picked test year]
+				RETURN CALCULATE ( AVERAGE ( 'Models'[Gini] ), REMOVEFILTERS ( 'Models' ), 'Models'[Model] = m, 'Models'[Test year] = y )
+				```
+			formatString: 0.00
+			displayFolder: Model Trust
+
+		measure 'Picked test pairs' = ```
+				VAR y = [Picked test year]
+				RETURN FORMAT ( CALCULATE ( MAX ( 'Models'[Sites] ), REMOVEFILTERS ( 'Models' ), 'Models'[Test year] = y ), "#,0" ) & " test pairs · " & y
+				```
+			displayFolder: Model Trust
+
+		measure 'Picked model and year' = [Picked model] & ", " & [Picked test year]
+			displayFolder: Model Trust
+
+		measure 'ROC AUC label' = "AUC " & FORMAT ( [Picked AUC], "0.00" )
+			displayFolder: Model Trust
+
+		measure 'Gini 2023' = CALCULATE ( AVERAGE ( 'Models'[Gini] ), 'Models'[Test year] = 2023 )
+			formatString: 0.000
+			displayFolder: Model Trust
+
+		measure 'Gini 2024' = CALCULATE ( AVERAGE ( 'Models'[Gini] ), 'Models'[Test year] = 2024 )
+			formatString: 0.000
+			displayFolder: Model Trust
+
+		measure 'Capture top 20% 2023' = CALCULATE ( AVERAGE ( 'Models'[Capture top 20%] ), 'Models'[Test year] = 2023 )
+			formatString: 0.0%
+			displayFolder: Model Trust
+
+		measure 'Capture top 20% 2024' = CALCULATE ( AVERAGE ( 'Models'[Capture top 20%] ), 'Models'[Test year] = 2024 )
+			formatString: 0.0%
+			displayFolder: Model Trust
+
+		measure 'Precision top 20% 2023' = CALCULATE ( AVERAGE ( 'Models'[Precision top 20%] ), 'Models'[Test year] = 2023 )
+			formatString: 0.0%
+			displayFolder: Model Trust
+
+		measure 'Precision top 20% 2024' = CALCULATE ( AVERAGE ( 'Models'[Precision top 20%] ), 'Models'[Test year] = 2024 )
+			formatString: 0.0%
+			displayFolder: Model Trust
+
+		measure 'Model row fill' = IF ( SELECTEDVALUE ( 'Models'[Model] ) = [Picked model], "#E3DECF", "#F7F5EC" )
+			displayFolder: Model Trust
+
+	ref table PricingSummary
+
+		measure 'Wrong band A to B 2023 central' = ```
+				VAR f = FILTER ( ALL ( PricingSummary ), PricingSummary[Score year] = 2023 && PricingSummary[Claim-cost scenario] = "central" )
+				RETURN FORMAT ( MAXX ( f, PricingSummary[Misallocated share A] ), "0.0%" ) & UNICHAR ( 8201 ) & "→" & UNICHAR ( 8201 )
+				    & FORMAT ( MAXX ( f, PricingSummary[Misallocated share B] ), "0.0%" )
+				```
+			displayFolder: Executive Intelligence
+
+		measure 'Selected scenario' = SELECTEDVALUE ( ClaimCostScenarios[Scenario key], "central" )
+			displayFolder: Pricing Lab
+
+		measure 'Selected score year' = SELECTEDVALUE ( ScoreYears[Score year], 2023 )
+			formatString: 0
+			displayFolder: Pricing Lab
+
+		measure 'Pricing scenario label' = FORMAT ( [Selected score year], "0" ) & " " & [Selected scenario]
+			displayFolder: Pricing Lab
+
+		measure 'Priced sites' = ```
+				VAR y = [Selected score year]
+				RETURN CALCULATE ( SUM ( PricingBands[Sites] ), REMOVEFILTERS ( PricingBands ), PricingBands[Claim-cost scenario] = "central", PricingBands[Score year] = y )
+				```
+			formatString: #,0
+			displayFolder: Pricing Lab
+
+		measure 'Pricing base line' = [Pricing scenario label] & " · " & FORMAT ( [Priced sites], "#,0" ) & " sites"
+			displayFolder: Pricing Lab
+
+		measure 'Pricing year base line' = FORMAT ( [Selected score year], "0" ) & " · " & FORMAT ( [Priced sites], "#,0" ) & " sites"
+			displayFolder: Pricing Lab
+
+		measure 'Wrong band share A' = ```
+				VAR s = [Selected scenario]
+				VAR y = [Selected score year]
+				RETURN CALCULATE ( AVERAGE ( PricingSummary[Misallocated share A] ), PricingSummary[Claim-cost scenario] = s, PricingSummary[Score year] = y )
+				```
+			formatString: 0.0%
+			displayFolder: Pricing Lab
+
+		measure 'Wrong band share B' = ```
+				VAR s = [Selected scenario]
+				VAR y = [Selected score year]
+				RETURN CALCULATE ( AVERAGE ( PricingSummary[Misallocated share B] ), PricingSummary[Claim-cost scenario] = s, PricingSummary[Score year] = y )
+				```
+			formatString: 0.0%
+			displayFolder: Pricing Lab
+
+		measure 'Wrong band A to B' = FORMAT ( [Wrong band share A], "0.0%" ) & UNICHAR ( 8201 ) & "→" & UNICHAR ( 8201 ) & FORMAT ( [Wrong band share B], "0.0%" )
+			displayFolder: Pricing Lab
+
+		measure 'Overall loss ratio A' = ```
+				VAR s = [Selected scenario]
+				VAR y = [Selected score year]
+				RETURN CALCULATE ( AVERAGE ( PricingSummary[Overall ratio A] ), PricingSummary[Claim-cost scenario] = s, PricingSummary[Score year] = y )
+				```
+			formatString: 0.00
+			displayFolder: Pricing Lab
+
+		measure 'Overall loss ratio B' = ```
+				VAR s = [Selected scenario]
+				VAR y = [Selected score year]
+				RETURN CALCULATE ( AVERAGE ( PricingSummary[Overall ratio B] ), PricingSummary[Claim-cost scenario] = s, PricingSummary[Score year] = y )
+				```
+			formatString: 0.00
+			displayFolder: Pricing Lab
+
+		measure 'Overall ratio A to B' = FORMAT ( [Overall loss ratio A], "0.00" ) & UNICHAR ( 8201 ) & "→" & UNICHAR ( 8201 ) & FORMAT ( [Overall loss ratio B], "0.00" )
+			displayFolder: Pricing Lab
+
+		measure 'Scenario premium' = ```
+				VAR y = [Selected score year]
+				RETURN FORMAT ( CALCULATE ( SUM ( PricingSummary[Total premium] ), PricingSummary[Score year] = y ) / 1E9, "$#,0.00" ) & "bn"
+				```
+			displayFolder: Pricing Lab
+
+		measure 'Scenario simulated loss' = ```
+				VAR y = [Selected score year]
+				RETURN FORMAT ( CALCULATE ( SUM ( PricingSummary[Simulated loss] ), PricingSummary[Score year] = y ) / 1E9, "$#,0.00" ) & "bn"
+				```
+			displayFolder: Pricing Lab
+
+		measure 'Scenario loss ratio' = ```
+				VAR y = [Selected score year]
+				RETURN CALCULATE ( AVERAGE ( PricingSummary[Overall ratio A] ), PricingSummary[Score year] = y )
+				```
+			formatString: 0.00
+			displayFolder: Pricing Lab
+
+		measure 'Scenario wrong band A to B' = ```
+				VAR y = [Selected score year]
+				RETURN FORMAT ( CALCULATE ( AVERAGE ( PricingSummary[Misallocated share A] ), PricingSummary[Score year] = y ), "0.0%" ) & " → "
+				    & FORMAT ( CALCULATE ( AVERAGE ( PricingSummary[Misallocated share B] ), PricingSummary[Score year] = y ), "0.0%" )
+				```
+			displayFolder: Pricing Lab
+
+		measure 'Scenario band spread A to B' = ```
+				VAR y = [Selected score year]
+				RETURN FORMAT ( CALCULATE ( AVERAGE ( PricingSummary[Band spread A] ), PricingSummary[Score year] = y ), "0.0" ) & "x → "
+				    & FORMAT ( CALCULATE ( AVERAGE ( PricingSummary[Band spread B] ), PricingSummary[Score year] = y ), "0.0" ) & "x"
+				```
+			displayFolder: Pricing Lab
+
+		measure 'Scenario row fill' = IF ( SELECTEDVALUE ( PricingSummary[Claim-cost scenario] ) = [Selected scenario], "#E3DECF", "#F7F5EC" )
+			displayFolder: Pricing Lab
+
+	ref table ROC
+
+		measure 'ROC true positive rate' = ```
+				VAR m = [Picked model]
+				VAR y = [Picked test year]
+				RETURN CALCULATE ( MAX ( ROC[True positive rate] ), ROC[Model] = m, ROC[Test year] = y )
+				```
+			formatString: 0%
+			displayFolder: Model Trust
+
+		measure 'Coin toss' = ```
+				VAR m = [Picked model]
+				VAR y = [Picked test year]
+				RETURN CALCULATE ( MAX ( ROC[False positive rate] ), ROC[Model] = m, ROC[Test year] = y )
+				```
+			formatString: 0%
+			displayFolder: Model Trust
+
+	ref table Calibration
+
+		measure 'Share that crossed' = ```
+				VAR m = [Picked model]
+				VAR y = [Picked test year]
+				RETURN CALCULATE ( AVERAGE ( Calibration[Observed share] ), Calibration[Model] = m, Calibration[Test year] = y )
+				```
+			formatString: 0.0%
+			displayFolder: Model Trust
+
+		measure 'Predicted' = ```
+				VAR m = [Picked model]
+				VAR y = [Picked test year]
+				RETURN CALCULATE ( AVERAGE ( Calibration[Predicted share] ), Calibration[Model] = m, Calibration[Test year] = y )
+				```
+			formatString: 0.0%
+			displayFolder: Model Trust
+
+		measure 'Calibration note' = IF ( [Picked model] = "Last year's rate", "Last year's rate is a rank, not a probability, so it has no calibration.", " " )
+			displayFolder: Model Trust
+
+	ref table Robustness
+
+		measure 'Robustness AUC 2023' = SUM ( Robustness[AUC 2023] )
+			formatString: 0.000
+			displayFolder: Model Trust
+
+	ref table Drivers
+
+		measure 'Driver AUC drop' = SUM ( Drivers[AUC drop] )
+			formatString: 0.000
+			displayFolder: Model Trust
+
+	ref table PricingBands
+
+		measure 'Band loss ratio A' = ```
+				VAR s = [Selected scenario]
+				VAR y = [Selected score year]
+				RETURN CALCULATE ( AVERAGE ( PricingBands[Loss ratio A] ), PricingBands[Claim-cost scenario] = s, PricingBands[Score year] = y )
+				```
+			formatString: 0.00
+			displayFolder: Pricing Lab
+
+		measure 'Band loss ratio B' = ```
+				VAR s = [Selected scenario]
+				VAR y = [Selected score year]
+				RETURN CALCULATE ( AVERAGE ( PricingBands[Loss ratio B] ), PricingBands[Claim-cost scenario] = s, PricingBands[Score year] = y )
+				```
+			formatString: 0.00
+			displayFolder: Pricing Lab
+
+		measure 'Band loss ratio low' = MIN ( [Band loss ratio A], [Band loss ratio B] )
+			formatString: 0.00
+			displayFolder: Pricing Lab
+
+		measure 'Band loss ratio high' = MAX ( [Band loss ratio A], [Band loss ratio B] )
+			formatString: 0.00
+			displayFolder: Pricing Lab
+
+		measure 'Band premium change' = ```
+				VAR s = [Selected scenario]
+				VAR y = [Selected score year]
+				RETURN CALCULATE ( AVERAGE ( PricingBands[Premium change] ), PricingBands[Claim-cost scenario] = s, PricingBands[Score year] = y )
+				```
+			formatString: +0.0%;−0.0%;0.0%
+			displayFolder: Pricing Lab

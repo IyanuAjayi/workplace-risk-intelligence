@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1920">
+<title>Concept C Executive</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,opsz,wght@0,14..32,400..900;1,14..32,400..900&display=block" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden}
+body{position:relative;background:#0A1212;color:#EFECDF;font-family:Inter,Arial,sans-serif;font-optical-sizing:auto;
+ -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+.mono{font-family:'IBM Plex Mono',Consolas,monospace}
+.abs{position:absolute}
+.t1{color:#EFECDF}.t2{color:#B3BFB8}.t3{color:#8A9892}
+.cap{text-transform:uppercase;letter-spacing:.08em}
+.panel{position:absolute;background:#101E1D;border:1px solid #2B3D3B}
+.tbar{position:absolute;left:0;right:0;top:0;height:28px;background:#274A48;display:flex;align-items:center;
+ justify-content:space-between;padding:0 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;
+ letter-spacing:.08em;text-transform:uppercase;color:#EFECDF}
+.tbar .meta{color:#C9D2CB;font-weight:400}
+.ctitle{position:absolute;font-size:16px;line-height:20px;font-weight:600;color:#EFECDF;letter-spacing:-.005em}
+.legend{position:absolute;display:flex;gap:20px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#B3BFB8}
+.legend i{display:inline-block;vertical-align:-1px;margin-right:7px}
+svg text{font-family:'IBM Plex Mono',monospace}
+
+.rail{position:absolute;left:0;top:0}
+.top{position:absolute;left:0;top:0;width:1920px;height:64px}
+.lock1{position:absolute;left:205px;top:14px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:13px;letter-spacing:.14em;color:#EFECDF}
+.lock2{position:absolute;left:205px;top:34px;font-size:13px;line-height:16px;color:#B3BFB8}
+.fields{position:absolute;right:32px;top:13px;display:flex;gap:30px}
+.f .l{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8A9892;line-height:16px}
+.f .v{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#EFECDF;line-height:20px}
+.key{position:absolute;top:72px;height:40px;width:296px;border:1px solid #2B3D3B;background:#101E1D;border-radius:4px;
+ display:flex;align-items:center;padding:0 14px;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.06em;color:#B3BFB8}
+.key b{font-weight:500;color:#8A9892;margin-right:12px;letter-spacing:0}
+.key .dot{margin-left:auto;width:6px;height:6px;border-radius:50%;background:#3A4F4C}
+.key.on{background:#1936E8;border-color:#7B8CFF;color:#FFFFFF}
+.key.on b{color:#FFFFFF}.key.on .dot{background:#FFFFFF}
+.ctx{position:absolute;left:1280px;top:72px;width:608px;height:40px;border-left:1px solid #2B3D3B;padding-left:16px;
+ font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:20px;color:#B3BFB8;white-space:nowrap}
+.ctx .l{color:#8A9892;letter-spacing:.08em;margin-right:8px}
+.eyebrow{position:absolute;display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.edot{width:7px;height:7px;border-radius:50%;background:#E24337;flex:none}
+.hl{position:absolute;left:32px;top:150px;width:1232px;font-size:36px;line-height:44px;font-weight:600;letter-spacing:-.018em;color:#EFECDF}
+.hl em{font-style:normal;color:#E24337}
+.sub{position:absolute;left:32px;top:198px;width:1232px;font-size:16px;line-height:24px;color:#B3BFB8}
+.def{position:absolute;left:1280px;top:126px;width:608px;height:104px;border:1px solid #2B3D3B;padding:10px 16px}
+.def .l{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;color:#8A9892;margin-bottom:4px}
+.def p{font-size:14px;line-height:20px;color:#EFECDF}
+.def p.s{color:#B3BFB8;font-size:14px;line-height:20px;margin-top:2px;white-space:nowrap;letter-spacing:-.01em}
+/* primary KPI: the terminal screen */
+.kpi1{position:absolute;left:32px;top:244px;width:452px;height:356px;background:#E6ECE2;border:1px solid #4A5E5A;border-radius:4px;overflow:hidden}
+.kpi1 .tbar{color:#E6ECE2}
+.kpi1 .tbar .meta{color:#C9D2CB}
+.hero{position:absolute;left:22px;top:40px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:104px;line-height:104px;letter-spacing:-.02em;color:#0A1212;white-space:nowrap}
+.pt{margin:0 -.17em}
+.u{font-size:.56em;color:#4A5856;margin-left:.06em;letter-spacing:0}
+.kp .u{color:#B3BFB8}
+.kdesc{position:absolute;left:28px;top:150px;width:396px;font-size:17px;line-height:24px;font-weight:500;color:#303A39}
+.cmp{position:absolute;left:28px;top:190px;width:396px;border-top:1px solid #AEB9B1}
+.cmp div{display:flex;justify-content:space-between;height:30px;align-items:center;border-bottom:1px solid #C9D1C8;
+ font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4A5856}
+.cmp div span:last-child{font-size:14px;color:#0A1212;font-weight:500}
+.cmp div.sig{height:40px}
+.cmp div.sig span:last-child{font-size:26px;color:#E24337;letter-spacing:-.01em}
+.cmp div.sig span:first-child{display:flex;align-items:center;gap:8px}
+.kbase{position:absolute;left:28px;top:322px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#4A5856}
+/* secondary KPIs */
+.kp{position:absolute;left:0;width:450px;height:114px;border-bottom:1px solid #22332F}
+.kp:last-child{border-bottom:0}
+.kp .lab{position:absolute;left:20px;top:14px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;color:#8A9892;display:flex;gap:10px;align-items:center}
+.kp .val{position:absolute;left:18px;top:36px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:40px;line-height:44px;letter-spacing:-.01em;color:#EFECDF;white-space:nowrap}
+.kp .txt{position:absolute;left:196px;top:38px;width:238px;font-size:14px;line-height:19px;color:#EFECDF}
+.kp .meta{position:absolute;left:20px;top:88px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A9892}
+.sim{display:inline-flex;align-items:center;height:20px;padding:0 7px;border:1px solid #F2D858;color:#F2D858;border-radius:2px;
+ font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;font-weight:500}
+/* sector table */
+.stab{position:absolute;left:16px;top:74px;width:730px}
+.shead,.srow{display:grid;grid-template-columns:214px 88px 262px 82px 84px;align-items:center}
+.shead{height:26px;border-bottom:1px solid #3A4F4C;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#8A9892}
+.srow{height:27px;border-bottom:1px solid #1F2E2C;font-size:14px;color:#EFECDF}
+.srow .c2,.srow .c4,.srow .c5,.shead .c2,.shead .c4,.shead .c5{text-align:right}
+.srow .c2,.srow .c4,.srow .c5,.srow .sval{font-family:'IBM Plex Mono',monospace;font-size:13px}
+.srow .c2{color:#B3BFB8}
+.c3{display:flex;align-items:center;padding-left:18px}
+.track{position:relative;display:inline-block;width:168px;height:10px}
+.track .fill{position:absolute;left:0;top:0;height:10px;background:#93A49D;border-radius:0 2px 2px 0}
+.track .tick{position:absolute;left:134.4px;top:-6px;width:1px;height:22px;background:#B3BFB8;opacity:.7}
+.sval{margin-left:12px;width:52px;text-align:right}
+.srow.total{border-bottom:0;border-top:1px solid #3A4F4C;color:#B3BFB8;font-weight:500}
+.flag{margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A9892;border:1px solid #3A4F4C;padding:0 4px;border-radius:2px}
+.note{position:absolute;font-size:14px;line-height:19px;color:#B3BFB8}
+/* actions */
+.atab{position:absolute;left:16px;top:74px;width:574px}
+.ahead,.arow{display:grid;grid-template-columns:118px 112px 344px;align-items:center}
+.ahead{height:26px;border-bottom:1px solid #3A4F4C;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#8A9892}
+.arow{height:52px;border-bottom:1px solid #1F2E2C;font-size:14px;line-height:19px;color:#EFECDF}
+.arow .sig{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#EFECDF}
+.chipb{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:8px;vertical-align:-1px}
+.arow .use b{font-weight:600}
+.caveats{position:absolute;left:16px;top:290px;width:574px;display:flex;flex-wrap:wrap;gap:8px}
+.cav{display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 10px;border:1px solid #3A4F4C;border-radius:2px;font-size:13px;color:#EFECDF}
+.cav i{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A9892;letter-spacing:.06em}
+.cavl{position:absolute;left:16px;top:268px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;color:#8A9892}
+/* footer */
+.foot{position:absolute;top:1004px;height:60px;border-top:1px solid #2B3D3B;padding-top:10px}
+.foot .l{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;color:#8A9892;line-height:16px}
+.foot p{font-size:13px;line-height:17px;color:#B3BFB8;margin-top:3px}
+.corner{position:absolute;right:32px;bottom:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A9892;letter-spacing:.04em}
+</style></head>
+<body>
+<svg class="rail" width="1920" height="1080">
+<line x1="16" x2="16" y1="0" y2="1080" stroke="#14211F" stroke-width="1"/>
+<line x1="492" x2="492" y1="0" y2="1080" stroke="#14211F" stroke-width="1"/>
+<line x1="1272" x2="1272" y1="0" y2="1080" stroke="#14211F" stroke-width="1"/>
+<line x1="1904" x2="1904" y1="0" y2="1080" stroke="#14211F" stroke-width="1"/>
+<line x1="0" x2="1920" y1="64" y2="64" stroke="#14211F" stroke-width="1"/>
+<line x1="0" x2="1920" y1="120" y2="120" stroke="#14211F" stroke-width="1"/>
+<line x1="0" x2="1920" y1="236" y2="236" stroke="#14211F" stroke-width="1"/>
+<line x1="0" x2="1920" y1="608" y2="608" stroke="#14211F" stroke-width="1"/>
+<line x1="0" x2="1920" y1="996" y2="996" stroke="#14211F" stroke-width="1"/>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="16" cy="64" r="4.5"/><line x1="8" x2="24" y1="64" y2="64"/><line x1="16" x2="16" y1="56" y2="72"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="16" cy="120" r="4.5"/><line x1="8" x2="24" y1="120" y2="120"/><line x1="16" x2="16" y1="112" y2="128"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="16" cy="236" r="4.5"/><line x1="8" x2="24" y1="236" y2="236"/><line x1="16" x2="16" y1="228" y2="244"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="16" cy="608" r="4.5"/><line x1="8" x2="24" y1="608" y2="608"/><line x1="16" x2="16" y1="600" y2="616"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="16" cy="996" r="4.5"/><line x1="8" x2="24" y1="996" y2="996"/><line x1="16" x2="16" y1="988" y2="1004"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="492" cy="64" r="4.5"/><line x1="484" x2="500" y1="64" y2="64"/><line x1="492" x2="492" y1="56" y2="72"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="492" cy="120" r="4.5"/><line x1="484" x2="500" y1="120" y2="120"/><line x1="492" x2="492" y1="112" y2="128"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="492" cy="236" r="4.5"/><line x1="484" x2="500" y1="236" y2="236"/><line x1="492" x2="492" y1="228" y2="244"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="492" cy="608" r="4.5"/><line x1="484" x2="500" y1="608" y2="608"/><line x1="492" x2="492" y1="600" y2="616"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="492" cy="996" r="4.5"/><line x1="484" x2="500" y1="996" y2="996"/><line x1="492" x2="492" y1="988" y2="1004"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="1272" cy="64" r="4.5"/><line x1="1264" x2="1280" y1="64" y2="64"/><line x1="1272" x2="1272" y1="56" y2="72"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="1272" cy="120" r="4.5"/><line x1="1264" x2="1280" y1="120" y2="120"/><line x1="1272" x2="1272" y1="112" y2="128"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="1272" cy="236" r="4.5"/><line x1="1264" x2="1280" y1="236" y2="236"/><line x1="1272" x2="1272" y1="228" y2="244"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="1272" cy="608" r="4.5"/><line x1="1264" x2="1280" y1="608" y2="608"/><line x1="1272" x2="1272" y1="600" y2="616"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="1272" cy="996" r="4.5"/><line x1="1264" x2="1280" y1="996" y2="996"/><line x1="1272" x2="1272" y1="988" y2="1004"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="1904" cy="64" r="4.5"/><line x1="1896" x2="1912" y1="64" y2="64"/><line x1="1904" x2="1904" y1="56" y2="72"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="1904" cy="120" r="4.5"/><line x1="1896" x2="1912" y1="120" y2="120"/><line x1="1904" x2="1904" y1="112" y2="128"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="1904" cy="236" r="4.5"/><line x1="1896" x2="1912" y1="236" y2="236"/><line x1="1904" x2="1904" y1="228" y2="244"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="1904" cy="608" r="4.5"/><line x1="1896" x2="1912" y1="608" y2="608"/><line x1="1904" x2="1904" y1="600" y2="616"/></g>
+<g stroke="#2E423F" stroke-width="1" fill="none"><circle cx="1904" cy="996" r="4.5"/><line x1="1896" x2="1912" y1="996" y2="996"/><line x1="1904" x2="1904" y1="988" y2="1004"/></g>
+</svg>
+<div class="top">
+  <img src="../brand/parakeet-logo.svg" alt="Parakeet Risk" class="abs" style="left:32px;top:20px;height:24px">
+  <div class="abs" style="left:188px;top:16px;width:1px;height:32px;background:#3A4F4C"></div>
+  <div class="lock1">WORKPLACE RISK INTELLIGENCE</div>
+  <div class="lock2">Predictive insights for industrial insurance underwriting</div>
+  <div class="fields"><div class="f"><div class="l">Test years</div><div class="v">2023 and 2024</div></div><div class="f"><div class="l">Outcomes</div><div class="v">2024 and 2025</div></div><div class="f"><div class="l">Training</div><div class="v">2016 to 2022</div></div><div class="f"><div class="l">Data</div><div class="v">OSHA ITA 300A, 2016 to 2025</div></div><div class="f"><div class="l">As of</div><div class="v">submissions to 31 Aug 2026</div></div></div>
+</div>
+<div class="key on" style="left:32px"><b>F1</b>EXECUTIVE INTELLIGENCE<span class="dot"></span></div>
+<div class="key" style="left:344px"><b>F2</b>RISK LANDSCAPE<span class="dot"></span></div>
+<div class="key" style="left:656px"><b>F3</b>MODEL TRUST<span class="dot"></span></div>
+<div class="key" style="left:968px"><b>F4</b>PRICING LAB<span class="dot"></span></div>
+<div class="ctx"><div><span class="l">SCOPE</span>Private-sector industrial test sites with a BLS rate</div>
+<div><span class="l">BASE</span>199,150 site-years · 2023: 99,185 · 2024: 99,965 · all sectors · all states</div></div>
+
+<div class="eyebrow t2" style="left:32px;top:130px"><span class="edot"></span>Finding / hold-out test, starting years 2023 and 2024</div>
+<div class="hl">The highest risk band crossed the line <em>16x</em> as often as the lowest.</div>
+<div class="sub">The line is set within each industry, so the score measures risk against a site's own peers. Both test years were held out of training, and the pattern held in each.</div>
+<div class="def"><div class="l">TARGET · CROSSING THE LINE</div>
+<p>A site crosses the line when its next-year serious-injury (DART) rate is above the rate that marked the worst 20% of its industry this year.</p>
+<p class="s">DART: days away, restriction or transfer cases per 200,000 hours.</p></div>
+
+<div class="kpi1">
+  <div class="tbar"><span style="display:flex;align-items:center;gap:9px"><span class="edot"></span>Key signal / band 5</span><span class="meta">2023 test year</span></div>
+  <div class="hero">46<span class="pt">.</span>5<span class="u">%</span></div>
+  <div class="kdesc">of band 5 sites crossed the line next year</div>
+  <div class="cmp">
+    <div><span>Band 1, lowest</span><span>2.9%</span></div>
+    <div class="sig"><span><span class="edot"></span>Ratio, band 5 to band 1</span><span>16.0x</span></div>
+    <div><span>2024 repeat, band 5 vs band 1</span><span>47.5% vs 3.0%</span></div>
+  </div>
+  <div class="kbase">99,185 SITE-YEARS SCORED · OBSERVED, NOT MODELLED</div>
+</div>
+
+<div class="panel" style="left:500px;top:244px;width:764px;height:356px">
+  <div class="tbar"><span>01 / Risk distribution</span><span class="meta">Observed · 2023 and 2024</span></div>
+  <div class="ctitle" style="left:16px;top:42px">Share of sites that crossed the line the next year, by risk band</div>
+  <div class="legend" style="left:16px;top:70px"><span><i style="width:12px;height:12px;background:linear-gradient(90deg,#1F5241 0 20%,#527049 20% 40%,#907335 40% 60%,#C48243 60% 80%,#FF8580 80%)"></i>2023 · 99,185 site-years</span>
+  <span><i style="width:12px;height:12px;background:#4F6662"></i>2024 · 99,965 site-years</span>
+  <span><i style="width:14px;height:0;border-top:2px dotted #E24337"></i>Band 1 level, 2023</span></div>
+  <svg width="762" height="300" viewBox="0 0 762 300" class="abs" style="left:0;top:76px">
+<line x1="64" x2="738" y1="222.0" y2="222.0" stroke="#3A4F4C" stroke-width="1"/>
+<text x="54" y="226.0" font-size="12" fill="#8A9892" text-anchor="end">0%</text>
+<line x1="64" x2="738" y1="183.6" y2="183.6" stroke="#1F2E2C" stroke-width="1"/>
+<text x="54" y="187.6" font-size="12" fill="#8A9892" text-anchor="end">10%</text>
+<line x1="64" x2="738" y1="145.2" y2="145.2" stroke="#1F2E2C" stroke-width="1"/>
+<text x="54" y="149.2" font-size="12" fill="#8A9892" text-anchor="end">20%</text>
+<line x1="64" x2="738" y1="106.8" y2="106.8" stroke="#1F2E2C" stroke-width="1"/>
+<text x="54" y="110.8" font-size="12" fill="#8A9892" text-anchor="end">30%</text>
+<line x1="64" x2="738" y1="68.4" y2="68.4" stroke="#1F2E2C" stroke-width="1"/>
+<text x="54" y="72.4" font-size="12" fill="#8A9892" text-anchor="end">40%</text>
+<line x1="64" x2="738" y1="30.0" y2="30.0" stroke="#1F2E2C" stroke-width="1"/>
+<text x="54" y="34.0" font-size="12" fill="#8A9892" text-anchor="end">50%</text>
+<line x1="64" x2="738" y1="151.7" y2="151.7" stroke="#B3BFB8" stroke-opacity=".55" stroke-width="1"/>
+<text x="72" y="144.7" font-size="12" fill="#B3BFB8">ALL SITES 18.3% · 2023 AND 2024 POOLED</text>
+<line x1="128.4" x2="618.6" y1="210.9" y2="210.9" stroke="#E24337" stroke-width="1.6" stroke-dasharray="1.6 4.4" stroke-linecap="round"/>
+<path d="M94.4,222 L94.4,213.9 Q94.4,210.9 97.4,210.9 L125.4,210.9 Q128.4,210.9 128.4,213.9 L128.4,222 Z" fill="#1F5241" stroke="#3E7A63" stroke-width="1"/>
+<text x="111.4" y="203.9" font-size="12" font-weight="500" fill="#EFECDF" text-anchor="middle">2.9%</text>
+<path d="M134.4,222 L134.4,213.5 Q134.4,210.5 137.4,210.5 L165.4,210.5 Q168.4,210.5 168.4,213.5 L168.4,222 Z" fill="#4F6662"/>
+<text x="151.4" y="203.5" font-size="12" font-weight="400" fill="#B3BFB8" text-anchor="middle">3.0%</text>
+<text x="131.4" y="242" font-size="13" font-weight="500" fill="#EFECDF" text-anchor="middle">1 LOWEST</text>
+<path d="M229.2,222 L229.2,197.7 Q229.2,194.7 232.2,194.7 L260.2,194.7 Q263.2,194.7 263.2,197.7 L263.2,222 Z" fill="#527049"/>
+<text x="246.2" y="187.7" font-size="12" font-weight="500" fill="#EFECDF" text-anchor="middle">7.1%</text>
+<path d="M269.2,222 L269.2,195.8 Q269.2,192.8 272.2,192.8 L300.2,192.8 Q303.2,192.8 303.2,195.8 L303.2,222 Z" fill="#4F6662"/>
+<text x="286.2" y="185.8" font-size="12" font-weight="400" fill="#B3BFB8" text-anchor="middle">7.6%</text>
+<text x="266.2" y="242" font-size="13" font-weight="500" fill="#EFECDF" text-anchor="middle">2</text>
+<path d="M364.0,222 L364.0,177.8 Q364.0,174.8 367.0,174.8 L395.0,174.8 Q398.0,174.8 398.0,177.8 L398.0,222 Z" fill="#907335"/>
+<text x="381.0" y="167.8" font-size="12" font-weight="500" fill="#EFECDF" text-anchor="middle">12.3%</text>
+<path d="M404.0,222 L404.0,175.8 Q404.0,172.8 407.0,172.8 L435.0,172.8 Q438.0,172.8 438.0,175.8 L438.0,222 Z" fill="#4F6662"/>
+<text x="421.0" y="165.8" font-size="12" font-weight="400" fill="#B3BFB8" text-anchor="middle">12.8%</text>
+<text x="401.0" y="242" font-size="13" font-weight="500" fill="#EFECDF" text-anchor="middle">3</text>
+<path d="M498.8,222 L498.8,144.4 Q498.8,141.4 501.8,141.4 L529.8,141.4 Q532.8,141.4 532.8,144.4 L532.8,222 Z" fill="#C48243"/>
+<text x="515.8" y="134.4" font-size="12" font-weight="500" fill="#EFECDF" text-anchor="middle">21.0%</text>
+<path d="M538.8,222 L538.8,140.5 Q538.8,137.5 541.8,137.5 L569.8,137.5 Q572.8,137.5 572.8,140.5 L572.8,222 Z" fill="#4F6662"/>
+<text x="555.8" y="130.5" font-size="12" font-weight="400" fill="#B3BFB8" text-anchor="middle">22.0%</text>
+<text x="535.8" y="242" font-size="13" font-weight="500" fill="#EFECDF" text-anchor="middle">4</text>
+<path d="M633.6,222 L633.6,46.4 Q633.6,43.4 636.6,43.4 L664.6,43.4 Q667.6,43.4 667.6,46.4 L667.6,222 Z" fill="#FF8580"/>
+<text x="650.6" y="36.4" font-size="12" font-weight="500" fill="#EFECDF" text-anchor="middle">46.5%</text>
+<path d="M673.6,222 L673.6,42.6 Q673.6,39.6 676.6,39.6 L704.6,39.6 Q707.6,39.6 707.6,42.6 L707.6,222 Z" fill="#4F6662"/>
+<text x="690.6" y="32.6" font-size="12" font-weight="400" fill="#B3BFB8" text-anchor="middle">47.5%</text>
+<text x="670.6" y="242" font-size="13" font-weight="500" fill="#EFECDF" text-anchor="middle">5 HIGHEST</text>
+<path d="M627.6,43.4 L621.6,43.4 L621.6,210.9 L627.6,210.9" fill="none" stroke="#E24337" stroke-width="1.6"/>
+<text x="611.6" y="78.0" font-size="26" font-weight="500" fill="#E24337" text-anchor="end">16x</text>
+<text x="611.6" y="97.0" font-size="12" fill="#B3BFB8" text-anchor="end">46.5% / 2.9%</text>
+<text x="401.0" y="266" font-size="12" fill="#8A9892" text-anchor="middle" letter-spacing=".06em">RISK BAND · SCORECARD FIFTHS ACROSS BOTH TEST YEARS</text>
+</svg>
+</div>
+
+<div class="panel" style="left:1280px;top:244px;width:608px;height:356px">
+  <div class="tbar"><span>02 / Model trust</span><span class="meta">Unseen test years · all test pairs</span></div>
+  <div class="ctitle" style="left:16px;top:42px">How well each model ranks sites it never saw (AUC)</div>
+  <div class="legend" style="left:16px;top:70px"><span><i style="width:10px;height:10px;border-radius:50%;background:#EFECDF"></i>2023 · 107,673 test pairs</span>
+  <span><i style="width:9px;height:9px;border:1.6px solid #EFECDF;transform:rotate(45deg)"></i>2024 · 108,129 test pairs</span></div>
+  <svg width="606" height="278" class="abs" style="left:0;top:0">
+<line x1="214.0" x2="214.0" y1="96" y2="252" stroke="#3A4F4C" stroke-width="1"/>
+<text x="214.0" y="268" font-size="12" fill="#8A9892" text-anchor="middle">0.50</text>
+<line x1="288.3" x2="288.3" y1="96" y2="252" stroke="#1F2E2C" stroke-width="1"/>
+<text x="288.3" y="268" font-size="12" fill="#8A9892" text-anchor="middle">0.60</text>
+<line x1="362.6" x2="362.6" y1="96" y2="252" stroke="#1F2E2C" stroke-width="1"/>
+<text x="362.6" y="268" font-size="12" fill="#8A9892" text-anchor="middle">0.70</text>
+<line x1="436.9" x2="436.9" y1="96" y2="252" stroke="#1F2E2C" stroke-width="1"/>
+<text x="436.9" y="268" font-size="12" fill="#8A9892" text-anchor="middle">0.80</text>
+<text x="194.0" y="268" font-size="12" fill="#8A9892" text-anchor="end">CHANCE</text>
+<line x1="214" x2="474" y1="115.0" y2="115.0" stroke="#2B3D3B" stroke-width="1"/>
+<circle cx="282.3" cy="110.0" r="5" fill="#9AA7A1" stroke="#101E1D" stroke-width="2"/>
+<path d="M280.1,115.5 L285.6,121.0 L280.1,126.5 L274.6,121.0 Z" fill="#101E1D" stroke="#9AA7A1" stroke-width="1.6"/>
+<text x="22" y="113.0" style="font-family:Inter" font-size="14" font-weight="500" fill="#EFECDF">Rating class only</text>
+<text x="22" y="128.0" font-size="12" fill="#8A9892">sector, size, state, ownership</text>
+<text x="498" y="120.0" font-size="14" font-weight="500" fill="#B3BFB8">0.592</text>
+<text x="552" y="120.0" font-size="14" fill="#8A9892">0.589</text>
+<line x1="214" x2="474" y1="153.0" y2="153.0" stroke="#2B3D3B" stroke-width="1"/>
+<circle cx="384.1" cy="148.0" r="5" fill="#9AA7A1" stroke="#101E1D" stroke-width="2"/>
+<path d="M384.1,153.5 L389.6,159.0 L384.1,164.5 L378.6,159.0 Z" fill="#101E1D" stroke="#9AA7A1" stroke-width="1.6"/>
+<text x="22" y="151.0" style="font-family:Inter" font-size="14" font-weight="500" fill="#EFECDF">Last year's rate only</text>
+<text x="22" y="166.0" font-size="12" fill="#8A9892">DART rate in the starting year</text>
+<text x="498" y="158.0" font-size="14" font-weight="500" fill="#B3BFB8">0.729</text>
+<text x="552" y="158.0" font-size="14" fill="#8A9892">0.729</text>
+<rect x="8" y="173.0" width="590" height="36" fill="#172C2B"/>
+<line x1="214" x2="474" y1="191.0" y2="191.0" stroke="#2B3D3B" stroke-width="1"/>
+<circle cx="424.2" cy="186.0" r="5" fill="#EFECDF" stroke="#172C2B" stroke-width="2"/>
+<path d="M425.7,191.5 L431.2,197.0 L425.7,202.5 L420.2,197.0 Z" fill="#172C2B" stroke="#EFECDF" stroke-width="1.6"/>
+<text x="22" y="189.0" style="font-family:Inter" font-size="14" font-weight="600" fill="#EFECDF">Scorecard</text>
+<text x="22" y="204.0" font-size="12" fill="#8A9892">explainable, used for pricing</text>
+<text x="498" y="196.0" font-size="14" font-weight="500" fill="#EFECDF">0.783</text>
+<text x="552" y="196.0" font-size="14" fill="#B3BFB8">0.785</text>
+<line x1="214" x2="474" y1="229.0" y2="229.0" stroke="#2B3D3B" stroke-width="1"/>
+<circle cx="436.9" cy="224.0" r="5" fill="#9AA7A1" stroke="#101E1D" stroke-width="2"/>
+<path d="M437.6,229.5 L443.1,235.0 L437.6,240.5 L432.1,235.0 Z" fill="#101E1D" stroke="#9AA7A1" stroke-width="1.6"/>
+<text x="22" y="227.0" style="font-family:Inter" font-size="14" font-weight="500" fill="#EFECDF">Gradient boosting</text>
+<text x="22" y="242.0" font-size="12" fill="#8A9892">highest AUC of the four</text>
+<text x="498" y="234.0" font-size="14" font-weight="500" fill="#B3BFB8">0.800</text>
+<text x="552" y="234.0" font-size="14" fill="#8A9892">0.801</text>
+<text x="498" y="82" font-size="12" fill="#8A9892">2023</text>
+<text x="552" y="82" font-size="12" fill="#8A9892">2024</text>
+</svg>
+  <div class="note" style="left:16px;top:276px;width:574px">Read 0.78 as: shown one site that crossed the line and one that did not, the scorecard ranks the crosser higher 78 times in 100 (chance is 50). The 95% intervals are narrower than the markers, for example 0.780 to 0.787 for the 2023 scorecard.</div>
+</div>
+
+<div class="panel" style="left:32px;top:616px;width:452px;height:372px">
+  <div class="tbar"><span>Supporting signals</span><span class="meta">Period and base on each</span></div>
+  <div class="abs" style="left:0;top:28px;width:450px">
+    <div class="kp" style="top:0;position:relative">
+      <div class="lab">CONCENTRATION</div><div class="val">51<span class="pt">.</span>4<span class="u">%</span></div>
+      <div class="txt">of next year's line-crossers were already in the top risk band</div>
+      <div class="meta">BOTH TEST YEARS POOLED · HIT RATE 47.0% · LIFT 2.57x</div></div>
+    <div class="kp" style="position:relative">
+      <div class="lab">RANKING POWER · SCORECARD AUC</div><div class="val">0<span class="pt">.</span>78</div>
+      <div class="txt">on years it never saw. Gradient boosting reaches 0.80.</div>
+      <div class="meta">2023: 0.783, +0.054 VS LAST YEAR'S RATE · 2024: 0.785</div></div>
+    <div class="kp" style="position:relative">
+      <div class="lab">PRICING TEST <span class="sim">SIMULATED</span></div><div class="val">2<span class="pt">.</span>10<span class="u" style="margin:0 .25em"> to </span>1<span class="pt">.</span>05</div>
+      <div class="txt" style="left:288px;width:156px;white-space:nowrap">band 5 loss / premium,<br>Scenario A to B</div>
+      <div class="meta">2023 CENTRAL SCENARIO · NOT REAL PREMIUMS OR LOSSES</div></div>
+  </div>
+</div>
+
+<div class="panel" style="left:500px;top:616px;width:764px;height:372px">
+  <div class="tbar"><span>03 / Industry view</span><span class="meta">Both test years pooled</span></div>
+  <div class="ctitle" style="left:16px;top:42px">Share of each sector's sites in the top risk band</div>
+  <div class="stab">
+    <div class="shead"><div class="c1">SECTOR</div><div class="c2">SITE-YEARS</div><div class="c3" style="padding-left:18px"><span class="chipb" style="background:#FF8580;width:10px;height:10px"></span>IN TOP BAND · TICK: EVEN 20%</div><div class="c4">AVG DART</div><div class="c5">AUC 2023</div></div>
+    <div class="srow"><div class="c1">Wholesale</div><div class="c2">27,123</div><div class="c3"><span class="track"><span class="fill" style="width:142.5px"></span><span class="tick"></span></span><span class="sval">21.2%</span></div><div class="c4">2.83</div><div class="c5">0.779</div></div>
+<div class="srow"><div class="c1">Transport and warehousing</div><div class="c2">36,087</div><div class="c3"><span class="track"><span class="fill" style="width:141.1px"></span><span class="tick"></span></span><span class="sval">21.0%</span></div><div class="c4">4.29</div><div class="c5">0.765</div></div>
+<div class="srow"><div class="c1">Agriculture</div><div class="c2">6,335</div><div class="c3"><span class="track"><span class="fill" style="width:137.1px"></span><span class="tick"></span></span><span class="sval">20.4%</span></div><div class="c4">3.04</div><div class="c5">0.761</div></div>
+<div class="srow"><div class="c1">Manufacturing</div><div class="c2">78,918</div><div class="c3"><span class="track"><span class="fill" style="width:136.4px"></span><span class="tick"></span></span><span class="sval">20.3%</span></div><div class="c4">2.17</div><div class="c5">0.787</div></div>
+<div class="srow"><div class="c1">Mining, oil and gas<span class="flag">SMALL N</span></div><div class="c2">848</div><div class="c3"><span class="track"><span class="fill" style="width:133.1px"></span><span class="tick"></span></span><span class="sval">19.8%</span></div><div class="c4">0.77</div><div class="c5">0.800</div></div>
+<div class="srow"><div class="c1">Construction</div><div class="c2">43,110</div><div class="c3"><span class="track"><span class="fill" style="width:123.6px"></span><span class="tick"></span></span><span class="sval">18.4%</span></div><div class="c4">1.85</div><div class="c5">0.808</div></div>
+<div class="srow"><div class="c1">Utilities</div><div class="c2">6,729</div><div class="c3"><span class="track"><span class="fill" style="width:106.2px"></span><span class="tick"></span></span><span class="sval">15.8%</span></div><div class="c4">1.38</div><div class="c5">0.779</div></div>
+<div class="srow total"><div class="c1">All industrial sectors</div><div class="c2">199,150</div><div class="c3"><span class="track"><span class="fill" style="width:134.4px;opacity:.45"></span><span class="tick"></span></span><span class="sval">20.0%</span></div><div class="c4">2.57</div><div class="c5">0.783</div></div>
+  </div>
+  <div class="note" style="left:16px;top:322px;width:730px">Every sector keeps 15.8% to 21.2% of its sites in the top band while average DART rates run from 0.77 to 4.29 per 100 full-time workers: the line is set within each industry.</div>
+</div>
+
+<div class="panel" style="left:1280px;top:616px;width:608px;height:372px">
+  <div class="tbar"><span>04 / Actions and limits</span><span class="meta">Guidance, not cause</span></div>
+  <div class="ctitle" style="left:16px;top:42px">What an underwriter or risk engineer could do next</div>
+  <div class="atab">
+    <div class="ahead"><div>SEGMENT</div><div>SIGNAL, 2023</div><div>SUGGESTED USE</div></div>
+    <div class="arow"><div><span class="chipb" style="background:#FF8580"></span>Band 5</div><div class="sig">46.5% crossed</div><div class="use"><b>Risk engineering:</b> survey these sites first, before renewal.</div></div>
+    <div class="arow"><div><span class="chipb" style="background:#C48243"></span>Band 4</div><div class="sig">21.0% crossed</div><div class="use"><b>Underwriting:</b> review terms and loss-control requirements at renewal.</div></div>
+    <div class="arow"><div><span class="chipb" style="background:#1F5241;outline:1px solid #3E7A63;outline-offset:-1px"></span>Bands 1, 2</div><div class="sig">2.9%, 7.1%</div><div class="use"><b>Pricing:</b> trial score-based credits in the Pricing Lab <span class="sim" style="margin-left:4px;vertical-align:1px">SIMULATED</span></div></div>
+  </div>
+  <div class="cavl">KEY CAVEATS</div>
+  <div class="caveats">
+    <span class="cav"><i>01</i>Associations, not causes</span>
+    <span class="cav"><i>02</i>Reported injuries (OSHA 300A), not claims</span>
+    <span class="cav"><i>03</i>Pricing is simulated</span>
+    <span class="cav"><i>04</i>2024 test: outcomes filed to 31 Aug 2026</span>
+  </div>
+</div>
+
+<div class="foot" style="left:32px;width:452px"><div class="l">SOURCE</div><p>OSHA ITA Form 300A, 2016 to 2025. The 2025 file covers submissions to 31 Aug 2026.</p></div>
+<div class="foot" style="left:500px;width:452px"><div class="l">TEST DESIGN</div><p>Trained 2016 to 2022, tuned on 2022. Tested on starting years 2023 and 2024.</p></div>
+<div class="foot" style="left:968px;width:452px"><div class="l">BASELINE AND POPULATION</div><p>BLS SOII industry DART rates 2022 to 2024. Industry: 3-digit NAICS. Sites with 20+ employees, 20,000+ hours.</p></div>
+<div class="foot" style="left:1436px;width:452px"><div class="l">FRESHNESS</div><p>Downloaded 27 and 29 Oct 2026. Figures QA-checked.</p>
+  <div class="abs" style="right:0;top:10px;display:flex;align-items:center;gap:8px;font-size:13px;color:#B3BFB8"><img src="../brand/parakeet-mark.svg" alt="" style="height:18px">A Parakeet Risk product</div></div>
+<div class="corner">Design concept C, not a live Power BI report</div>
+</body></html>

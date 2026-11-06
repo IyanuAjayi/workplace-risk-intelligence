@@ -1,0 +1,348 @@
+// Workplace Risk Intelligence: every measure the four report pages use, as one DAX query.
+// Paste the whole file into the DAX query view of the semantic model, select Run, check the one-row result,
+// then select Update model with changes. Format strings are set afterwards (docs/powerbi-build-guide.md, section d).
+// 155 measures. Documented list with formats and pages: outputs/powerbi/measures.dax.
+DEFINE
+    MEASURE Sites[Sites] = SUM ( Sites[Site count] )
+    MEASURE Sites[Sites crossing next year] = SUM ( Sites[Crossing sites] )
+    MEASURE Sites[Base rate] = DIVIDE ( [Sites crossing next year], [Sites] )
+    MEASURE Sites[Top band hit rate] = CALCULATE ( [Base rate], Sites[Risk band] = "5 highest" )
+    MEASURE Sites[Top band capture] =
+        DIVIDE (
+            CALCULATE ( [Sites crossing next year], Sites[Risk band] = "5 highest" ),
+            CALCULATE ( [Sites crossing next year], REMOVEFILTERS ( Sites[Risk band] ) )
+        )
+    MEASURE Sites[Top band lift] = DIVIDE ( [Top band hit rate], CALCULATE ( [Base rate], REMOVEFILTERS ( Sites[Risk band] ) ) )
+    MEASURE Sites[Share of sites in top band] =
+        DIVIDE (
+            CALCULATE ( [Sites], Sites[Risk band] = "5 highest" ),
+            CALCULATE ( [Sites], REMOVEFILTERS ( Sites[Risk band] ) )
+        )
+    MEASURE Sites[Average site DART rate] = DIVIDE ( SUM ( Sites[DART rate sum] ), [Sites] )
+    MEASURE Sites[Site premium A] = SUM ( Sites[Premium A industry only] )
+    MEASURE Sites[Site premium B] = SUM ( Sites[Premium B with score] )
+    MEASURE Sites[Site simulated loss] = SUM ( Sites[Simulated loss] )
+    MEASURE Sites[Site premium change] = DIVIDE ( [Site premium B], [Site premium A] ) - 1
+    MEASURE Sites[Top band crossing sites] = CALCULATE ( [Sites crossing next year], Sites[Risk band] = "5 highest" )
+    MEASURE Sites[Top band site-years] = CALCULATE ( [Sites], Sites[Risk band] = "5 highest" )
+    MEASURE Sites[Capture remainder] = 1 - [Top band capture]
+    MEASURE Sites[Random fifth] = 0.2
+    MEASURE Sites[Capture base line] =
+        FORMAT ( [Top band crossing sites], "#,0" ) & " of "
+            & FORMAT ( CALCULATE ( [Sites crossing next year], REMOVEFILTERS ( Sites[Risk band] ) ), "#,0" )
+            & " · " & [Test year label]
+    MEASURE Sites[Hit rate base line] = FORMAT ( [Top band crossing sites], "#,0" ) & " of " & FORMAT ( [Top band site-years], "#,0" ) & " · " & [Test year label]
+    MEASURE Sites[Crossing rate 2023] = CALCULATE ( [Base rate], Sites[Score year] = 2023 )
+    MEASURE Sites[Crossing rate 2024] = CALCULATE ( [Base rate], Sites[Score year] = 2024 )
+    MEASURE Sites[Crossing rate 2024 band 1] = CALCULATE ( [Crossing rate 2024], Sites[Band order] = 1 )
+    MEASURE Sites[Crossing rate 2024 band 2] = CALCULATE ( [Crossing rate 2024], Sites[Band order] = 2 )
+    MEASURE Sites[Crossing rate 2024 band 3] = CALCULATE ( [Crossing rate 2024], Sites[Band order] = 3 )
+    MEASURE Sites[Crossing rate 2024 band 4] = CALCULATE ( [Crossing rate 2024], Sites[Band order] = 4 )
+    MEASURE Sites[Crossing rate 2024 band 5] = CALCULATE ( [Crossing rate 2024], Sites[Band order] = 5 )
+    MEASURE Sites[Crossing base 2023] =
+        FORMAT ( CALCULATE ( [Sites crossing next year], Sites[Score year] = 2023 ), "#,0" ) & " of "
+            & FORMAT ( CALCULATE ( [Sites], Sites[Score year] = 2023 ), "#,0" ) & " site-years · 2023"
+    MEASURE Sites[All sites rate] = [Portfolio crossing rate]
+    MEASURE Sites[Portfolio site-years] = CALCULATE ( [Sites], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ) )
+    MEASURE Sites[Portfolio crossing sites] = CALCULATE ( [Sites crossing next year], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ) )
+    MEASURE Sites[Portfolio crossing rate] = DIVIDE ( [Portfolio crossing sites], [Portfolio site-years] )
+    MEASURE Sites[Portfolio base line] = FORMAT ( [Portfolio crossing sites], "#,0" ) & " of " & FORMAT ( [Portfolio site-years], "#,0" ) & " · " & [Test year label]
+    MEASURE Sites[Portfolio DART rate] = CALCULATE ( [Average site DART rate], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ) )
+    MEASURE Sites[Band 5 site-years] = CALCULATE ( [Sites], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Band order] ), Sites[Risk band] = "5 highest" )
+    MEASURE Sites[Band 5 share] = DIVIDE ( [Band 5 site-years], [Portfolio site-years] )
+    MEASURE Sites[Band 5 base line] = FORMAT ( [Band 5 site-years], "#,0" ) & " band 5 site-years · " & [Test year label]
+    MEASURE Sites[Size site-years 20 to 249] = CALCULATE ( [Portfolio site-years], KEEPFILTERS ( Sites[Size band label] = "20 to 249 employees" ) )
+    MEASURE Sites[Size band 5 share 20 to 249] = CALCULATE ( [Band 5 share], KEEPFILTERS ( Sites[Size band label] = "20 to 249 employees" ) )
+    MEASURE Sites[Size site-years 250+] = CALCULATE ( [Portfolio site-years], KEEPFILTERS ( Sites[Size band label] = "250+ employees" ) )
+    MEASURE Sites[Size band 5 share 250+] = CALCULATE ( [Band 5 share], KEEPFILTERS ( Sites[Size band label] = "250+ employees" ) )
+    MEASURE Sites[Band 5 share base] = FORMAT ( [Band 5 site-years], "#,0" ) & " of " & FORMAT ( [Portfolio site-years], "#,0" ) & " site-years · " & [Test year label]
+    MEASURE Sites[Band 5 crossing range] =
+        VAR t =
+            FILTER (
+                ADDCOLUMNS (
+                    VALUES ( Sites[Sector] ),
+                    "@n", CALCULATE ( [Sites], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Band order] ), Sites[Risk band] = "5 highest" ),
+                    "@r", CALCULATE ( [Base rate], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Band order] ), Sites[Risk band] = "5 highest" )
+                ),
+                [@n] >= 100
+            )
+        VAR lo = FORMAT ( MINX ( t, [@r] ), "0.0%" )
+        VAR hi = FORMAT ( MAXX ( t, [@r] ), "0.0%" )
+        RETURN
+            IF ( COUNTROWS ( t ) = 0, "Too few sites", IF ( lo = hi, lo, lo & " to " & hi ) )
+    MEASURE Sites[Cell site-years] = CALCULATE ( [Sites], REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ) )
+    MEASURE Sites[Cell crossing rate] =
+        VAR n = [Cell site-years]
+        RETURN
+            IF ( n = 0, BLANK (), IF ( n < 100, -1, CALCULATE ( [Base rate], REMOVEFILTERS ( Sites[Risk band], Sites[Band order] ) ) ) )
+    MEASURE Sites[Crossed Manufacturing] = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Manufacturing" ) )
+    MEASURE Sites[Crossed Construction] = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Construction" ) )
+    MEASURE Sites[Crossed Transport and warehousing] = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Transport and warehousing" ) )
+    MEASURE Sites[Crossed Wholesale] = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Wholesale" ) )
+    MEASURE Sites[Crossed Utilities] = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Utilities" ) )
+    MEASURE Sites[Crossed Agriculture] = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Agriculture" ) )
+    MEASURE Sites[Crossed Mining, oil and gas] = CALCULATE ( [Cell crossing rate], KEEPFILTERS ( Sites[Sector] = "Mining, oil and gas" ) )
+    MEASURE Sites[Map band order] =
+        VAR picked = SELECTEDVALUE ( Bands[Band order] )
+        VAR drilled =
+            IF (
+                ISFILTERED ( Sites[Risk band] ),
+                CALCULATE ( SELECTEDVALUE ( Sites[Band order] ), REMOVEFILTERS ( StateGrid ), REMOVEFILTERS ( Sites[State] ) )
+            )
+        RETURN
+            COALESCE ( picked, drilled, 5 )
+    MEASURE Sites[Map share] =
+        VAR b = [Map band order]
+        RETURN
+            DIVIDE (
+                CALCULATE ( [Sites], REMOVEFILTERS ( Bands ), REMOVEFILTERS ( Sites[Risk band] ), Sites[Band order] = b ),
+                [Portfolio site-years]
+            )
+    MEASURE Sites[Map x] = IF ( [Portfolio site-years] >= 500, SELECTEDVALUE ( StateGrid[Grid column] ) )
+    MEASURE Sites[Map y] = IF ( [Portfolio site-years] >= 500, SELECTEDVALUE ( StateGrid[Grid row] ) )
+    MEASURE Sites[Map tile colour] =
+        VAR s = [Map share]
+        RETURN
+            SWITCH (
+                TRUE (),
+                [Portfolio site-years] < 500, BLANK (),
+                s >= 0.25, "#C98369",
+                s >= 0.15, "#D9B9A7",
+                "#EADFD2"
+            )
+    MEASURE Sites[Map title] = "Band " & [Map band order] & " share by state"
+    MEASURE Sites[Map legend title] = "Share of site-years, " & [Test year label]
+    MEASURE Sites[Map share label] = "In band " & [Map band order]
+    MEASURE Sites[State base line] = FORMAT ( [Portfolio site-years], "#,0" ) & " site-years · " & [Test year label]
+    MEASURE Sites[Sector size note] = [Test year label] & " · DART: serious-injury rate per 100 full-time workers"
+    MEASURE Sites[Band table note] =
+        "Crossed the line next year, " & [Test year label]
+            & " · line: each industry's worst-20% DART rate this year · data bars 0 to 100% · too few sites: under 100 site-years"
+    MEASURE Sites[Alt text map] =
+        "Tile map of each state's share of site-years in band " & [Map band order] & ", " & [Test year label]
+            & ". Classes: 25% and over, 15% to 25%, under 15%. States under 500 site-years are shown as too few sites."
+    MEASURE TestYears[Test year label] = SELECTEDVALUE ( TestYears[Test year], "2023 + 2024" )
+    MEASURE Bands[Band fill] = SELECTEDVALUE ( Bands[Band colour] )
+    MEASURE Bands[Band text fill] = SELECTEDVALUE ( Bands[Band text colour] )
+    MEASURE Models[Model AUC] = AVERAGE ( Models[AUC] )
+    MEASURE Models[Model AUC low] = AVERAGE ( Models[AUC low] )
+    MEASURE Models[Model AUC high] = AVERAGE ( Models[AUC high] )
+    MEASURE Models[Model Gini] = AVERAGE ( Models[Gini] )
+    MEASURE Models[Model capture top 20%] = AVERAGE ( Models[Capture top 20%] )
+    MEASURE Models[Model precision top 20%] = AVERAGE ( Models[Precision top 20%] )
+    MEASURE Models[Best model AUC] = CALCULATE ( [Model AUC], Models[Model] = "Gradient boosting" )
+    MEASURE Models[Rating class AUC] = CALCULATE ( [Model AUC], Models[Model] = "Rating class only" )
+    MEASURE Models[Capture gain vs rating class] =
+        DIVIDE (
+            CALCULATE ( [Model capture top 20%], Models[Model] = "Gradient boosting" ),
+            CALCULATE ( [Model capture top 20%], Models[Model] = "Rating class only" )
+        )
+    MEASURE Models[Picked AUC] =
+        VAR m = [Picked model]
+        VAR y = [Picked test year]
+        RETURN
+            CALCULATE ( AVERAGE ( Models[AUC] ), Models[Model] = m, Models[Test year] = y )
+    MEASURE Models[Picked AUC base] =
+        VAR m = [Picked model]
+        VAR y = [Picked test year]
+        VAR lo = CALCULATE ( AVERAGE ( Models[AUC low] ), Models[Model] = m, Models[Test year] = y )
+        VAR hi = CALCULATE ( AVERAGE ( Models[AUC high] ), Models[Model] = m, Models[Test year] = y )
+        RETURN
+            m & ", " & y & " · 95% CI " & FORMAT ( lo, "0.000" ) & " to " & FORMAT ( hi, "0.000" )
+    MEASURE Models[Picked Gini] =
+        VAR m = [Picked model]
+        VAR y = [Picked test year]
+        RETURN
+            CALCULATE ( AVERAGE ( Models[Gini] ), Models[Model] = m, Models[Test year] = y )
+    MEASURE Models[Picked test pairs] =
+        VAR y = [Picked test year]
+        RETURN
+            FORMAT ( CALCULATE ( MAX ( Models[Sites] ), Models[Test year] = y ), "#,0" ) & " test pairs · " & y
+    MEASURE Models[Picked model and year] = [Picked model] & ", " & [Picked test year]
+    MEASURE Models[ROC AUC label] = "AUC " & FORMAT ( [Picked AUC], "0.00" )
+    MEASURE Models[AUC 2023] = CALCULATE ( AVERAGE ( Models[AUC] ), Models[Test year] = 2023 )
+    MEASURE Models[AUC 2024] = CALCULATE ( AVERAGE ( Models[AUC] ), Models[Test year] = 2024 )
+    MEASURE Models[Gini 2023] = CALCULATE ( AVERAGE ( Models[Gini] ), Models[Test year] = 2023 )
+    MEASURE Models[Gini 2024] = CALCULATE ( AVERAGE ( Models[Gini] ), Models[Test year] = 2024 )
+    MEASURE Models[Capture top 20% 2023] = CALCULATE ( AVERAGE ( Models[Capture top 20%] ), Models[Test year] = 2023 )
+    MEASURE Models[Capture top 20% 2024] = CALCULATE ( AVERAGE ( Models[Capture top 20%] ), Models[Test year] = 2024 )
+    MEASURE Models[Precision top 20% 2023] = CALCULATE ( AVERAGE ( Models[Precision top 20%] ), Models[Test year] = 2023 )
+    MEASURE Models[Precision top 20% 2024] = CALCULATE ( AVERAGE ( Models[Precision top 20%] ), Models[Test year] = 2024 )
+    MEASURE Models[Model row fill] = IF ( SELECTEDVALUE ( Models[Model] ) = [Picked model], "#E3DECF" )
+    MEASURE Models[Model inputs] = CALCULATE ( SELECTEDVALUE ( ModelPicker[Inputs] ), TREATAS ( VALUES ( Models[Model] ), ModelPicker[Model] ) )
+    MEASURE Models[Tooltip AUC 2023] =
+        FORMAT ( [AUC 2023], "0.000" ) & ", 95% CI "
+            & FORMAT ( CALCULATE ( AVERAGE ( Models[AUC low] ), Models[Test year] = 2023 ), "0.000" ) & " to "
+            & FORMAT ( CALCULATE ( AVERAGE ( Models[AUC high] ), Models[Test year] = 2023 ), "0.000" )
+    MEASURE Models[Tooltip AUC 2024] =
+        FORMAT ( [AUC 2024], "0.000" ) & ", 95% CI "
+            & FORMAT ( CALCULATE ( AVERAGE ( Models[AUC low] ), Models[Test year] = 2024 ), "0.000" ) & " to "
+            & FORMAT ( CALCULATE ( AVERAGE ( Models[AUC high] ), Models[Test year] = 2024 ), "0.000" )
+    MEASURE Models[Tooltip Gini] = FORMAT ( [Gini 2023], "0.000" ) & " and " & FORMAT ( [Gini 2024], "0.000" )
+    MEASURE Models[Tooltip base] =
+        FORMAT ( CALCULATE ( MAX ( Models[Sites] ), Models[Test year] = 2023 ), "#,0" ) & " and "
+            & FORMAT ( CALCULATE ( MAX ( Models[Sites] ), Models[Test year] = 2024 ), "#,0" ) & " test pairs"
+    MEASURE Models[AUC 2023 words] =
+        VAR m = SELECTEDVALUE ( Models[Model] )
+        RETURN
+            IF ( m IN { "Scorecard", "Rating class only" }, "about " & FORMAT ( ROUND ( [AUC 2023] * 10, 0 ), "0" ) & " in 10", "" )
+    MEASURE Models[AUC 2023 scorecard] = CALCULATE ( [AUC 2023], Models[Model] = "Scorecard" )
+    MEASURE Models[AUC 2024 scorecard] = CALCULATE ( [AUC 2024], Models[Model] = "Scorecard" )
+    MEASURE Models[AUC 2023 last year] = CALCULATE ( [AUC 2023], Models[Model] = "Last year's rate" )
+    MEASURE Models[AUC 2024 last year] = CALCULATE ( [AUC 2024], Models[Model] = "Last year's rate" )
+    MEASURE Models[AUC 2023 rating class] = CALCULATE ( [AUC 2023], Models[Model] = "Rating class only" )
+    MEASURE Models[AUC 2024 rating class] = CALCULATE ( [AUC 2024], Models[Model] = "Rating class only" )
+    MEASURE ModelPicker[Flagged and crossed] = SUM ( Models[Flagged and crossed] )
+    MEASURE ModelPicker[Flagged, did not cross] = SUM ( Models[Flagged, did not cross] )
+    MEASURE ModelPicker[Missed] = SUM ( Models[Missed] )
+    MEASURE ModelPicker[Not flagged, did not cross] = SUM ( Models[Not flagged, did not cross] )
+    MEASURE ModelPicker[Picked model] = SELECTEDVALUE ( ModelPicker[Model], "Scorecard" )
+    MEASURE TestYearPicker[Picked test year] = SELECTEDVALUE ( TestYearPicker[Test year], 2023 )
+    MEASURE ROC[ROC true positive rate] =
+        VAR m = [Picked model]
+        VAR y = [Picked test year]
+        RETURN
+            CALCULATE ( MAX ( ROC[True positive rate] ), ROC[Model] = m, ROC[Test year] = y )
+    MEASURE ROC[Coin toss] =
+        VAR m = [Picked model]
+        VAR y = [Picked test year]
+        RETURN
+            CALCULATE ( MAX ( ROC[False positive rate] ), ROC[Model] = m, ROC[Test year] = y )
+    MEASURE ROC[Alt text ROC] =
+        "ROC curve, " & [Picked model and year]
+            & ": share of line-crossers caught against share of non-crossers flagged. The shaded area under the curve is the AUC, "
+            & FORMAT ( [Picked AUC], "0.000" ) & "."
+    MEASURE Calibration[Calibration share crossed] =
+        VAR m = [Picked model]
+        VAR y = [Picked test year]
+        RETURN
+            CALCULATE ( AVERAGE ( Calibration[Observed share] ), Calibration[Model] = m, Calibration[Test year] = y )
+    MEASURE Calibration[Calibration predicted] =
+        VAR m = [Picked model]
+        VAR y = [Picked test year]
+        RETURN
+            CALCULATE ( AVERAGE ( Calibration[Predicted share] ), Calibration[Model] = m, Calibration[Test year] = y )
+    MEASURE Calibration[Calibration note] = IF ( [Picked model] = "Last year's rate", "Last year's rate is a rank, not a probability, so it has no calibration.", "" )
+    MEASURE Calibration[Alt text calibration] =
+        IF (
+            [Picked model] = "Last year's rate",
+            "No calibration chart: last year's rate is a rank, not a probability.",
+            "Column and line chart, " & [Picked model and year]
+                & ", by score decile 1 (lowest) to 10 (highest). Columns: share that crossed the line. Line: mean predicted share."
+        )
+    MEASURE Robustness[Robustness AUC 2023] = SUM ( Robustness[AUC 2023] )
+    MEASURE Robustness[Robustness AUC 2024] = SUM ( Robustness[AUC 2024] )
+    MEASURE Robustness[Robustness note] =
+        IF (
+            SELECTEDVALUE ( Robustness[Group] ) = "Check",
+            SELECTEDVALUE ( Robustness[Note] ) & " · 2024 test " & FORMAT ( [Robustness AUC 2024], "0.000" ),
+            "Scorecard, 2023 test"
+        )
+    MEASURE Drivers[Driver AUC drop] = SUM ( Drivers[AUC drop] )
+    MEASURE Drivers[Driver note] = "Gradient boosting, 2023 sample. Associations, not causes."
+    MEASURE PricingBands[Selected scenario] = SELECTEDVALUE ( ClaimCostScenarios[Scenario key], "central" )
+    MEASURE PricingBands[Band premium A] =
+        VAR s = [Selected scenario]
+        RETURN
+            CALCULATE ( SUM ( PricingBands[Premium A industry only] ), PricingBands[Claim-cost scenario] = s )
+    MEASURE PricingBands[Band premium B] =
+        VAR s = [Selected scenario]
+        RETURN
+            CALCULATE ( SUM ( PricingBands[Premium B with score] ), PricingBands[Claim-cost scenario] = s )
+    MEASURE PricingBands[Band simulated loss] =
+        VAR s = [Selected scenario]
+        RETURN
+            CALCULATE ( SUM ( PricingBands[Simulated loss] ), PricingBands[Claim-cost scenario] = s )
+    MEASURE PricingBands[Band loss ratio A] = DIVIDE ( [Band simulated loss], [Band premium A] )
+    MEASURE PricingBands[Band loss ratio B] = DIVIDE ( [Band simulated loss], [Band premium B] )
+    MEASURE PricingBands[Band premium change] = DIVIDE ( [Band premium B], [Band premium A] ) - 1
+    MEASURE PricingBands[Priced sites] =
+        CALCULATE (
+            SUM ( PricingBands[Sites] ),
+            PricingBands[Claim-cost scenario] = "central",
+            REMOVEFILTERS ( PricingBands[Risk band], PricingBands[Band order], PricingBands[Band label], PricingBands[Band short] )
+        )
+    MEASURE PricingBands[Pricing scenario label] = [Selected year label] & " " & [Selected scenario]
+    MEASURE PricingBands[Pricing base line] = [Pricing scenario label] & " · " & FORMAT ( [Priced sites], "#,0" ) & " sites"
+    MEASURE PricingBands[Pricing year base line] = [Selected year label] & " · " & FORMAT ( [Priced sites], "#,0" ) & " sites"
+    MEASURE PricingBands[Band loss ratio low] = MIN ( [Band loss ratio A], [Band loss ratio B] )
+    MEASURE PricingBands[Band loss ratio high] = MAX ( [Band loss ratio A], [Band loss ratio B] )
+    MEASURE PricingBands[Band colour] =
+        SWITCH (
+            SELECTEDVALUE ( PricingBands[Band order] ),
+            1, "#C9D6BD",
+            2, "#D1A76A",
+            3, "#C98369",
+            4, "#A96247",
+            5, "#944126"
+        )
+    MEASURE PricingBands[Band tooltip base] =
+        VAR s = [Selected scenario]
+        VAR n = CALCULATE ( SUM ( PricingBands[Sites] ), PricingBands[Claim-cost scenario] = s )
+        RETURN
+            "Simulated " & [Pricing scenario label] & " · " & FORMAT ( n, "#,0" ) & " sites"
+    MEASURE PricingBands[Alt text loss premium] =
+        "Dot chart. Simulated loss divided by simulated premium for each risk band, test year " & [Selected year label] & ", "
+            & [Selected scenario] & " claim cost, under A (industry only) and B (with the score). Solid line at 1.0, where simulated loss equals premium."
+    MEASURE PricingBands[Alt text premium change] =
+        "Column chart. Change in simulated premium from A to B by risk band, test year " & [Selected year label] & ", "
+            & [Selected scenario] & " claim cost. Total premium is the same under A and B."
+    MEASURE ClaimCostScenarios[Misallocated share A] =
+        VAR s = [Selected scenario]
+        RETURN
+            CALCULATE ( AVERAGE ( PricingSummary[Misallocated share A] ), PricingSummary[Claim-cost scenario] = s )
+    MEASURE ClaimCostScenarios[Misallocated share B] =
+        VAR s = [Selected scenario]
+        RETURN
+            CALCULATE ( AVERAGE ( PricingSummary[Misallocated share B] ), PricingSummary[Claim-cost scenario] = s )
+    MEASURE ClaimCostScenarios[Band spread A] =
+        VAR s = [Selected scenario]
+        RETURN
+            CALCULATE ( AVERAGE ( PricingSummary[Band spread A] ), PricingSummary[Claim-cost scenario] = s )
+    MEASURE ClaimCostScenarios[Band spread B] =
+        VAR s = [Selected scenario]
+        RETURN
+            CALCULATE ( AVERAGE ( PricingSummary[Band spread B] ), PricingSummary[Claim-cost scenario] = s )
+    MEASURE ScoreYears[Selected year label] =
+        VAR y = SELECTEDVALUE ( ScoreYears[Score year] )
+        RETURN
+            IF ( ISBLANK ( y ), "2023 + 2024", FORMAT ( y, "0" ) )
+    MEASURE PricingSummary[Wrong band A to B] = FORMAT ( [Misallocated share A], "0.0%" ) & UNICHAR ( 8201 ) & "→" & UNICHAR ( 8201 ) & FORMAT ( [Misallocated share B], "0.0%" )
+    MEASURE PricingSummary[Wrong band A to B 2023 central] = CALCULATE ( [Wrong band A to B], PricingSummary[Score year] = 2023, ClaimCostScenarios[Scenario key] = "central" )
+    MEASURE PricingSummary[Wrong band definition] =
+        "Share of simulated premium that would have to move between bands for each band's premium share to match its share of simulated loss. Simulated "
+            & [Pricing scenario label] & "."
+    MEASURE PricingSummary[Overall loss ratio A] =
+        VAR s = [Selected scenario]
+        RETURN
+            CALCULATE ( AVERAGE ( PricingSummary[Overall ratio A] ), PricingSummary[Claim-cost scenario] = s )
+    MEASURE PricingSummary[Overall loss ratio B] =
+        VAR s = [Selected scenario]
+        RETURN
+            CALCULATE ( AVERAGE ( PricingSummary[Overall ratio B] ), PricingSummary[Claim-cost scenario] = s )
+    MEASURE PricingSummary[Overall ratio A to B] = FORMAT ( [Overall loss ratio A], "0.00" ) & UNICHAR ( 8201 ) & "→" & UNICHAR ( 8201 ) & FORMAT ( [Overall loss ratio B], "0.00" )
+    MEASURE PricingSummary[Overall ratio note] = "Same total premium and same simulated loss under A and B, so unchanged by construction. Simulated " & [Pricing scenario label] & "."
+    MEASURE PricingSummary[Scenario premium] = SUM ( PricingSummary[Total premium] )
+    MEASURE PricingSummary[Scenario simulated loss] = SUM ( PricingSummary[Simulated loss] )
+    MEASURE PricingSummary[Scenario loss ratio] = AVERAGE ( PricingSummary[Overall ratio A] )
+    MEASURE PricingSummary[Scenario wrong band A to B] = FORMAT ( AVERAGE ( PricingSummary[Misallocated share A] ), "0.0%" ) & " → " & FORMAT ( AVERAGE ( PricingSummary[Misallocated share B] ), "0.0%" )
+    MEASURE PricingSummary[Scenario band spread A to B] = FORMAT ( AVERAGE ( PricingSummary[Band spread A] ), "0.0" ) & "x → " & FORMAT ( AVERAGE ( PricingSummary[Band spread B] ), "0.0" ) & "x"
+    MEASURE PricingSummary[Scenario row fill] = IF ( SELECTEDVALUE ( PricingSummary[Claim-cost scenario] ) = [Selected scenario], "#E3DECF", "#F7F5EC" )
+    MEASURE About[Footer] = "Source: OSHA ITA 300A 2016 to 2025. Test years 2023 and 2024. Simulated pricing, not actual premiums or losses."
+
+EVALUATE
+ROW (
+    "Sites", [Sites],
+    "Base rate", [Base rate],
+    "Top band capture", [Top band capture],
+    "Top band hit rate", [Top band hit rate],
+    "Capture base line", [Capture base line],
+    "Wrong band A to B 2023 central", [Wrong band A to B 2023 central],
+    "Band 5 crossing range", [Band 5 crossing range],
+    "Portfolio base line", [Portfolio base line],
+    "Picked AUC", [Picked AUC],
+    "Picked AUC base", [Picked AUC base],
+    "Picked test pairs", [Picked test pairs],
+    "Priced sites 2023", CALCULATE ( [Priced sites], ScoreYears[Score year] = 2023 ),
+    "Pricing base line 2023", CALCULATE ( [Pricing base line], ScoreYears[Score year] = 2023 )
+)

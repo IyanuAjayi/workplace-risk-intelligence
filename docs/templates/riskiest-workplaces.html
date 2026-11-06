@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<title>Finding next year’s riskiest workplaces</title>
+<meta name="author" content="David Ajayi, Parakeet Risk">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=block">
+<!-- Two-page project summary, A4, for Jowanza and the Parakeet team. Every figure is in docs/verified-metrics.md or on the live report.
+     Build the PDF and the Word copy from the repository root: .venv/bin/python scripts/11_riskiest_workplaces.py
+     Charts: docs/templates/riskiest-workplaces-charts.html. Check: .venv/bin/python -I powerbi/tools/check_numbers.py docs/templates/riskiest-workplaces.html --metrics docs/verified-metrics.md -->
+<style>
+  :root {
+    --nest: #EFECDF;
+    --card: #F7F5EC;
+    --card-line: #E3DECF;
+    --rule: #DCD8CA;
+    --onyx: #000000;
+    --ink: #303A39;
+    --muted: #66655F;
+    --shell: #FFFFFF;
+    --molt: #B5C7E4;
+    --sans: Inter, "Segoe UI", Arial, sans-serif;
+    --mx: 18mm;
+    --gap: 7mm;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--shell); }
+  body { font-family: var(--sans); font-size: 8.6pt; line-height: 1.48; color: var(--ink); font-optical-sizing: auto; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .page { position: relative; width: 210mm; height: 297mm; overflow: hidden; padding: 0 var(--mx); break-after: page; }
+  .page:last-of-type { break-after: auto; }
+  .page--2 { padding-top: 13mm; }
+
+  .masthead { margin: 0 calc(-1 * var(--mx)); padding: 0 var(--mx); height: 15mm; background: var(--nest); display: flex; align-items: center; justify-content: space-between; }
+  .masthead img { display: block; height: 5.2mm; width: auto; }
+  .masthead div { font-weight: 500; font-size: 7.6pt; color: var(--muted); }
+
+  h1 { margin-top: 8mm; font-weight: 600; font-size: 22pt; line-height: 1.15; letter-spacing: -0.02em; color: var(--onyx); }
+  .dek { margin-top: 2.4mm; font-size: 10.2pt; line-height: 1.45; color: var(--ink); }
+  .byline { margin-top: 2.4mm; font-weight: 500; font-size: 7.8pt; color: var(--muted); }
+
+  h2 { font-weight: 600; font-size: 10.5pt; line-height: 1.3; letter-spacing: -0.005em; color: var(--onyx); margin-bottom: 1.4mm; }
+  p { margin-bottom: 1.6mm; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; color: var(--onyx); }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gap); align-items: start; }
+  .block { margin-top: 5.2mm; }
+  .near { margin-top: 3.8mm; }
+  .cols > div > * + h2 { margin-top: 4.2mm; }
+
+  .steps { list-style: none; counter-reset: step; }
+  .steps.continued { counter-reset: step 3; }
+  .steps li { position: relative; padding-left: 4.6mm; margin-bottom: 1.3mm; counter-increment: step; }
+  .steps li:last-child { margin-bottom: 0; }
+  .steps li::before { content: counter(step); position: absolute; left: 0; top: 0; font-weight: 600; color: var(--onyx); font-variant-numeric: tabular-nums; }
+  .note { margin-top: 2.8mm; padding: 2.4mm 2.8mm; background: var(--card); }
+
+  .kpis { display: grid; grid-template-columns: 1fr 1fr 1fr 1.18fr; column-gap: 6mm; }
+  .kpi { border-top: 1px solid var(--onyx); padding-top: 2.4mm; }
+  .kpi-value { font-weight: 600; font-size: 19pt; line-height: 1.1; letter-spacing: -0.018em; color: var(--onyx); white-space: nowrap; }
+  .kpi-caption { margin-top: 1.3mm; font-weight: 500; font-size: 7.8pt; line-height: 1.38; color: var(--ink); }
+  .kpi-base { margin-top: 1.1mm; font-size: 7pt; line-height: 1.35; color: var(--muted); }
+  .tag { display: inline-block; padding: 0 1.1mm; margin-right: 1.4mm; background: var(--molt); color: var(--ink); font-weight: 500; font-size: 6.9pt; line-height: 1.45; white-space: nowrap; }
+
+  figure img { display: block; width: 83.5mm; height: auto; }
+  figcaption { margin-top: 1.5mm; font-size: 7pt; line-height: 1.4; color: var(--muted); }
+
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: var(--gap); margin-top: 3.4mm; }
+  .tile img { display: block; width: 100%; height: auto; border: 0.75px solid var(--card-line); }
+  .tile h3 { margin-top: 1.9mm; font-weight: 600; font-size: 8pt; line-height: 1.3; color: var(--onyx); }
+  .tile p { margin-top: 0.6mm; font-size: 7.4pt; line-height: 1.42; }
+
+  .sources { margin-top: 5mm; padding-top: 2.2mm; border-top: 1px solid var(--rule); font-size: 6.8pt; line-height: 1.45; color: var(--muted); }
+  .footer { position: absolute; left: var(--mx); right: var(--mx); bottom: 9mm; display: flex; justify-content: space-between; font-weight: 500; font-size: 7pt; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<section class="page page--1">
+  <header class="masthead">
+    <img src="../../powerbi/brand/parakeet-logo.svg" alt="Parakeet Risk">
+    <div>Project summary · November 2026</div>
+  </header>
+
+  <h1>Finding next year’s riskiest workplaces</h1>
+  <p class="dek">Many US workplaces send OSHA a yearly injury summary, which OSHA publishes free. We used 10 years of them to build and test a risk score for industrial sites. Tested on results it never saw while learning, the score put half of the sites that had a bad year in its top fifth.</p>
+  <p class="byline">David Ajayi, data analysis intern, Parakeet Risk</p>
+
+  <div class="cols block">
+    <div>
+      <h2>Why we started</h2>
+      <p>Workers’ compensation, the insurance that pays when someone is hurt at work, starts from a set rate for each type of business, applied to its payroll. Larger employers can have it adjusted for their own past claims, but many smaller businesses don’t qualify. So two similar businesses can pay much the same even when one is much safer. We asked whether OSHA’s injury records could show which sites are heading for a bad year, and whether pricing with them would move premium, the price of insurance, toward the riskier sites.</p>
+      <h2>How we did it</h2>
+      <ol class="steps">
+        <li><strong>Gather the records.</strong> OSHA, the US workplace-safety agency, publishes the yearly summaries that larger and higher-risk sites must send. We used 2016 to 2025: about 3.2 million records.</li>
+        <li><strong>Keep comparable sites.</strong> We kept industrial ones, such as manufacturing, construction and transport, with 20 or more employees and at least 20,000 hours worked. We set aside impossible hours and treated blanks as unknown, not zero.</li>
+        <li><strong>Link each site to its next year where we could.</strong> That gave 799,158 pairs starting in 2016 to 2024: a site’s record one year and its result the next.</li>
+      </ol>
+    </div>
+    <div>
+      <ol class="steps continued">
+        <li><strong>Define a bad year before looking at results.</strong> The DART rate counts serious injuries and illnesses that meant days away from work, lighter duties or a job transfer, per 100 full-time workers. A site has a bad year, or “crosses the line,” when its rate next year is above the line marking its industry’s worst 20% of sites this year.</li>
+        <li><strong>Build the score, then test it.</strong> A scorecard gives each site points for its last one or two years of injury records, its hours, sector, size, state and ownership. It learned from 2016 to 2021, took a practice test on 2022 to pick a setting, then relearned from 2016 to 2022. Pairs starting in 2023 and 2024, with results in 2024 and 2025, stayed locked away until every setting was fixed, like a final exam.</li>
+        <li><strong>Sort the test sites into five equal-sized risk bands.</strong> Band&nbsp;1 is the lowest risk and band&nbsp;5 the highest. Then test pricing in a simulation.</li>
+      </ol>
+      <p class="note"><strong>From 799,158 to 199,150.</strong> Of the 799,158 pairs, 583,356 taught the score and 215,802, starting in 2023 and 2024, tested it; every AUC figure uses those. The bands and pricing use the 199,150 private-sector test pairs, or site-years, as the pricing uses private-industry injury rates. That leaves out 16,315 pairs from government or unknown-ownership sites and 337 missing next-year injury details.</p>
+    </div>
+  </div>
+
+  <h2 class="block">What we found</h2>
+  <div class="kpis" aria-label="Key figures">
+    <div class="kpi">
+      <div class="kpi-value">51.4%</div>
+      <div class="kpi-caption">of sites that later had a bad year were in band&nbsp;5</div>
+      <div class="kpi-base">18,709 of 36,389 site-years<br>2023 + 2024</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value">47.0%</div>
+      <div class="kpi-caption">of band&nbsp;5 sites had a bad year (all sites: 18.3%)</div>
+      <div class="kpi-base">18,709 of 39,830 site-years<br>2023 + 2024</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value">0.78</div>
+      <div class="kpi-caption">AUC ranking skill (0.59 without injury history)</div>
+      <div class="kpi-base">0.50 is a coin toss<br>107,673 test pairs · 2023</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value">27.5% → 10.0%</div>
+      <div class="kpi-caption">of premium in the wrong band, without and with the score</div>
+      <div class="kpi-base"><span class="tag">Simulated</span>2023 test year<br>$50,076 claim cost</div>
+    </div>
+  </div>
+
+  <div class="cols near">
+    <div>
+      <p><strong>The bands sort sites clearly.</strong> In the 2023 test year, 46.5% of band&nbsp;5 sites crossed the line the next year, against 2.9% of band&nbsp;1 sites: about 16 times as often. 2024 was almost the same, at 47.5% against 3.0%. Across both years, band&nbsp;5 held a fifth of the sites but just over half of those that had a bad year. In every sector, band&nbsp;5 sites crossed the line at more than twice their sector’s rate.</p>
+      <p>Even so, more than half of band&nbsp;5 sites did not have a bad year. A band describes a group of sites, not a certainty for any one of them.</p>
+    </div>
+    <figure>
+      <img src="../../outputs/riskiest-workplaces/bands-chart.png" alt="Share of sites that crossed their industry's line the next year, by risk band. 2023 test year: band 5 46.5%, band 4 21.0%, band 3 12.3%, band 2 7.1%, band 1 2.9%. 2024: 47.5%, 22.0%, 12.8%, 7.6%, 3.0%. All sites, both years: 18.3%.">
+      <figcaption>199,150 private-sector site-years (99,185 in 2023, 99,965 in 2024).<br>A site in both test years counts once in each.</figcaption>
+    </figure>
+  </div>
+
+  <div class="footer"><span>Parakeet Risk · Finding next year’s riskiest workplaces</span><span>Page 1 of 2</span></div>
+</section>
+
+<section class="page page--2">
+  <div class="cols">
+    <p><strong>The score ranks sites well.</strong> Pick at random one site that went on to have a bad year and one that didn’t: AUC is the chance that the score ranks the first one higher. A coin toss scores 0.50 and a perfect ranking 1.00. Our scorecard reached 0.78 in 2023 and 0.79 in 2024, against 0.73 for last year’s DART rate on its own and 0.59 for sector, size, state and ownership alone. AUC measures how well the score ranks many sites. It says nothing certain about any single one.</p>
+    <p><strong>In a simulation, pricing with the score puts premium much closer to the risk.</strong> We priced the 199,150 site-years two ways, keeping each industry’s total the same. Method&nbsp;A charged every site in an industry the same price per hour worked, set by the industry’s published injury rate. Method&nbsp;B shared that total out by score, within limits. Under A, safer bands overpaid and riskier ones underpaid: 27.5% of premium sat in the wrong band in the 2023 test year, meaning it would have to move between bands to match each band’s share of simulated losses. Under B, 10.0% did (26.7% and 9.3% in 2024). <span class="tag">Simulated</span>Not actual premiums, claims or loss ratios.</p>
+  </div>
+  <div class="cols near">
+    <figure>
+      <img src="../../outputs/riskiest-workplaces/auc-chart.png" alt="AUC on the test years, where 0.50 is a coin toss and 1.00 is a perfect ranking. 2023: gradient boosting 0.80, scorecard 0.78, last year's rate 0.73, rating class only 0.59. 2024: 0.80, 0.79, 0.73, 0.59.">
+      <figcaption>All 215,802 test pairs, public-sector sites included. Gradient boosting, a more complex model, ranks slightly better but is harder to explain, so we use the scorecard.</figcaption>
+    </figure>
+    <figure>
+      <img src="../../outputs/riskiest-workplaces/pricing-chart.png" alt="Simulated losses per 1 dollar of premium by risk band, 2023 test year, 50,076 dollar claim cost. A, industry only, against B, with the score: band 5 2.10 and 1.05, band 4 1.19 and 1.00, band 3 0.82 and 1.14, band 2 0.58 and 0.87, band 1 0.35 and 0.52. All sites 0.92 either way. Simulated, not actual premiums, claims or loss ratios.">
+      <figcaption>Losses are next year’s DART cases times a $50,076 average claim cost. Totals are equal under A and B: the score only moves premium.</figcaption>
+    </figure>
+  </div>
+
+  <h2 class="block">What we built</h2>
+  <div class="cols">
+    <p>The results live in one Power BI report, published as Workplace Risk Intelligence. Each page states one finding on the left, with its key figures and a caution, and shows the evidence on the right. Every figure on each page as it opens was checked against the verified results, and every filter, link and button was tested.</p>
+    <p><strong>How to use it.</strong> Move with the tabs or the blue links, and filter on the left of pages 2 to 4. A drill-through from page 1 keeps Risk Landscape on one sector until you press Reset to default in the top toolbar. The report shows only groups of sites, with data export off. Jowanza has read-only access and decides who else sees it.</p>
+  </div>
+  <div class="tiles">
+    <div class="tile">
+      <img src="../../outputs/riskiest-workplaces/page1-executive-intelligence.png" alt="Executive Intelligence page">
+      <h3>1. Executive Intelligence</h3>
+      <p>Start here: crossing rates by band, band&nbsp;5 by sector and AUC. Right-click a sector, then Drill through.</p>
+    </div>
+    <div class="tile">
+      <img src="../../outputs/riskiest-workplaces/page2-risk-landscape.png" alt="Risk Landscape page">
+      <h3>2. Risk Landscape</h3>
+      <p>Band&nbsp;5 sites by state, sector and size, and each band’s crossing rate by sector.</p>
+    </div>
+    <div class="tile">
+      <img src="../../outputs/riskiest-workplaces/page3-model-trust.png" alt="Model Trust page">
+      <h3>3. Model Trust</h3>
+      <p>The scorecard’s ranking against three other models, and by sector and size. Pick a model and a test year.</p>
+    </div>
+    <div class="tile">
+      <img src="../../outputs/riskiest-workplaces/page4-pricing-lab.png" alt="Pricing Lab page">
+      <h3>4. Pricing Lab</h3>
+      <p>Simulated A and B pricing by band. For every claim cost and test year, premium in the wrong band falls.</p>
+    </div>
+  </div>
+
+  <h2 class="block">Why it matters</h2>
+  <div class="cols">
+    <p>Built on free public records, the score ranks industrial sites far better than sector, size, state and ownership alone, and the 2025 file already holds 149,200 sites that meet the rules for scoring. That makes it a cheap early warning for Parakeet: send safety surveys and risk-engineering visits to band&nbsp;5 first, and test the score on an insurer’s own claims before prices change.</p>
+    <p><strong>Its limits.</strong> The score predicts injuries and illnesses employers report to OSHA, not insurance claims, and some go unreported. It shows patterns, not causes, and each year’s records arrive only after the year they predict has begun. Two test years are a short track record, and all pricing is simulated. Still, a workplace’s own public injury record is a strong, free clue to which sites are most likely to have a bad year next.</p>
+  </div>
+
+  <p class="sources">Sources: OSHA Injury Tracking Application, Form 300A, 2016 to 2025 (2025 file to Aug 31, 2026); BLS SOII industry DART and days-away rates, 2022 and 2023; NCCI average lost-time claim cost ($50,076, accidents 2023 to 2024) via NSC Injury Facts; screens from the live report.</p>
+  <div class="footer"><span>Parakeet Risk · Finding next year’s riskiest workplaces</span><span>Page 2 of 2</span></div>
+</section>
+
+</body>
+</html>

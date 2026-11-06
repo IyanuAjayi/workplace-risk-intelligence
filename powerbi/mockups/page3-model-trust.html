@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Model Trust</title>
+<link rel="stylesheet" href="wri-system.css">
+<!-- Page 3 of 4. Built from wri-system.css; inline styles carry page-specific positions only.
+     data-pbi="visual" with a unique id marks every element Power BI renders natively (data-pbi-type
+     names the visual). Everything else is baked into the background image: open #baked to see it.
+     Population: all 215,802 test pairs (2023: 107,673; 2024: 108,129), not the 199,150 priced portfolio.
+     Curves are drawn to scale from outputs/model/roc_curve.csv and calibration.csv (scorecard, 2023). -->
+</head>
+<body>
+
+<!-- HEADER: identical on all pages; Model Trust is the active page -->
+<img class="wri-logo" src="../brand/parakeet-logo.svg" alt="Parakeet Risk">
+<div class="wri-lockup-rule"></div>
+<div class="wri-product">
+  <div class="wri-product-name">Workplace Risk Intelligence</div>
+  <div class="wri-proposition">Predictive insights for industrial insurance underwriting</div>
+</div>
+<nav class="wri-nav" aria-label="Report pages">
+  <div class="wri-tab" id="nav-executive-intelligence" data-pbi="visual" data-pbi-type="actionButton">Executive Intelligence</div>
+  <div class="wri-tab" id="nav-risk-landscape" data-pbi="visual" data-pbi-type="actionButton">Risk Landscape</div>
+  <div class="wri-tab wri-tab--active" id="nav-model-trust" data-pbi="visual" data-pbi-type="actionButton">Model Trust</div>
+  <div class="wri-tab" id="nav-pricing-lab" data-pbi="visual" data-pbi-type="actionButton">Pricing Lab</div>
+</nav>
+<div class="wri-period">
+  <div>Test years 2023 + 2024</div>
+  <div class="wri-period-sub">215,802 test pairs, public sites included</div>
+</div>
+
+<!-- RAIL: the finding, key figures for the picked model and year, what it means, filters, limits, caveat.
+     The statement names the scorecard (AUC 0.783 in 2023, 0.785 in 2024), so it stays true whichever model and year
+     the slicers pick. It runs to four lines (to y 404), so the key figures and what it means sit 48 and 36 px lower
+     than on the other analysis pages; the filters, limits and caveat keep the shared positions. -->
+<h1 class="wri-rail-statement" style="top:172px">The scorecard ranked<br>next year's line-crossers<br>above non-crossers<br>about 8&nbsp;times in&nbsp;10.</h1>
+
+<div class="wri-figure wri-abs" style="left:64px;top:424px" id="kpi-auc-value" data-pbi="visual" data-pbi-type="card">0.78</div>
+<p class="wri-ledger-caption wri-abs wri-nowrap" style="left:64px;top:464px" id="kpi-auc-caption" data-pbi="baked" data-pbi-type="textbox">AUC, ranking accuracy</p>
+<p class="wri-count wri-abs" style="left:64px;top:484px" id="kpi-auc-base" data-pbi="visual" data-pbi-type="card">Scorecard, 2023 · 95% CI 0.780 to 0.787</p>
+<div class="wri-figure wri-abs" style="left:424px;top:424px" id="kpi-gini-value" data-pbi="visual" data-pbi-type="card">0.57</div>
+<p class="wri-ledger-caption wri-abs wri-nowrap" style="left:424px;top:464px" id="kpi-gini-caption" data-pbi="baked" data-pbi-type="textbox">Gini, 2 × AUC − 1</p>
+<p class="wri-count wri-abs" style="left:424px;top:484px" id="kpi-gini-base" data-pbi="visual" data-pbi-type="card">107,673 test pairs · 2023</p>
+
+<div class="wri-rail-head" style="top:524px"><span class="wri-dot"></span><h2 class="wri-title">What it means</h2></div>
+<p class="wri-body wri-abs" style="left:64px;top:560px;width:576px">Trust it to rank a book of sites, not to judge one site.</p>
+
+<div class="wri-filters-head" style="top:608px">
+  <h2 class="wri-title">Filters</h2>
+  <a class="wri-reset" id="btn-reset-filters" data-pbi="visual" data-pbi-type="actionButton"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7a4.5 4.5 0 1 0 1.32-3.18" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2 1.5v3.5h3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Reset filters</a>
+</div>
+<div class="wri-slicer" style="left:64px;top:652px;width:576px" id="slicer-model" data-pbi="visual" data-pbi-type="slicer">
+  <span class="wri-slicer-label">Model</span>
+  <div class="wri-tiles"><div class="wri-tile">Rating class only</div><div class="wri-tile">Last year's rate</div><div class="wri-tile wri-tile--selected">Scorecard</div><div class="wri-tile">Gradient boosting</div></div>
+</div>
+<div class="wri-slicer" style="left:64px;top:740px;width:576px" id="slicer-test-year" data-pbi="visual" data-pbi-type="slicer">
+  <span class="wri-slicer-label">Test year</span>
+  <div class="wri-tiles"><div class="wri-tile wri-tile--selected">2023, outcome 2024</div><div class="wri-tile">2024, outcome 2025</div></div>
+</div>
+
+<div class="wri-ledger-close" style="top:836px"></div>
+<h2 class="wri-title wri-abs" style="left:64px;top:848px">Limits of the data</h2>
+<div class="wri-label wri-text-ink wri-abs" style="left:64px;top:884px;width:576px">
+  <p>Employers self-report; reporting varies by state.</p>
+  <p>Small sites fall outside OSHA's reporting rules.</p>
+  <p>Sites that change ID can drop out.</p>
+</div>
+<div class="wri-ledger-close" style="top:952px"></div>
+<p class="wri-caveat">Associations, not causes. Reported injuries, not claims. <a class="wri-caveat-link" id="link-pricing-lab" data-pbi="visual" data-pbi-type="actionButton">Scores in pricing: Pricing Lab →</a></p>
+
+<!-- EVIDENCE A: four models, both test years. Native table (Models), picked model row filled; test design baked beneath -->
+<section class="wri-card" style="left:704px;top:144px;width:708px;height:488px">
+  <div class="wri-card-head"><h2 class="wri-title">Four models on two unseen years</h2></div>
+  <p class="wri-card-sub">Line: each industry's worst-20% serious-injury (DART) rate this year.</p>
+  <!-- column group labels and spanner rules (baked) -->
+  <div class="wri-label wri-text-muted wri-abs" style="left:172px;top:132px;width:104px;text-align:right">AUC</div>
+  <div class="wri-label wri-text-muted wri-abs" style="left:284px;top:132px;width:104px;text-align:right">Gini</div>
+  <div class="wri-label wri-text-muted wri-abs" style="left:396px;top:112px;width:132px;text-align:right">Crossers caught<br>in the top 20%</div>
+  <div class="wri-label wri-text-muted wri-abs" style="left:536px;top:112px;width:132px;text-align:right">Share of top 20%<br>that crossed</div>
+  <svg class="wri-abs" style="left:0;top:155px" width="708" height="2" aria-hidden="true">
+    <g class="wri-hairline"><line x1="188" y1="0.5" x2="276" y2="0.5"/><line x1="300" y1="0.5" x2="388" y2="0.5"/><line x1="412" y1="0.5" x2="528" y2="0.5"/><line x1="552" y1="0.5" x2="668" y2="0.5"/></g>
+  </svg>
+  <div class="wri-abs" style="left:32px;top:160px;width:644px" id="table-model-comparison" data-pbi="visual" data-pbi-type="tableEx" role="table" aria-label="Four models on the 2023 and 2024 test years, all test pairs. AUC 2023 and 2024: rating class only 0.592 and 0.589; last year's rate 0.729 and 0.729; scorecard 0.783 and 0.785; gradient boosting 0.800 and 0.801. Gini: 0.183 and 0.177; 0.459 and 0.458; 0.567 and 0.571; 0.600 and 0.601. Line-crossers caught in the top 20%: 28.0% and 27.2%; 49.8% and 49.8%; 50.8% and 51.1%; 51.7% and 51.8%. Share of the top 20% that crossed: 25.6% and 24.8%; 45.9% and 45.8%; 46.7% and 46.9%; 47.6% and 47.6%.">
+    <table class="wri-table">
+      <colgroup><col style="width:140px"><col style="width:56px"><col style="width:56px"><col style="width:56px"><col style="width:56px"><col style="width:70px"><col style="width:70px"><col style="width:70px"><col style="width:70px"></colgroup>
+      <thead><tr><th></th><th class="wri-num" style="padding-right:8px">2023</th><th class="wri-num" style="padding-right:8px">2024</th><th class="wri-num" style="padding-right:8px">2023</th><th class="wri-num" style="padding-right:8px">2024</th><th class="wri-num" style="padding-right:8px">2023</th><th class="wri-num" style="padding-right:8px">2024</th><th class="wri-num" style="padding-right:8px">2023</th><th class="wri-num" style="padding-right:8px">2024</th></tr></thead>
+      <tbody>
+        <tr><td style="padding-left:8px">Rating class only</td><td class="wri-num" style="padding-right:8px">0.592</td><td class="wri-num wri-secondary" style="padding-right:8px">0.589</td><td class="wri-num" style="padding-right:8px">0.183</td><td class="wri-num wri-secondary" style="padding-right:8px">0.177</td><td class="wri-num" style="padding-right:8px">28.0%</td><td class="wri-num wri-secondary" style="padding-right:8px">27.2%</td><td class="wri-num" style="padding-right:8px">25.6%</td><td class="wri-num wri-secondary" style="padding-right:8px">24.8%</td></tr>
+        <tr><td style="padding-left:8px">Last year's rate</td><td class="wri-num" style="padding-right:8px">0.729</td><td class="wri-num wri-secondary" style="padding-right:8px">0.729</td><td class="wri-num" style="padding-right:8px">0.459</td><td class="wri-num wri-secondary" style="padding-right:8px">0.458</td><td class="wri-num" style="padding-right:8px">49.8%</td><td class="wri-num wri-secondary" style="padding-right:8px">49.8%</td><td class="wri-num" style="padding-right:8px">45.9%</td><td class="wri-num wri-secondary" style="padding-right:8px">45.8%</td></tr>
+        <tr class="wri-row--selected"><td style="padding-left:8px">Scorecard</td><td class="wri-num" style="padding-right:8px">0.783</td><td class="wri-num wri-secondary" style="padding-right:8px">0.785</td><td class="wri-num" style="padding-right:8px">0.567</td><td class="wri-num wri-secondary" style="padding-right:8px">0.571</td><td class="wri-num" style="padding-right:8px">50.8%</td><td class="wri-num wri-secondary" style="padding-right:8px">51.1%</td><td class="wri-num" style="padding-right:8px">46.7%</td><td class="wri-num wri-secondary" style="padding-right:8px">46.9%</td></tr>
+        <tr><td style="padding-left:8px">Gradient boosting</td><td class="wri-num" style="padding-right:8px">0.800</td><td class="wri-num wri-secondary" style="padding-right:8px">0.801</td><td class="wri-num" style="padding-right:8px">0.600</td><td class="wri-num wri-secondary" style="padding-right:8px">0.601</td><td class="wri-num" style="padding-right:8px">51.7%</td><td class="wri-num wri-secondary" style="padding-right:8px">51.8%</td><td class="wri-num" style="padding-right:8px">47.6%</td><td class="wri-num wri-secondary" style="padding-right:8px">47.6%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- why the scorecard prices although gradient boosting ranks slightly higher (baked note, inset 8 px like the table
+       text; no figure, so it holds in every model and test-year state: the 0.800 and 0.801 are in the row above) -->
+  <p class="wri-label wri-text-muted wri-abs wri-nowrap" style="left:40px;top:306px;width:636px">Bands and pricing use the scorecard, readable line by line. Gradient boosting is a benchmark.</p>
+  <!-- test design (baked): one column per starting year, 2016 to 2024; each outcome is the following year.
+       Rows on a 26 px pitch so the note above fits inside the card -->
+  <svg class="wri-abs" style="left:32px;top:334px" width="644" height="128" viewBox="0 0 644 128" role="img" aria-label="Test design by starting year: trained on 2016 to 2021, tuned on 2022, refit on 2016 to 2022, then tested once on 2023 and 2024.">
+    <line class="wri-hairline" x1="0" y1="0.5" x2="644" y2="0.5"/>
+    <text class="wri-axis-title wri-proportional" x="8" y="22">Starting year</text>
+    <g class="wri-axis-title" text-anchor="middle">
+      <text x="168" y="22">2016</text><text x="224" y="22">2017</text><text x="280" y="22">2018</text><text x="336" y="22">2019</text><text x="392" y="22">2020</text><text x="448" y="22">2021</text><text x="504" y="22">2022</text><text x="560" y="22">2023</text><text x="616" y="22">2024</text>
+    </g>
+    <g class="wri-axis-label--secondary">
+      <text x="8" y="48">Trained</text>
+      <text x="8" y="74">Tuned</text>
+      <text x="8" y="100">Refit</text>
+    </g>
+    <text class="wri-axis-label" x="8" y="126">Tested once</text>
+    <g shape-rendering="crispEdges">
+      <rect class="wri-fill-comparison" x="142" y="34" width="332" height="12"/>
+      <rect class="wri-fill-comparison" x="478" y="60" width="52" height="12"/>
+      <rect class="wri-fill-comparison" x="142" y="86" width="388" height="12"/>
+      <rect class="wri-fill-primary" x="534" y="112" width="52" height="12"/>
+      <rect class="wri-fill-primary" x="590" y="112" width="52" height="12"/>
+    </g>
+  </svg>
+</section>
+
+<!-- EVIDENCE E: robustness and subgroups, scorecard 2023. Native bar chart (Robustness table), axis floor 0.50.
+     The plot runs from x 1684 to the visual's right edge (x 1824, 140 px), so the axis end is about 1.148: that puts
+     1.00 on the baked tick at x 1792 and leaves room for the outside-end labels. The label column is 208 px wide so
+     the mining row can carry its small-base note -->
+<section class="wri-card" style="left:1444px;top:144px;width:412px;height:488px">
+  <div class="wri-card-head">
+    <h2 class="wri-title">Holds under checks</h2>
+    <div class="wri-legend"><svg class="wri-legend-swatch" width="12" height="12" aria-hidden="true"><rect class="wri-fill-primary" width="12" height="12"/></svg>Scorecard, 2023</div>
+  </div>
+  <!-- baked: group rules between checks, sectors and sizes; fixed 0.50 to 1.00 scale under the bars; the small-base
+       note on the mining row (428 test pairs: robustness_subgroups.csv and the Robustness table's Note), right-aligned
+       8 px before the bars, clear of the live category label -->
+  <svg class="wri-abs" style="left:32px;top:72px" width="348" height="392" aria-hidden="true">
+    <g class="wri-hairline"><line x1="0" y1="112.5" x2="348" y2="112.5"/><line x1="0" y1="308.5" x2="348" y2="308.5"/></g>
+    <text class="wri-axis-title" x="200" y="159" text-anchor="end">428 pairs</text>
+    <line class="wri-axis-line" x1="208" y1="364.5" x2="316" y2="364.5"/>
+    <g class="wri-axis-line"><line x1="208.5" y1="364" x2="208.5" y2="370"/><line x1="315.5" y1="364" x2="315.5" y2="370"/></g>
+    <g class="wri-axis-title">
+      <text x="194" y="388">0.50 coin toss</text>
+      <text x="316" y="388" text-anchor="middle">1.00</text>
+    </g>
+  </svg>
+  <svg class="wri-abs" style="left:32px;top:72px" width="348" height="392" viewBox="0 0 348 392" id="chart-robustness-frame" role="img" aria-label="Bar chart. Scorecard AUC on the 2023 test year under robustness checks and by subgroup, axis from 0.50 (coin toss) to 1.00. All test pairs 0.783; without 2020 0.783; stable-ID links only 0.782; next year's own top 20% as the target 0.781. Construction 0.808; mining, oil and gas 0.800, on only 428 test pairs, so read it with care; manufacturing 0.787; utilities 0.779; wholesale 0.779; transport and warehousing 0.765; agriculture 0.761. 20 to 249 employees 0.762; 250+ employees 0.915.">
+    <g class="wri-axis-label">
+      <text x="0" y="19">All test pairs</text>
+      <text x="0" y="47">Without 2020</text>
+      <text class="wri-proportional" x="0" y="75">Stable-ID links only</text>
+      <text x="0" y="103">Next year's own top 20%</text>
+      <text x="0" y="131">Construction</text>
+      <text x="0" y="159">Mining, oil and gas</text>
+      <text x="0" y="187">Manufacturing</text>
+      <text x="0" y="215">Utilities</text>
+      <text x="0" y="243">Wholesale</text>
+      <text x="0" y="271">Transport and warehousing</text>
+      <text x="0" y="299">Agriculture</text>
+      <text x="0" y="327">20 to 249 employees</text>
+      <text x="0" y="355">250+ employees</text>
+    </g>
+    <g id="chart-robustness" data-pbi="visual" data-pbi-type="clusteredBarChart">
+    <g class="wri-fill-primary" shape-rendering="crispEdges">
+      <rect x="208" y="8" width="61.1" height="12"/>
+      <rect x="208" y="36" width="61.1" height="12"/>
+      <rect x="208" y="64" width="60.9" height="12"/>
+      <rect x="208" y="92" width="60.7" height="12"/>
+      <rect x="208" y="120" width="66.5" height="12"/>
+      <rect x="208" y="148" width="64.8" height="12"/>
+      <rect x="208" y="176" width="62.0" height="12"/>
+      <rect x="208" y="204" width="60.3" height="12"/>
+      <rect x="208" y="232" width="60.3" height="12"/>
+      <rect x="208" y="260" width="57.2" height="12"/>
+      <rect x="208" y="288" width="56.4" height="12"/>
+      <rect x="208" y="316" width="56.6" height="12"/>
+      <rect x="208" y="344" width="89.6" height="12"/>
+    </g>
+    <g class="wri-axis-label">
+      <text x="275.1" y="19">0.783</text>
+      <text x="275.1" y="47">0.783</text>
+      <text x="274.9" y="75">0.782</text>
+      <text x="274.7" y="103">0.781</text>
+      <text x="280.5" y="131">0.808</text>
+      <text x="278.8" y="159">0.800</text>
+      <text x="276.0" y="187">0.787</text>
+      <text x="274.3" y="215">0.779</text>
+      <text x="274.3" y="243">0.779</text>
+      <text x="271.2" y="271">0.765</text>
+      <text x="270.4" y="299">0.761</text>
+      <text x="270.6" y="327">0.762</text>
+      <text x="303.6" y="355">0.915</text>
+    </g>
+    </g>
+  </svg>
+</section>
+
+<!-- EVIDENCE B: ROC for the picked model and test year. Native line chart (ROC), area shaded; coin toss as a dashed y = x series -->
+<section class="wri-card" style="left:704px;top:664px;width:264px;height:352px">
+  <div class="wri-card-head">
+    <h2 class="wri-title">ROC curve</h2>
+    <div class="wri-legend"><svg width="16" height="12" aria-hidden="true"><line class="wri-ref-line" x1="0" y1="6.5" x2="16" y2="6.5"/></svg>Coin toss</div>
+  </div>
+  <!-- baked: axis titles, axis lines and the fixed 0 to 100% scale -->
+  <svg class="wri-abs" style="left:32px;top:72px" width="200" height="256" viewBox="0 0 200 256" aria-hidden="true">
+    <text class="wri-axis-title wri-proportional" x="0" y="14">Crossers caught</text>
+    <line class="wri-axis-line" x1="43.5" y1="28" x2="43.5" y2="184"/>
+    <line class="wri-axis-line" x1="44" y1="184.5" x2="200" y2="184.5"/>
+    <g class="wri-axis-title" text-anchor="end">
+      <text x="38" y="33">100%</text><text x="38" y="111">50%</text><text x="38" y="189">0%</text>
+    </g>
+    <g class="wri-axis-title">
+      <text x="44" y="204">0%</text><text x="122" y="204" text-anchor="middle">50%</text><text x="200" y="204" text-anchor="end">100%</text>
+    </g>
+    <text class="wri-axis-title wri-proportional" x="44" y="228">Non-crossers flagged</text>
+  </svg>
+  <svg class="wri-abs" style="left:32px;top:72px" width="200" height="256" viewBox="0 0 200 256" id="chart-roc" data-pbi="visual" data-pbi-type="lineChart" role="img" aria-label="ROC curve, scorecard, 2023 test year: share of line-crossers caught against share of non-crossers flagged as the score threshold falls. The curve bows well above the coin-toss diagonal; the shaded area under it is the AUC, 0.783.">
+    <path d="M44.0 184.0 L44.1 182.6 L44.3 181.2 L44.4 179.8 L44.6 178.5 L44.8 177.1 L45.0 175.8 L45.3 174.5 L45.5 173.1 L45.7 171.8 L45.9 170.4 L46.2 169.1 L46.3 167.8 L46.6 166.5 L46.8 165.1 L47.0 163.8 L47.2 162.5 L47.5 161.2 L47.7 159.9 L47.9 158.5 L48.1 157.2 L48.3 155.9 L48.6 154.6 L48.8 153.3 L49.1 152.0 L49.3 150.8 L49.6 149.5 L49.8 148.2 L50.1 146.9 L50.4 145.7 L50.7 144.5 L51.0 143.2 L51.3 142.0 L51.5 140.7 L51.9 139.5 L52.2 138.3 L52.5 137.1 L52.8 135.9 L53.1 134.7 L53.5 133.6 L53.9 132.4 L54.3 131.2 L54.6 130.0 L55.0 128.9 L55.3 127.7 L55.7 126.6 L56.1 125.4 L56.5 124.3 L56.8 123.1 L57.2 122.0 L57.6 120.8 L58.1 119.7 L58.5 118.7 L58.9 117.6 L59.4 116.5 L59.8 115.4 L60.2 114.3 L60.7 113.2 L61.2 112.2 L61.6 111.1 L62.0 110.0 L62.5 108.9 L62.9 107.8 L63.4 106.8 L63.9 105.7 L64.4 104.7 L64.9 103.7 L65.5 102.7 L66.0 101.8 L66.6 100.8 L67.1 99.8 L67.7 98.8 L68.3 97.9 L68.8 96.9 L69.5 96.0 L70.1 95.1 L70.7 94.2 L71.3 93.3 L71.9 92.3 L72.5 91.4 L73.1 90.5 L73.7 89.6 L74.4 88.7 L75.1 87.9 L75.8 87.0 L76.4 86.2 L77.1 85.3 L77.8 84.4 L78.5 83.7 L79.2 82.8 L79.9 82.0 L80.7 81.2 L81.4 80.4 L82.2 79.7 L83.0 78.9 L83.8 78.2 L84.6 77.4 L85.3 76.6 L86.1 75.9 L86.9 75.1 L87.6 74.3 L88.4 73.6 L89.2 72.8 L90.1 72.1 L90.8 71.4 L91.6 70.6 L92.4 69.8 L93.2 69.0 L94.1 68.4 L94.8 67.6 L95.7 66.9 L96.5 66.2 L97.4 65.6 L98.3 64.9 L99.1 64.2 L100.1 63.6 L100.9 62.8 L101.9 62.2 L102.8 61.6 L103.8 61.0 L104.7 60.3 L105.5 59.7 L106.5 59.0 L107.5 58.5 L108.5 57.8 L109.4 57.2 L110.3 56.5 L111.3 55.9 L112.2 55.2 L113.3 54.6 L114.3 54.0 L115.3 53.3 L116.3 52.6 L117.3 52.0 L118.3 51.4 L119.3 50.8 L120.4 50.2 L121.4 49.6 L122.5 49.0 L123.6 48.4 L124.6 47.8 L125.6 47.2 L126.7 46.6 L127.8 46.1 L128.9 45.5 L130.1 45.0 L131.2 44.5 L132.4 44.0 L133.5 43.5 L134.7 42.9 L135.8 42.3 L137.0 41.9 L138.2 41.5 L139.4 41.0 L140.6 40.5 L141.7 40.0 L142.9 39.5 L144.1 39.0 L145.2 38.5 L146.4 38.0 L147.7 37.7 L149.0 37.3 L150.2 36.9 L151.4 36.5 L152.7 36.1 L153.9 35.6 L155.2 35.2 L156.5 34.8 L157.8 34.6 L159.1 34.3 L160.4 33.9 L161.6 33.5 L162.9 33.2 L164.2 32.9 L165.6 32.6 L167.0 32.4 L168.3 32.1 L169.6 31.8 L170.9 31.5 L172.3 31.3 L173.6 31.1 L175.0 30.8 L176.3 30.5 L177.6 30.3 L179.0 30.1 L180.4 29.9 L181.8 29.7 L183.1 29.5 L184.5 29.3 L185.8 29.1 L187.2 28.9 L188.6 28.8 L189.9 28.6 L191.3 28.5 L192.8 28.4 L194.2 28.3 L195.6 28.2 L197.0 28.1 L198.5 28.0 L200.0 28.0 L200.0 184.0 L44.0 184.0 Z" fill="var(--wri-screen-ink)" fill-opacity=".12" stroke="none"/>
+    <line class="wri-ref-line" x1="44" y1="184" x2="200" y2="28"/>
+    <path class="wri-stroke-primary" d="M44.0 184.0 L44.1 182.6 L44.3 181.2 L44.4 179.8 L44.6 178.5 L44.8 177.1 L45.0 175.8 L45.3 174.5 L45.5 173.1 L45.7 171.8 L45.9 170.4 L46.2 169.1 L46.3 167.8 L46.6 166.5 L46.8 165.1 L47.0 163.8 L47.2 162.5 L47.5 161.2 L47.7 159.9 L47.9 158.5 L48.1 157.2 L48.3 155.9 L48.6 154.6 L48.8 153.3 L49.1 152.0 L49.3 150.8 L49.6 149.5 L49.8 148.2 L50.1 146.9 L50.4 145.7 L50.7 144.5 L51.0 143.2 L51.3 142.0 L51.5 140.7 L51.9 139.5 L52.2 138.3 L52.5 137.1 L52.8 135.9 L53.1 134.7 L53.5 133.6 L53.9 132.4 L54.3 131.2 L54.6 130.0 L55.0 128.9 L55.3 127.7 L55.7 126.6 L56.1 125.4 L56.5 124.3 L56.8 123.1 L57.2 122.0 L57.6 120.8 L58.1 119.7 L58.5 118.7 L58.9 117.6 L59.4 116.5 L59.8 115.4 L60.2 114.3 L60.7 113.2 L61.2 112.2 L61.6 111.1 L62.0 110.0 L62.5 108.9 L62.9 107.8 L63.4 106.8 L63.9 105.7 L64.4 104.7 L64.9 103.7 L65.5 102.7 L66.0 101.8 L66.6 100.8 L67.1 99.8 L67.7 98.8 L68.3 97.9 L68.8 96.9 L69.5 96.0 L70.1 95.1 L70.7 94.2 L71.3 93.3 L71.9 92.3 L72.5 91.4 L73.1 90.5 L73.7 89.6 L74.4 88.7 L75.1 87.9 L75.8 87.0 L76.4 86.2 L77.1 85.3 L77.8 84.4 L78.5 83.7 L79.2 82.8 L79.9 82.0 L80.7 81.2 L81.4 80.4 L82.2 79.7 L83.0 78.9 L83.8 78.2 L84.6 77.4 L85.3 76.6 L86.1 75.9 L86.9 75.1 L87.6 74.3 L88.4 73.6 L89.2 72.8 L90.1 72.1 L90.8 71.4 L91.6 70.6 L92.4 69.8 L93.2 69.0 L94.1 68.4 L94.8 67.6 L95.7 66.9 L96.5 66.2 L97.4 65.6 L98.3 64.9 L99.1 64.2 L100.1 63.6 L100.9 62.8 L101.9 62.2 L102.8 61.6 L103.8 61.0 L104.7 60.3 L105.5 59.7 L106.5 59.0 L107.5 58.5 L108.5 57.8 L109.4 57.2 L110.3 56.5 L111.3 55.9 L112.2 55.2 L113.3 54.6 L114.3 54.0 L115.3 53.3 L116.3 52.6 L117.3 52.0 L118.3 51.4 L119.3 50.8 L120.4 50.2 L121.4 49.6 L122.5 49.0 L123.6 48.4 L124.6 47.8 L125.6 47.2 L126.7 46.6 L127.8 46.1 L128.9 45.5 L130.1 45.0 L131.2 44.5 L132.4 44.0 L133.5 43.5 L134.7 42.9 L135.8 42.3 L137.0 41.9 L138.2 41.5 L139.4 41.0 L140.6 40.5 L141.7 40.0 L142.9 39.5 L144.1 39.0 L145.2 38.5 L146.4 38.0 L147.7 37.7 L149.0 37.3 L150.2 36.9 L151.4 36.5 L152.7 36.1 L153.9 35.6 L155.2 35.2 L156.5 34.8 L157.8 34.6 L159.1 34.3 L160.4 33.9 L161.6 33.5 L162.9 33.2 L164.2 32.9 L165.6 32.6 L167.0 32.4 L168.3 32.1 L169.6 31.8 L170.9 31.5 L172.3 31.3 L173.6 31.1 L175.0 30.8 L176.3 30.5 L177.6 30.3 L179.0 30.1 L180.4 29.9 L181.8 29.7 L183.1 29.5 L184.5 29.3 L185.8 29.1 L187.2 28.9 L188.6 28.8 L189.9 28.6 L191.3 28.5 L192.8 28.4 L194.2 28.3 L195.6 28.2 L197.0 28.1 L198.5 28.0 L200.0 28.0" stroke-width="2" stroke-linejoin="round"/>
+  </svg>
+  <svg class="wri-abs" style="left:118px;top:198px" width="112" height="28" viewBox="0 0 112 28" id="label-roc-auc" data-pbi="visual" data-pbi-type="card" role="img" aria-label="AUC 0.78, scorecard, 2023 test year">
+    <text class="wri-data-label" x="112" y="22" text-anchor="end">AUC 0.78</text>
+  </svg>
+  <!-- the picked model and year on its own line: the longest, Gradient boosting, 2023, needs about 160 px -->
+  <div class="wri-label wri-text-ink wri-abs wri-nowrap" style="left:32px;top:304px;width:200px;text-align:right" id="label-roc-selection" data-pbi="visual" data-pbi-type="card">Scorecard, 2023</div>
+</section>
+
+<!-- EVIDENCE C: calibration for the picked model and test year. Native line and clustered column chart (Calibration),
+     legend off; Y axis and secondary Y axis both fixed 0 to 0.6, so the predicted line and the columns share one scale -->
+<section class="wri-card" style="left:1000px;top:664px;width:412px;height:352px">
+  <div class="wri-card-head"><h2 class="wri-title">Predicted against observed</h2></div>
+  <!-- baked: series key (fixed series, so not a live legend), fixed 0 to 60% scale, baseline and axis title.
+       The native chart's plot area is sized to this scale: 60% at y 788, 0% on the baseline at y 936. -->
+  <svg class="wri-abs" style="left:32px;top:72px" width="348" height="256" viewBox="0 0 348 256" aria-hidden="true">
+    <g>
+      <rect class="wri-fill-comparison" x="40" y="3" width="12" height="12"/>
+      <text class="wri-axis-label--secondary wri-proportional" x="60" y="14">Share that crossed</text>
+      <line class="wri-stroke-primary" x1="200" y1="9" x2="220" y2="9" stroke-width="2"/>
+      <circle class="wri-fill-primary" cx="210" cy="9" r="4"/>
+      <text class="wri-axis-label--secondary wri-proportional" x="228" y="14">Predicted</text>
+    </g>
+    <g class="wri-axis-title" text-anchor="end">
+      <text x="32" y="57">60%</text><text x="32" y="106">40%</text><text x="32" y="156">20%</text><text x="32" y="205">0%</text>
+    </g>
+    <line class="wri-baseline" x1="40" y1="200.5" x2="348" y2="200.5"/>
+    <text class="wri-axis-title wri-proportional" x="40" y="244">Score decile, <tspan class="wri-tabular">10</tspan> highest</text>
+  </svg>
+  <svg class="wri-abs" style="left:32px;top:72px" width="348" height="256" viewBox="0 0 348 256" id="chart-calibration" data-pbi="visual" data-pbi-type="lineClusteredColumnComboChart" role="img" aria-label="Column and line chart, scorecard, 2023 test year, by score decile 1 (lowest) to 10 (highest). Columns: observed share that crossed the line. Line: mean predicted share. Predicted against observed: 4.0% and 2.1%; 6.2% and 4.0%; 7.5% and 6.4%; 8.9% and 8.9%; 10.8% and 11.8%; 13.9% and 14.1%; 18.7% and 18.1%; 26.3% and 25.2%; 38.8% and 38.0%; 57.8% and 55.5%.">
+    <g class="wri-fill-comparison" shape-rendering="crispEdges">
+      <rect x="46.4" y="194.8" width="18" height="5.2"/>
+      <rect x="77.2" y="190.1" width="18" height="9.9"/>
+      <rect x="108.0" y="184.3" width="18" height="15.7"/>
+      <rect x="138.8" y="177.9" width="18" height="22.1"/>
+      <rect x="169.6" y="170.8" width="18" height="29.2"/>
+      <rect x="200.4" y="165.3" width="18" height="34.7"/>
+      <rect x="231.2" y="155.3" width="18" height="44.7"/>
+      <rect x="262.0" y="137.8" width="18" height="62.2"/>
+      <rect x="292.8" y="106.3" width="18" height="93.7"/>
+      <rect x="323.6" y="63.1" width="18" height="136.9"/>
+    </g>
+    <polyline class="wri-stroke-primary" points="55.4,190.3 86.2,184.8 117.0,181.5 147.8,178.0 178.6,173.4 209.4,165.8 240.2,153.8 271.0,135.2 301.8,104.3 332.6,57.5" stroke-width="2" stroke-linejoin="round"/>
+    <g class="wri-fill-primary">
+      <circle cx="55.4" cy="190.3" r="4"/><circle cx="86.2" cy="184.8" r="4"/><circle cx="117.0" cy="181.5" r="4"/><circle cx="147.8" cy="178.0" r="4"/><circle cx="178.6" cy="173.4" r="4"/>
+      <circle cx="209.4" cy="165.8" r="4"/><circle cx="240.2" cy="153.8" r="4"/><circle cx="271.0" cy="135.2" r="4"/><circle cx="301.8" cy="104.3" r="4"/><circle cx="332.6" cy="57.5" r="4"/>
+    </g>
+    <g class="wri-axis-title" text-anchor="middle">
+      <text x="55.4" y="220">1</text><text x="86.2" y="220">2</text><text x="117.0" y="220">3</text><text x="147.8" y="220">4</text><text x="178.6" y="220">5</text>
+      <text x="209.4" y="220">6</text><text x="240.2" y="220">7</text><text x="271.0" y="220">8</text><text x="301.8" y="220">9</text><text x="332.6" y="220">10</text>
+    </g>
+  </svg>
+  <div class="wri-label wri-text-ink wri-abs wri-nowrap" style="left:212px;top:96px;width:168px;text-align:right" id="label-calibration-selection" data-pbi="visual" data-pbi-type="card">Scorecard, 2023</div>
+  <div class="wri-label wri-text-ink wri-abs" style="left:72px;top:150px;width:308px" id="card-calibration-note" data-pbi="visual" data-pbi-type="card" hidden>Last year's rate is a rank, not a probability, so it has no calibration.</div>
+</section>
+
+<!-- EVIDENCE D: what gradient boosting leans on. Native bar chart (Drivers), top seven inputs. The plot runs from
+     x 1644 to x 1824 (180 px), so the axis is 0 to about 0.174: the 0.125 bar ends at x 1773 and its label stays outside -->
+<section class="wri-card" style="left:1444px;top:664px;width:412px;height:352px">
+  <div class="wri-card-head"><h2 class="wri-title">What gradient boosting leans on</h2></div>
+  <svg class="wri-abs" style="left:32px;top:72px" width="348" height="256" viewBox="0 0 348 256" aria-hidden="true">
+    <text class="wri-axis-title wri-proportional" x="168" y="18">AUC lost if shuffled</text>
+    <line class="wri-hairline" x1="0" y1="30.5" x2="348" y2="30.5"/>
+    <text class="wri-axis-title wri-proportional" x="0" y="252"><tspan class="wri-tabular">2023</tspan> sample · associations, not causes</text>
+  </svg>
+  <svg class="wri-abs" style="left:32px;top:72px" width="348" height="256" viewBox="0 0 348 256" id="chart-drivers" data-pbi="visual" data-pbi-type="clusteredBarChart" role="img" aria-label="Bar chart. Gradient boosting permutation importance on a 2023 sample: AUC lost when each input is shuffled. DART rank in industry this year 0.125; hours worked 0.037; total case rate 0.018; change on last year 0.011; above the line this year 0.011; two-year DART rate 0.010; DART rate 0.007. Associations, not causes.">
+    <g class="wri-axis-label">
+      <text x="0" y="54">DART rank in industry</text>
+      <text x="0" y="82">Hours worked</text>
+      <text x="0" y="110">Total case rate</text>
+      <text x="0" y="138">Change on last year</text>
+      <text x="0" y="166">Above the line now</text>
+      <text class="wri-proportional" x="0" y="194">Two-year DART rate</text>
+      <text x="0" y="222">DART rate</text>
+    </g>
+    <g class="wri-fill-primary" shape-rendering="crispEdges">
+      <rect x="168" y="43" width="129.3" height="12"/>
+      <rect x="168" y="71" width="38.0" height="12"/>
+      <rect x="168" y="99" width="18.2" height="12"/>
+      <rect x="168" y="127" width="11.6" height="12"/>
+      <rect x="168" y="155" width="11.1" height="12"/>
+      <rect x="168" y="183" width="10.5" height="12"/>
+      <rect x="168" y="211" width="7.0" height="12"/>
+    </g>
+    <g class="wri-axis-label">
+      <text x="303.3" y="54">0.125</text>
+      <text x="212.0" y="82">0.037</text>
+      <text x="192.2" y="110">0.018</text>
+      <text x="185.6" y="138">0.011</text>
+      <text x="185.1" y="166">0.011</text>
+      <text x="184.5" y="194">0.010</text>
+      <text x="181.0" y="222">0.007</text>
+    </g>
+  </svg>
+</section>
+
+<!-- BOTTOM LINE: one-line source, corner label (mockup only) -->
+<p class="wri-source">Source: OSHA ITA Form 300A, 2016 to 2025 (2025 file to 31 Aug 2026)</p>
+<div class="wri-corner-label">Model Trust. Design mockup, not a live Power BI report</div>
+<span id="baked" hidden></span>
+
+</body>
+</html>

@@ -1,0 +1,307 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "landscape",
+  "displayName": "Risk Landscape",
+  "displayOption": "FitToPage",
+  "height": 1080,
+  "width": 1920,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'page2-risk-landscape.png'"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "page2-risk-landscape.png"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#EFECDF'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_kpi_1_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_kpi_1_base",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_kpi_2_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_kpi_2_base",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_btn_reset",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_slicer_test_year",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_slicer_sector",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_slicer_size",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_map_title",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_map_legend_title",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_map_hover",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_table_sectors",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_chart_sectors",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_chart_sizes",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_note_sectors",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_table_bands",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_note_bands",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_card_size_years_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_tiles",
+      "target": "landscape_card_size_years_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_kpi_1_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_kpi_1_base",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_kpi_2_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_kpi_2_base",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_btn_reset",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_slicer_test_year",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_slicer_sector",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_slicer_size",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_map_title",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_map_tiles",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_map_legend_title",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_table_sectors",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_chart_sectors",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_chart_sizes",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_note_sectors",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_table_bands",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_note_bands",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_card_size_years_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "landscape_map_hover",
+      "target": "landscape_card_size_years_2",
+      "type": "NoFilter"
+    }
+  ],
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "landscape_drill",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Sites"
+              }
+            },
+            "Property": "Sector"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "landscape_binding",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "landscape_drill_param",
+        "boundFilter": "landscape_drill",
+        "asAggregation": false,
+        "qnaSingleSelectRequired": false,
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Sites"
+              }
+            },
+            "Property": "Sector"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,576 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "executive",
+  "displayName": "Executive Intelligence",
+  "displayOption": "FitToPage",
+  "height": 1080,
+  "width": 1920,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'page1-executive-intelligence.png'"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "page1-executive-intelligence.png"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#EFECDF'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_kpi_capture_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_kpi_capture_count",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_kpi_hit_rate_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_kpi_hit_rate_count",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_kpi_wrong_band_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_chart_crossing_by_band",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_table_sector_dart",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_chart_sector_band5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_chart_auc_2023",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_card_crossing_2024_b1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_card_crossing_2024_b2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_card_crossing_2024_b3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_card_crossing_2024_b4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_card_crossing_2024_b5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_card_auc_2023_m1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_card_auc_2024_m1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_card_auc_2023_m2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_card_auc_2024_m2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_card_auc_2023_m3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_capture_vs_random",
+      "target": "executive_card_auc_2024_m3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_kpi_capture_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_kpi_capture_count",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_chart_capture_vs_random",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_kpi_hit_rate_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_kpi_hit_rate_count",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_kpi_wrong_band_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_table_sector_dart",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_chart_sector_band5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_chart_auc_2023",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_card_crossing_2024_b1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_card_crossing_2024_b2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_card_crossing_2024_b3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_card_crossing_2024_b4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_card_crossing_2024_b5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_card_auc_2023_m1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_card_auc_2024_m1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_card_auc_2023_m2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_card_auc_2024_m2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_card_auc_2023_m3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_crossing_by_band",
+      "target": "executive_card_auc_2024_m3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_kpi_capture_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_kpi_capture_count",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_chart_capture_vs_random",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_kpi_hit_rate_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_kpi_hit_rate_count",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_kpi_wrong_band_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_chart_crossing_by_band",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_chart_sector_band5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_chart_auc_2023",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_card_crossing_2024_b1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_card_crossing_2024_b2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_card_crossing_2024_b3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_card_crossing_2024_b4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_card_crossing_2024_b5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_card_auc_2023_m1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_card_auc_2024_m1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_card_auc_2023_m2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_card_auc_2024_m2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_card_auc_2023_m3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_table_sector_dart",
+      "target": "executive_card_auc_2024_m3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_kpi_capture_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_kpi_capture_count",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_chart_capture_vs_random",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_kpi_hit_rate_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_kpi_hit_rate_count",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_kpi_wrong_band_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_chart_crossing_by_band",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_table_sector_dart",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_chart_auc_2023",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_card_crossing_2024_b1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_card_crossing_2024_b2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_card_crossing_2024_b3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_card_crossing_2024_b4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_card_crossing_2024_b5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_card_auc_2023_m1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_card_auc_2024_m1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_card_auc_2023_m2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_card_auc_2024_m2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_card_auc_2023_m3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_sector_band5",
+      "target": "executive_card_auc_2024_m3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_kpi_capture_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_kpi_capture_count",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_chart_capture_vs_random",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_kpi_hit_rate_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_kpi_hit_rate_count",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_kpi_wrong_band_value",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_chart_crossing_by_band",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_table_sector_dart",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_chart_sector_band5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_card_crossing_2024_b1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_card_crossing_2024_b2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_card_crossing_2024_b3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_card_crossing_2024_b4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_card_crossing_2024_b5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_card_auc_2023_m1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_card_auc_2024_m1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_card_auc_2023_m2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_card_auc_2024_m2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_card_auc_2023_m3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "executive_chart_auc_2023",
+      "target": "executive_card_auc_2024_m3",
+      "type": "NoFilter"
+    }
+  ]
+}
