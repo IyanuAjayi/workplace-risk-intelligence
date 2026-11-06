@@ -125,3 +125,8 @@ Shared helpers live in `src/osha.py`. Random seeds are fixed (42).
 ## Limits
 
 OSHA data is employer-reported and covers only sites above the reporting thresholds. The score predicts reported injuries, not claim costs. Pricing is a simulation on stated assumptions. Prediction isn't evidence of cause. Two test years is a solid check, not a long track record.
+
+## Related projects
+
+- Industrial Fire Loss Atlas (NFIRS 2025): https://github.com/IyanuAjayi/industrial-fire-loss-atlas
+- Pipeline Incident Loss Atlas (PHMSA): https://github.com/IyanuAjayi/pipeline-incident-loss-atlas
